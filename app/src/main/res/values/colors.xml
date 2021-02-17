@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+<resources name ="theme_one">
+    <color name="purple_200">#545de8</color>
+    <color name="purple_500">#545de8</color>
+    <color name="blue_1e319d">#1e319d</color>
+    <color name="blue_545de8">#545de8</color>
+    <color name="blue_4e3ec8">#4e3ec8</color>
+    <color name="button_positive">#256fff</color>
+    <color name="button_negative">#ebeffa</color>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="white_fff">#FFFFFFFF</color>
+    <color name="green_8BC34A">#8BC34A</color>
+    <color name ="font_primary">#3a4b6e</color>
+    <color name ="font_secondary">#8896c2</color>
+    <color name="orange_f68059">#f68059</color>
+    <color name="red_ee0005">#ee0005</color>
+    <color name="blue_3ecdff">#3ecdff</color>
+    <color name="background_form">#f3f6ff</color>
+
 </resources>
