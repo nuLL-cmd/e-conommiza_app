@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue_1e319d"
+    tools:context=".activity.SplashActivity">
+
+    <RelativeLayout
+        android:id="@+id/relativeChar_splash"
+        android:layout_width="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@id/lblSlogan_splash"
+        android:background="@drawable/bg_resources_logo"
+        android:paddingTop="@dimen/_5sdp"
+        android:paddingBottom="@dimen/_5sdp"
+        android:paddingStart="@dimen/_7sdp"
+        android:paddingEnd="@dimen/_7sdp"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/lblSlogan_splash">
+
+        <TextView
+            android:id="@+id/lblChar_logo_splash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_20ssp"
+            android:text="E"
+            android:textColor="@color/white_fff"/>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/viewLogoOne_splash"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_2sdp"
+        android:background="@drawable/bg_resources_logo"
+        android:layout_alignBottom="@id/relativeChar_splash"
+        android:layout_toEndOf="@id/relativeChar_splash"
+        android:layout_marginStart="-2dp"
+
+        android:layout_toRightOf="@id/relativeChar_splash"
+        android:layout_marginLeft="-2dp" />
+
+
+    <View
+        android:id="@+id/viewLogoTwo_splash"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_marginStart="-2dp"
+        android:layout_height="@dimen/_2sdp"
+        android:background="@drawable/bg_resources_logo"
+        android:layout_alignTop="@id/relativeChar_splash"
+        android:layout_toEndOf="@id/relativeChar_splash"
+        android:layout_marginLeft="-2dp"
+        android:layout_toRightOf="@id/relativeChar_splash" />
+
+    <TextView
+        android:id="@+id/lblSlogan_splash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/aldrich"
+        android:text="conommiza :)"
+        android:textColor="@color/white_fff"
+        android:textSize="@dimen/_20ssp"
+        android:textStyle="bold" />
+
+
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/progress_splash"
+        android:layout_width="@dimen/_200sdp"
+        android:padding="@dimen/_75sdp"
+        android:layout_height="@dimen/_200sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_20ssp"
+        android:layout_above="@id/txtVersao_splash"
+        android:layout_centerHorizontal="true"
+        style="@style/SpinKitView.Small.ThreeBounce"
+        android:backgroundTint="@color/white_fff"
+        android:layout_below="@id/relativeChar_splash"/>
+
+
+    <TextView
+        android:id="@+id/txtVersao_splash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_5sdp"
+        android:textStyle="bold"
+        android:textColor="@color/white_fff"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/_10sdp"/>
+
+
+
+</RelativeLayout>

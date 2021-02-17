@@ -1,8 +1,10 @@
-package com.automatodev.e_conommiza_app;
+package com.automatodev.e_conommiza_app.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.automatodev.e_conommiza_app.R;
 
 public class MainActivity extends AppCompatActivity {
 
