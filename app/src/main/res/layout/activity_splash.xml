@@ -32,7 +32,7 @@
 
     <View
         android:id="@+id/viewLogoOne_splash"
-        android:layout_width="@dimen/_120sdp"
+        android:layout_width="@dimen/_110sdp"
         android:layout_height="@dimen/_2sdp"
         android:background="@drawable/bg_resources_logo"
         android:layout_alignBottom="@id/relativeChar_splash"
@@ -45,7 +45,7 @@
 
     <View
         android:id="@+id/viewLogoTwo_splash"
-        android:layout_width="@dimen/_120sdp"
+        android:layout_width="@dimen/_110sdp"
         android:layout_marginStart="-2dp"
         android:layout_height="@dimen/_2sdp"
         android:background="@drawable/bg_resources_logo"
@@ -60,9 +60,11 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:fontFamily="@font/aldrich"
+        android:gravity="center"
         android:text="conommiza :)"
         android:textColor="@color/white_fff"
         android:textSize="@dimen/_20ssp"
+
         android:textStyle="bold" />
 
 
