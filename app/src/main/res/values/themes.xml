@@ -15,4 +15,19 @@
 
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.Econommiza_app_two" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/blue_545de8</item>
+        <item name="colorPrimaryVariant">@color/green_1DC1A0</item>
+        <item name="colorOnPrimary">@color/white_fff</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/blue_545de8</item>
+        <item name="colorSecondaryVariant">@color/blue_545de8</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+
+        <!-- Customize your theme here. -->
+    </style>
 </resources>

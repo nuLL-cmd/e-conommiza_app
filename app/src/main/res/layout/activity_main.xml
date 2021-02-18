@@ -1,12 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/background_form"
+    android:background="@drawable/bg_relative_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
+    <RelativeLayout
+        android:id="@+id/relativeData_main"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_320sdp"
+        android:layout_below="@id/viewSuportLayout_main"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_relative_data_main">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefresh_main"
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/_10sdp"
+            android:layout_height="match_parent">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerItens_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/_5sdp"
+                android:layout_margin="@dimen/_10sdp"/>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/clip_dancer"
+        android:layout_above="@id/relativeData_main"
+        android:layout_toEndOf="@id/viewSuportImage_main"/>
+
+
+    <ImageButton
+        android:layout_width="@dimen/_32sdp"
+        android:layout_height="@dimen/_32sdp"
+        android:src="@drawable/ic_round_exit"
+        android:background="@drawable/bg_button_white_global"
+        android:layout_marginTop="@dimen/_35sdp"
+        android:layout_marginStart="@dimen/_15ssp"
+        android:id="@+id/btnExit_main"/>
+
+
+    <ImageButton
+        android:layout_width="@dimen/_32sdp"
+        android:layout_height="@dimen/_32sdp"
+        android:src="@drawable/ic_baseline_menu"
+        android:background="@drawable/bg_button_white_global"
+        android:layout_marginTop="@dimen/_35sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:id="@+id/btnOptions_main"
+        android:layout_toEndOf="@id/btnExit_main"
+        android:layout_marginStart="@dimen/_20sdp"/>
+
+
+
+    <View
+        android:id="@+id/viewSuportImage_main"
+        android:layout_width="@dimen/_1sdp"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true" />
+
+    <View
+        android:id="@+id/viewSuportLayout_main"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true" />
+
+
+
+
+
+
+
+</RelativeLayout>

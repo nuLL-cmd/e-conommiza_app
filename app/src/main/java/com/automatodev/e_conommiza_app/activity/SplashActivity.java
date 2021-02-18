@@ -49,7 +49,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run(){
                 try{
-                    sleep(3000);
+                    sleep(2300);
                     startActivity(new Intent(SplashActivity.this, MainActivity.class));
                     finish();
                 }catch(InterruptedException e) {
