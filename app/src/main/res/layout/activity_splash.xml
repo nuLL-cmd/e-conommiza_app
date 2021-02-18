@@ -1,138 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#F7F8FC"
-    tools:context=".activity.SplashActivity">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F7F8FC"
+        tools:context=".activity.SplashActivity">
 
 
-    <View
-        android:id="@+id/viewLogoOne_splash"
-        android:layout_width="@dimen/_120sdp"
-        android:layout_height="@dimen/_2sdp"
-        android:layout_alignStart="@id/linearLogo_splash"
-        android:background="@drawable/bg_resources_logo"
-        android:layout_above="@id/linearLogo_splash"
-        android:layout_marginBottom="-2.8dp"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_alignLeft="@id/linearLogo_splash" />
-
-    <View
-        android:id="@+id/viewLogoTwo_splash"
-        android:layout_width="@dimen/_120sdp"
-        android:layout_height="@dimen/_2sdp"
-        android:background="@drawable/bg_resources_logo"
-        android:layout_below="@id/linearLogo_splash"
-        android:layout_alignStart="@id/linearLogo_splash"
-        android:layout_marginTop="-2.8dp"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_alignLeft="@id/linearLogo_splash" />
-    <LinearLayout
-        android:id="@+id/linearLogo_splash"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-
-        <RelativeLayout
-            android:id="@+id/relativeChar_splash"
-            android:layout_width="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toStartOf="@id/lblSlogan_splash"
+        <View
+            android:id="@+id/viewLogoOne_splash"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="@dimen/_2sdp"
+            android:layout_alignStart="@id/linearLogo_splash"
             android:background="@drawable/bg_resources_logo"
-            android:paddingTop="@dimen/_5sdp"
-            android:paddingBottom="@dimen/_5sdp"
-            android:paddingStart="@dimen/_7sdp"
-            android:paddingEnd="@dimen/_7sdp"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/lblSlogan_splash">
+            android:layout_above="@id/linearLogo_splash"
+            android:layout_marginBottom="-2.8dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_alignLeft="@id/linearLogo_splash" />
 
-            <TextView
-                android:id="@+id/lblChar_logo_splash"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/_20ssp"
-                android:text="E"
-                android:textColor="@color/white_fff"/>
-        </RelativeLayout>
+        <View
+            android:id="@+id/viewLogoTwo_splash"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="@dimen/_2sdp"
+            android:background="@drawable/bg_resources_logo"
+            android:layout_below="@id/linearLogo_splash"
+            android:layout_alignStart="@id/linearLogo_splash"
+            android:layout_marginTop="-2.8dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_alignLeft="@id/linearLogo_splash" />
 
-        <!-- <View
-             android:id="@+id/viewLogoOne_splash"
-             android:layout_width="@dimen/_110sdp"
-             android:layout_height="@dimen/_2sdp"
-             android:background="@drawable/bg_resources_logo"
-             android:layout_alignBottom="@id/relativeChar_splash"
-             android:layout_toEndOf="@id/relativeChar_splash"
-             android:layout_marginStart="-2dp"
-
-             android:layout_toRightOf="@id/relativeChar_splash"
-             android:layout_marginLeft="-2dp" />
-
-
-         <View
-             android:id="@+id/viewLogoTwo_splash"
-             android:layout_width="@dimen/_110sdp"
-             android:layout_marginStart="-2dp"
-             android:layout_height="@dimen/_2sdp"
-             android:background="@drawable/bg_resources_logo"
-             android:layout_alignTop="@id/relativeChar_splash"
-             android:layout_toEndOf="@id/relativeChar_splash"
-             android:layout_marginLeft="-2dp"
-             android:layout_toRightOf="@id/relativeChar_splash" />-->
-
-        <TextView
-            android:id="@+id/lblSlogan_splash"
+        <LinearLayout
+            android:id="@+id/linearLogo_splash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:fontFamily="@font/aldrich"
             android:gravity="center"
-            android:text="conommiza :)"
+            android:orientation="horizontal">
+
+
+            <RelativeLayout
+                android:id="@+id/relativeChar_splash"
+                android:layout_width="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@id/lblSlogan_splash"
+                android:background="@drawable/bg_resources_logo"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:paddingStart="@dimen/_7sdp"
+                android:paddingEnd="@dimen/_7sdp"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/lblSlogan_splash">
+
+                <TextView
+                    android:id="@+id/lblChar_logo_splash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_20ssp"
+                    android:text="E"
+                    android:textColor="@color/white_fff" />
+            </RelativeLayout>
+
+            <!-- <View
+                 android:id="@+id/viewLogoOne_splash"
+                 android:layout_width="@dimen/_110sdp"
+                 android:layout_height="@dimen/_2sdp"
+                 android:background="@drawable/bg_resources_logo"
+                 android:layout_alignBottom="@id/relativeChar_splash"
+                 android:layout_toEndOf="@id/relativeChar_splash"
+                 android:layout_marginStart="-2dp"
+
+                 android:layout_toRightOf="@id/relativeChar_splash"
+                 android:layout_marginLeft="-2dp" />
+
+
+             <View
+                 android:id="@+id/viewLogoTwo_splash"
+                 android:layout_width="@dimen/_110sdp"
+                 android:layout_marginStart="-2dp"
+                 android:layout_height="@dimen/_2sdp"
+                 android:background="@drawable/bg_resources_logo"
+                 android:layout_alignTop="@id/relativeChar_splash"
+                 android:layout_toEndOf="@id/relativeChar_splash"
+                 android:layout_marginLeft="-2dp"
+                 android:layout_toRightOf="@id/relativeChar_splash" />-->
+
+            <TextView
+                android:id="@+id/lblSlogan_splash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/aldrich"
+                android:gravity="center"
+                android:text="conommiza :)"
+                android:textColor="@color/font_primary"
+                android:textSize="@dimen/_20ssp"
+
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/progress_splash"
+            android:layout_width="@dimen/_150sdp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            android:layout_marginBottom="@dimen/_20sdp"
+            app:lottie_fileName="wave.json"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_below="@id/linearLogo_splash"
+            android:layout_centerHorizontal="true" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Versão 0.0.0"
             android:textColor="@color/font_primary"
-            android:textSize="@dimen/_20ssp"
-
-            android:textStyle="bold" />
-
-
-    </LinearLayout>
-
-
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:textStyle="bold"
+            android:id="@+id/txtVersao_splash"
+            android:fontFamily="@font/aldrich" />
 
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/progress_splash"
-        android:layout_width="@dimen/_150sdp"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        android:layout_marginBottom="@dimen/_20sdp"
-        app:lottie_fileName="wave.json"
-        android:layout_height="@dimen/_100sdp"
-        android:layout_marginTop="@dimen/_30sdp"
-        android:layout_below="@id/linearLogo_splash"
-        android:layout_centerHorizontal="true" />
-
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Versão 0.0.0"
-        android:textColor="@color/font_primary"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/_20sdp"
-        android:textStyle="bold"
-        android:id="@+id/txtVersao_splash"
-        android:fontFamily="@font/aldrich"/>
-
-
-
-
-</RelativeLayout>
+    </RelativeLayout>
+</layout>
