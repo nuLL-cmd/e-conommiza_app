@@ -9,7 +9,7 @@
     tools:context=".activity.MainActivity">
 
     <RelativeLayout
-        android:id="@+id/relativeData_main"
+        android:id="@+id/relative_Data_main"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_320sdp"
         android:layout_below="@id/viewSuportLayout_main"
@@ -41,7 +41,7 @@
         android:layout_alignParentEnd="true"
         android:scaleType="centerCrop"
         android:src="@drawable/clip_dancer"
-        android:layout_above="@id/relativeData_main"
+        android:layout_above="@id/relative_Data_main"
         android:layout_toEndOf="@id/viewSuportImage_main"/>
 
 
