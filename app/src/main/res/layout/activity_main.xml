@@ -1,89 +1,279 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/bg_relative_main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activity.MainActivity">
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
 
     <RelativeLayout
-        android:id="@+id/relative_Data_main"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_320sdp"
-        android:layout_below="@id/viewSuportLayout_main"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/bg_relative_data_main">
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_relative_main"
+        tools:context=".activity.MainActivity">
 
-
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipeRefresh_main"
+        <RelativeLayout
+            android:id="@+id/relativeData_main"
             android:layout_width="match_parent"
-            android:layout_margin="@dimen/_10sdp"
-            android:layout_height="match_parent">
+            android:layout_height="@dimen/_320sdp"
+            android:layout_below="@id/viewSuportLayout_main"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/bg_relative_data_main">
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerItens_main"
+            <TextView
+                android:id="@+id/txtCash_main"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_28sdp"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:text="Comece adicionadno uma perspectiva"
+                android:textAlignment="center"
+                android:textColor="#939090"
+                android:textSize="@dimen/_9ssp" />
+
+
+            <ImageButton
+                android:id="@+id/btnAddPerspective_main"
+                android:layout_width="@dimen/_28sdp"
+                android:layout_height="@dimen/_28sdp"
+                android:background="@drawable/bg_button_white_global"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/_25sdp"
+                android:src="@drawable/ic_add"
+                android:layout_alignTop="@id/txtCash_main" />
+
+
+            <RelativeLayout
+                android:id="@+id/relativeChildData_main"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="@dimen/_5sdp"
-                android:layout_margin="@dimen/_10sdp"/>
+                android:layout_below="@id/txtCash_main"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/bg_relative_perspective">
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                    android:id="@+id/swipeRefresh_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/_10sdp">
 
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerItens_main"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:listitem="@layout/layout_items_main"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:padding="@dimen/_5sdp" />
+
+
+                </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/relativeData_main"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@id/viewSuportImage_main"
+            android:scaleType="centerCrop"
+            android:src="@drawable/clip_dancer" />
+
+
+        <ImageButton
+            android:id="@+id/btnExit_main"
+            android:layout_width="@dimen/_32sdp"
+            android:layout_height="@dimen/_32sdp"
+            android:layout_marginStart="@dimen/_15ssp"
+            android:layout_marginTop="@dimen/_35sdp"
+            android:background="@drawable/bg_button_back_form_global"
+            android:src="@drawable/ic_round_exit" />
+
+
+        <TextView
+            android:id="@+id/lblExit_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/btnExit_main"
+            android:layout_alignBottom="@id/btnExit_main"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_toEndOf="@id/btnExit_main"
+            android:gravity="center"
+            android:text="Sair"
+            android:textColor="@color/background_form"
+            android:textSize="@dimen/_16ssp" />
+
+
+        <View
+            android:id="@+id/viewSuportImage_main"
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true" />
+
+        <View
+            android:id="@+id/viewSuportLayout_main"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_centerInParent="true" />
+
+
+        <RelativeLayout
+            android:id="@+id/relativeDataBalance_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/relativeData_main"
+            android:layout_below="@id/btnExit_main"
+            android:layout_toStartOf="@id/viewSuportImage_main"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/txtMonthBalance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:ellipsize="marquee"
+                android:paddingStart="@dimen/_20ssp"
+                android:singleLine="true"
+                android:text="Balanço"
+                android:textColor="@color/background_form"
+                android:textSize="@dimen/_20sdp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/lblValueBalance_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/txtValueBalance_main"
+                android:layout_alignBottom="@id/txtValueBalance_main"
+                android:gravity="center"
+                android:paddingStart="@dimen/_20ssp"
+                android:text="R$"
+                android:textColor="@color/background_form"
+                android:textSize="@dimen/_17ssp" />
+
+
+            <TextView
+                android:id="@+id/txtValueBalance_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtMonthBalance"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_toEndOf="@id/lblValueBalance_main"
+                android:ellipsize="end"
+                android:paddingStart="@dimen/_10sdp"
+                android:singleLine="true"
+                android:text="300,00"
+                android:textAlignment="center"
+                android:textColor="@color/background_form"
+                android:textSize="@dimen/_30ssp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+
+        <com.github.clans.fab.FloatingActionMenu
+            android:id="@+id/menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="@dimen/_10sdp"
+            fab:menu_animationDelayPerItem="50"
+            fab:menu_backgroundColor="@android:color/transparent"
+            fab:menu_buttonSpacing="0dp"
+            fab:menu_colorNormal="#2196F3"
+            fab:menu_colorPressed="#3F51B5"
+            fab:menu_colorRipple="#99FFFFFF"
+            fab:menu_fab_label="Toque para fechar"
+            fab:menu_fab_size="normal"
+            fab:menu_icon="@drawable/fab_add"
+            fab:menu_labels_colorNormal="#333333"
+            fab:menu_labels_colorPressed="#444444"
+            fab:menu_labels_colorRipple="#66FFFFFF"
+            fab:menu_labels_cornerRadius="3dp"
+            fab:menu_labels_ellipsize="none"
+            fab:menu_labels_hideAnimation="@anim/fab_slide_out_to_right"
+            fab:menu_labels_margin="0dp"
+            fab:menu_labels_maxLines="-1"
+            fab:menu_labels_padding="8dp"
+            fab:menu_labels_paddingBottom="4dp"
+            fab:menu_labels_paddingLeft="8dp"
+            fab:menu_labels_paddingRight="8dp"
+            fab:menu_labels_paddingTop="4dp"
+            fab:menu_labels_position="left"
+            fab:menu_labels_showAnimation="@anim/fab_slide_in_from_right"
+            fab:menu_labels_showShadow="true"
+            fab:menu_labels_singleLine="false"
+            fab:menu_labels_textColor="#FFFFFF"
+            fab:menu_labels_textSize="14sp"
+            fab:menu_openDirection="up"
+            fab:menu_shadowColor="#66000000"
+            fab:menu_shadowRadius="4dp"
+            fab:menu_shadowXOffset="1dp"
+            fab:menu_shadowYOffset="3dp"
+            fab:menu_showShadow="true">
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/menuProfile_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_person"
+                app:fab_colorNormal="#E91E63"
+                fab:fab_label="Minha conta"
+                fab:fab_size="mini" />
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/menuOptions_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_settings"
+                app:fab_colorNormal="#FF9800"
+                fab:fab_label="Opções"
+                fab:fab_size="mini" />
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/menuUpdate_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_refresh"
+                app:fab_colorNormal="#3F51B5"
+                fab:fab_label="Atualizar"
+                fab:fab_size="mini" />
+
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/menuProvento_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_thumb_up"
+                app:fab_colorNormal="#4CAF50"
+                fab:fab_label="Add provento"
+                fab:fab_size="mini" />
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/menuDespesa_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_thumb_down"
+                fab:fab_label="Add despesa"
+                fab:fab_size="mini" />
+
+        </com.github.clans.fab.FloatingActionMenu>
     </RelativeLayout>
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/clip_dancer"
-        android:layout_above="@id/relative_Data_main"
-        android:layout_toEndOf="@id/viewSuportImage_main"/>
-
-
-    <ImageButton
-        android:layout_width="@dimen/_32sdp"
-        android:layout_height="@dimen/_32sdp"
-        android:src="@drawable/ic_round_exit"
-        android:background="@drawable/bg_button_white_global"
-        android:layout_marginTop="@dimen/_35sdp"
-        android:layout_marginStart="@dimen/_15ssp"
-        android:id="@+id/btnExit_main"/>
-
-
-    <ImageButton
-        android:layout_width="@dimen/_32sdp"
-        android:layout_height="@dimen/_32sdp"
-        android:src="@drawable/ic_baseline_menu"
-        android:background="@drawable/bg_button_white_global"
-        android:layout_marginTop="@dimen/_35sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:id="@+id/btnOptions_main"
-        android:layout_toEndOf="@id/btnExit_main"
-        android:layout_marginStart="@dimen/_20sdp"/>
-
-
-
-    <View
-        android:id="@+id/viewSuportImage_main"
-        android:layout_width="@dimen/_1sdp"
-        android:layout_height="match_parent"
-        android:layout_centerHorizontal="true" />
-
-    <View
-        android:id="@+id/viewSuportLayout_main"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_centerInParent="true" />
-
-
-
-
-
-
-
-</RelativeLayout>
+</layout>
