@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.automatodev.e_conommiza_app.R;
 import com.automatodev.e_conommiza_app.databinding.ActivitySplashBinding;
 
+import lombok.extern.java.Log;
+
 @SuppressLint("SetTextI18n")
 public class SplashActivity extends AppCompatActivity {
     ActivitySplashBinding binding;
@@ -50,7 +52,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run(){
                 try{
                     sleep(2300);
-                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                     finish();
                 }catch(InterruptedException e) {
                     e.printStackTrace();
