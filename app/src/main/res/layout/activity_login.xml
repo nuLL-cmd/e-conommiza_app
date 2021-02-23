@@ -22,8 +22,8 @@
             android:layout_marginEnd="@dimen/_10sdp"
             android:id="@+id/linearDataAccount_login"
             android:orientation="vertical"
-            android:paddingStart="25dp"
-            android:paddingEnd="25dp">
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_15sdp">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -130,8 +130,7 @@
                 android:paddingEnd="@dimen/_10sdp"
                 android:singleLine="true"
                 android:textColor="#A2A2A2"
-                android:textSize="@dimen/_12ssp"
-                android:textStyle="bold" />
+                android:textSize="@dimen/_12ssp"/>
 
 
             <EditText
@@ -147,8 +146,7 @@
                 android:paddingEnd="@dimen/_10sdp"
                 android:singleLine="true"
                 android:textColor="#A2A2A2"
-                android:textSize="@dimen/_12ssp"
-                android:textStyle="bold" />
+                android:textSize="@dimen/_12ssp"/>
 
 
             <Button
@@ -174,32 +172,7 @@
                 android:textStyle="bold" />
 
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_height="wrap_content">
 
-
-                <View
-                    android:id="@+id/viewSeparatorSocial_login"
-                    android:layout_width="match_parent"
-                    android:layout_height="3dp"
-                    android:layout_centerInParent="true"
-                    android:layout_marginStart="@dimen/_50sdp"
-                    android:layout_marginEnd="@dimen/_50sdp"
-                    android:background="#E2E0E0" />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ou faça login com"
-                    android:id="@+id/lblSocial_login"
-                    android:background="#fff"
-                    android:padding="@dimen/_5sdp"
-                    android:layout_centerInParent="true"/>
-
-            </RelativeLayout>
 
 
             <com.github.ybq.android.spinkit.SpinKitView
@@ -224,6 +197,33 @@
             android:layout_height="match_parent"
             android:gravity="bottom"
             android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_height="wrap_content">
+
+
+                <View
+                    android:id="@+id/viewSeparatorSocial_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="@dimen/_50sdp"
+                    android:layout_marginEnd="@dimen/_50sdp"
+                    android:background="#E2E0E0" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ou faça login com"
+                    android:id="@+id/lblSocial_login"
+                    android:background="#fff"
+                    android:padding="@dimen/_5sdp"
+                    android:layout_centerInParent="true"/>
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -292,6 +292,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="5dp"
                     android:clickable="true"
+                    android:onClick="actLoginRegister"
                     android:gravity="center"
                     android:id="@+id/txtRegister_login"
                     android:text="Registre-se"
