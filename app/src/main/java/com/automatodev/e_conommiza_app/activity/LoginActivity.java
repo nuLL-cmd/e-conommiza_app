@@ -24,4 +24,12 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(this, RegisterActivity.class));
         }
     }
+
+
+    public void actLoginMain(View view){
+        if (!MainActivity.status){
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        }
+    }
 }
