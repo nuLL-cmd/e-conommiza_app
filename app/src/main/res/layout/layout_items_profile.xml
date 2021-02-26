@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_70sdp"
+    android:background="@color/background_form">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/imageItem_layoutItem"
+        android:layout_width="@dimen/_48sdp"
+        android:layout_height="@dimen/_48sdp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:background="@color/blue_545de8"
+        android:padding="@dimen/_10sdp"
+        android:src="@drawable/ic_restaurant"
+        app:riv_corner_radius="@dimen/_7sdp" />
+
+
+    <TextView
+        android:id="@+id/txtItem_layoutItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/imageItem_layoutItem"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:layout_toEndOf="@id/imageItem_layoutItem"
+        android:text="Mc Donalds"
+        android:textColor="@color/font_primary"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/txtDataItem_layout_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtItem_layoutItem"
+        android:layout_alignStart="@id/txtItem_layoutItem"
+        android:text="23.05.18, 3:33 PM"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/txtValueItem_layout_item"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/txtDataItem_layout_item"
+        android:layout_alignBottom="@id/txtDataItem_layout_item"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_toEndOf="@id/txtDataItem_layout_item"
+        android:gravity="center|end"
+        android:text="-R$ 15.35"
+        android:textColor="@color/font_primary"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="#CDCDCD"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"/>
+
+</RelativeLayout>

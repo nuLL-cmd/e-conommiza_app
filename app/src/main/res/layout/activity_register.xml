@@ -131,20 +131,36 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/edtEmail_register"
+                android:id="@+id/edtUser_register"
                 android:layout_width="match_parent"
                 android:background="@drawable/layout_shadow_white"
                 android:layout_height="@dimen/_53sdp"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:hint="Email"
+                android:hint="Usuário"
                 android:inputType="textEmailAddress"
                 android:paddingStart="@dimen/_15ssp"
                 android:paddingEnd="@dimen/_10sdp"
                 android:singleLine="true"
                 android:textColor="#A2A2A2"
-                android:textSize="@dimen/_12ssp"
-               />
+                android:textSize="@dimen/_10ssp"
+                />
 
+
+            <EditText
+                android:id="@+id/edtEmail_register"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_53sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/layout_shadow_white"
+                android:hint="E-mail"
+                android:inputType="numberPassword"
+                android:maxLength="6"
+                android:paddingStart="@dimen/_15ssp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:singleLine="true"
+                android:textColor="#A2A2A2"
+                android:textSize="@dimen/_10ssp"
+                />
 
             <EditText
                 android:id="@+id/edtPassword_register"
@@ -152,31 +168,15 @@
                 android:layout_height="@dimen/_53sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:background="@drawable/layout_shadow_white"
-                android:hint="Password"
+                android:hint="Senha"
                 android:inputType="numberPassword"
                 android:maxLength="6"
                 android:paddingStart="@dimen/_15ssp"
                 android:paddingEnd="@dimen/_10sdp"
                 android:singleLine="true"
                 android:textColor="#A2A2A2"
-                android:textSize="@dimen/_12ssp"
-               />
-
-            <EditText
-                android:id="@+id/edtConfirmPassword_register"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_53sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:background="@drawable/layout_shadow_white"
-                android:hint="Password"
-                android:inputType="numberPassword"
-                android:maxLength="6"
-                android:paddingStart="@dimen/_15ssp"
-                android:paddingEnd="@dimen/_10sdp"
-                android:singleLine="true"
-                android:textColor="#A2A2A2"
-                android:textSize="@dimen/_12ssp"
-               />
+                android:textSize="@dimen/_10ssp"
+                />
 
 
 

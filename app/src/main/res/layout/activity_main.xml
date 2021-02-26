@@ -33,10 +33,10 @@
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:layout_marginEnd="@dimen/_10sdp"
-                android:text="Comece adicionadno uma perspectiva"
+                android:text="Comece adicionando uma perspectiva"
                 android:textAlignment="center"
                 android:textColor="#939090"
-                android:textSize="@dimen/_9ssp" />
+                android:textSize="@dimen/_10ssp" />
 
 
             <ImageButton
@@ -93,14 +93,15 @@
             android:src="@drawable/clip_dancer" />
 
 
-        <ImageButton
+        <ImageView
             android:id="@+id/btnExit_main"
             android:layout_width="@dimen/_32sdp"
             android:layout_height="@dimen/_32sdp"
             android:layout_marginStart="@dimen/_15ssp"
+            android:padding="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_35sdp"
             android:background="@drawable/bg_button_back_form_global"
-            android:src="@drawable/ic_round_exit" />
+            android:src="@drawable/ic_home" />
 
 
         <TextView
@@ -112,7 +113,7 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_toEndOf="@id/btnExit_main"
             android:gravity="center"
-            android:text="Sair"
+            android:text="Home"
             android:textColor="@color/background_form"
             android:textSize="@dimen/_16ssp" />
 
@@ -234,6 +235,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_person"
+                android:onClick="actMainProfile"
                 app:fab_colorNormal="#E91E63"
                 fab:fab_label="Minha conta"
                 fab:fab_size="mini" />
@@ -242,9 +244,9 @@
                 android:id="@+id/menuOptions_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_settings"
+                android:src="@drawable/ic_add_white"
                 app:fab_colorNormal="#FF9800"
-                fab:fab_label="Opções"
+                fab:fab_label="Adicionar perspectiva"
                 fab:fab_size="mini" />
 
             <com.github.clans.fab.FloatingActionButton
@@ -263,7 +265,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_thumb_up"
                 app:fab_colorNormal="#4CAF50"
-                fab:fab_label="Add provento"
+                fab:fab_label="Adicionar provento"
                 fab:fab_size="mini" />
 
             <com.github.clans.fab.FloatingActionButton
@@ -271,7 +273,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_thumb_down"
-                fab:fab_label="Add despesa"
+                fab:fab_label="Adicionar despesa"
                 fab:fab_size="mini" />
 
         </com.github.clans.fab.FloatingActionMenu>

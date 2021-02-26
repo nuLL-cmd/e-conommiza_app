@@ -130,7 +130,7 @@
                 android:paddingEnd="@dimen/_10sdp"
                 android:singleLine="true"
                 android:textColor="#A2A2A2"
-                android:textSize="@dimen/_12ssp"/>
+                android:textSize="@dimen/_10ssp"/>
 
 
             <EditText
@@ -146,7 +146,7 @@
                 android:paddingEnd="@dimen/_10sdp"
                 android:singleLine="true"
                 android:textColor="#A2A2A2"
-                android:textSize="@dimen/_12ssp"/>
+                android:textSize="@dimen/_10ssp"/>
 
 
             <Button

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.automatodev.e_conommiza_app.ProfileActivity;
 import com.automatodev.e_conommiza_app.R;
 import com.automatodev.e_conommiza_app.databinding.ActivitySplashBinding;
 
