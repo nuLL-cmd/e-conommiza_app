@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/relativeDaddy_dialogAbout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_180sdp"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:background="@drawable/bg_dialog_global">
+
+
+        <RelativeLayout
+            android:id="@+id/relativeTitle_dialogAbout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:background="@drawable/bg_dialog_view">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="E-conommiza"
+                android:textColor="@color/background_form"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:gravity="center"
+                android:textSize="@dimen/_14ssp"/>
+
+
+
+            <ImageButton
+                android:id="@+id/btnClose_dialogAbout"
+                android:layout_width="@dimen/_26sdp"
+                android:layout_height="@dimen/_26sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="@drawable/bg_button_back_form_global"
+                android:src="@drawable/ic_close" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_below="@id/relativeTitle_dialogAbout"
+            android:layout_above="@+id/linearSocial_dialogAbout"
+            android:layout_margin="@dimen/_5sdp"
+            android:text="Aplicativo de finanças. \nVisite a pagina do app na playstore \n \nVersão 1.0.0"
+            android:textSize="@dimen/_10sdp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/linearSocial_dialogAbout"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btnFacebook_dialogAbout"
+                android:background="@drawable/bg_button_white_shadow_global"
+                android:layout_width="@dimen/_55sdp"
+
+                android:src="@drawable/ic_facebook_svg"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_height="@dimen/_55sdp"/>
+
+
+            <ImageButton
+                android:id="@+id/btnLinkedin_dialogAbout"
+                android:background="@drawable/bg_button_white_shadow_global"
+                android:layout_width="@dimen/_55sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_20sdp"
+                android:src="@drawable/ic_linkedin"
+                android:layout_height="@dimen/_55sdp"/>
+
+
+            <ImageButton
+                android:id="@+id/btnPlay_dialogAbout"
+                android:paddingStart="@dimen/_10sdp"
+                android:background="@drawable/bg_button_white_shadow_global"
+                android:layout_width="@dimen/_55sdp"
+                android:src="@drawable/ic_playstore"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_height="@dimen/_55sdp"/>
+
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
+
+</layout>

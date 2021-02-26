@@ -1,300 +1,293 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeDaddy_login"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    android:background="@color/background_form"
-    tools:context=".ProfileActivity">
+    <data>
 
-    <ImageButton
-        android:id="@+id/btnBack_regoster"
-        android:layout_width="@dimen/_32sdp"
-        android:layout_height="@dimen/_32sdp"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:background="@drawable/bg_button_back_form_global"
-        android:src="@drawable/ic_arrow_back" />
+    </data>
 
-    <ScrollView
+    <RelativeLayout
+        android:id="@+id/relativeDaddy_profile"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fillViewport="true"
+        android:layout_height="match_parent"
+        android:background="@color/background_form"
+        tools:context=".ProfileActivity">
 
-        android:layout_below="@id/btnBack_regoster"
-        android:id="@+id/scrollDataUser_profile">
-        <LinearLayout
-            android:id="@+id/lineareDataUser_profile"
-            android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_below="@id/btnBack_regoster"
+        <ImageButton
+            android:id="@+id/btnBack_regoster"
+            android:layout_width="@dimen/_32sdp"
+            android:layout_height="@dimen/_32sdp"
+            android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:orientation="vertical">
+            android:background="@drawable/bg_button_back_form_global"
+            android:src="@drawable/ic_arrow_back" />
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
 
-            <TextView
-                android:id="@+id/lblWelcome_profile"
+            android:layout_below="@id/btnBack_regoster"
+            android:id="@+id/scrollDataUser_profile">
+
+            <LinearLayout
+                android:id="@+id/lineareDataUser_profile"
                 android:layout_width="match_parent"
+
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:ellipsize="marquee"
-                android:singleLine="true"
-                android:text="Bem vindo de volta!"
-                android:textColor="@color/font_secondary"
-                android:textSize="@dimen/_16ssp" />
-
-
-
-
-
-<!--
-            <TextView
-                android:id="@+id/txtUserName_profile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/lblWelcome_profile"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_below="@id/btnBack_regoster"
                 android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical">
 
-                android:ellipsize="marquee"
-                android:singleLine="true"
-                android:text="Marco"
-                android:textSize="@dimen/_30ssp"
-                android:textStyle="bold" />
--->
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardDataUser_profile"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_180sdp"
-                android:layout_below="@+id/txtUserName_profile"
-                android:layout_marginBottom="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_15sdp"
-                app:cardCornerRadius="@dimen/_30sdp">
-
-                <RelativeLayout
-                    android:id="@+id/relativeCardDataUser_profile"
+                <TextView
+                    android:id="@+id/lblWelcome_profile"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
+                    android:text="Bem vindo de volta!"
+                    android:textColor="@color/font_secondary"
+                    android:textSize="@dimen/_16ssp" />
+
+
+                <!--
+                            <TextView
+                                android:id="@+id/txtUserName_profile"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/lblWelcome_profile"
+                                android:layout_marginTop="@dimen/_10sdp"
+
+                                android:ellipsize="marquee"
+                                android:singleLine="true"
+                                android:text="Marco"
+                                android:textSize="@dimen/_30ssp"
+                                android:textStyle="bold" />
+                -->
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardDataUser_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_180sdp"
+                    android:layout_below="@+id/txtUserName_profile"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    app:cardCornerRadius="@dimen/_30sdp">
 
                     <RelativeLayout
-                        android:id="@+id/viewSuportDataUser_profile"
+                        android:id="@+id/relativeCardDataUser_profile"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_60sdp"
-                        android:background="@color/button_positive">
+                        android:layout_height="match_parent">
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center|start"
-                            android:orientation="vertical">
+                        <RelativeLayout
+                            android:id="@+id/viewSuportDataUser_profile"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_60sdp"
+                            android:background="@color/button_positive">
 
-                            <TextView
-                                android:id="@+id/lblSince_profile"
+                            <LinearLayout
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="@dimen/_10ssp"
-                                android:text="Usuário do app desde"
-                                android:layout_marginStart="@dimen/_20sdp"
+                                android:layout_height="match_parent"
+                                android:gravity="center|start"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/lblSince_profile"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/_10ssp"
+                                    android:text="Usuário do app desde"
+                                    android:layout_marginStart="@dimen/_20sdp"
+                                    android:layout_marginTop="@dimen/_10sdp"
+                                    android:textColor="#95FFFFFF" />
+
+
+                                <TextView
+                                    android:drawableStart="@drawable/ic_calendar"
+                                    android:drawablePadding="@dimen/_5sdp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="12 jan 2020,8am"
+                                    android:id="@+id/txtSince_profile"
+                                    android:textSize="@dimen/_14ssp"
+                                    android:textStyle="bold"
+                                    android:layout_marginBottom="@dimen/_8sdp"
+                                    android:layout_below="@+id/lblSince_profile"
+                                    android:layout_marginStart="@dimen/_18ssp"
+                                    android:layout_marginTop="@dimen/_7sdp"
+                                    android:gravity="center"
+                                    android:textAlignment="center"
+                                    android:textColor="#BCFFFFFF" />
+                            </LinearLayout>
+
+
+                            <ImageButton
+                                android:layout_width="@dimen/_26sdp"
+                                android:layout_height="@dimen/_26sdp"
                                 android:layout_marginTop="@dimen/_10sdp"
-                                android:textColor="#95FFFFFF"/>
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentEnd="true"
+                                android:onClick="about"
+                                android:layout_marginEnd="@dimen/_20sdp"
+                                android:background="@drawable/bg_button_back_form_global"
+                                android:src="@drawable/ic_info" />
+
+                        </RelativeLayout>
 
 
-
-                            <TextView
-                                android:drawableStart="@drawable/ic_calendar"
-                                android:drawablePadding="@dimen/_5sdp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="12 jan 2020,8am"
-                                android:id="@+id/txtSince_profile"
-                                android:textSize="@dimen/_14ssp"
-                                android:textStyle="bold"
-                                android:layout_marginBottom="@dimen/_8sdp"
-                                android:layout_below="@+id/lblSince_profile"
-                                android:layout_marginStart="@dimen/_18ssp"
-                                android:layout_marginTop="@dimen/_7sdp"
-                                android:gravity="center"
-                                android:textAlignment="center"
-                                android:textColor="#BCFFFFFF"/>
-                        </LinearLayout>
-
+                        <com.makeramen.roundedimageview.RoundedImageView
+                            android:layout_width="@dimen/_48sdp"
+                            android:layout_height="@dimen/_48sdp"
+                            app:riv_corner_radius="@dimen/_10sdp"
+                            android:src="@drawable/image"
+                            android:layout_below="@+id/viewSuportDataUser_profile"
+                            android:layout_marginStart="@dimen/_20sdp"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:id="@+id/imageUser_profile" />
 
                         <ImageButton
-                            android:layout_width="@dimen/_26sdp"
-                            android:layout_height="@dimen/_26sdp"
+                            android:layout_width="@dimen/_28sdp"
+                            android:layout_height="@dimen/_28sdp"
                             android:layout_marginTop="@dimen/_10sdp"
-                            android:layout_centerVertical="true"
+                            android:layout_alignTop="@id/imageUser_profile"
                             android:layout_alignParentEnd="true"
                             android:layout_marginEnd="@dimen/_20sdp"
                             android:background="@drawable/bg_button_back_form_global"
-                            android:src="@drawable/ic_info" />
+                            android:src="@drawable/ic_edit" />
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_35sdp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginStart="@dimen/_20sdp"
+                            android:layout_marginEnd="@dimen/_20sdp"
+                            android:layout_marginBottom="@dimen/_8sdp"
+                            android:text="Sair"
+                            style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
+                            android:textColor="@color/background_form"
+                            android:background="@drawable/bg_button_blue_noshadow_global" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Marco\n Aurelio"
+                            android:layout_alignTop="@id/imageUser_profile"
+                            android:layout_alignBottom="@id/imageUser_profile"
+                            android:layout_toEndOf="@id/imageUser_profile"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:textAlignment="center"
+                            android:gravity="center"
+                            android:textSize="@dimen/_15ssp"
+                            android:textStyle="bold" />
 
                     </RelativeLayout>
 
 
+                </androidx.cardview.widget.CardView>
 
 
+            </LinearLayout>
 
-                    <com.makeramen.roundedimageview.RoundedImageView
-                        android:layout_width="@dimen/_48sdp"
-                        android:layout_height="@dimen/_48sdp"
-                        app:riv_corner_radius="@dimen/_10sdp"
-                        android:src="@drawable/image"
-                        android:layout_below="@+id/viewSuportDataUser_profile"
-                        android:layout_marginStart="@dimen/_20sdp"
-                        android:layout_marginTop="@dimen/_15sdp"
-                        android:id="@+id/imageUser_profile"/>
-
-                    <ImageButton
-                        android:layout_width="@dimen/_28sdp"
-                        android:layout_height="@dimen/_28sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_alignTop="@id/imageUser_profile"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="@dimen/_20sdp"
-                        android:background="@drawable/bg_button_back_form_global"
-                        android:src="@drawable/ic_edit" />
-
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_35sdp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginStart="@dimen/_20sdp"
-                        android:layout_marginEnd="@dimen/_20sdp"
-                        android:layout_marginBottom="@dimen/_8sdp"
-                        android:text="Sair"
-                        style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
-                        android:textColor="@color/background_form"
-                        android:background="@drawable/bg_button_blue_noshadow_global"/>
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Marco\n Aurelio"
-                        android:layout_alignTop="@id/imageUser_profile"
-                        android:layout_alignBottom="@id/imageUser_profile"
-                        android:layout_toEndOf="@id/imageUser_profile"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:textAlignment="center"
-                        android:gravity="center"
-                        android:textSize="@dimen/_15ssp"
-                        android:textStyle="bold"/>
-
-                </RelativeLayout>
-
-
-            </androidx.cardview.widget.CardView>
-
-
-        </LinearLayout>
-
-    </ScrollView>
-
-
-
-    <RelativeLayout
-        android:id="@+id/relativeData_main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/scrollDataUser_profile"
-        android:background="@drawable/bg_relative_data_main_two">
-
-
-
-
-
-
-        <TextView
-            android:id="@+id/txtCash_main"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_28sdp"
-            android:gravity="center"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:text="Você não tem nenhuma perspectiva"
-            android:textAlignment="center"
-            android:textColor="#939090"
-            android:textSize="@dimen/_10ssp" />
-
-
-        <ImageButton
-            android:id="@+id/btnAddPerspective_main"
-            android:layout_width="@dimen/_28sdp"
-            android:layout_height="@dimen/_28sdp"
-            android:background="@drawable/bg_button_white_global_two"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/_25sdp"
-            android:src="@drawable/ic_add"
-            android:layout_alignTop="@id/txtCash_main" />
+        </ScrollView>
 
 
         <RelativeLayout
-            android:id="@+id/relativeChildData_main"
+            android:id="@+id/relativeData_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/txtCash_main"
+            android:layout_below="@id/scrollDataUser_profile"
+            android:background="@drawable/bg_relative_data_main_two">
 
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/bg_relative_perspective_two">
 
-            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:id="@+id/swipeRefresh_main"
+            <TextView
+                android:id="@+id/txtCash_main"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_28sdp"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:text="Você não tem nenhuma perspectiva"
+                android:textAlignment="center"
+                android:textColor="#939090"
+                android:textSize="@dimen/_10ssp" />
+
+
+            <ImageButton
+                android:id="@+id/btnAddPerspective_main"
+                android:layout_width="@dimen/_28sdp"
+                android:layout_height="@dimen/_28sdp"
+                android:background="@drawable/bg_button_white_global_two"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/_25sdp"
+                android:src="@drawable/ic_add"
+                android:layout_alignTop="@id/txtCash_main" />
+
+
+            <RelativeLayout
+                android:id="@+id/relativeChildData_main"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="@dimen/_10sdp">
+                android:layout_below="@id/txtCash_main"
 
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/bg_relative_perspective_two">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerItens_main"
+                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                    android:id="@+id/swipeRefresh_main"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    tools:listitem="@layout/layout_items_profile"
-                    android:layout_margin="@dimen/_10sdp"
-                    android:padding="@dimen/_5sdp" />
+                    android:layout_margin="@dimen/_10sdp">
 
 
-            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerItens_main"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:listitem="@layout/layout_items_profile"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:padding="@dimen/_5sdp" />
+
+
+                </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_below="@id/txtCash_main"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:padding="@dimen/_10sdp"
+                android:id="@+id/relativeResource_profile">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_20sdp"
+                    android:id="@+id/imgNotfound_profile"
+                    android:src="@drawable/ic_not_found"
+                    android:layout_centerInParent="true" />
+
+
+            </RelativeLayout>
+
 
         </RelativeLayout>
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_below="@id/txtCash_main"
-            android:layout_height="match_parent"
-            android:visibility="gone"
-            android:padding="@dimen/_10sdp"
-            android:id="@+id/relativeResource_profile">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_20sdp"
-                android:id="@+id/imgNotfound_profile"
-                android:src="@drawable/ic_not_found"
-                android:layout_centerInParent="true"/>
-
-
-        </RelativeLayout>
-
 
 
     </RelativeLayout>
-
-
-
-
-</RelativeLayout>
+</layout>

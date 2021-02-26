@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/background_form"/>
-    <corners android:radius="@dimen/_10sdp"/>
-    <stroke android:color="@color/button_positive"
-        android:width="0.5dp"/>
-</shape>
