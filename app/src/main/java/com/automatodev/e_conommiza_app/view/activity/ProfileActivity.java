@@ -1,13 +1,13 @@
-package com.automatodev.e_conommiza_app;
+package com.automatodev.e_conommiza_app.view.activity;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 
+import com.automatodev.e_conommiza_app.R;
 import com.automatodev.e_conommiza_app.databinding.ActivityProfileBinding;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogAboutBinding;
 
@@ -38,7 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     public void about(View view){
-        LayoutDialogAboutBinding layoutBinding  = DataBindingUtil.inflate(getLayoutInflater().from(this),R.layout.layout_dialog_about,binding.relativeDaddyProfile,false);
+        LayoutDialogAboutBinding layoutBinding  = DataBindingUtil.inflate(getLayoutInflater().from(this), R.layout.layout_dialog_about,binding.relativeDaddyProfile,false);
         AlertDialog dialog = new AlertDialog.Builder(this).create();
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         dialog.setView(layoutBinding.getRoot());

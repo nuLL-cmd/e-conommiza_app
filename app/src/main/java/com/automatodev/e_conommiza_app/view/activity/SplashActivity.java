@@ -1,4 +1,4 @@
-package com.automatodev.e_conommiza_app.activity;
+package com.automatodev.e_conommiza_app.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,17 +8,16 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
-import com.automatodev.e_conommiza_app.ProfileActivity;
-import com.automatodev.e_conommiza_app.R;
 import com.automatodev.e_conommiza_app.databinding.ActivitySplashBinding;
-
-import lombok.extern.java.Log;
+import com.automatodev.e_conommiza_app.security.firebaseAuth.Authentication;
+import com.google.rpc.context.AttributeContext;
 
 @SuppressLint("SetTextI18n")
 public class SplashActivity extends AppCompatActivity {
-    ActivitySplashBinding binding;
+    private ActivitySplashBinding binding;
+    private Authentication auth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +26,7 @@ public class SplashActivity extends AppCompatActivity {
         View viewSplash = binding.getRoot();
         setContentView(viewSplash);
 
+        auth = new Authentication();
 
         showVersion();
         splash();
@@ -53,7 +53,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run(){
                 try{
                     sleep(2300);
-                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                    startActivity(new Intent(SplashActivity.this,auth.getUser() != null ? MainActivity.class : LoginActivity.class));
                     finish();
                 }catch(InterruptedException e) {
                     e.printStackTrace();

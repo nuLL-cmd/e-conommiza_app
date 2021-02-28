@@ -1,3 +1,4 @@
+
 plugins {
     id 'com.android.application'
 }
@@ -86,4 +87,17 @@ dependencies {
 
     //FloatActionMenu
     implementation 'com.github.clans:fab:1.6.4'
+
+    // Firebase
+    implementation platform('com.google.firebase:firebase-bom:26.4.0')
+
+    //Firestore
+    implementation 'com.google.firebase:firebase-firestore'
+
+    // FirebaseAuthentication
+    implementation 'com.google.firebase:firebase-auth'
+
+    apply plugin: 'com.google.gms.google-services'
+    apply plugin: 'com.android.application'
+
 }

@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background_form"
-        tools:context=".ProfileActivity">
+        tools:context=".view.activity.ProfileActivity">
 
         <ImageButton
             android:id="@+id/btnBack_regoster"
@@ -79,7 +79,7 @@
                     android:layout_below="@+id/txtUserName_profile"
                     android:layout_marginBottom="@dimen/_15sdp"
                     android:layout_marginTop="@dimen/_15sdp"
-                    app:cardCornerRadius="@dimen/_30sdp">
+                    app:cardCornerRadius="@dimen/_25sdp">
 
                     <RelativeLayout
                         android:id="@+id/relativeCardDataUser_profile"
@@ -90,7 +90,7 @@
                             android:id="@+id/viewSuportDataUser_profile"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_60sdp"
-                            android:background="@color/button_positive">
+                            android:background="@drawable/bg_dialog_view">
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -160,7 +160,7 @@
                             android:layout_alignParentEnd="true"
                             android:layout_marginEnd="@dimen/_20sdp"
                             android:background="@drawable/bg_button_back_form_global"
-                            android:src="@drawable/ic_edit" />
+                            android:src="@drawable/ic_camera" />
 
                         <Button
                             android:layout_width="match_parent"

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "240681895609",
+    "project_id": "e-conommiza",
+    "storage_bucket": "e-conommiza.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:240681895609:android:da999850b357cd573f7d68",
+        "android_client_info": {
+          "package_name": "com.automatodev.e_conommiza_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "240681895609-q91jgs7iso0lg4m12sb908239ntvc7nb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.automatodev.e_conommiza_app",
+            "certificate_hash": "124f45bf251e6f7138052b0476571129c84a0c3c"
+          }
+        },
+        {
+          "client_id": "240681895609-t8md6sgkob29noa8jnc23tbnkjnv0h84.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDaUaa8nJG_Y1rW3YSBUaSDkd5ZzF2Wwk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "240681895609-t8md6sgkob29noa8jnc23tbnkjnv0h84.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,4 +1,4 @@
-package com.automatodev.e_conommiza_app.activity;
+package com.automatodev.e_conommiza_app.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.automatodev.e_conommiza_app.ProfileActivity;
-import com.automatodev.e_conommiza_app.R;
 import com.automatodev.e_conommiza_app.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,5 +42,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, ProfileActivity.class));
             binding.menu.close(true);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
     }
 }
