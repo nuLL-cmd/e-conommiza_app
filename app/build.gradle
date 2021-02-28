@@ -97,6 +97,15 @@ dependencies {
     // FirebaseAuthentication
     implementation 'com.google.firebase:firebase-auth'
 
+    //Firebase Storage
+    implementation 'com.google.firebase:firebase-storage'
+
+    //SiliCompressor para usar o FileUtils
+    implementation 'com.iceteck.silicompressorr:silicompressor:2.2.4'
+
+    //ZeloryCompressor para comprimir a imagem
+    implementation 'id.zelory:compressor:2.1.0'
+
     apply plugin: 'com.google.gms.google-services'
     apply plugin: 'com.android.application'
 

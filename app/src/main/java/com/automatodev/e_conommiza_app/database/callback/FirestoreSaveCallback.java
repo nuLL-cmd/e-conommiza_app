@@ -4,6 +4,6 @@ import com.google.firebase.firestore.DocumentReference;
 
 public interface FirestoreSaveCallback {
 
-    void onSuccess(DocumentReference documentReference);
+    void onSuccess();
     void onFailure(Exception e);
 }

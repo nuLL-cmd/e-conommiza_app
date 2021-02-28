@@ -136,12 +136,14 @@
                     android:textSize="@dimen/_15ssp"
                     android:textStyle="bold" />
 
+
                 <EditText
                     android:id="@+id/edtUser_register"
                     android:layout_width="match_parent"
-                    android:background="@drawable/layout_shadow_white"
+                    android:text="nazomii"
                     android:layout_height="@dimen/_53sdp"
                     android:layout_marginTop="@dimen/_20sdp"
+                    android:background="@drawable/layout_shadow_white"
                     android:hint="Usuário"
                     android:inputType="textEmailAddress"
                     android:paddingStart="@dimen/_15ssp"
@@ -150,11 +152,11 @@
                     android:textColor="#A2A2A2"
                     android:textSize="@dimen/_10ssp" />
 
-
                 <EditText
                     android:id="@+id/edtEmail_register"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_53sdp"
+                    android:text="programadormoderador@hotmail.com"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:background="@drawable/layout_shadow_white"
                     android:hint="E-mail"
@@ -170,6 +172,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_53sdp"
                     android:layout_marginTop="@dimen/_5sdp"
+                    android:text="402866"
                     android:background="@drawable/layout_shadow_white"
                     android:hint="Senha"
                     android:inputType="numberPassword"

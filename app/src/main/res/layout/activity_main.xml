@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_28sdp"
                 android:gravity="center"
-                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:ellipsize="end"
                 android:singleLine="true"
@@ -40,15 +40,28 @@
 
 
             <ImageButton
+                android:id="@+id/btnChart_profile"
+                android:layout_width="@dimen/_28sdp"
+                android:layout_height="@dimen/_28sdp"
+                android:background="@drawable/bg_button_cancel_noshadow_global"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:src="@drawable/ic_chart"
+                android:layout_alignTop="@id/txtCash_main" />
+
+
+
+            <ImageButton
                 android:id="@+id/btnAddPerspective_main"
                 android:layout_width="@dimen/_28sdp"
                 android:layout_height="@dimen/_28sdp"
-                android:background="@drawable/bg_button_white_global"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="@dimen/_25sdp"
+                android:layout_alignTop="@id/btnChart_profile"
                 android:src="@drawable/ic_add"
-                android:layout_alignTop="@id/txtCash_main" />
+                android:layout_toStartOf="@+id/btnChart_profile"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:background="@drawable/bg_button_cancel_noshadow_global"
+                 />
 
 
             <RelativeLayout
@@ -100,7 +113,6 @@
             android:layout_marginStart="@dimen/_15ssp"
             android:padding="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_35sdp"
-            android:background="@drawable/bg_button_back_form_global"
             android:src="@drawable/ic_home" />
 
 

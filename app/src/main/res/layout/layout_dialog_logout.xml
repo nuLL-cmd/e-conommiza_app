@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/relativeDaddy_dialogLogout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:background="@drawable/bg_dialog_global">
+
+
+        <RelativeLayout
+            android:id="@+id/relativeTitle_dialogLogout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:background="@drawable/bg_dialog_view">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Sair"
+                android:id="@+id/lblTitle_dialogLogout"
+                android:textColor="@color/background_form"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:gravity="center"
+                android:textSize="@dimen/_14ssp"/>
+
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:layout_height="wrap_content"
+            android:id="@+id/lblMessage_dialogLogout"
+            android:gravity="center"
+            android:layout_below="@id/relativeTitle_dialogLogout"
+            android:layout_margin="@dimen/_5sdp"
+            android:text="Deseja fazer logout do aplicativo?"
+            android:textSize="@dimen/_12ssp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/linearSocial_dialogLogout"
+            android:layout_gravity="center"
+            android:layout_below="@id/lblMessage_dialogLogout"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginEnd="@dimen/_18sdp"
+                android:text="Sim"
+                android:id="@+id/btnYes_dialogLogout"
+                style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
+                android:textColor="@color/background_form"
+                android:background="@drawable/bg_button_blue_noshadow_global" />
+
+
+            <Button
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:text="Cancelar"
+                android:id="@+id/btnCancel_dialogLogout"
+                android:layout_marginStart="@dimen/_18sdp"
+                style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
+                android:textColor="@color/font_primary"
+                android:background="@drawable/bg_button_cancel_noshadow_global" />
+        </LinearLayout>
+
+
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
+
+</layout>

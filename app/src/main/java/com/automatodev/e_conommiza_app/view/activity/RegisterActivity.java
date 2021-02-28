@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuthEmailException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
@@ -90,10 +91,11 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(Task<AuthResult> task) {
                     if (task.isSuccessful()) {
+                        userEntity.setUid(auth.getUser().getUid());
                         bindingProgress.setInformation("Salvando dados...");
                         firestoreService.saveUser(userEntity, new FirestoreSaveCallback() {
                             @Override
-                            public void onSuccess(DocumentReference documentReference) {
+                            public void onSuccess() {
                                 bindingProgress.setIsLoading(false);
                                 bindingProgress.setStatus(true);
                                 bindingProgress.setInformation("Sucesso!!");
@@ -127,7 +129,10 @@ public class RegisterActivity extends AppCompatActivity {
                             bindingProgress.setInformation("Escolha uma senha mais forte");
                         } catch (FirebaseAuthEmailException e) {
                             bindingProgress.setInformation("Email com formato invalido!");
+                        } catch (FirebaseAuthUserCollisionException e) {
+                            bindingProgress.setInformation("Email ja cadastrado em outra conta!");
                         } catch (Exception e) {
+                            e.printStackTrace();
                             bindingProgress.setInformation("Ops! Algo deu errado!");
                             Snackbar.make(binding.relativeDaddyRegister, "Algo deu errado, verifique seu email e/ou senha.\nDa uma olhada na sua conexão :D", Snackbar.LENGTH_LONG).show();
                         }
@@ -135,7 +140,7 @@ public class RegisterActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 try {
-                                    sleep(1200);
+                                    sleep(2000);
                                     dialogProgress.dismiss();
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
@@ -147,7 +152,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Exception e) {
-                    Log.e(LOG_X, "Error actLoginMain: " + e.getMessage());
+                    Log.e(LOG_X, "Error actRegisterMain: " + e.getMessage());
                     e.printStackTrace();
                 }
             });

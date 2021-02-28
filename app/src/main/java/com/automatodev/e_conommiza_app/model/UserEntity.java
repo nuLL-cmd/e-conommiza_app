@@ -16,6 +16,7 @@ public class UserEntity implements Parcelable {
     private String userName;
     private String email;
     private String urlPhoto;
+    private String uid;
     @ServerTimestamp
     private Date dateSince;
 
@@ -24,6 +25,7 @@ public class UserEntity implements Parcelable {
         userName = in.readString();
         email = in.readString();
         urlPhoto = in.readString();
+        uid = in.readString();
         dateSince = new Date((in.readLong()));
     }
 
@@ -53,6 +55,7 @@ public class UserEntity implements Parcelable {
         dest.writeString(userName);
         dest.writeString(email);
         dest.writeString(urlPhoto);
+        dest.writeString(uid);
         dest.writeLong(dateSince.getTime());
     }
 }

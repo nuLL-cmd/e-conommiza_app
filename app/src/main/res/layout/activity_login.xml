@@ -130,6 +130,7 @@
                     android:background="@drawable/layout_shadow_white"
                     android:layout_height="@dimen/_53sdp"
                     android:layout_marginTop="@dimen/_20sdp"
+                    android:text="programadormoderador@hotmail.com"
                     android:hint="Email"
                     android:inputType="textEmailAddress"
                     android:paddingStart="@dimen/_15ssp"
@@ -142,6 +143,7 @@
                 <EditText
                     android:id="@+id/edtPassword_login"
                     android:layout_width="match_parent"
+                    android:text="402866"
                     android:layout_height="@dimen/_53sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:background="@drawable/layout_shadow_white"
