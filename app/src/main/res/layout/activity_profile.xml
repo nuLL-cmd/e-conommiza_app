@@ -26,22 +26,22 @@
             android:src="@drawable/ic_arrow_back" />
 
         <ScrollView
+            android:id="@+id/scrollDataUser_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fillViewport="true"
 
             android:layout_below="@id/btnBack_regoster"
-            android:id="@+id/scrollDataUser_profile">
+            android:fillViewport="true">
 
             <LinearLayout
                 android:id="@+id/lineareDataUser_profile"
                 android:layout_width="match_parent"
 
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:layout_marginStart="@dimen/_20sdp"
                 android:layout_below="@id/btnBack_regoster"
+                android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
                 android:orientation="vertical">
 
 
@@ -49,12 +49,12 @@
                     android:id="@+id/lblWelcome_profile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
                     android:ellipsize="marquee"
                     android:singleLine="true"
                     android:text="Bem vindo de volta!"
                     android:textColor="@color/font_secondary"
-                    android:textSize="@dimen/_16ssp" />
+                    android:textSize="@dimen/_16ssp"
+                    android:textStyle="bold" />
 
 
                 <!--
@@ -77,9 +77,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_180sdp"
                     android:layout_below="@+id/txtUserName_profile"
-                    android:layout_marginBottom="@dimen/_15sdp"
                     android:layout_marginTop="@dimen/_15sdp"
-                    app:cardCornerRadius="@dimen/_25sdp">
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    app:cardCornerRadius="@dimen/_20sdp">
 
                     <RelativeLayout
                         android:id="@+id/relativeCardDataUser_profile"
@@ -102,89 +102,133 @@
                                     android:id="@+id/lblSince_profile"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textSize="@dimen/_10ssp"
-                                    android:text="Usuário do app desde"
                                     android:layout_marginStart="@dimen/_20sdp"
                                     android:layout_marginTop="@dimen/_10sdp"
-                                    android:textColor="#95FFFFFF" />
+                                    android:text="Usuário do app desde"
+                                    android:textColor="#95FFFFFF"
+                                    android:textSize="@dimen/_10ssp" />
 
 
                                 <TextView
-                                    android:drawableStart="@drawable/ic_calendar"
-                                    android:drawablePadding="@dimen/_5sdp"
+                                    android:id="@+id/txtSince_profile"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="12 jan 2020,8am"
-                                    android:id="@+id/txtSince_profile"
-                                    android:textSize="@dimen/_14ssp"
-                                    android:textStyle="bold"
-                                    android:layout_marginBottom="@dimen/_8sdp"
                                     android:layout_below="@+id/lblSince_profile"
                                     android:layout_marginStart="@dimen/_18ssp"
                                     android:layout_marginTop="@dimen/_7sdp"
+                                    android:layout_marginBottom="@dimen/_8sdp"
+                                    android:drawableStart="@drawable/ic_calendar"
+                                    android:drawablePadding="@dimen/_5sdp"
                                     android:gravity="center"
+                                    android:text="12 jan 2020,8am"
                                     android:textAlignment="center"
-                                    android:textColor="#BCFFFFFF" />
+                                    android:textColor="#BCFFFFFF"
+                                    android:textSize="@dimen/_14ssp"
+                                    android:textStyle="bold" />
                             </LinearLayout>
 
 
                             <ImageButton
                                 android:layout_width="@dimen/_26sdp"
                                 android:layout_height="@dimen/_26sdp"
-                                android:layout_marginTop="@dimen/_10sdp"
-                                android:layout_centerVertical="true"
                                 android:layout_alignParentEnd="true"
-                                android:onClick="about"
+                                android:layout_centerVertical="true"
+                                android:layout_marginTop="@dimen/_10sdp"
                                 android:layout_marginEnd="@dimen/_20sdp"
-                                android:background="@drawable/bg_button_back_form_global"
+                                android:background="@drawable/bg_button_cancel_noshadow_global"
+                                android:onClick="about"
                                 android:src="@drawable/ic_info" />
 
                         </RelativeLayout>
 
 
                         <com.makeramen.roundedimageview.RoundedImageView
+                            android:id="@+id/imageUser_profile"
                             android:layout_width="@dimen/_48sdp"
                             android:layout_height="@dimen/_48sdp"
-                            app:riv_corner_radius="@dimen/_10sdp"
-                            android:src="@drawable/image"
                             android:layout_below="@+id/viewSuportDataUser_profile"
                             android:layout_marginStart="@dimen/_20sdp"
                             android:layout_marginTop="@dimen/_15sdp"
-                            android:id="@+id/imageUser_profile" />
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/image"
+                            app:riv_corner_radius="@dimen/_10sdp" />
 
                         <ImageButton
+                            android:id="@+id/btnImage_profile"
                             android:layout_width="@dimen/_28sdp"
                             android:layout_height="@dimen/_28sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
                             android:layout_alignTop="@id/imageUser_profile"
                             android:layout_alignParentEnd="true"
+                            android:layout_marginTop="@dimen/_10sdp"
                             android:layout_marginEnd="@dimen/_20sdp"
-                            android:background="@drawable/bg_button_back_form_global"
+                            android:background="@drawable/bg_button_cancel_noshadow_global"
+                            android:onClick="pickLib"
                             android:src="@drawable/ic_camera" />
 
-                        <Button
+
+                        <ImageButton
+                            android:id="@+id/btnChart_profile"
+                            android:layout_width="@dimen/_28sdp"
+                            android:layout_height="@dimen/_28sdp"
+                            android:layout_alignTop="@id/imageUser_profile"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_20sdp"
+                            android:layout_toStartOf="@+id/btnImage_profile"
+                            android:background="@drawable/bg_button_cancel_noshadow_global"
+                            android:onClick="pickLib"
+                            android:src="@drawable/ic_chart" />
+
+                        <LinearLayout
+                            android:id="@+id/linearButtons_profile"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_35sdp"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/imageUser_profile"
                             android:layout_alignParentBottom="true"
                             android:layout_marginStart="@dimen/_20sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
                             android:layout_marginEnd="@dimen/_20sdp"
-                            android:layout_marginBottom="@dimen/_8sdp"
-                            android:text="Sair"
-                            style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
-                            android:textColor="@color/background_form"
-                            android:background="@drawable/bg_button_blue_noshadow_global" />
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/btnSave_profile"
+                                style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
+                                android:layout_width="@dimen/_80sdp"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginEnd="@dimen/_12sdp"
+                                android:background="@drawable/bg_button_blue_noshadow_global"
+                                android:onClick="updateUser"
+                                android:text="Salvar"
+                                android:textColor="@color/background_form" />
+
+
+                            <Button
+                                android:id="@+id/btnLogout_profile"
+                                style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
+                                android:layout_width="@dimen/_80sdp"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginStart="@dimen/_12sdp"
+                                android:background="@drawable/bg_button_cancel_noshadow_global"
+                                android:onClick="logout"
+                                android:text="Sair"
+                                android:textColor="@color/font_primary" />
+
+                        </LinearLayout>
 
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Marco\n Aurelio"
                             android:layout_alignTop="@id/imageUser_profile"
                             android:layout_alignBottom="@id/imageUser_profile"
-                            android:layout_toEndOf="@id/imageUser_profile"
                             android:layout_marginStart="@dimen/_10sdp"
-                            android:textAlignment="center"
-                            android:gravity="center"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_toStartOf="@+id/btnChart_profile"
+                            android:layout_toEndOf="@id/imageUser_profile"
+                            android:ellipsize="marquee"
+                            android:gravity="start|center"
+                            android:singleLine="true"
+                            android:text="Marco"
                             android:textSize="@dimen/_15ssp"
                             android:textStyle="bold" />
 
@@ -211,12 +255,12 @@
                 android:id="@+id/txtCash_main"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_28sdp"
-                android:gravity="center"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:ellipsize="end"
-                android:singleLine="true"
                 android:layout_marginEnd="@dimen/_10sdp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:singleLine="true"
                 android:text="Você não tem nenhuma perspectiva"
                 android:textAlignment="center"
                 android:textColor="#939090"
@@ -227,12 +271,12 @@
                 android:id="@+id/btnAddPerspective_main"
                 android:layout_width="@dimen/_28sdp"
                 android:layout_height="@dimen/_28sdp"
-                android:background="@drawable/bg_button_white_global_two"
-                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_alignTop="@id/txtCash_main"
                 android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/_25sdp"
-                android:src="@drawable/ic_add"
-                android:layout_alignTop="@id/txtCash_main" />
+                android:background="@drawable/bg_button_white_global_two"
+                android:src="@drawable/ic_add" />
 
 
             <RelativeLayout
@@ -241,8 +285,8 @@
                 android:layout_height="match_parent"
                 android:layout_below="@id/txtCash_main"
 
-                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_alignParentBottom="true"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/bg_relative_perspective_two">
 
                 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -256,9 +300,9 @@
                         android:id="@+id/recyclerItens_main"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        tools:listitem="@layout/layout_items_profile"
                         android:layout_margin="@dimen/_10sdp"
-                        android:padding="@dimen/_5sdp" />
+                        android:padding="@dimen/_5sdp"
+                        tools:listitem="@layout/layout_items_profile" />
 
 
                 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
@@ -267,20 +311,20 @@
 
 
             <RelativeLayout
+                android:id="@+id/relativeResource_profile"
                 android:layout_width="match_parent"
-                android:layout_below="@id/txtCash_main"
                 android:layout_height="match_parent"
-                android:visibility="gone"
+                android:layout_below="@id/txtCash_main"
                 android:padding="@dimen/_10sdp"
-                android:id="@+id/relativeResource_profile">
+                android:visibility="gone">
 
                 <ImageView
+                    android:id="@+id/imgNotfound_profile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
                     android:padding="@dimen/_20sdp"
-                    android:id="@+id/imgNotfound_profile"
-                    android:src="@drawable/ic_not_found"
-                    android:layout_centerInParent="true" />
+                    android:src="@drawable/ic_not_found" />
 
 
             </RelativeLayout>
