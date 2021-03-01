@@ -19,7 +19,7 @@
     <style name="Theme.Econommiza_app_two" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/blue_545de8</item>
-        <item name="colorPrimaryVariant">@color/green_1DC1A0</item>
+        <item name="colorPrimaryVariant">@color/button_positive</item>
         <item name="colorOnPrimary">@color/white_fff</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/blue_545de8</item>

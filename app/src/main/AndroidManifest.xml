@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Econommiza_app">
-        <activity android:name=".view.activity.ProfileActivity">
+        <activity android:name=".view.activity.ProfileActivity"
+            android:theme="@style/Theme.Econommiza_app_two">
 
         </activity>
         <activity

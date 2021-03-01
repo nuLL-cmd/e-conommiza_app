@@ -9,7 +9,6 @@ import com.google.firebase.storage.StorageReference;
 public class StorageService {
 
     private FirebaseStorage storage;
-
     public StorageService(){
         storage = FirebaseStorage.getInstance();
     }

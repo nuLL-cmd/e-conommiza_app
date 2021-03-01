@@ -21,6 +21,7 @@ import com.automatodev.e_conommiza_app.database.callback.StorageCallback;
 import com.automatodev.e_conommiza_app.database.firestore.FirestoreService;
 import com.automatodev.e_conommiza_app.database.storage.StorageService;
 import com.automatodev.e_conommiza_app.databinding.ActivityProfileBinding;
+import com.automatodev.e_conommiza_app.databinding.ActivityProfileTwoBinding;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogAboutBinding;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogLogoutBinding;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogProgressBinding;
@@ -39,7 +40,7 @@ import id.zelory.compressor.Compressor;
 import lombok.SneakyThrows;
 
 public class ProfileActivity extends AppCompatActivity {
-    private ActivityProfileBinding binding;
+    private ActivityProfileTwoBinding binding;
     private Authentication auth;
     private FirestoreService firestoreService;
     private StorageService storageService;
@@ -50,7 +51,7 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityProfileBinding.inflate(getLayoutInflater());
+        binding = ActivityProfileTwoBinding.inflate(getLayoutInflater());
         View viewBinding = binding.getRoot();
         setContentView(viewBinding);
 

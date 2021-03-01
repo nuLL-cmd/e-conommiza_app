@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/relativeDaddy_profile"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_form"
+        tools:context=".view.activity.ProfileActivity">
+
+
+        <RelativeLayout
+            android:id="@+id/lineareDataUser_profile"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_250sdp"
+            android:background="@drawable/bg_relative_data_profile"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/btnBack_regoster"
+                android:layout_width="@dimen/_32sdp"
+                android:layout_height="@dimen/_32sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/bg_button_blue_noshadow_global"
+                android:src="@drawable/ic_arrow_back_white" />
+
+            <TextView
+                android:id="@+id/lblSince_profile"
+                android:layout_width="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_25sdp"
+                android:layout_below="@id/btnBack_regoster"
+                android:text="Usuário do app desde"
+                android:textColor="#95FFFFFF"
+                android:textAlignment="center"
+                android:textSize="@dimen/_15ssp" />
+
+
+            <TextView
+                android:id="@+id/txtSince_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblSince_profile"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:drawableStart="@drawable/ic_calendar"
+                android:drawablePadding="@dimen/_5sdp"
+                android:gravity="center"
+                android:text="12 jan 2020,8am"
+                android:layout_centerHorizontal="true"
+                android:textColor="#BCFFFFFF"
+                android:textSize="@dimen/_25ssp"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
+
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:src="@drawable/image"
+            app:riv_border_width="@dimen/_6sdp"
+            app:riv_border_color="@color/background_form"
+            android:layout_marginTop="-70dp"
+            app:riv_corner_radius="@dimen/_35sdp"
+            android:layout_below="@id/lineareDataUser_profile"
+            android:id="@+id/imageUser_profile"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white_fff"
+            android:id="@+id/fab_one"
+            android:src="@drawable/ic_camera"
+            app:backgroundTint="@color/background_form"
+            android:layout_below="@id/lineareDataUser_profile"
+            android:layout_toEndOf="@id/imageUser_profile"
+            android:layout_marginTop="-25dp"
+            android:layout_marginStart="@dimen/_20sdp" />
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/background_form"
+            android:layout_below="@id/lineareDataUser_profile"
+            android:src="@drawable/ic_save_green"
+            android:layout_toEndOf="@id/fab_one"
+            android:layout_marginTop="-25dp"
+            android:layout_marginStart="@dimen/_20sdp"/>
+
+
+        <RelativeLayout
+                android:id="@+id/relativeData_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/imageUser_profile"
+                android:background="@drawable/bg_relative_data_main">
+
+
+                <TextView
+                    android:id="@+id/txtCash_main"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="Você não tem nenhuma perspectiva"
+                    android:textAlignment="center"
+                    android:textColor="#939090"
+                    android:textSize="@dimen/_10ssp" />
+
+
+                <ImageButton
+                    android:id="@+id/btnAddPerspective_main"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_alignTop="@id/txtCash_main"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_25sdp"
+                    android:background="@drawable/bg_button_white_global"
+                    android:src="@drawable/ic_add" />
+
+
+                <RelativeLayout
+                    android:id="@+id/relativeChildData_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/txtCash_main"
+
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/bg_relative_perspective">
+
+                    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                        android:id="@+id/swipeRefresh_main"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_10sdp">
+
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerItens_main"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/_10sdp"
+                            android:padding="@dimen/_5sdp"
+                            tools:listitem="@layout/layout_items_main" />
+
+
+                    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/relativeResource_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/txtCash_main"
+                    android:padding="@dimen/_10sdp"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/imgNotfound_profile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:padding="@dimen/_20sdp"
+                        android:src="@drawable/ic_not_found" />
+
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+
+    </RelativeLayout>
+</layout>
