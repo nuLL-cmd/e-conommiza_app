@@ -24,14 +24,24 @@
             android:background="@drawable/bg_relative_data_profile"
             android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/btnBack_regoster"
-                android:layout_width="@dimen/_32sdp"
-                android:layout_height="@dimen/_32sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/bg_button_blue_noshadow_global"
-                android:src="@drawable/ic_arrow_back_white" />
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:id="@+id/toolbarMenu_profile"
+                app:title=" "
+                app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                android:layout_height="@dimen/_55sdp">
+
+
+                <ImageButton
+                    android:id="@+id/btnBack_regoster"
+                    android:layout_width="@dimen/_32sdp"
+                    android:layout_height="@dimen/_32sdp"
+                    android:background="@drawable/bg_button_blue_noshadow_global"
+                    android:src="@drawable/ic_arrow_back_white" />
+
+            </androidx.appcompat.widget.Toolbar>
+
 
             <TextView
                 android:id="@+id/lblSince_profile"
@@ -39,8 +49,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_25sdp"
-                android:layout_below="@id/btnBack_regoster"
-                android:text="Usuário do app desde"
+                android:layout_below="@id/toolbarMenu_profile"
+                android:text="Ultima despesa cadastrada"
                 android:textColor="#95FFFFFF"
                 android:textAlignment="center"
                 android:textSize="@dimen/_15ssp" />
@@ -70,19 +80,33 @@
             android:layout_width="@dimen/_100sdp"
             android:layout_height="@dimen/_100sdp"
             android:layout_marginStart="@dimen/_15sdp"
-            android:src="@drawable/image"
+
             app:riv_border_width="@dimen/_6sdp"
             app:riv_border_color="@color/background_form"
+            android:scaleType="centerCrop"
             android:layout_marginTop="-70dp"
             app:riv_corner_radius="@dimen/_35sdp"
             android:layout_below="@id/lineareDataUser_profile"
             android:id="@+id/imageUser_profile"/>
 
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/imageUser_profile"
+            android:layout_alignBottom="@id/imageUser_profile"
+            android:background="@drawable/bg_image_profile"
+            android:layout_alignTop="@id/imageUser_profile"
+            android:layout_alignEnd="@id/imageUser_profile"/>
+
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/white_fff"
+            android:backgroundTint="@color/button_positive"
             android:id="@+id/fab_one"
+            android:onClick="pickLib"
+            app:borderWidth="@dimen/_5sdp"
             android:src="@drawable/ic_camera"
             app:backgroundTint="@color/background_form"
             android:layout_below="@id/lineareDataUser_profile"
@@ -94,7 +118,10 @@
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_two"
             android:layout_width="match_parent"
+            android:backgroundTint="#4CAF50"
             android:layout_height="wrap_content"
+            android:onClick="updateUser"
+            app:borderWidth="@dimen/_5sdp"
             app:backgroundTint="@color/background_form"
             android:layout_below="@id/lineareDataUser_profile"
             android:src="@drawable/ic_save_green"

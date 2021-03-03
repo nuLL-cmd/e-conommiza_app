@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/itemRoot"
+        android:icon="@drawable/ic_more"
+        app:showAsAction="always"
+        android:title="Sair">
+        <menu>
+            <item
+                android:id="@+id/itemAbout"
+                android:icon="@drawable/ic_info"
+                app:showAsAction="always"
+                android:title="Sobre o app"/>
+
+            <item
+                android:id="@+id/itemFeedback"
+                android:icon="@drawable/ic_touch"
+                app:showAsAction="always"
+                android:title="Avalie-nos"/>
+
+            <item
+                android:id="@+id/itemExit"
+                android:icon="@drawable/ic_round_exit"
+                app:showAsAction="always"
+                android:title="Fazer logout"/>
+        </menu>
+
+    </item>
+</menu>

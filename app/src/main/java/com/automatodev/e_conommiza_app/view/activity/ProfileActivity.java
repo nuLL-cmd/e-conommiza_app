@@ -10,10 +10,15 @@ import androidx.databinding.DataBindingUtil;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.automatodev.e_conommiza_app.R;
 import com.automatodev.e_conommiza_app.database.callback.FirestoreSaveCallback;
@@ -26,6 +31,12 @@ import com.automatodev.e_conommiza_app.databinding.LayoutDialogAboutBinding;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogLogoutBinding;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogProgressBinding;
 import com.automatodev.e_conommiza_app.security.firebaseAuth.Authentication;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.google.android.material.snackbar.Snackbar;
 import com.iceteck.silicompressorr.FileUtils;
 import com.squareup.picasso.Callback;
@@ -54,6 +65,8 @@ public class ProfileActivity extends AppCompatActivity {
         binding = ActivityProfileTwoBinding.inflate(getLayoutInflater());
         View viewBinding = binding.getRoot();
         setContentView(viewBinding);
+
+        setSupportActionBar(binding.toolbarMenuProfile);
 
         auth = new Authentication();
         firestoreService = new FirestoreService();
@@ -128,8 +141,24 @@ public class ProfileActivity extends AppCompatActivity {
         if (requestCode == 100 && resultCode == RESULT_OK) {
             if (data != null) {
                 uriInternal = data.getData();
-                binding.imageUserProfile.setAlpha(0f);
-                Picasso.get().load(uriInternal).into(binding.imageUserProfile, new Callback() {
+                Glide.with(this).load(uriInternal).addListener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        new Thread() {
+                            @Override
+                            public void run() {
+                                uriExternal = resizeImage(uriInternal);
+                            }
+                        }.start();
+                        return false;
+                    }
+                }).into(binding.imageUserProfile);
+               /* Picasso.get().load(uriInternal).rotate(90f).into(binding.imageUserProfile, new Callback() {
                     @Override
                     public void onSuccess() {
                         binding.imageUserProfile.animate().setDuration(300).alpha(1f).start();
@@ -145,7 +174,7 @@ public class ProfileActivity extends AppCompatActivity {
                     public void onError(Exception e) {
 
                     }
-                });
+                });*/
             }
         }
     }
@@ -259,4 +288,15 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_profile,menu);
+        return super.onCreateOptionsMenu(menu);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
 }

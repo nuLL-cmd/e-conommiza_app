@@ -125,7 +125,7 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_toEndOf="@id/btnExit_main"
             android:gravity="center"
-            android:text="Home"
+            android:text="Marco"
             android:textColor="@color/background_form"
             android:textSize="@dimen/_16ssp" />
 
