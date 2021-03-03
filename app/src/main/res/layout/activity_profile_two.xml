@@ -6,6 +6,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
+
+        <variable
+            name="isImage"
+            type="Boolean"
+            />
 
     </data>
 
@@ -93,11 +99,22 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility='@{isImage ? View.VISIBLE : View.GONE, default = visible}'
             android:layout_alignStart="@id/imageUser_profile"
             android:layout_alignBottom="@id/imageUser_profile"
             android:background="@drawable/bg_image_profile"
             android:layout_alignTop="@id/imageUser_profile"
-            android:layout_alignEnd="@id/imageUser_profile"/>
+            android:layout_alignEnd="@id/imageUser_profile">
+
+            <ImageView
+                android:layout_width="@dimen/_48sdp"
+                android:layout_height="@dimen/_48sdp"
+                android:alpha="0.6"
+                android:src="@drawable/ic_photo"
+                android:layout_centerInParent="true"
+                android:id="@+id/imgNoImage_profile"/>
+
+        </RelativeLayout>
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

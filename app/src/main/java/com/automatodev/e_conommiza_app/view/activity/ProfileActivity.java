@@ -1,7 +1,7 @@
 package com.automatodev.e_conommiza_app.view.activity;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -65,6 +65,7 @@ public class ProfileActivity extends AppCompatActivity {
         binding = ActivityProfileTwoBinding.inflate(getLayoutInflater());
         View viewBinding = binding.getRoot();
         setContentView(viewBinding);
+        binding.setIsImage(true);
 
         setSupportActionBar(binding.toolbarMenuProfile);
 
@@ -95,7 +96,6 @@ public class ProfileActivity extends AppCompatActivity {
         dialog.show();
         layoutBinding.btnCloseDialogAbout.setOnClickListener(view1 -> dialog.dismiss());
     }
-
     public void logout(View view) {
         AlertDialog dialogLogout = new AlertDialog.Builder(this).create();
         dialogLogout.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -141,6 +141,7 @@ public class ProfileActivity extends AppCompatActivity {
         if (requestCode == 100 && resultCode == RESULT_OK) {
             if (data != null) {
                 uriInternal = data.getData();
+                binding.imageUserProfile.setAlpha(0f);
                 Glide.with(this).load(uriInternal).addListener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
@@ -149,18 +150,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        new Thread() {
-                            @Override
-                            public void run() {
-                                uriExternal = resizeImage(uriInternal);
-                            }
-                        }.start();
-                        return false;
-                    }
-                }).into(binding.imageUserProfile);
-               /* Picasso.get().load(uriInternal).rotate(90f).into(binding.imageUserProfile, new Callback() {
-                    @Override
-                    public void onSuccess() {
+                        binding.setIsImage(false);
                         binding.imageUserProfile.animate().setDuration(300).alpha(1f).start();
                         new Thread() {
                             @Override
@@ -168,13 +158,10 @@ public class ProfileActivity extends AppCompatActivity {
                                 uriExternal = resizeImage(uriInternal);
                             }
                         }.start();
-                    }
 
-                    @Override
-                    public void onError(Exception e) {
-
+                        return false;
                     }
-                });*/
+                }).into(binding.imageUserProfile);
             }
         }
     }
