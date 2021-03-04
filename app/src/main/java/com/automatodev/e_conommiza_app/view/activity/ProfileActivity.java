@@ -1,4 +1,5 @@
 package com.automatodev.e_conommiza_app.view.activity;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -8,6 +9,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -21,6 +24,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.automatodev.e_conommiza_app.R;
+import com.automatodev.e_conommiza_app.database.callback.FirestoreGetCallback;
 import com.automatodev.e_conommiza_app.database.callback.FirestoreSaveCallback;
 import com.automatodev.e_conommiza_app.database.callback.StorageCallback;
 import com.automatodev.e_conommiza_app.database.firestore.FirestoreService;
@@ -30,6 +34,7 @@ import com.automatodev.e_conommiza_app.databinding.ActivityProfileTwoBinding;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogAboutBinding;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogLogoutBinding;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogProgressBinding;
+import com.automatodev.e_conommiza_app.model.UserEntity;
 import com.automatodev.e_conommiza_app.security.firebaseAuth.Authentication;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -37,7 +42,9 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.iceteck.silicompressorr.FileUtils;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -57,6 +64,7 @@ public class ProfileActivity extends AppCompatActivity {
     private StorageService storageService;
     private Uri uriInternal;
     private Uri uriExternal;
+    private UserEntity user;
     public static boolean status;
 
     @Override
@@ -65,13 +73,14 @@ public class ProfileActivity extends AppCompatActivity {
         binding = ActivityProfileTwoBinding.inflate(getLayoutInflater());
         View viewBinding = binding.getRoot();
         setContentView(viewBinding);
-        binding.setIsImage(true);
 
         setSupportActionBar(binding.toolbarMenuProfile);
 
         auth = new Authentication();
         firestoreService = new FirestoreService();
         storageService = new StorageService();
+
+        getUser();
     }
 
 
@@ -88,7 +97,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
 
-    public void about(View view) {
+    public void about() {
         LayoutDialogAboutBinding layoutBinding = DataBindingUtil.inflate(getLayoutInflater().from(this), R.layout.layout_dialog_about, binding.relativeDaddyProfile, false);
         AlertDialog dialog = new AlertDialog.Builder(this).create();
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -96,7 +105,8 @@ public class ProfileActivity extends AppCompatActivity {
         dialog.show();
         layoutBinding.btnCloseDialogAbout.setOnClickListener(view1 -> dialog.dismiss());
     }
-    public void logout(View view) {
+
+    public void logout() {
         AlertDialog dialogLogout = new AlertDialog.Builder(this).create();
         dialogLogout.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         LayoutDialogLogoutBinding bindingLogout = DataBindingUtil.inflate(getLayoutInflater().from(this), R.layout.layout_dialog_logout, binding.relativeDaddyProfile, false);
@@ -150,7 +160,6 @@ public class ProfileActivity extends AppCompatActivity {
 
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        binding.setIsImage(false);
                         binding.imageUserProfile.animate().setDuration(300).alpha(1f).start();
                         new Thread() {
                             @Override
@@ -176,8 +185,8 @@ public class ProfileActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             return Uri.fromFile(file);
-        }catch(Exception e){
-           return uriExternal = uri;
+        } catch (Exception e) {
+            return uriExternal = uri;
 
         }
 
@@ -277,13 +286,72 @@ public class ProfileActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_profile,menu);
+        getMenuInflater().inflate(R.menu.menu_profile, menu);
         return super.onCreateOptionsMenu(menu);
 
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.itemAbout:
+                about();
+                break;
+            case R.id.itemExit:
+                logout();
+                break;
+            case R.id.itemFeedback:
+                feedback();
+                break;
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void getUser() {
+        String uid = auth.getUser().getUid();
+        firestoreService.getUser(uid, new FirestoreGetCallback() {
+            @Override
+            public void onSuccess(Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot doc = task.getResult();
+                    if (doc.exists()) {
+                        user = doc.toObject(UserEntity.class);
+                        binding.imageUserProfile.setAlpha(0f);
+                        binding.setIsImage(false);
+                        Glide.with(ProfileActivity.this).load(user.getUrlPhoto())
+                                .addListener(new RequestListener<Drawable>() {
+                                    @Override
+                                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                        return false;
+                                    }
+
+                                    @Override
+                                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                        binding.imageUserProfile.animate().setDuration(300).alpha(1f).start();
+                                        return false;
+                                    }
+                                })
+                                .into(binding.imageUserProfile);
+
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                Log.e("logx", "Error getUser: " + e.getMessage());
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public void feedback(){
+        final String appPackageName = getApplicationContext().getPackageName();
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+        } catch (android.content.ActivityNotFoundException anfe) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+        }
     }
 }

@@ -81,25 +81,9 @@
 
         </RelativeLayout>
 
-
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:layout_width="@dimen/_100sdp"
-            android:layout_height="@dimen/_100sdp"
-            android:layout_marginStart="@dimen/_15sdp"
-
-            app:riv_border_width="@dimen/_6sdp"
-            app:riv_border_color="@color/background_form"
-            android:scaleType="centerCrop"
-            android:layout_marginTop="-70dp"
-            app:riv_corner_radius="@dimen/_35sdp"
-            android:layout_below="@id/lineareDataUser_profile"
-            android:id="@+id/imageUser_profile"/>
-
-
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility='@{isImage ? View.VISIBLE : View.GONE, default = visible}'
             android:layout_alignStart="@id/imageUser_profile"
             android:layout_alignBottom="@id/imageUser_profile"
             android:background="@drawable/bg_image_profile"
@@ -115,6 +99,22 @@
                 android:id="@+id/imgNoImage_profile"/>
 
         </RelativeLayout>
+
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+
+            app:riv_border_width="@dimen/_6sdp"
+            app:riv_border_color="@color/background_form"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="-70dp"
+            app:riv_corner_radius="@dimen/_35sdp"
+            android:layout_below="@id/lineareDataUser_profile"
+            android:id="@+id/imageUser_profile"/>
+
+
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

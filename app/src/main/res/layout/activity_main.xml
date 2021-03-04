@@ -13,8 +13,70 @@
         android:layout_height="match_parent"
         android:background="@drawable/bg_relative_main"
         tools:context=".view.activity.MainActivity">
+        
 
-        <RelativeLayout
+
+    <RelativeLayout
+        android:id="@+id/relativeData_main"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_320sdp"
+        android:layout_below="@id/viewSuportLayout_main"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_relative_data_main">
+
+        <TextView
+            android:id="@+id/txtCash_main"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_28sdp"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:text="Comece adicionando uma perspectiva"
+            android:textAlignment="center"
+            android:textColor="#939090"
+            android:textSize="@dimen/_10ssp" />
+
+
+        <ImageButton
+            android:id="@+id/btnChart_profile"
+            android:layout_width="@dimen/_28sdp"
+            android:layout_height="@dimen/_28sdp"
+            android:background="@drawable/bg_button_cancel_noshadow_global"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:src="@drawable/ic_chart"
+            android:layout_alignTop="@id/txtCash_main" />
+
+
+
+        <ImageButton
+            android:id="@+id/btnAddPerspective_main"
+            android:layout_width="@dimen/_28sdp"
+            android:layout_height="@dimen/_28sdp"
+            android:layout_alignTop="@id/btnChart_profile"
+            android:src="@drawable/ic_add"
+            android:layout_toStartOf="@+id/btnChart_profile"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@drawable/bg_button_cancel_noshadow_global"
+            />
+
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager_main"
+            android:layout_width="match_parent"
+            android:layout_below="@id/txtCash_main"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_height="@dimen/_320sdp"
+            android:orientation="horizontal" />
+
+    </RelativeLayout>
+
+       <!-- <RelativeLayout
             android:id="@+id/relativeData_main"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_320sdp"
@@ -94,7 +156,7 @@
             </RelativeLayout>
 
 
-        </RelativeLayout>
+        </RelativeLayout>-->
 
         <ImageView
             android:layout_width="wrap_content"
