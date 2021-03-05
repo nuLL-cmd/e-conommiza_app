@@ -45,7 +45,7 @@
             android:id="@+id/btnChart_profile"
             android:layout_width="@dimen/_28sdp"
             android:layout_height="@dimen/_28sdp"
-            android:background="@drawable/bg_button_cancel_noshadow_global"
+            android:background="@drawable/bg_button_white_global"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="@dimen/_15sdp"
@@ -62,7 +62,7 @@
             android:src="@drawable/ic_add"
             android:layout_toStartOf="@+id/btnChart_profile"
             android:layout_marginEnd="@dimen/_5sdp"
-            android:background="@drawable/bg_button_cancel_noshadow_global"
+            android:background="@drawable/bg_button_white_global"
             />
 
 
@@ -321,15 +321,6 @@
                 android:src="@drawable/ic_add_white"
                 app:fab_colorNormal="#FF9800"
                 fab:fab_label="Adicionar perspectiva"
-                fab:fab_size="mini" />
-
-            <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/menuUpdate_item"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_refresh"
-                app:fab_colorNormal="#3F51B5"
-                fab:fab_label="Atualizar"
                 fab:fab_size="mini" />
 
 

@@ -9,15 +9,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.automatodev.e_conommiza_app.R;
+import com.automatodev.e_conommiza_app.model.DataEntryEntity;
+import com.automatodev.e_conommiza_app.model.PerspectiveEntity;
 
 import java.util.List;
 
 public class PerspectiveAdapter extends RecyclerView.Adapter<PerspectiveAdapter.DataHandler>{
-    private List<String> list;
+    private List<PerspectiveEntity> list;
+    private ItemsAdapter itemsAdapter;
     private int position;
 
-    public PerspectiveAdapter(List<String> list){
+    public PerspectiveAdapter(List<PerspectiveEntity> list){
         this.list = list;
+
+
     }
     @NonNull
     @Override
@@ -28,7 +33,7 @@ public class PerspectiveAdapter extends RecyclerView.Adapter<PerspectiveAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull DataHandler holder, int position) {
-
+        holder.recyclerView.setAdapter(new ItemsAdapter(list.get(position).getItemsPerspective()));
     }
 
     public int getItem(){
@@ -41,9 +46,11 @@ public class PerspectiveAdapter extends RecyclerView.Adapter<PerspectiveAdapter.
     }
 
     public class DataHandler extends RecyclerView.ViewHolder {
+        private RecyclerView recyclerView;
         public DataHandler(@NonNull View itemView) {
             super(itemView);
-
+            recyclerView = itemView.findViewById(R.id.recyclerItens_layoutPerspective);
+            recyclerView.hasFixedSize();
             position = getAdapterPosition();
 
         }

@@ -9,9 +9,13 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.automatodev.e_conommiza_app.database.seed.MockFile;
 import com.automatodev.e_conommiza_app.databinding.ActivityMainBinding;
+import com.automatodev.e_conommiza_app.model.DataEntryEntity;
+import com.automatodev.e_conommiza_app.model.PerspectiveEntity;
 import com.automatodev.e_conommiza_app.view.adapter.PerspectiveAdapter;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,32 +64,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showData() {
-        List<String> list = new ArrayList<>();
-        list.add("Janeiro / 2021");
-        list.add("Fevereiro / 2021");
-        list.add("Março / 2021");
-        list.add("Abril / 2021");
-        list.add("Maio / 2021");
-        list.add("Junho / 2021");
-        list.add("Julho / 2021");
-        list.add("Agosto / 2021");
-        list.add("Setembro / 2021");
 
-        adapter = new PerspectiveAdapter(list);
+        List<PerspectiveEntity> perspectiveEntities = new ArrayList<>(MockFile.getPerspectiveEntityLIst());
+
+
+        adapter = new PerspectiveAdapter(perspectiveEntities);
         binding.viewPagerMain.setAdapter(adapter);
 
 
-        if (list.size() == 0)
+        if (perspectiveEntities.size() == 0)
             binding.txtCashMain.setText("Comece adicionando uma perspectiva!");
         else
-            binding.txtCashMain.setText(list.get(adapter.getItem()));
+            binding.txtCashMain.setText(perspectiveEntities.get(adapter.getItem()).getNamePespective());
 
         binding.viewPagerMain.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
 
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-                binding.txtCashMain.setText(list.get(position));
+                binding.txtCashMain.setText(perspectiveEntities.get(position).getNamePespective());
+
             }
         });
     }

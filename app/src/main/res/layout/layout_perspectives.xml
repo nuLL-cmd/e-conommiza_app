@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bg_relative_perspective">
 
 
@@ -26,6 +27,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/_10sdp"
                 android:padding="@dimen/_5sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/layout_items_main" />
 
 
