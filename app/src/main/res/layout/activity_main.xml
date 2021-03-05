@@ -277,7 +277,7 @@
             fab:menu_colorRipple="#99FFFFFF"
             fab:menu_fab_label="Toque para fechar"
             fab:menu_fab_size="normal"
-            fab:menu_icon="@drawable/fab_add"
+            fab:menu_icon="@drawable/ic_baseline_menu"
             fab:menu_labels_colorNormal="#333333"
             fab:menu_labels_colorPressed="#444444"
             fab:menu_labels_colorRipple="#66FFFFFF"

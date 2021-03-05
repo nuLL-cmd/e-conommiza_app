@@ -9,14 +9,14 @@ import java.util.List;
 
 public class MockFile {
 
-    private static List<PerspectiveEntity> perspectiveEntities = new ArrayList<>();
+    private  List<PerspectiveEntity> perspectiveEntities = new ArrayList<>();
 
-    private static List<DataEntryEntity> dataEntryEntities= new ArrayList<>();
-    private static List<DataEntryEntity> dataEntryEntitiesTwo = new ArrayList<>();
-    private static List<DataEntryEntity> dataEntryEntitiesTree = new ArrayList<>();
+    private  List<DataEntryEntity> dataEntryEntities= new ArrayList<>();
+    private  List<DataEntryEntity> dataEntryEntitiesTwo = new ArrayList<>();
+    private  List<DataEntryEntity> dataEntryEntitiesTree = new ArrayList<>();
 
 
-    public static List<PerspectiveEntity> getPerspectiveEntityLIst(){
+    public  List<PerspectiveEntity> getPerspectiveEntityLIst(){
 
         dataEntryEntities.add(new DataEntryEntity("Fujioka", 1614900139724L,"entry",new BigDecimal("2800.33")));
         dataEntryEntities.add(new DataEntryEntity("McDonalds", 1614900139724L,"noEntry",new BigDecimal("35.33")));

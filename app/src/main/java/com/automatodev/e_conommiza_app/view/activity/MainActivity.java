@@ -64,8 +64,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showData() {
-
-        List<PerspectiveEntity> perspectiveEntities = new ArrayList<>(MockFile.getPerspectiveEntityLIst());
+        MockFile mockFile = new MockFile();
+        List<PerspectiveEntity> perspectiveEntities = new ArrayList<>();
+        perspectiveEntities.addAll(mockFile.getPerspectiveEntityLIst());
 
 
         adapter = new PerspectiveAdapter(perspectiveEntities);
