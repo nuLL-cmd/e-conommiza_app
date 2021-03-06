@@ -76,57 +76,9 @@ public class ProfileActivity extends AppCompatActivity {
         firestoreService = new FirestoreService();
         storageService = new StorageService();
 
+
         getUser();
         showData();
-    }
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        status = true;
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        status = false;
-    }
-
-
-    public void about() {
-        LayoutDialogAboutBinding layoutBinding = DataBindingUtil.inflate(getLayoutInflater().from(this), R.layout.layout_dialog_about, binding.relativeDaddyProfile, false);
-        AlertDialog dialog = new AlertDialog.Builder(this).create();
-        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        dialog.setView(layoutBinding.getRoot());
-        dialog.show();
-        layoutBinding.btnCloseDialogAbout.setOnClickListener(view1 -> dialog.dismiss());
-    }
-
-    public void logout() {
-        AlertDialog dialogLogout = new AlertDialog.Builder(this).create();
-        dialogLogout.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        LayoutDialogLogoutBinding bindingLogout = DataBindingUtil.inflate(getLayoutInflater().from(this), R.layout.layout_dialog_logout, binding.relativeDaddyProfile, false);
-        dialogLogout.setView(bindingLogout.getRoot());
-        dialogLogout.show();
-        bindingLogout.btnYesDialogLogout.setOnClickListener(v -> {
-            auth.logout();
-            startActivity(new Intent(this, LoginActivity.class));
-            finish();
-        });
-        bindingLogout.btnCancelDialogLogout.setOnClickListener(v1 -> dialogLogout.dismiss());
-
-    }
-
-    public void pickLib(View view) {
-        String permission = Manifest.permission.READ_EXTERNAL_STORAGE;
-        if (ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED)
-            ActivityCompat.requestPermissions(this, new String[]{permission}, 100);
-        else {
-            Intent intent = new Intent(Intent.ACTION_PICK);
-            intent.setType("image/*");
-            startActivityForResult(intent, 100);
-        }
     }
 
     @Override
@@ -207,6 +159,7 @@ public class ProfileActivity extends AppCompatActivity {
                     firestoreService.updateUser(auth.getUser().getUid(), map, new FirestoreSaveCallback() {
                         @Override
                         public void onSuccess() {
+                            MainActivity.refresh = true;
                             bindingProgress.setInformation("Sucesso!!");
                             bindingProgress.setIsLoading(false);
                             bindingProgress.setStatus(true);
@@ -280,6 +233,27 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
+    public void getUser() {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            user = bundle.getParcelable("user");
+            binding.imageUserProfile.setAlpha(0f);
+            Glide.with(ProfileActivity.this).load(user.getUrlPhoto())
+                    .addListener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            binding.imageUserProfile.animate().setDuration(300).alpha(1f).start();
+                            return false;
+                        }
+                    })
+                    .into(binding.imageUserProfile);
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -304,46 +278,7 @@ public class ProfileActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void getUser() {
-        String uid = auth.getUser().getUid();
-        firestoreService.getUser(uid, new FirestoreGetCallback() {
-            @Override
-            public void onSuccess(Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot doc = task.getResult();
-                    if (doc.exists()) {
-                        user = doc.toObject(UserEntity.class);
-                        binding.imageUserProfile.setAlpha(0f);
-                        binding.setIsImage(false);
-                        Glide.with(ProfileActivity.this).load(user.getUrlPhoto())
-                                .addListener(new RequestListener<Drawable>() {
-                                    @Override
-                                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                        return false;
-                                    }
-
-                                    @Override
-                                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                        binding.imageUserProfile.animate().setDuration(300).alpha(1f).start();
-                                        return false;
-                                    }
-                                })
-                                .into(binding.imageUserProfile);
-
-                    }
-
-                }
-            }
-
-            @Override
-            public void onFailure(Exception e) {
-                Log.e("logx", "Error getUser: " + e.getMessage());
-                e.printStackTrace();
-            }
-        });
-    }
-
-    public void feedback(){
+    public void feedback() {
         final String appPackageName = getApplicationContext().getPackageName();
         try {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
@@ -356,13 +291,61 @@ public class ProfileActivity extends AppCompatActivity {
         NavUtils.navigateUpFromSameTask(this);
     }
 
-    public void showData(){
+    public void showData() {
         MockFile mockFile = new MockFile();
-        List<PerspectiveEntity> perspectiveEntities  = mockFile.getPerspectiveEntityLIst();
+        List<PerspectiveEntity> perspectiveEntities = mockFile.getPerspectiveEntityLIst();
         ItemsProfileAdapter adapter = new ItemsProfileAdapter(perspectiveEntities);
 
         binding.recyclerItemsProfile.hasFixedSize();
         binding.recyclerItemsProfile.setAdapter(adapter);
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        status = true;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        status = false;
+    }
+
+
+    public void about() {
+        LayoutDialogAboutBinding layoutBinding = DataBindingUtil.inflate(getLayoutInflater().from(this), R.layout.layout_dialog_about, binding.relativeDaddyProfile, false);
+        AlertDialog dialog = new AlertDialog.Builder(this).create();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.setView(layoutBinding.getRoot());
+        dialog.show();
+        layoutBinding.btnCloseDialogAbout.setOnClickListener(view1 -> dialog.dismiss());
+    }
+
+    public void logout() {
+        AlertDialog dialogLogout = new AlertDialog.Builder(this).create();
+        dialogLogout.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        LayoutDialogLogoutBinding bindingLogout = DataBindingUtil.inflate(getLayoutInflater().from(this), R.layout.layout_dialog_logout, binding.relativeDaddyProfile, false);
+        dialogLogout.setView(bindingLogout.getRoot());
+        dialogLogout.show();
+        bindingLogout.btnYesDialogLogout.setOnClickListener(v -> {
+            auth.logout();
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+        });
+        bindingLogout.btnCancelDialogLogout.setOnClickListener(v1 -> dialogLogout.dismiss());
+
+    }
+
+    public void pickLib(View view) {
+        String permission = Manifest.permission.READ_EXTERNAL_STORAGE;
+        if (ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED)
+            ActivityCompat.requestPermissions(this, new String[]{permission}, 100);
+        else {
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setType("image/*");
+            startActivityForResult(intent, 100);
+        }
     }
 }

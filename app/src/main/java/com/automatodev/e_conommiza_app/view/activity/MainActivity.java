@@ -5,14 +5,21 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
+import com.automatodev.e_conommiza_app.database.callback.FirestoreGetCallback;
+import com.automatodev.e_conommiza_app.database.firestore.FirestoreService;
 import com.automatodev.e_conommiza_app.database.seed.MockFile;
 import com.automatodev.e_conommiza_app.databinding.ActivityMainBinding;
 import com.automatodev.e_conommiza_app.model.PerspectiveEntity;
+import com.automatodev.e_conommiza_app.model.UserEntity;
+import com.automatodev.e_conommiza_app.security.firebaseAuth.Authentication;
 import com.automatodev.e_conommiza_app.view.adapter.FragmentPageAdapter;
-import com.automatodev.e_conommiza_app.view.adapter.PerspectiveAdapter;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +31,11 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private FragmentPageAdapter fragmentAdapter;
     public static List<PerspectiveEntity> perspectiveEntities;
-    //private PerspectiveAdapter adapter;
+    private FirestoreService firestoreService;
+    private Authentication auth;
+    private UserEntity userEntity;
+    public static boolean refresh;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
+        getUser();
         showData();
     }
 
@@ -53,7 +65,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void actMainProfile(View view) {
         if (!ProfileActivity.status) {
-            startActivity(new Intent(this, ProfileActivity.class));
+            Intent intent = new Intent(this, ProfileActivity.class);
+            intent.putExtra("user",userEntity);
+            startActivity(intent);
             binding.menu.close(true);
         }
     }
@@ -105,18 +119,55 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-    /*    binding.viewPagerMain.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-                binding.txtPerspectiveMain.setText(perspectiveEntities.get(position).getNamePespective());
-                binding.txtCreditMain.setText("R$ "+perspectiveEntities.get(position).getTotalCredit());
-                binding.txtDebitMain.setText("R$ "+perspectiveEntities.get(position).getTotaldDebit());
-
-            }
-        });*/
     }
 
+    public void getUser(){
+        auth = new Authentication();
+        String uid = auth.getUser().getUid();
+        if (uid != null){
+            firestoreService = new FirestoreService();
+            try{
+                firestoreService.getUser(uid, new FirestoreGetCallback() {
+                    @Override
+                    public void onSuccess(Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()){
+                            DocumentSnapshot snapshot = task.getResult();
+                            if (snapshot.exists())
+                                userEntity = snapshot.toObject(UserEntity.class);
+                            binding.txtUserMain.setText(userEntity.getUserName());
+                        }
+                    }
+                    @Override
+                    public void onFailure(Exception e) {
+                        Log.e("logx", "Error getUser: "+e.getMessage());
+                        e.printStackTrace();
+                        errorLogout();
+                    }
+                });
+            }catch (Exception e){
+                Log.e("logx","Exception getUser: "+e.getMessage());
+                e.printStackTrace();
+                errorLogout();
+            }
+
+        }else
+            errorLogout();
+
+    }
+
+    private void errorLogout() {
+        Toast.makeText(this, "Tivemos um problema ao carregar sessão... Saindo...", Toast.LENGTH_LONG).show();
+        auth.logout();
+        startActivity(new Intent(this, LoginActivity.class));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (refresh){
+            getUser();
+            refresh = false;
+        }
+
+    }
 }
