@@ -58,7 +58,7 @@
             android:layout_below="@id/relativeTitle_dialogAbout"
             android:layout_above="@+id/linearSocial_dialogAbout"
             android:layout_margin="@dimen/_5sdp"
-            android:text="Aplicativo de finanças. \nVisite a pagina do app na playstore \n \nVersão 1.0.0"
+            android:text="Aplicativo de finanças. \nVisite a pagina do ptojryo na playstore \n \nVersão 1.0.0"
             android:textSize="@dimen/_9ssp"/>
 
         <LinearLayout
@@ -71,34 +71,24 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/btnFacebook_dialogAbout"
-                android:background="@drawable/bg_button_white_shadow_global"
-                android:layout_width="@dimen/_55sdp"
-
-                android:src="@drawable/ic_facebook_svg"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:layout_height="@dimen/_55sdp"/>
-
 
             <ImageButton
                 android:id="@+id/btnLinkedin_dialogAbout"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_15sdp"
                 android:background="@drawable/bg_button_white_shadow_global"
-                android:layout_width="@dimen/_55sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:paddingBottom="@dimen/_20sdp"
-                android:src="@drawable/ic_linkedin"
-                android:layout_height="@dimen/_55sdp"/>
-
+                android:src="@drawable/ic_linkedin" />
 
             <ImageButton
                 android:id="@+id/btnPlay_dialogAbout"
-                android:paddingStart="@dimen/_10sdp"
+                android:paddingStart="@dimen/_8sdp"
                 android:background="@drawable/bg_button_white_shadow_global"
-                android:layout_width="@dimen/_55sdp"
+                android:layout_width="@dimen/_45sdp"
                 android:src="@drawable/ic_playstore"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:layout_height="@dimen/_55sdp"/>
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_height="@dimen/_45sdp"/>
 
 
         </LinearLayout>

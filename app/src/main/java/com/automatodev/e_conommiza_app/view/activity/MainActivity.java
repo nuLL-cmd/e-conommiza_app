@@ -1,29 +1,30 @@
 package com.automatodev.e_conommiza_app.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager2.widget.ViewPager2;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.automatodev.e_conommiza_app.database.seed.MockFile;
 import com.automatodev.e_conommiza_app.databinding.ActivityMainBinding;
-import com.automatodev.e_conommiza_app.model.DataEntryEntity;
 import com.automatodev.e_conommiza_app.model.PerspectiveEntity;
+import com.automatodev.e_conommiza_app.view.adapter.FragmentPageAdapter;
 import com.automatodev.e_conommiza_app.view.adapter.PerspectiveAdapter;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     public static boolean status;
+
     private ActivityMainBinding binding;
-    private PerspectiveAdapter adapter;
+    private FragmentPageAdapter fragmentAdapter;
+    public static List<PerspectiveEntity> perspectiveEntities;
+    //private PerspectiveAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,28 +66,57 @@ public class MainActivity extends AppCompatActivity {
 
     public void showData() {
         MockFile mockFile = new MockFile();
-        List<PerspectiveEntity> perspectiveEntities = new ArrayList<>();
+        perspectiveEntities = new ArrayList<>();
         perspectiveEntities.addAll(mockFile.getPerspectiveEntityLIst());
 
 
-        adapter = new PerspectiveAdapter(perspectiveEntities);
-        binding.viewPagerMain.setAdapter(adapter);
+       // adapter = new PerspectiveAdapter(perspectiveEntities);
+        fragmentAdapter = new FragmentPageAdapter(getSupportFragmentManager(), 0,perspectiveEntities);
+        binding.viewPagerMain.setAdapter(fragmentAdapter);
 
 
-        if (perspectiveEntities.size() == 0)
-            binding.txtCashMain.setText("Comece adicionando uma perspectiva!");
-        else
-            binding.txtCashMain.setText(perspectiveEntities.get(adapter.getItem()).getNamePespective());
+        if (perspectiveEntities.size() == 0){
+            binding.txtPerspectiveMain.setText("Nenhuma perspectiva");
+            binding.txtCreditMain.setText("R$ 0.00");
+            binding.txtDebitMain.setText("R$ 0.00");
 
-        binding.viewPagerMain.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+        }
+        else{
+            binding.txtPerspectiveMain.setText(perspectiveEntities.get(fragmentAdapter.getIntemCount()).getNamePespective());
+            binding.txtCreditMain.setText("R$ "+perspectiveEntities.get(fragmentAdapter.getIntemCount()).getTotalCredit());
+            binding.txtDebitMain.setText("R$ "+perspectiveEntities.get(fragmentAdapter.getIntemCount()).getTotaldDebit());
+        }
+
+        binding.viewPagerMain.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                binding.txtPerspectiveMain.setText(perspectiveEntities.get(position).getNamePespective());
+                binding.txtCreditMain.setText("R$ "+perspectiveEntities.get(position).getTotalCredit());
+                binding.txtDebitMain.setText("R$ "+perspectiveEntities.get(position).getTotaldDebit());
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+    /*    binding.viewPagerMain.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
 
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-                binding.txtCashMain.setText(perspectiveEntities.get(position).getNamePespective());
+                binding.txtPerspectiveMain.setText(perspectiveEntities.get(position).getNamePespective());
+                binding.txtCreditMain.setText("R$ "+perspectiveEntities.get(position).getTotalCredit());
+                binding.txtDebitMain.setText("R$ "+perspectiveEntities.get(position).getTotaldDebit());
 
             }
-        });
+        });*/
     }
 
 }

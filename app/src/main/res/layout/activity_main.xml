@@ -25,138 +25,76 @@
         android:background="@drawable/bg_relative_data_main">
 
         <TextView
-            android:id="@+id/txtCash_main"
+            android:id="@+id/txtPerspective_main"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_28sdp"
             android:gravity="center"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:shadowColor="#743F3F3F"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="20"
             android:layout_marginStart="@dimen/_20sdp"
             android:textStyle="bold"
             android:layout_marginTop="@dimen/_10sdp"
             android:ellipsize="end"
             android:singleLine="true"
             android:layout_marginEnd="@dimen/_10sdp"
-            android:text="Comece adicionando uma perspectiva"
+            android:text="Nenhuma perspectiva"
             android:textAlignment="center"
             android:textColor="#939090"
             android:textSize="@dimen/_10ssp" />
 
-
-        <ImageButton
-            android:id="@+id/btnChart_profile"
-            android:layout_width="@dimen/_28sdp"
-            android:layout_height="@dimen/_28sdp"
-            android:background="@drawable/bg_button_white_global"
-            android:layout_marginStart="@dimen/_10sdp"
+        <TextView
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:layout_height="wrap_content"
+            android:shadowColor="#743F3F3F"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="20"
+            android:text="R$ 540.50"
+            android:layout_alignTop="@id/txtDebit_main"
+            android:layout_alignBottom="@id/txtDebit_main"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:textColor="#4CAF50"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/_15sdp"
-            android:src="@drawable/ic_chart"
-            android:layout_alignTop="@id/txtCash_main" />
+            android:id="@+id/txtCredit_main"
+            android:textStyle="bold"
+            android:textSize="@dimen/_8ssp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingStart="@dimen/_10sdp"
+            android:shadowColor="#743F3F3F"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="20"
+            android:paddingEnd="@dimen/_10sdp"
+            android:layout_alignTop="@id/txtPerspective_main"
+            android:layout_alignBottom="@id/txtPerspective_main"
+            android:text="R$ 385.50"
+            android:textColor="#F44336"
+            android:layout_toStartOf="@id/txtCredit_main"
+            android:id="@+id/txtDebit_main"
+            android:textStyle="bold"
+            android:textSize="@dimen/_8ssp"/>
 
 
-
-        <ImageButton
-            android:id="@+id/btnAddPerspective_main"
-            android:layout_width="@dimen/_28sdp"
-            android:layout_height="@dimen/_28sdp"
-            android:layout_alignTop="@id/btnChart_profile"
-            android:src="@drawable/ic_add"
-            android:layout_toStartOf="@+id/btnChart_profile"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:background="@drawable/bg_button_white_global"
-            />
-
-
-        <androidx.viewpager2.widget.ViewPager2
+        <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager_main"
             android:layout_width="match_parent"
-            android:layout_below="@id/txtCash_main"
+            android:layout_below="@id/txtPerspective_main"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_height="@dimen/_320sdp"
             android:orientation="horizontal" />
 
     </RelativeLayout>
-
-       <!-- <RelativeLayout
-            android:id="@+id/relativeData_main"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_320sdp"
-            android:layout_below="@id/viewSuportLayout_main"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/bg_relative_data_main">
-
-
-            <TextView
-                android:id="@+id/txtCash_main"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/_28sdp"
-                android:gravity="center"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:text="Comece adicionando uma perspectiva"
-                android:textAlignment="center"
-                android:textColor="#939090"
-                android:textSize="@dimen/_10ssp" />
-
-
-            <ImageButton
-                android:id="@+id/btnChart_profile"
-                android:layout_width="@dimen/_28sdp"
-                android:layout_height="@dimen/_28sdp"
-                android:background="@drawable/bg_button_cancel_noshadow_global"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:src="@drawable/ic_chart"
-                android:layout_alignTop="@id/txtCash_main" />
-
-
-
-            <ImageButton
-                android:id="@+id/btnAddPerspective_main"
-                android:layout_width="@dimen/_28sdp"
-                android:layout_height="@dimen/_28sdp"
-                android:layout_alignTop="@id/btnChart_profile"
-                android:src="@drawable/ic_add"
-                android:layout_toStartOf="@+id/btnChart_profile"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:background="@drawable/bg_button_cancel_noshadow_global"
-                 />
-
-
-            <RelativeLayout
-                android:id="@+id/relativeChildData_main"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/txtCash_main"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_alignParentBottom="true"
-                android:background="@drawable/bg_relative_perspective">
-
-                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                    android:id="@+id/swipeRefresh_main"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/_10sdp">
-
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerItens_main"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        tools:listitem="@layout/layout_items_main"
-                        android:layout_margin="@dimen/_10sdp"
-                        android:padding="@dimen/_5sdp" />
-
-
-                </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-            </RelativeLayout>
-
-
-        </RelativeLayout>-->
 
         <ImageView
             android:layout_width="wrap_content"
@@ -315,7 +253,7 @@
                 fab:fab_size="mini" />
 
             <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/menuOptions_item"
+                android:id="@+id/menuPerspective_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_add_white"
@@ -325,7 +263,7 @@
 
 
             <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/menuProvento_item"
+                android:id="@+id/menuCredit_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_thumb_up"

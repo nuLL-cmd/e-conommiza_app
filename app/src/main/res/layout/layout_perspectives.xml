@@ -1,39 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/bg_relative_perspective">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+    </data>
 
     <RelativeLayout
-        android:id="@+id/relativeChildData_layoutPerspective"
         android:layout_width="match_parent"
+        android:id="@+id/relativeDaddy_layoutPerspective"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
         android:background="@drawable/bg_relative_perspective">
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipeRefresh_layoutPerspective"
+
+        <RelativeLayout
+            android:id="@+id/relativeChildData_layoutPerspective"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/_10sdp">
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/bg_relative_perspective">
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerItens_layoutPerspective"
+
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipeRefresh_layoutPerspective"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="@dimen/_10sdp"
-                android:padding="@dimen/_5sdp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/layout_items_main" />
+                android:layout_margin="@dimen/_10sdp">
 
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerItens_layoutPerspective"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:padding="@dimen/_5sdp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/layout_items_main" />
+
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        </RelativeLayout>
+
 
     </RelativeLayout>
-
-
-</RelativeLayout>
+</layout>

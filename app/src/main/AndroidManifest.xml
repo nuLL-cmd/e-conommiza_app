@@ -15,24 +15,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Econommiza_app">
-        <activity android:name=".view.activity.ProfileActivity"
-            android:theme="@style/Theme.Econommiza_app_two">
 
+        <activity
+            android:name=".view.activity.ProfileActivity"
+            android:theme="@style/Theme.Econommiza_app_two"
+            android:parentActivityName=".view.activity.ProfileActivity">
         </activity>
+
         <activity
             android:name=".view.activity.RegisterActivity"
             android:parentActivityName=".view.activity.RegisterActivity">
+        </activity>
+
+        <activity
+            android:name=".view.activity.LoginActivity" >
 
         </activity>
 
-        <activity android:name=".view.activity.LoginActivity" >
-
-        </activity>
-
-        <activity android:name=".view.activity.SplashActivity">
+        <activity
+            android:name=".view.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

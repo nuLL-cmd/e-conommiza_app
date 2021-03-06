@@ -8,6 +8,7 @@ import androidx.databinding.BindingAdapter;
 
 import com.airbnb.lottie.LottieAnimationView;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
@@ -30,4 +31,5 @@ public class BinderAdapter {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyy HH:mm:ss", locale);
         text.setText(dateFormat.format(date));
     }
+
 }
