@@ -128,13 +128,13 @@
                     android:id="@+id/edtEmail_login"
                     android:layout_width="match_parent"
                     android:background="@drawable/layout_shadow_white"
-                    android:layout_height="@dimen/_53sdp"
+                    android:layout_height="@dimen/_50sdp"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:text="programadormoderador@hotmail.com"
                     android:hint="Email"
                     android:inputType="textEmailAddress"
-                    android:paddingStart="@dimen/_15ssp"
-                    android:paddingEnd="@dimen/_10sdp"
+                    android:paddingStart="@dimen/_15sdp"
+                    android:paddingEnd="@dimen/_15sdp"
                     android:singleLine="true"
                     android:textColor="#A2A2A2"
                     android:textSize="@dimen/_10ssp" />
@@ -144,14 +144,14 @@
                     android:id="@+id/edtPassword_login"
                     android:layout_width="match_parent"
                     android:text="402866"
-                    android:layout_height="@dimen/_53sdp"
+                    android:layout_height="@dimen/_50sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:background="@drawable/layout_shadow_white"
                     android:hint="Password"
                     android:inputType="numberPassword"
                     android:maxLength="6"
-                    android:paddingStart="@dimen/_15ssp"
-                    android:paddingEnd="@dimen/_10sdp"
+                    android:paddingStart="@dimen/_15sdp"
+                    android:paddingEnd="@dimen/_15sdp"
                     android:singleLine="true"
                     android:textColor="#A2A2A2"
                     android:textSize="@dimen/_10ssp" />
@@ -161,8 +161,9 @@
                     android:id="@+id/btnLogin_login"
                     style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_53sdp"
+                    android:layout_height="@dimen/_50sdp"
                     android:elevation="@dimen/_10sdp"
+                    android:textSize="@dimen/_11ssp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/bg_button_blue_global"
                     android:text="Login"
@@ -175,21 +176,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:clickable="true"
+                    android:textSize="@dimen/_11ssp"
                     android:text="Esqueci minha senha"
                     android:textAlignment="center"
                     android:textColor="@color/button_positive"
                     android:textStyle="bold" />
 
-
-                <com.github.ybq.android.spinkit.SpinKitView
-                    android:id="@+id/spinkit_login"
-                    style="@style/SpinKitView.Large.ThreeBounce"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="100dp"
-                    android:visibility="gone"
-                    app:SpinKit_Color="@color/button_positive" />
 
 
             </LinearLayout>
@@ -211,7 +203,7 @@
                     <View
                         android:id="@+id/viewSeparatorSocial_login"
                         android:layout_width="match_parent"
-                        android:layout_height="3dp"
+                        android:layout_height="@dimen/_2sdp"
                         android:layout_centerInParent="true"
                         android:layout_marginStart="@dimen/_50sdp"
                         android:layout_marginEnd="@dimen/_50sdp"
@@ -224,6 +216,7 @@
                         android:text="Ou faça login com"
                         android:id="@+id/lblSocial_login"
                         android:background="#fff"
+                        android:textSize="@dimen/_11ssp"
                         android:padding="@dimen/_5sdp"
                         android:layout_centerInParent="true" />
 
@@ -268,18 +261,10 @@
 
                 </LinearLayout>
 
-                <View
-                    android:id="@+id/viewSeparatorRegister_login"
-                    android:layout_width="match_parent"
-                    android:layout_height="3dp"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp"
-                    android:background="#E2E0E0" />
-
                 <LinearLayout
                     android:id="@+id/linearRegister_login"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="@dimen/_36sdp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -288,14 +273,16 @@
                         android:layout_height="match_parent"
                         android:id="@+id/lblRegister_login"
                         android:gravity="center"
+                        android:textSize="@dimen/_11ssp"
                         android:text="Não possui uma conta?"
                         android:textAlignment="center" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="5dp"
+                        android:layout_marginStart="@dimen/_5sdp"
                         android:clickable="true"
+                        android:textSize="@dimen/_11ssp"
                         android:onClick="actLoginRegister"
                         android:gravity="center"
                         android:id="@+id/txtRegister_login"

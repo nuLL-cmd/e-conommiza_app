@@ -61,6 +61,7 @@ public class ProfileActivity extends AppCompatActivity {
     private Uri uriInternal;
     private Uri uriExternal;
     private UserEntity user;
+    private List<PerspectiveEntity> perspectiveEntities;
     public static boolean status;
 
     @Override
@@ -76,9 +77,12 @@ public class ProfileActivity extends AppCompatActivity {
         firestoreService = new FirestoreService();
         storageService = new StorageService();
 
-
         getUser();
         showData();
+
+        binding.lblSinceProfile.setTexts(new String[]{"Você tem","Você pode consultar um","Organize seus gastos ","Seu bolso agradeçe"});
+        binding.txtSinceProfile.setTexts(new String[]{perspectiveEntities.size()+" perspectivas cadastradas","relatorio clicando no gráfico","em proventos e despessas","esta boa ação"});
+
     }
 
     @Override
@@ -293,7 +297,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void showData() {
         MockFile mockFile = new MockFile();
-        List<PerspectiveEntity> perspectiveEntities = mockFile.getPerspectiveEntityLIst();
+        perspectiveEntities = mockFile.getPerspectiveEntityLIst();
         ItemsProfileAdapter adapter = new ItemsProfileAdapter(perspectiveEntities);
 
         binding.recyclerItemsProfile.hasFixedSize();

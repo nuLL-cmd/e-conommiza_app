@@ -24,133 +24,155 @@
 
 
         <RelativeLayout
-            android:id="@+id/lineareDataUser_profile"
+            android:id="@+id/relativeDataUser_profile"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_250sdp"
-            android:background="@drawable/bg_relative_data_profile"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_above="@id/viewSuportLayout_profile">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbarMenu_profile"
+            <RelativeLayout
+                android:id="@+id/lineareDataUser_profile"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_55sdp"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
-                app:title=" ">
+                android:layout_height="match_parent"
+                android:layout_alignBottom="@id/imageUser_profile"
+                android:layout_marginBottom="@dimen/_45sdp"
+                android:background="@drawable/bg_relative_data_profile"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbarMenu_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_55sdp"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                    app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
+                    app:title=" ">
 
 
-                <ImageButton
-                    android:id="@+id/btnBack_regoster"
-                    android:layout_width="@dimen/_32sdp"
-                    android:onClick="actProfileMain"
-                    android:layout_height="@dimen/_32sdp"
-                    android:background="@drawable/bg_button_blue_noshadow_global"
-                    android:src="@drawable/ic_arrow_back_white" />
+                    <ImageButton
+                        android:id="@+id/btnBack_regoster"
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
+                        android:background="@drawable/bg_button_blue_noshadow_global"
+                        android:onClick="actProfileMain"
+                        android:src="@drawable/ic_arrow_back_white" />
 
-            </androidx.appcompat.widget.Toolbar>
+                </androidx.appcompat.widget.Toolbar>
 
 
-            <TextView
-                android:id="@+id/lblSince_profile"
+                <com.tomer.fadingtextview.FadingTextView
+                    android:id="@+id/lblSince_profile"
+                    android:layout_width="wrap_content"
+                    app:timeout="2500"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/txtSince_profile"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:text="Ultima despesa cadastrada"
+                    android:textAlignment="center"
+                    android:textColor="#95FFFFFF"
+                    android:textSize="@dimen/_15ssp" />
+
+
+                <com.tomer.fadingtextview.FadingTextView
+                    android:id="@+id/txtSince_profile"
+                    android:layout_width="wrap_content"
+                    app:timeout="2500"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:gravity="center"
+                    android:text="12 jan 2020,8am"
+                    android:textColor="#BCFFFFFF"
+                    android:textSize="@dimen/_25ssp"
+                    android:textStyle="bold" />
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/toolbarMenu_profile"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/_25sdp"
-                android:text="Ultima despesa cadastrada"
-                android:textAlignment="center"
-                android:textColor="#95FFFFFF"
-                android:textSize="@dimen/_15ssp" />
+                android:layout_alignStart="@id/imageUser_profile"
+                android:layout_alignTop="@id/imageUser_profile"
+                android:layout_alignEnd="@id/imageUser_profile"
+                android:layout_alignBottom="@id/imageUser_profile"
+                android:background="@drawable/bg_image_profile">
+
+                <ImageView
+                    android:id="@+id/imgNoImage_profile"
+                    android:layout_width="@dimen/_48sdp"
+                    android:layout_height="@dimen/_48sdp"
+                    android:layout_centerInParent="true"
+                    android:alpha="0.6"
+                    android:src="@drawable/ic_photo" />
+
+            </RelativeLayout>
 
 
-            <TextView
-                android:id="@+id/txtSince_profile"
-                android:layout_width="wrap_content"
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/imageUser_profile"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="-70dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/image"
+                app:riv_border_color="@color/background_form"
+                app:riv_border_width="@dimen/_6sdp"
+                app:riv_corner_radius="@dimen/_35sdp" />
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_one"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/lblSince_profile"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/_7sdp"
-                android:layout_marginBottom="@dimen/_8sdp"
-                android:drawableStart="@drawable/ic_calendar"
-                android:drawablePadding="@dimen/_5sdp"
-                android:gravity="center"
-                android:text="12 jan 2020,8am"
-                android:textColor="#BCFFFFFF"
-                android:textSize="@dimen/_25ssp"
-                android:textStyle="bold" />
+                android:layout_alignBottom="@id/imageUser_profile"
+                android:layout_marginBottom="@dimen/_25sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_toEndOf="@id/imageUser_profile"
+                android:backgroundTint="@color/button_positive"
+                android:onClick="pickLib"
+                android:src="@drawable/ic_camera"
+                app:backgroundTint="@color/background_form"
+                app:borderWidth="@dimen/_5sdp" />
 
 
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_two"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_alignBottom="@id/fab_one"
+                android:layout_toEndOf="@id/fab_one"
+                android:backgroundTint="#4CAF50"
+                android:onClick="updateUser"
+                android:src="@drawable/ic_save_green"
+                app:backgroundTint="@color/background_form"
+                app:borderWidth="@dimen/_5sdp" />
         </RelativeLayout>
 
-        <RelativeLayout
+
+
+
+
+        <View
+            android:id="@+id/viewSuportLayout_profile"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@id/imageUser_profile"
-            android:layout_alignTop="@id/imageUser_profile"
-            android:layout_alignEnd="@id/imageUser_profile"
-            android:layout_alignBottom="@id/imageUser_profile"
-            android:background="@drawable/bg_image_profile">
-
-            <ImageView
-                android:id="@+id/imgNoImage_profile"
-                android:layout_width="@dimen/_48sdp"
-                android:layout_height="@dimen/_48sdp"
-                android:layout_centerInParent="true"
-                android:alpha="0.6"
-                android:src="@drawable/ic_photo" />
-
-        </RelativeLayout>
-
-
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/imageUser_profile"
-            android:layout_width="@dimen/_100sdp"
-            android:layout_height="@dimen/_100sdp"
-
-            android:layout_below="@id/lineareDataUser_profile"
-            android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginTop="-70dp"
-            android:scaleType="centerCrop"
-            app:riv_border_color="@color/background_form"
-            app:riv_border_width="@dimen/_6sdp"
-            app:riv_corner_radius="@dimen/_35sdp" />
-
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_one"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/lineareDataUser_profile"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginTop="-25dp"
-            android:layout_toEndOf="@id/imageUser_profile"
-            android:backgroundTint="@color/button_positive"
-            android:onClick="pickLib"
-            android:src="@drawable/ic_camera"
-            app:backgroundTint="@color/background_form"
-            app:borderWidth="@dimen/_5sdp" />
-
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_two"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/lineareDataUser_profile"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginTop="-25dp"
-            android:layout_toEndOf="@id/fab_one"
-            android:backgroundTint="#4CAF50"
-            android:onClick="updateUser"
-            android:src="@drawable/ic_save_green"
-            app:backgroundTint="@color/background_form"
-            app:borderWidth="@dimen/_5sdp" />
+            android:layout_height="0.5dp"
+            android:layout_centerInParent="true"
+            android:background="@android:color/transparent" />
 
 
         <RelativeLayout
             android:id="@+id/relativeData_profile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/imageUser_profile"
+            android:layout_below="@id/viewSuportLayout_profile"
             android:background="@drawable/bg_relative_data_main">
 
 
@@ -167,8 +189,8 @@
                 android:text="Perspectivas cadastradas"
                 android:textAlignment="center"
                 android:textColor="#939090"
-                android:textStyle="bold"
-                android:textSize="@dimen/_10ssp" />
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="bold" />
 
 
             <ImageButton
@@ -180,15 +202,15 @@
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_25sdp"
                 android:background="@drawable/bg_button_white_global"
-                android:src="@drawable/ic_chart" />
+                android:src="@drawable/ic_icont_chart_one" />
 
             <ImageButton
                 android:id="@+id/btnAddPerspective_profile"
                 android:layout_width="@dimen/_28sdp"
                 android:layout_height="@dimen/_28sdp"
                 android:layout_alignTop="@id/txtCash_profile"
-                android:layout_toStartOf="@id/btnChart_profile"
                 android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_toStartOf="@id/btnChart_profile"
                 android:background="@drawable/bg_button_white_global"
                 android:src="@drawable/ic_add" />
 
@@ -214,9 +236,9 @@
                         android:id="@+id/recyclerItems_profile"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         android:layout_margin="@dimen/_10sdp"
                         android:padding="@dimen/_5sdp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:listitem="@layout/layout_items_profile" />
 
 

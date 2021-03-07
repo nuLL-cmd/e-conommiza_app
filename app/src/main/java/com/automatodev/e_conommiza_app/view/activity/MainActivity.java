@@ -3,6 +3,7 @@ package com.automatodev.e_conommiza_app.view.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +25,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@SuppressLint("SetTextI18n")
 public class MainActivity extends AppCompatActivity {
 
     public static boolean status;
@@ -46,6 +49,15 @@ public class MainActivity extends AppCompatActivity {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
+
+        binding.txtMonthBalance.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    binding.txtMonthBalance.setSelected(true);
+                }
+            }
+        });
         getUser();
         showData();
     }
@@ -89,21 +101,28 @@ public class MainActivity extends AppCompatActivity {
         binding.viewPagerMain.setAdapter(fragmentAdapter);
 
 
+
         if (perspectiveEntities.size() == 0){
-            binding.txtPerspectiveMain.setText("Nenhuma perspectiva");
-            binding.txtCreditMain.setText("R$ 0.00");
-            binding.txtDebitMain.setText("R$ 0.00");
+            binding.txtPerspectiveMain.setText("Não há perspectivas");
+            binding.txtCreditMain.setVisibility(View.GONE);
+            binding.txtDebitMain.setVisibility(View.GONE);
+            binding.txtAmountPerspectiveMain.setText("Comece adicionando \n uma nova perspectiva!");
 
         }
         else{
+            binding.txtCreditMain.setVisibility(View.VISIBLE);
+            binding.txtDebitMain.setVisibility(View.VISIBLE);
             binding.txtPerspectiveMain.setText(perspectiveEntities.get(fragmentAdapter.getIntemCount()).getNamePespective());
             binding.txtCreditMain.setText("R$ "+perspectiveEntities.get(fragmentAdapter.getIntemCount()).getTotalCredit());
             binding.txtDebitMain.setText("R$ "+perspectiveEntities.get(fragmentAdapter.getIntemCount()).getTotaldDebit());
+            binding.txtAmountPerspectiveMain.setText("Saldo - "+perspectiveEntities.get(fragmentAdapter.getIntemCount()).getMounth() + "\nR$ "+
+                    perspectiveEntities.get(fragmentAdapter.getIntemCount()).getTotalCredit().subtract(perspectiveEntities.get(fragmentAdapter.getIntemCount()).getTotaldDebit()));
         }
 
         binding.viewPagerMain.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
 
             }
 
@@ -112,6 +131,8 @@ public class MainActivity extends AppCompatActivity {
                 binding.txtPerspectiveMain.setText(perspectiveEntities.get(position).getNamePespective());
                 binding.txtCreditMain.setText("R$ "+perspectiveEntities.get(position).getTotalCredit());
                 binding.txtDebitMain.setText("R$ "+perspectiveEntities.get(position).getTotaldDebit());
+                binding.txtAmountPerspectiveMain.setText("Saldo - "+perspectiveEntities.get(position).getMounth() + "\nR$ "+
+                        perspectiveEntities.get(position).getTotalCredit().subtract(perspectiveEntities.get(position).getTotaldDebit()));
             }
 
             @Override

@@ -141,7 +141,7 @@
                     android:id="@+id/edtUser_register"
                     android:layout_width="match_parent"
                     android:text="nazomii"
-                    android:layout_height="@dimen/_53sdp"
+                    android:layout_height="@dimen/_50sdp"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:background="@drawable/layout_shadow_white"
                     android:hint="Usuário"
@@ -155,7 +155,7 @@
                 <EditText
                     android:id="@+id/edtEmail_register"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_53sdp"
+                    android:layout_height="@dimen/_50sdp"
                     android:text="programadormoderador@hotmail.com"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:background="@drawable/layout_shadow_white"
@@ -170,7 +170,7 @@
                 <EditText
                     android:id="@+id/edtPassword_register"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_53sdp"
+                    android:layout_height="@dimen/_50sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:text="402866"
                     android:background="@drawable/layout_shadow_white"
@@ -188,9 +188,10 @@
                     android:id="@+id/btnLogin_register"
                     style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_53sdp"
+                    android:layout_height="@dimen/_50sdp"
                     android:onClick="actRegisterMain"
                     android:elevation="@dimen/_10sdp"
+                    android:textSize="@dimen/_11ssp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/bg_button_blue_global"
                     android:text="Registrar"
@@ -242,6 +243,7 @@
                         android:id="@+id/lblSocial_register"
                         android:background="#fff"
                         android:padding="@dimen/_5sdp"
+                        android:textSize="@dimen/_11ssp"
                         android:layout_centerInParent="true" />
 
                 </RelativeLayout>

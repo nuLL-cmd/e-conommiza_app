@@ -31,7 +31,7 @@
             android:gravity="center"
             android:paddingStart="@dimen/_10sdp"
             android:paddingEnd="@dimen/_10sdp"
-            android:shadowColor="#743F3F3F"
+            android:shadowColor="#953F3F3F"
             android:shadowDx="3"
             android:shadowDy="3"
             android:shadowRadius="20"
@@ -52,7 +52,7 @@
             android:paddingStart="@dimen/_10sdp"
             android:paddingEnd="@dimen/_10sdp"
             android:layout_height="wrap_content"
-            android:shadowColor="#743F3F3F"
+            android:shadowColor="#953F3F3F"
             android:shadowDx="3"
             android:shadowDy="3"
             android:shadowRadius="20"
@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingStart="@dimen/_10sdp"
-            android:shadowColor="#743F3F3F"
+            android:shadowColor="#953F3F3F"
             android:shadowDx="3"
             android:shadowDy="3"
             android:shadowRadius="20"
@@ -108,10 +108,9 @@
 
         <ImageView
             android:id="@+id/btnExit_main"
-            android:layout_width="@dimen/_32sdp"
-            android:layout_height="@dimen/_32sdp"
-            android:layout_marginStart="@dimen/_15ssp"
-            android:padding="@dimen/_5sdp"
+            android:layout_width="@dimen/_28sdp"
+            android:layout_height="@dimen/_28sdp"
+            android:layout_marginStart="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_35sdp"
             android:src="@drawable/ic_home" />
 
@@ -122,11 +121,16 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/btnExit_main"
             android:layout_alignBottom="@id/btnExit_main"
-            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:layout_alignEnd="@id/viewSuportImage_main"
+            android:layout_marginEnd="@dimen/_5sdp"
             android:layout_toEndOf="@id/btnExit_main"
-            android:gravity="center"
+            android:gravity="center|start"
+            android:text="MARCO"
             android:textColor="@color/background_form"
-            android:textSize="@dimen/_16ssp" />
+            android:textSize="@dimen/_12ssp" />
 
 
         <View
@@ -148,52 +152,84 @@
             android:layout_height="match_parent"
             android:layout_above="@id/relativeData_main"
             android:layout_below="@id/btnExit_main"
-            android:layout_toStartOf="@id/viewSuportImage_main"
-            android:gravity="center">
+            android:layout_toStartOf="@id/viewSuportImage_main">
 
             <TextView
                 android:id="@+id/txtMonthBalance"
-                android:layout_width="match_parent"
+                android:layout_marginStart="@dimen/_15sdp"
+
+
+
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_30sdp"
-                android:ellipsize="marquee"
-                android:paddingStart="@dimen/_20ssp"
-                android:singleLine="true"
+                android:layout_above="@id/scrollTxtValueBalance_main"
                 android:text="Balanço"
+                android:textStyle="bold"
                 android:textColor="@color/background_form"
-                android:textSize="@dimen/_20sdp"
-                android:textStyle="bold" />
+                android:textSize="@dimen/_15ssp" />
 
 
             <TextView
                 android:id="@+id/lblValueBalance_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@id/txtValueBalance_main"
-                android:layout_alignBottom="@id/txtValueBalance_main"
+                android:layout_alignTop="@id/scrollTxtValueBalance_main"
+                android:layout_alignBottom="@id/scrollTxtValueBalance_main"
+                android:layout_alignStart="@id/txtMonthBalance"
                 android:gravity="center"
-                android:paddingStart="@dimen/_20ssp"
                 android:text="R$"
                 android:textColor="@color/background_form"
-                android:textSize="@dimen/_17ssp" />
+                android:textSize="@dimen/_13ssp" />
+
+
+            <HorizontalScrollView
+                android:id="@+id/scrollTxtValueBalance_main"
+                android:layout_width="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:scrollbars="none"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/lblValueBalance_main"
+                android:fillViewport="true">
+
+                <TextView
+                    android:id="@+id/txtValueBalance_main"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/lblValueBalance_main"
+                    android:singleLine="true"
+                    android:textStyle="bold"
+                    android:text="750.00"
+                    android:textAlignment="center"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/background_form"
+                    android:textSize="@dimen/_30ssp"/>
+
+            </HorizontalScrollView>
+
+
+            <!---->
+
 
 
             <TextView
-                android:id="@+id/txtValueBalance_main"
+                android:id="@+id/txtAmountPerspective_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/txtMonthBalance"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_toEndOf="@id/lblValueBalance_main"
-                android:ellipsize="end"
-                android:paddingStart="@dimen/_10sdp"
-                android:singleLine="true"
-                android:text="300,00"
+                android:shadowColor="#D7FFFFFF"
+                android:shadowDx="3"
+                android:padding="@dimen/_10sdp"
+                android:shadowDy="3"
+                android:shadowRadius="20"
+                android:layout_alignParentBottom="true"
                 android:textAlignment="center"
+                android:layout_alignStart="@id/lblValueBalance_main"
+                android:text="Saldo - Fevereiro\n R$ 1600.00"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:textColor="@color/background_form"
-                android:textSize="@dimen/_30ssp"
-                android:textStyle="bold" />
+                android:textSize="@dimen/_10ssp" />
 
         </RelativeLayout>
 
@@ -243,8 +279,8 @@
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/menuProfile_item"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:src="@drawable/ic_person"
                 android:onClick="actMainProfile"
                 app:fab_colorNormal="#E91E63"
@@ -253,8 +289,8 @@
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/menuPerspective_item"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:src="@drawable/ic_add_white"
                 app:fab_colorNormal="#FF9800"
                 fab:fab_label="Adicionar perspectiva"
@@ -263,8 +299,8 @@
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/menuCredit_item"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:src="@drawable/ic_thumb_up"
                 app:fab_colorNormal="#4CAF50"
                 fab:fab_label="Adicionar provento"
@@ -272,8 +308,8 @@
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/menuDespesa_item"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:src="@drawable/ic_thumb_down"
                 fab:fab_label="Adicionar despesa"
                 fab:fab_size="mini" />

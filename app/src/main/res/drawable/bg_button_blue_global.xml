@@ -4,36 +4,36 @@
 <!-- Drop Shadow Stack -->
 <item>
     <shape>
-        <padding android:top="2dp" android:right="2dp" android:bottom="2dp" android:left="2dp" />
-        <corners android:radius="10dp" />
+        <padding android:top="@dimen/_1sdp" android:right="@dimen/_1sdp" android:bottom="@dimen/_1sdp" android:left="@dimen/_1sdp" />
+        <corners android:radius="@dimen/_10sdp" />
         <solid android:color="#00CCCCCC" />
     </shape>
 </item>
 <item>
     <shape>
-        <padding android:top="2dp" android:right="2dp" android:bottom="2dp" android:left="2dp" />
-        <corners android:radius="10dp" />
+        <padding android:top="@dimen/_1sdp" android:right="@dimen/_1sdp" android:bottom="@dimen/_1sdp" android:left="@dimen/_1sdp" />
+        <corners android:radius="@dimen/_10sdp" />
         <solid android:color="#10CCCCCC" />
     </shape>
 </item>
 <item>
     <shape>
-        <padding android:top="2dp" android:right="2dp" android:bottom="2dp" android:left="2dp" />
-        <corners android:radius="10dp" />
+        <padding android:top="@dimen/_1sdp" android:right="@dimen/_1sdp" android:bottom="@dimen/_1sdp" android:left="@dimen/_1sdp" />
+        <corners android:radius="@dimen/_10sdp" />
         <solid android:color="#20CCCCCC" />
     </shape>
 </item>
 <item>
     <shape>
-        <padding android:top="2dp" android:right="2dp" android:bottom="2dp" android:left="2dp" />
-        <corners android:radius="10dp" />
+        <padding android:top="@dimen/_1sdp" android:right="@dimen/_1sdp" android:bottom="@dimen/_1sdp" android:left="@dimen/_1sdp" />
+        <corners android:radius="@dimen/_10sdp" />
         <solid android:color="#30CCCCCC" />
     </shape>
 </item>
 <item>
     <shape>
-        <padding android:top="2dp" android:right="2dp" android:bottom="2dp" android:left="2dp" />
-        <corners android:radius="10dp" />
+        <padding android:top="@dimen/_1sdp" android:right="@dimen/_1sdp" android:bottom="@dimen/_1sdp" android:left="@dimen/_1sdp" />
+        <corners android:radius="@dimen/_10sdp" />
         <solid android:color="#50CCCCCC" />
     </shape>
 </item>
@@ -46,7 +46,7 @@
         <item android:id="@+id/mask">
             <shape android:name="shape_unselected">
                 <solid android:color="@color/button_positive"/>
-                <corners android:radius="10dp"/>
+                <corners android:radius="@dimen/_10sdp"/>
             </shape>
 
         </item>
