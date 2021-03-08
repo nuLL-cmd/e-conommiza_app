@@ -11,8 +11,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.automatodev.e_conommiza_app.database.callback.FirestoreGetCallback;
-import com.automatodev.e_conommiza_app.database.firestore.FirestoreService;
+import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreGetCallback;
+import com.automatodev.e_conommiza_app.database.firebase.firestore.FirestoreService;
 import com.automatodev.e_conommiza_app.database.seed.MockFile;
 import com.automatodev.e_conommiza_app.databinding.ActivityMainBinding;
 import com.automatodev.e_conommiza_app.model.PerspectiveEntity;
@@ -112,11 +112,12 @@ public class MainActivity extends AppCompatActivity {
         else{
             binding.txtCreditMain.setVisibility(View.VISIBLE);
             binding.txtDebitMain.setVisibility(View.VISIBLE);
-            binding.txtPerspectiveMain.setText(perspectiveEntities.get(fragmentAdapter.getIntemCount()).getNamePespective());
+            binding.txtPerspectiveMain.setText(perspectiveEntities.get(fragmentAdapter.getIntemCount()).getMonth()+" / "+
+                    perspectiveEntities.get(fragmentAdapter.getIntemCount()).getYear());
             binding.txtCreditMain.setText("R$ "+perspectiveEntities.get(fragmentAdapter.getIntemCount()).getTotalCredit());
-            binding.txtDebitMain.setText("R$ "+perspectiveEntities.get(fragmentAdapter.getIntemCount()).getTotaldDebit());
-            binding.txtAmountPerspectiveMain.setText("Saldo - "+perspectiveEntities.get(fragmentAdapter.getIntemCount()).getMounth() + "\nR$ "+
-                    perspectiveEntities.get(fragmentAdapter.getIntemCount()).getTotalCredit().subtract(perspectiveEntities.get(fragmentAdapter.getIntemCount()).getTotaldDebit()));
+            binding.txtDebitMain.setText("R$ "+perspectiveEntities.get(fragmentAdapter.getIntemCount()).getTotalDebit());
+            binding.txtAmountPerspectiveMain.setText("Saldo - "+perspectiveEntities.get(fragmentAdapter.getIntemCount()).getMonth() + "\nR$ "+
+                    perspectiveEntities.get(fragmentAdapter.getIntemCount()).getTotalCredit().subtract(perspectiveEntities.get(fragmentAdapter.getIntemCount()).getTotalDebit()));
         }
 
         binding.viewPagerMain.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -128,11 +129,12 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                binding.txtPerspectiveMain.setText(perspectiveEntities.get(position).getNamePespective());
+                binding.txtPerspectiveMain.setText(perspectiveEntities.get(position).getMonth()+" / "+
+                        perspectiveEntities.get(position).getYear());
                 binding.txtCreditMain.setText("R$ "+perspectiveEntities.get(position).getTotalCredit());
-                binding.txtDebitMain.setText("R$ "+perspectiveEntities.get(position).getTotaldDebit());
-                binding.txtAmountPerspectiveMain.setText("Saldo - "+perspectiveEntities.get(position).getMounth() + "\nR$ "+
-                        perspectiveEntities.get(position).getTotalCredit().subtract(perspectiveEntities.get(position).getTotaldDebit()));
+                binding.txtDebitMain.setText("R$ "+perspectiveEntities.get(position).getTotalDebit());
+                binding.txtAmountPerspectiveMain.setText("Saldo - "+perspectiveEntities.get(position).getMonth() + "\nR$ "+
+                        perspectiveEntities.get(position).getTotalCredit().subtract(perspectiveEntities.get(position).getTotalDebit()));
             }
 
             @Override
@@ -191,4 +193,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
 }

@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     private Authentication auth;
     private LayoutDialogProgressBinding bindingProgress;
     private AlertDialog dialogProgress;
+
     private final String LOG_X = "logx";
 
 
@@ -38,8 +39,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(viewLogin);
 
         auth = new Authentication();
-
-       // getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
     }
 
     public void actLoginRegister(View view){

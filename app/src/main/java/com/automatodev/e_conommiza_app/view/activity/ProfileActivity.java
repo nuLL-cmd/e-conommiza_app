@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,12 +21,11 @@ import androidx.core.app.NavUtils;
 import androidx.databinding.DataBindingUtil;
 
 import com.automatodev.e_conommiza_app.R;
-import com.automatodev.e_conommiza_app.database.callback.FirestoreGetCallback;
-import com.automatodev.e_conommiza_app.database.callback.FirestoreSaveCallback;
-import com.automatodev.e_conommiza_app.database.callback.StorageCallback;
-import com.automatodev.e_conommiza_app.database.firestore.FirestoreService;
+import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreSaveCallback;
+import com.automatodev.e_conommiza_app.database.firebase.callback.StorageCallback;
+import com.automatodev.e_conommiza_app.database.firebase.firestore.FirestoreService;
 import com.automatodev.e_conommiza_app.database.seed.MockFile;
-import com.automatodev.e_conommiza_app.database.storage.StorageService;
+import com.automatodev.e_conommiza_app.database.firebase.storage.StorageService;
 import com.automatodev.e_conommiza_app.databinding.ActivityProfileTwoBinding;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogAboutBinding;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogLogoutBinding;
@@ -39,9 +39,7 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.iceteck.silicompressorr.FileUtils;
 
 import java.io.File;
@@ -54,14 +52,16 @@ import id.zelory.compressor.Compressor;
 import lombok.SneakyThrows;
 
 public class ProfileActivity extends AppCompatActivity {
+
     private ActivityProfileTwoBinding binding;
     private Authentication auth;
     private FirestoreService firestoreService;
     private StorageService storageService;
-    private Uri uriInternal;
-    private Uri uriExternal;
     private UserEntity user;
     private List<PerspectiveEntity> perspectiveEntities;
+    private Uri uriInternal;
+    private Uri uriExternal;
+
     public static boolean status;
 
     @Override
@@ -80,8 +80,8 @@ public class ProfileActivity extends AppCompatActivity {
         getUser();
         showData();
 
-        binding.lblSinceProfile.setTexts(new String[]{"Você tem","Você pode consultar um","Organize seus gastos ","Seu bolso agradeçe"});
-        binding.txtSinceProfile.setTexts(new String[]{perspectiveEntities.size()+" perspectivas cadastradas","relatorio clicando no gráfico","em proventos e despessas","esta boa ação"});
+        binding.lblSinceProfile.setTexts(new String[]{"Você tem", "Você pode consultar um", "Organize seus gastos ", "Seu bolso agradeçe"});
+        binding.txtSinceProfile.setTexts(new String[]{perspectiveEntities.size() + " perspectivas cadastradas", "relatorio clicando no gráfico", "em proventos e despessas", "esta boa ação"});
 
     }
 
@@ -242,20 +242,27 @@ public class ProfileActivity extends AppCompatActivity {
         if (bundle != null) {
             user = bundle.getParcelable("user");
             binding.imageUserProfile.setAlpha(0f);
-            Glide.with(ProfileActivity.this).load(user.getUrlPhoto())
-                    .addListener(new RequestListener<Drawable>() {
-                        @Override
-                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                            return false;
-                        }
+            try {
+                Glide.with(ProfileActivity.this).load(user.getUrlPhoto())
+                        .addListener(new RequestListener<Drawable>() {
+                            @Override
+                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                return false;
+                            }
 
-                        @Override
-                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            binding.imageUserProfile.animate().setDuration(300).alpha(1f).start();
-                            return false;
-                        }
-                    })
-                    .into(binding.imageUserProfile);
+                            @Override
+                            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                binding.imageUserProfile.animate().setDuration(300).alpha(1f).start();
+                                return false;
+                            }
+                        })
+                        .into(binding.imageUserProfile);
+
+            } catch (Exception e) {
+                Log.e("logx", "Error loadImge getUser: " + e.getMessage());
+                Toast.makeText(this, "Houve complicações ao carregar seu perfil, favor feche a aplicação e tente novamente", Toast.LENGTH_SHORT).show();
+                finish();
+            }
         }
     }
 

@@ -1,8 +1,8 @@
-package com.automatodev.e_conommiza_app.database.storage;
+package com.automatodev.e_conommiza_app.database.firebase.storage;
 
 import android.net.Uri;
 
-import com.automatodev.e_conommiza_app.database.callback.StorageCallback;
+import com.automatodev.e_conommiza_app.database.firebase.callback.StorageCallback;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 

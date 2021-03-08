@@ -1,21 +1,12 @@
-package com.automatodev.e_conommiza_app.database.firestore;
+package com.automatodev.e_conommiza_app.database.firebase.firestore;
 
-import androidx.annotation.NonNull;
-
-import com.automatodev.e_conommiza_app.database.callback.FirestoreGetCallback;
-import com.automatodev.e_conommiza_app.database.callback.FirestoreSaveCallback;
+import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreGetCallback;
+import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreSaveCallback;
 import com.automatodev.e_conommiza_app.model.UserEntity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.auth.User;
 
 import java.util.Map;
-import java.util.Objects;
 
 public class FirestoreService {
 
@@ -27,7 +18,7 @@ public class FirestoreService {
 
     public void saveUser(UserEntity userEntity, FirestoreSaveCallback callback) {
         if (userEntity != null) {
-            firebaseFirestore.collection("users").document(userEntity.getUid())
+            firebaseFirestore.collection("users").document(userEntity.getUserUid())
                     .set(userEntity)
                     .addOnSuccessListener(aVoid -> callback.onSuccess())
                     .addOnFailureListener(callback::onFailure);

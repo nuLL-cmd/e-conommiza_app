@@ -243,7 +243,7 @@
                         android:id="@+id/lblSocial_register"
                         android:background="#fff"
                         android:padding="@dimen/_5sdp"
-                        android:textSize="@dimen/_11ssp"
+                        android:textSize="@dimen/_10ssp"
                         android:layout_centerInParent="true" />
 
                 </RelativeLayout>

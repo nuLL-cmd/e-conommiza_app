@@ -176,7 +176,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:clickable="true"
-                    android:textSize="@dimen/_11ssp"
+                    android:textSize="@dimen/_10ssp"
                     android:text="Esqueci minha senha"
                     android:textAlignment="center"
                     android:textColor="@color/button_positive"
@@ -216,7 +216,7 @@
                         android:text="Ou faça login com"
                         android:id="@+id/lblSocial_login"
                         android:background="#fff"
-                        android:textSize="@dimen/_11ssp"
+                        android:textSize="@dimen/_10ssp"
                         android:padding="@dimen/_5sdp"
                         android:layout_centerInParent="true" />
 
@@ -273,7 +273,7 @@
                         android:layout_height="match_parent"
                         android:id="@+id/lblRegister_login"
                         android:gravity="center"
-                        android:textSize="@dimen/_11ssp"
+                        android:textSize="@dimen/_10ssp"
                         android:text="Não possui uma conta?"
                         android:textAlignment="center" />
 
@@ -282,7 +282,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/_5sdp"
                         android:clickable="true"
-                        android:textSize="@dimen/_11ssp"
+                        android:textSize="@dimen/_10ssp"
                         android:onClick="actLoginRegister"
                         android:gravity="center"
                         android:id="@+id/txtRegister_login"

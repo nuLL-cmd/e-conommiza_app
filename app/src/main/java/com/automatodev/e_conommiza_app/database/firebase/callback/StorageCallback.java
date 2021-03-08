@@ -1,4 +1,4 @@
-package com.automatodev.e_conommiza_app.database.callback;
+package com.automatodev.e_conommiza_app.database.firebase.callback;
 
 import android.net.Uri;
 

@@ -11,8 +11,8 @@ import android.util.Log;
 import android.view.View;
 
 import com.automatodev.e_conommiza_app.R;
-import com.automatodev.e_conommiza_app.database.callback.FirestoreSaveCallback;
-import com.automatodev.e_conommiza_app.database.firestore.FirestoreService;
+import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreSaveCallback;
+import com.automatodev.e_conommiza_app.database.firebase.firestore.FirestoreService;
 import com.automatodev.e_conommiza_app.model.UserEntity;
 import com.automatodev.e_conommiza_app.security.firebaseAuth.Authentication;
 import com.automatodev.e_conommiza_app.security.callback.FirebaseAuthCallback;
@@ -24,9 +24,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuthEmailException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FieldValue;
-import com.google.firebase.firestore.auth.User;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -83,7 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
         } else {
             UserEntity userEntity = new UserEntity();
             userEntity.setUserName(user);
-            userEntity.setEmail(email);
+            userEntity.setUserEmail(email);
             dialogProgress.show();
             bindingProgress.setIsLoading(true);
             bindingProgress.setInformation("Criando conta...");
@@ -91,7 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        userEntity.setUid(auth.getUser().getUid());
+                        userEntity.setUserUid(auth.getUser().getUid());
                         bindingProgress.setInformation("Salvando dados...");
                         firestoreService.saveUser(userEntity, new FirestoreSaveCallback() {
                             @Override
