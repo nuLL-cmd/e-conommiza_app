@@ -4,7 +4,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +13,6 @@ import android.view.View;
 import com.automatodev.e_conommiza_app.R;
 import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreSaveCallback;
 import com.automatodev.e_conommiza_app.database.firebase.firestore.FirestoreService;
-import com.automatodev.e_conommiza_app.database.room.controller.UserController;
 import com.automatodev.e_conommiza_app.model.UserEntity;
 import com.automatodev.e_conommiza_app.security.firebaseAuth.Authentication;
 import com.automatodev.e_conommiza_app.security.callback.FirebaseAuthCallback;
@@ -26,10 +24,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuthEmailException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -99,26 +93,22 @@ public class RegisterActivity extends AppCompatActivity {
                         firestoreService.saveUser(userEntity, new FirestoreSaveCallback() {
                             @Override
                             public void onSuccess() {
-                                UserController userController = new ViewModelProvider(RegisterActivity.this).get(UserController.class);
-                                new CompositeDisposable().add(userController.addUser(userEntity).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(()->{
-                                    bindingProgress.setIsLoading(false);
-                                    bindingProgress.setStatus(true);
-                                    bindingProgress.setInformation("Sucesso!!");
-                                    new Thread() {
-                                        @Override
-                                        public void run() {
-                                            try {
-                                                sleep(1200);
-                                                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
-                                                finish();
-                                            } catch (InterruptedException e) {
-                                                e.printStackTrace();
-                                                Log.e(LOG_X, "Error actReisterMain thread: " + e.getMessage());
-                                            }
+                                bindingProgress.setIsLoading(false);
+                                bindingProgress.setStatus(true);
+                                bindingProgress.setInformation("Sucesso!!");
+                                new Thread() {
+                                    @Override
+                                    public void run() {
+                                        try {
+                                            sleep(1200);
+                                            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                                            finish();
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                            Log.e(LOG_X, "Error actReisterMain thread: " + e.getMessage());
                                         }
-                                    }.start();
-                                }));
-
+                                    }
+                                }.start();
                             }
 
                             @Override
