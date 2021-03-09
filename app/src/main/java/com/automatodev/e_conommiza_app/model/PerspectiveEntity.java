@@ -15,10 +15,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+
 @Entity(tableName = "tb_perspective")
-public class PerspectiveEntity implements Parcelable {
+public class PerspectiveEntity implements Parcelable{
 
     @PrimaryKey
     @ColumnInfo(name = "id_perspective")
@@ -43,7 +42,12 @@ public class PerspectiveEntity implements Parcelable {
         this.itemsPerspective = itemsPerspective;
     }
 
+    public PerspectiveEntity(){}
+
+
     protected PerspectiveEntity(Parcel in) {
+        idPerspective = in.readLong();
+        idUser = in.readLong();
         month = in.readString();
         year = in.readInt();
     }
@@ -60,6 +64,62 @@ public class PerspectiveEntity implements Parcelable {
         }
     };
 
+    public long getIdPerspective() {
+        return idPerspective;
+    }
+
+    public void setIdPerspective(long idPerspective) {
+        this.idPerspective = idPerspective;
+    }
+
+    public long getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(long idUser) {
+        this.idUser = idUser;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public BigDecimal getTotalDebit() {
+        return totalDebit;
+    }
+
+    public void setTotalDebit(BigDecimal totalDebit) {
+        this.totalDebit = totalDebit;
+    }
+
+    public BigDecimal getTotalCredit() {
+        return totalCredit;
+    }
+
+    public void setTotalCredit(BigDecimal totalCredit) {
+        this.totalCredit = totalCredit;
+    }
+
+    public List<DataEntryEntity> getItemsPerspective() {
+        return itemsPerspective;
+    }
+
+    public void setItemsPerspective(List<DataEntryEntity> itemsPerspective) {
+        this.itemsPerspective = itemsPerspective;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -67,6 +127,8 @@ public class PerspectiveEntity implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(idPerspective);
+        dest.writeLong(idUser);
         dest.writeString(month);
         dest.writeInt(year);
     }
