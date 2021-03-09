@@ -31,6 +31,9 @@ public class PerspectiveEntity implements Parcelable{
     private BigDecimal totalDebit;
     private BigDecimal totalCredit;
 
+    public PerspectiveEntity() {
+    }
+
     @Ignore
     private List<DataEntryEntity> itemsPerspective;
 
@@ -131,5 +134,61 @@ public class PerspectiveEntity implements Parcelable{
         dest.writeLong(idUser);
         dest.writeString(month);
         dest.writeInt(year);
+    }
+
+    public long getIdPerspective() {
+        return idPerspective;
+    }
+
+    public void setIdPerspective(long idPerspective) {
+        this.idPerspective = idPerspective;
+    }
+
+    public long getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(long idUser) {
+        this.idUser = idUser;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public BigDecimal getTotalDebit() {
+        return totalDebit;
+    }
+
+    public void setTotalDebit(BigDecimal totalDebit) {
+        this.totalDebit = totalDebit;
+    }
+
+    public BigDecimal getTotalCredit() {
+        return totalCredit;
+    }
+
+    public void setTotalCredit(BigDecimal totalCredit) {
+        this.totalCredit = totalCredit;
+    }
+
+    public List<DataEntryEntity> getItemsPerspective() {
+        return itemsPerspective;
+    }
+
+    public void setItemsPerspective(List<DataEntryEntity> itemsPerspective) {
+        this.itemsPerspective = itemsPerspective;
     }
 }
