@@ -1,6 +1,7 @@
 package com.automatodev.e_conommiza_app.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreGetCallback;
 import com.automatodev.e_conommiza_app.database.firebase.firestore.FirestoreService;
+import com.automatodev.e_conommiza_app.database.room.controller.UserController;
 import com.automatodev.e_conommiza_app.database.seed.MockFile;
 import com.automatodev.e_conommiza_app.databinding.ActivityMainBinding;
 import com.automatodev.e_conommiza_app.model.PerspectiveEntity;
@@ -25,12 +27,17 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+
 
 @SuppressLint("SetTextI18n")
 public class MainActivity extends AppCompatActivity {
 
     public static boolean status;
 
+    private UserController userController;
     private ActivityMainBinding binding;
     private FragmentPageAdapter fragmentAdapter;
     public static List<PerspectiveEntity> perspectiveEntities;
@@ -60,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
         });
         getUser();
         showData();
+
+        fetchUsers();
     }
 
     @Override
@@ -78,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
     public void actMainProfile(View view) {
         if (!ProfileActivity.status) {
             Intent intent = new Intent(this, ProfileActivity.class);
-            intent.putExtra("user",userEntity);
+            intent.putExtra("user", userEntity);
             startActivity(intent);
             binding.menu.close(true);
         }
@@ -96,27 +105,25 @@ public class MainActivity extends AppCompatActivity {
         perspectiveEntities.addAll(mockFile.getPerspectiveEntityLIst());
 
 
-       // adapter = new PerspectiveAdapter(perspectiveEntities);
-        fragmentAdapter = new FragmentPageAdapter(getSupportFragmentManager(), 0,perspectiveEntities);
+        // adapter = new PerspectiveAdapter(perspectiveEntities);
+        fragmentAdapter = new FragmentPageAdapter(getSupportFragmentManager(), 0, perspectiveEntities);
         binding.viewPagerMain.setAdapter(fragmentAdapter);
 
 
-
-        if (perspectiveEntities.size() == 0){
+        if (perspectiveEntities.size() == 0) {
             binding.txtPerspectiveMain.setText("Não há perspectivas");
             binding.txtCreditMain.setVisibility(View.GONE);
             binding.txtDebitMain.setVisibility(View.GONE);
             binding.txtAmountPerspectiveMain.setText("Comece adicionando \n uma nova perspectiva!");
 
-        }
-        else{
+        } else {
             binding.txtCreditMain.setVisibility(View.VISIBLE);
             binding.txtDebitMain.setVisibility(View.VISIBLE);
-            binding.txtPerspectiveMain.setText(perspectiveEntities.get(fragmentAdapter.getIntemCount()).getMonth()+" / "+
+            binding.txtPerspectiveMain.setText(perspectiveEntities.get(fragmentAdapter.getIntemCount()).getMonth() + " / " +
                     perspectiveEntities.get(fragmentAdapter.getIntemCount()).getYear());
-            binding.txtCreditMain.setText("R$ "+perspectiveEntities.get(fragmentAdapter.getIntemCount()).getTotalCredit());
-            binding.txtDebitMain.setText("R$ "+perspectiveEntities.get(fragmentAdapter.getIntemCount()).getTotalDebit());
-            binding.txtAmountPerspectiveMain.setText("Saldo - "+perspectiveEntities.get(fragmentAdapter.getIntemCount()).getMonth() + "\nR$ "+
+            binding.txtCreditMain.setText("R$ " + perspectiveEntities.get(fragmentAdapter.getIntemCount()).getTotalCredit());
+            binding.txtDebitMain.setText("R$ " + perspectiveEntities.get(fragmentAdapter.getIntemCount()).getTotalDebit());
+            binding.txtAmountPerspectiveMain.setText("Saldo - " + perspectiveEntities.get(fragmentAdapter.getIntemCount()).getMonth() + "\nR$ " +
                     perspectiveEntities.get(fragmentAdapter.getIntemCount()).getTotalCredit().subtract(perspectiveEntities.get(fragmentAdapter.getIntemCount()).getTotalDebit()));
         }
 
@@ -129,11 +136,11 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                binding.txtPerspectiveMain.setText(perspectiveEntities.get(position).getMonth()+" / "+
+                binding.txtPerspectiveMain.setText(perspectiveEntities.get(position).getMonth() + " / " +
                         perspectiveEntities.get(position).getYear());
-                binding.txtCreditMain.setText("R$ "+perspectiveEntities.get(position).getTotalCredit());
-                binding.txtDebitMain.setText("R$ "+perspectiveEntities.get(position).getTotalDebit());
-                binding.txtAmountPerspectiveMain.setText("Saldo - "+perspectiveEntities.get(position).getMonth() + "\nR$ "+
+                binding.txtCreditMain.setText("R$ " + perspectiveEntities.get(position).getTotalCredit());
+                binding.txtDebitMain.setText("R$ " + perspectiveEntities.get(position).getTotalDebit());
+                binding.txtAmountPerspectiveMain.setText("Saldo - " + perspectiveEntities.get(position).getMonth() + "\nR$ " +
                         perspectiveEntities.get(position).getTotalCredit().subtract(perspectiveEntities.get(position).getTotalDebit()));
             }
 
@@ -144,36 +151,37 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void getUser(){
+    public void getUser() {
         auth = new Authentication();
         String uid = auth.getUser().getUid();
-        if (uid != null){
+        if (uid != null) {
             firestoreService = new FirestoreService();
-            try{
+            try {
                 firestoreService.getUser(uid, new FirestoreGetCallback() {
                     @Override
                     public void onSuccess(Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             DocumentSnapshot snapshot = task.getResult();
                             if (snapshot.exists())
                                 userEntity = snapshot.toObject(UserEntity.class);
                             binding.txtUserMain.setText(userEntity.getUserName());
                         }
                     }
+
                     @Override
                     public void onFailure(Exception e) {
-                        Log.e("logx", "Error getUser: "+e.getMessage());
+                        Log.e("logx", "Error getUser: " + e.getMessage());
                         e.printStackTrace();
                         errorLogout();
                     }
                 });
-            }catch (Exception e){
-                Log.e("logx","Exception getUser: "+e.getMessage());
+            } catch (Exception e) {
+                Log.e("logx", "Exception getUser: " + e.getMessage());
                 e.printStackTrace();
                 errorLogout();
             }
 
-        }else
+        } else
             errorLogout();
 
     }
@@ -187,11 +195,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (refresh){
+        if (refresh) {
             getUser();
             refresh = false;
         }
 
+    }
+
+    public void fetchUsers() {
+        userController = new ViewModelProvider(this).get(UserController.class);
+        CompositeDisposable compositeDisposable = new CompositeDisposable();
+        compositeDisposable.add(userController.getAllUsers()
+                .subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread()).subscribe(users -> {
+                    if (users != null) {
+                        Toast.makeText(this, "Usuarios: " + users.size(), Toast.LENGTH_LONG).show();
+                        compositeDisposable.dispose();
+                    }
+
+                }));
     }
 
 }
