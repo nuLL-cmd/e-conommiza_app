@@ -17,7 +17,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 
-@Entity(tableName = "users")
+@Entity(tableName = "tb_user")
 public class UserEntity implements Parcelable {
 
     @PrimaryKey
