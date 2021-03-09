@@ -16,13 +16,12 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
-@Entity(tableName = "users")
+@Entity(tableName = "tb_user")
 public class UserEntity implements Parcelable {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_user")
-    private long idUser;
+    private int idUser;
 
     @ColumnInfo(name = "user_name")
     private String userName;
@@ -42,7 +41,7 @@ public class UserEntity implements Parcelable {
 
 
     protected UserEntity(Parcel in) {
-        idUser = in.readLong();
+        idUser = in.readInt();
         userName = in.readString();
         userEmail = in.readString();
         urlPhoto = in.readString();
@@ -73,11 +72,59 @@ public class UserEntity implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(idUser);
+        dest.writeInt(idUser);
         dest.writeString(userName);
         dest.writeString(userEmail);
         dest.writeString(urlPhoto);
         dest.writeString(userUid);
         dest.writeLong(dateSince.getTime());
+    }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getUrlPhoto() {
+        return urlPhoto;
+    }
+
+    public void setUrlPhoto(String urlPhoto) {
+        this.urlPhoto = urlPhoto;
+    }
+
+    public String getUserUid() {
+        return userUid;
+    }
+
+    public void setUserUid(String userUid) {
+        this.userUid = userUid;
+    }
+
+    public Date getDateSince() {
+        return dateSince;
+    }
+
+    public void setDateSince(Date dateSince) {
+        this.dateSince = dateSince;
     }
 }
