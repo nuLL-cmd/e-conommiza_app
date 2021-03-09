@@ -9,6 +9,7 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
 
+import com.automatodev.e_conommiza_app.database.sqlite.repository.UserRepository;
 import com.automatodev.e_conommiza_app.database.sqlite.utils.Converters;
 import com.automatodev.e_conommiza_app.model.PerspectiveEntity;
 import com.automatodev.e_conommiza_app.model.UserEntity;
@@ -25,6 +26,8 @@ public abstract class DatabaseConfig extends RoomDatabase {
 
         return databaseConfig;
     }
+
+    public abstract UserRepository userRepository();
 
 
 }

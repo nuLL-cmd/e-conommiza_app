@@ -13,12 +13,12 @@ import io.reactivex.Completable;
 import io.reactivex.Flowable;
 
 @Dao
-public interface UseRepository {
+public interface UserRepository {
     @Query("SELECT * FROM  tb_user")
     public Flowable<List<UserEntity>> getAllUsers();
 
     public @Query("SELECT * FROM tb_user WHERE user_uid = :uid")
-    Flowable<UserEntity> getUserById(String uid);
+    Flowable<UserEntity> getUserByUid(String uid);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public Completable addUser(UserEntity userEntity);
