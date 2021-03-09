@@ -16,7 +16,7 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
+
 @Entity(tableName = "users")
 public class UserEntity implements Parcelable {
 
@@ -79,5 +79,53 @@ public class UserEntity implements Parcelable {
         dest.writeString(urlPhoto);
         dest.writeString(userUid);
         dest.writeLong(dateSince.getTime());
+    }
+
+    public long getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(long idUser) {
+        this.idUser = idUser;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getUrlPhoto() {
+        return urlPhoto;
+    }
+
+    public void setUrlPhoto(String urlPhoto) {
+        this.urlPhoto = urlPhoto;
+    }
+
+    public String getUserUid() {
+        return userUid;
+    }
+
+    public void setUserUid(String userUid) {
+        this.userUid = userUid;
+    }
+
+    public Date getDateSince() {
+        return dateSince;
+    }
+
+    public void setDateSince(Date dateSince) {
+        this.dateSince = dateSince;
     }
 }
