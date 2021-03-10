@@ -63,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         }else{
             dialogProgress.show();
             bindingProgress.setIsLoading(true);
+            bindingProgress.setInformation("Um momento...");
             auth.loginWithEmail(email, password, new FirebaseAuthCallback() {
                 @Override
                 public void onSuccess(Task<AuthResult> task) {

@@ -11,10 +11,6 @@ import androidx.room.PrimaryKey;
 import com.google.firebase.firestore.ServerTimestamp;
 
 import java.util.Date;
-import java.util.List;
-
-import lombok.Getter;
-import lombok.Setter;
 
 
 @Entity(tableName = "tb_user")

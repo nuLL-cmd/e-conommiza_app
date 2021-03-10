@@ -49,7 +49,6 @@ import java.util.List;
 import java.util.Map;
 
 import id.zelory.compressor.Compressor;
-import lombok.SneakyThrows;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -128,7 +127,6 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-    @SneakyThrows
     private Uri resizeImage(Uri uri) {
         try {
             File file = new File(FileUtils.getPath(this, uri));
