@@ -10,11 +10,12 @@ import androidx.room.PrimaryKey;
 
 import com.google.firebase.firestore.ServerTimestamp;
 
+import java.io.Serializable;
 import java.util.Date;
 
 
 @Entity(tableName = "tb_user")
-public class UserEntity implements Parcelable {
+public class UserEntity implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_user")
@@ -50,32 +51,6 @@ public class UserEntity implements Parcelable {
 
     }
 
-    public static final Creator<UserEntity> CREATOR = new Creator<UserEntity>() {
-        @Override
-        public UserEntity createFromParcel(Parcel in) {
-            return new UserEntity(in);
-        }
-
-        @Override
-        public UserEntity[] newArray(int size) {
-            return new UserEntity[size];
-        }
-    };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(idUser);
-        dest.writeString(userName);
-        dest.writeString(userEmail);
-        dest.writeString(urlPhoto);
-        dest.writeString(userUid);
-        dest.writeLong(dateSince.getTime());
-    }
 
     public int getIdUser() {
         return idUser;

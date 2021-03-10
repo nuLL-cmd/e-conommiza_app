@@ -33,6 +33,8 @@ import com.automatodev.e_conommiza_app.databinding.LayoutDialogProgressBinding;
 import com.automatodev.e_conommiza_app.model.PerspectiveEntity;
 import com.automatodev.e_conommiza_app.model.UserEntity;
 import com.automatodev.e_conommiza_app.security.firebaseAuth.Authentication;
+import com.automatodev.e_conommiza_app.view.activity.LoginActivity;
+import com.automatodev.e_conommiza_app.view.activity.MainActivity;
 import com.automatodev.e_conommiza_app.view.adapter.ItemsProfileAdapter;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -236,31 +238,34 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void getUser() {
-        user = getIntent().getExtras().getParcelable("user");
+       Bundle bundle = getIntent().getExtras();
+        if (bundle != null){
+            user = (UserEntity)bundle.getSerializable("user");
+            if (user != null) {
+                binding.imageUserProfile.setAlpha(0f);
+                try {
+                    Glide.with(ProfileActivity.this).load(user.getUrlPhoto())
+                            .addListener(new RequestListener<Drawable>() {
+                                @Override
+                                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                    return false;
+                                }
 
-        if (user != null) {
-            binding.imageUserProfile.setAlpha(0f);
-            try {
-                Glide.with(ProfileActivity.this).load(user.getUrlPhoto())
-                        .addListener(new RequestListener<Drawable>() {
-                            @Override
-                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                return false;
-                            }
+                                @Override
+                                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                    binding.imageUserProfile.animate().setDuration(300).alpha(1f).start();
+                                    return false;
+                                }
+                            })
+                            .into(binding.imageUserProfile);
 
-                            @Override
-                            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                binding.imageUserProfile.animate().setDuration(300).alpha(1f).start();
-                                return false;
-                            }
-                        })
-                        .into(binding.imageUserProfile);
-
-            } catch (Exception e) {
-                Log.e("logx", "Error loadImge getUser: " + e.getMessage());
-                Toast.makeText(this, "Houve complicações ao carregar seu perfil, favor feche a aplicação e tente novamente", Toast.LENGTH_SHORT).show();
-                finish();
+                } catch (Exception e) {
+                    Log.e("logx", "Error loadImge getUser: " + e.getMessage());
+                    Toast.makeText(this, "Houve complicações ao carregar seu perfil, favor feche a aplicação e tente novamente", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
             }
+
         }
     }
 
