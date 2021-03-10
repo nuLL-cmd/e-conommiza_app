@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, ProfileActivity.class);
             intent.putExtra("user",userEntity);
             startActivity(intent);
-            binding.menu.close(true);
+           // binding.menu.close(true);
         }
     }
 

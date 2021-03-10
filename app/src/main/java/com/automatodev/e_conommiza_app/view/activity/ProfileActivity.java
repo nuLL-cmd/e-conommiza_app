@@ -238,9 +238,9 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void getUser() {
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            user = bundle.getParcelable("user");
+        user = getIntent().getExtras().getParcelable("user");
+
+        if (user != null) {
             binding.imageUserProfile.setAlpha(0f);
             try {
                 Glide.with(ProfileActivity.this).load(user.getUrlPhoto())

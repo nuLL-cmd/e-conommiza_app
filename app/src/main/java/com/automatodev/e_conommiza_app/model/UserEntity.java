@@ -20,9 +20,9 @@ import lombok.Setter;
 @Entity(tableName = "tb_user")
 public class UserEntity implements Parcelable {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_user")
-    private long idUser;
+    private int idUser;
 
     @ColumnInfo(name = "user_name")
     private String userName;
@@ -42,7 +42,7 @@ public class UserEntity implements Parcelable {
 
 
     protected UserEntity(Parcel in) {
-        idUser = in.readLong();
+        idUser = in.readInt();
         userName = in.readString();
         userEmail = in.readString();
         urlPhoto = in.readString();
@@ -81,11 +81,11 @@ public class UserEntity implements Parcelable {
         dest.writeLong(dateSince.getTime());
     }
 
-    public long getIdUser() {
+    public int getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(long idUser) {
+    public void setIdUser(int idUser) {
         this.idUser = idUser;
     }
 

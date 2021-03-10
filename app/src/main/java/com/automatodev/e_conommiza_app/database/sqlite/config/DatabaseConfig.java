@@ -15,7 +15,7 @@ import com.automatodev.e_conommiza_app.model.PerspectiveEntity;
 import com.automatodev.e_conommiza_app.model.UserEntity;
 
 @TypeConverters(Converters.class)
-@Database(entities = {UserEntity.class, PerspectiveEntity.class}, version = 1, exportSchema = false)
+@Database(entities = {UserEntity.class, PerspectiveEntity.class}, version = 2, exportSchema = false)
 public abstract class DatabaseConfig extends RoomDatabase {
     private static DatabaseConfig databaseConfig;
 
