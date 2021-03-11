@@ -7,11 +7,14 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
+import com.automatodev.e_conommiza_app.database.sqlite.repository.DataEntryDao;
+import com.automatodev.e_conommiza_app.database.sqlite.repository.PerspectiveDao;
 import com.automatodev.e_conommiza_app.database.sqlite.utils.Converters;
+import com.automatodev.e_conommiza_app.model.DataEntryEntity;
 import com.automatodev.e_conommiza_app.model.PerspectiveEntity;
 
 @TypeConverters(Converters.class)
-@Database(entities = {PerspectiveEntity.class}, version = 2, exportSchema = false)
+@Database(entities = {PerspectiveEntity.class, DataEntryEntity.class}, version = 2, exportSchema = false)
 public abstract class DatabaseConfig extends RoomDatabase {
     private static DatabaseConfig databaseConfig;
 
@@ -24,4 +27,6 @@ public abstract class DatabaseConfig extends RoomDatabase {
     }
 
 
+    public abstract DataEntryDao dataEntryDao();
+    public abstract PerspectiveDao perspectiveDao();
 }
