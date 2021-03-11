@@ -32,11 +32,13 @@ Obs: The file readme will be edited as the app progresses
 Technologies used
 * Design whit XML
 * Java 8
-* Retrofit (For API)
-* OkHttpClient (Conection management )
-* GsonConvertFactory (Serialization JSON)
+* CloudFirestore
+* Firebase authentication
+* Sqlite with persistence RoomDatabase
+* RxJava
 * Lottie Animation (for Animations After Effects)
-* Carouselview (For image viewing)
+* Facebook auth
+* Tweeter
 * Android-SpinKit (Para loadings animados)
 
 
