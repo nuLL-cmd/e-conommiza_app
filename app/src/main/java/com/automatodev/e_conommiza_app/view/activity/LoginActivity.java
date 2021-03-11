@@ -24,7 +24,6 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
-    private Authentication auth;
     private LayoutDialogProgressBinding bindingProgress;
     private AlertDialog dialogProgress;
 
@@ -38,19 +37,19 @@ public class LoginActivity extends AppCompatActivity {
         View viewLogin = binding.getRoot();
         setContentView(viewLogin);
 
-        auth = new Authentication();
+
     }
 
-    public void actLoginRegister(View view){
-        if (!RegisterActivity.status){
+    public void actLoginRegister(View view) {
+        if (!RegisterActivity.status) {
             startActivity(new Intent(this, RegisterActivity.class));
         }
     }
 
+    public void actLoginMain(View view) {
+        Authentication auth = new Authentication();
 
-    public void actLoginMain(View view){
-         bindingProgress =
-                DataBindingUtil.inflate(getLayoutInflater().from(this), R.layout.layout_dialog_progress, binding.relativeDaddyLogin,false);
+        bindingProgress = DataBindingUtil.inflate(getLayoutInflater().from(this), R.layout.layout_dialog_progress, binding.relativeDaddyLogin, false);
         dialogProgress = new AlertDialog.Builder(this).create();
         dialogProgress.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         dialogProgress.setView(bindingProgress.getRoot());
@@ -58,73 +57,56 @@ public class LoginActivity extends AppCompatActivity {
         String email = binding.edtEmailLogin.getText().toString().trim();
         String password = binding.edtPasswordLogin.getText().toString().trim();
 
-        if (email.isEmpty() || password.isEmpty()){
-            Snackbar.make(binding.relativeDaddyLogin, "Necessário o preenchimento de todos os campos",Snackbar.LENGTH_LONG).show();
-        }else{
+        if (email.isEmpty() || password.isEmpty()) {
+            Snackbar.make(binding.relativeDaddyLogin, "Necessário o preenchimento de todos os campos", Snackbar.LENGTH_LONG).show();
+        } else {
             dialogProgress.show();
             bindingProgress.setIsLoading(true);
             bindingProgress.setInformation("Um momento...");
             auth.loginWithEmail(email, password, new FirebaseAuthCallback() {
                 @Override
                 public void onSuccess(Task<AuthResult> task) {
-                   if (task.isSuccessful()){
-                       bindingProgress.setIsLoading(false);
-                       bindingProgress.setStatus(true);
-                       bindingProgress.setInformation("Sucesso!!");
-                       new Thread(){
-                           @Override
-                           public void run(){
-                               try {
-                                   sleep(1200);
-                                   if (!MainActivity.status){
-                                       startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                                       finish();
-                                   }
-                               } catch (InterruptedException e) {
-                                   e.printStackTrace();
-                               }
-                           }
-                       }.start();
+                    if (task.isSuccessful()) {
+                        returnSuccess();
 
-                   }else{
-                       bindingProgress.setIsLoading(false);
-                       try {
-                           throw task.getException();
-                       } catch (FirebaseAuthInvalidCredentialsException e) {
-                           bindingProgress.setInformation("Email ou senha invalidos!");
-                       } catch (FirebaseAuthEmailException e) {
-                           bindingProgress.setInformation("Email com formato invalido!");
-                       }catch(FirebaseAuthInvalidUserException e){
-                           bindingProgress.setInformation("Usuario não encontrado!");
-                       } catch (Exception e) {
-                           bindingProgress.setInformation("Ops! Algo deu errado!");
-                           Snackbar.make(binding.relativeDaddyLogin, "Algo deu errado, verifique seu email e/ou senha.\nDa uma olhada na sua conexão :D", Snackbar.LENGTH_LONG).show();
+                    } else {
+                        bindingProgress.setIsLoading(false);
+                        try {
+                            throw task.getException();
+                        } catch (FirebaseAuthInvalidCredentialsException e) {
+                            bindingProgress.setInformation("Email ou senha invalidos!");
+                        } catch (FirebaseAuthEmailException e) {
+                            bindingProgress.setInformation("Email com formato invalido!");
+                        } catch (FirebaseAuthInvalidUserException e) {
+                            bindingProgress.setInformation("Usuario não encontrado!");
+                        } catch (Exception e) {
+                            bindingProgress.setInformation("Ops! Algo deu errado!");
+                            Snackbar.make(binding.relativeDaddyLogin, "Algo deu errado, verifique seu email e/ou senha.\nDa uma olhada na sua conexão :D", Snackbar.LENGTH_LONG).show();
 
 
-                       }
-                       new Thread(){
-                           @Override
-                           public void run(){
-                               try {
-                                   sleep(1200);
-                                   dialogProgress.dismiss();
-                               } catch (InterruptedException e) {
-                                   e.printStackTrace();
-                               }
-                           }
-                       }.start();
+                        }
+                        new Thread() {
+                            @Override
+                            public void run() {
+                                try {
+                                    sleep(1200);
+                                    dialogProgress.dismiss();
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }.start();
 
-                   }
+                    }
                 }
 
                 @Override
                 public void onFailure(Exception e) {
-                    Log.e(LOG_X,"Error actLoginMain: "+e.getMessage());
+                    Log.e(LOG_X, "OnFailure actLoginMain: " + e.getMessage());
                     e.printStackTrace();
                 }
             });
         }
-
 
     }
 
@@ -133,4 +115,26 @@ public class LoginActivity extends AppCompatActivity {
         super.onBackPressed();
         finishAffinity();
     }
+
+    private void returnSuccess() {
+        bindingProgress.setIsLoading(false);
+        bindingProgress.setStatus(true);
+        bindingProgress.setInformation("Sucesso!!");
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    sleep(1200);
+                    if (!MainActivity.status) {
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        finish();
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+
+
 }

@@ -21,6 +21,7 @@ import androidx.core.app.NavUtils;
 import androidx.databinding.DataBindingUtil;
 
 import com.automatodev.e_conommiza_app.R;
+import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreGetCallback;
 import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreSaveCallback;
 import com.automatodev.e_conommiza_app.database.firebase.callback.StorageCallback;
 import com.automatodev.e_conommiza_app.database.firebase.firestore.FirestoreService;
@@ -41,7 +42,9 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.iceteck.silicompressorr.FileUtils;
 
 import java.io.File;
@@ -129,6 +132,42 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        status = true;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        status = false;
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_profile, menu);
+        return super.onCreateOptionsMenu(menu);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.itemAbout:
+                about();
+                break;
+            case R.id.itemExit:
+                logout();
+                break;
+            case R.id.itemFeedback:
+                feedback();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private Uri resizeImage(Uri uri) {
         try {
             File file = new File(FileUtils.getPath(this, uri));
@@ -201,7 +240,7 @@ public class ProfileActivity extends AppCompatActivity {
                             Snackbar.make(binding.relativeDaddyProfile
                                     , "Tivemos um problema ao salvar seus dados\n Tente novamente."
                                     , Snackbar.LENGTH_LONG).show();
-                            Log.e("logx", "Erro: " + e.getMessage());
+                            Log.e("logx", "OnFailure updateUser: " + e.getMessage());
                         }
                     });
                 }
@@ -226,8 +265,7 @@ public class ProfileActivity extends AppCompatActivity {
                     Snackbar.make(binding.relativeDaddyProfile
                             , "Tivemos um problema ao salvar seus dados\n Tente novamente."
                             , Snackbar.LENGTH_LONG).show();
-                    Log.e("logx", "Erro: " + e.getMessage());
-                    Log.e("logx", "Error uploadPhoto: " + e.getMessage());
+                    Log.e("logx", "OnFailure uploadPhoto: " + e.getMessage());
 
                 }
             });
@@ -238,66 +276,44 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void getUser() {
-       Bundle bundle = getIntent().getExtras();
-        if (bundle != null){
-            user = (UserEntity)bundle.getSerializable("user");
-            if (user != null) {
-                binding.imageUserProfile.setAlpha(0f);
-                try {
-                    Glide.with(ProfileActivity.this).load(user.getUrlPhoto())
-                            .addListener(new RequestListener<Drawable>() {
-                                @Override
-                                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                    return false;
-                                }
-
-                                @Override
-                                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                    binding.imageUserProfile.animate().setDuration(300).alpha(1f).start();
-                                    return false;
-                                }
-                            })
-                            .into(binding.imageUserProfile);
-
-                } catch (Exception e) {
-                    Log.e("logx", "Error loadImge getUser: " + e.getMessage());
-                    Toast.makeText(this, "Houve complicações ao carregar seu perfil, favor feche a aplicação e tente novamente", Toast.LENGTH_SHORT).show();
+        String uid = auth.getUser().getUid();
+        try {
+            firestoreService.getUser(uid, new FirestoreGetCallback() {
+                @Override
+                public void onSuccess(Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot doc = task.getResult();
+                        if (doc.exists()) {
+                            user = doc.toObject(UserEntity.class);
+                        }
+                        if (user.getUrlPhoto() != null){
+                            binding.imageUserProfile.setAlpha(0f);
+                            Glide.with(ProfileActivity.this).load(user.getUrlPhoto())
+                                    .addListener(new RequestListener<Drawable>() {
+                                        @Override
+                                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                            return false;
+                                        }
+                                        @Override
+                                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                            binding.imageUserProfile.animate().setDuration(300).alpha(1f).start();
+                                            return false;
+                                        }
+                                    }).into(binding.imageUserProfile);
+                        }
+                    }
+                }
+                @Override
+                public void onFailure(Exception e) {
+                    Log.e("logx", "onFailure getUser: " + e.getMessage());
+                    Toast.makeText(ProfileActivity.this, "Houve complicações ao carregar seu perfil, favor feche a aplicação e tente novamente", Toast.LENGTH_SHORT).show();
                     finish();
                 }
-            }
-
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_profile, menu);
-        return super.onCreateOptionsMenu(menu);
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.itemAbout:
-                about();
-                break;
-            case R.id.itemExit:
-                logout();
-                break;
-            case R.id.itemFeedback:
-                feedback();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    public void feedback() {
-        final String appPackageName = getApplicationContext().getPackageName();
-        try {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-        } catch (android.content.ActivityNotFoundException anfe) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+            });
+        } catch (Exception e) {
+            Log.e("logx", "Exception getUser: " + e.getMessage());
+            Toast.makeText(this, "Houve complicações ao carregar seu perfil, favor feche a aplicação e tente novamente", Toast.LENGTH_SHORT).show();
+            finish();
         }
     }
 
@@ -314,19 +330,6 @@ public class ProfileActivity extends AppCompatActivity {
         binding.recyclerItemsProfile.setAdapter(adapter);
 
     }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        status = true;
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        status = false;
-    }
-
 
     public void about() {
         LayoutDialogAboutBinding layoutBinding = DataBindingUtil.inflate(getLayoutInflater().from(this), R.layout.layout_dialog_about, binding.relativeDaddyProfile, false);
@@ -350,6 +353,15 @@ public class ProfileActivity extends AppCompatActivity {
         });
         bindingLogout.btnCancelDialogLogout.setOnClickListener(v1 -> dialogLogout.dismiss());
 
+    }
+
+    public void feedback() {
+        final String appPackageName = getApplicationContext().getPackageName();
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+        } catch (android.content.ActivityNotFoundException anfe) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+        }
     }
 
     public void pickLib(View view) {

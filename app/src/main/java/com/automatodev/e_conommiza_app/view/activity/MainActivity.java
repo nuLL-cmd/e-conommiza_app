@@ -30,14 +30,13 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     public static boolean status;
+    public static boolean refresh;
 
     private ActivityMainBinding binding;
-    private FragmentPageAdapter fragmentAdapter;
     public static List<PerspectiveEntity> perspectiveEntities;
     private FirestoreService firestoreService;
     private Authentication auth;
     private UserEntity userEntity;
-    public static boolean refresh;
 
 
     @Override
@@ -50,12 +49,9 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
 
-        binding.txtMonthBalance.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    binding.txtMonthBalance.setSelected(true);
-                }
+        binding.txtMonthBalance.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                binding.txtMonthBalance.setSelected(true);
             }
         });
         getUser();
@@ -95,9 +91,7 @@ public class MainActivity extends AppCompatActivity {
         perspectiveEntities = new ArrayList<>();
         perspectiveEntities.addAll(mockFile.getPerspectiveEntityLIst());
 
-
-        // adapter = new PerspectiveAdapter(perspectiveEntities);
-        fragmentAdapter = new FragmentPageAdapter(getSupportFragmentManager(), 0, perspectiveEntities);
+        FragmentPageAdapter fragmentAdapter = new FragmentPageAdapter(getSupportFragmentManager(), 0, perspectiveEntities);
         binding.viewPagerMain.setAdapter(fragmentAdapter);
 
 
@@ -145,36 +139,32 @@ public class MainActivity extends AppCompatActivity {
     public void getUser() {
         auth = new Authentication();
         String uid = auth.getUser().getUid();
-        if (uid != null) {
-            firestoreService = new FirestoreService();
-            try {
-                firestoreService.getUser(uid, new FirestoreGetCallback() {
-                    @Override
-                    public void onSuccess(Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot snapshot = task.getResult();
-                            if (snapshot.exists())
-                                userEntity = snapshot.toObject(UserEntity.class);
-                            binding.txtUserMain.setText(userEntity.getUserName());
-                        }
+        firestoreService = new FirestoreService();
+        try {
+            firestoreService.getUser(uid, new FirestoreGetCallback() {
+                @Override
+                public void onSuccess(Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot snapshot = task.getResult();
+                        if (snapshot.exists())
+                            userEntity = snapshot.toObject(UserEntity.class);
+                        binding.txtUserMain.setText(userEntity.getUserName());
                     }
+                }
 
-                    @Override
-                    public void onFailure(Exception e) {
-                        Log.e("logx", "Error getUser: " + e.getMessage());
-                        e.printStackTrace();
-                        errorLogout();
-                    }
-                });
-            } catch (Exception e) {
-                Log.e("logx", "Exception getUser: " + e.getMessage());
-                e.printStackTrace();
-                errorLogout();
-            }
+                @Override
+                public void onFailure(Exception e) {
+                    Log.e("logx", "Error getUser: " + e.getMessage());
+                    e.printStackTrace();
+                    errorLogout();
+                }
+            });
 
-        } else
+        } catch (Exception e) {
+            Log.e("logx", "Exception getUser: " + e.getMessage());
+            e.printStackTrace();
             errorLogout();
-
+        }
     }
 
     private void errorLogout() {

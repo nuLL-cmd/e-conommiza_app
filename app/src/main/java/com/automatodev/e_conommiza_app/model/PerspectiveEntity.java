@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Entity(tableName = "tb_perspective")
-public class PerspectiveEntity implements Parcelable {
+public class PerspectiveEntity  {
 
     @PrimaryKey
     @ColumnInfo(name = "id_perspective")
@@ -22,50 +22,24 @@ public class PerspectiveEntity implements Parcelable {
     private long idUser;
 
     private String month;
+    private String userUid;
     private int year;
     private BigDecimal totalDebit;
     private BigDecimal totalCredit;
 
-    public PerspectiveEntity() {
-    }
-
     @Ignore
     private List<DataEntryEntity> itemsPerspective;
 
-    public PerspectiveEntity(String month, int year, BigDecimal totalDebit, BigDecimal totalCredit, List<DataEntryEntity> itemsPerspective) {
+    public PerspectiveEntity() {
+    }
+
+    public PerspectiveEntity(String month, String userUid,int year, BigDecimal totalDebit, BigDecimal totalCredit, List<DataEntryEntity> itemsPerspective) {
         this.month = month;
+        this.userUid = userUid;
         this.year = year;
         this.totalDebit = totalDebit;
         this.totalCredit = totalCredit;
         this.itemsPerspective = itemsPerspective;
-    }
-
-    protected PerspectiveEntity(Parcel in) {
-        month = in.readString();
-        year = in.readInt();
-    }
-
-    public static final Creator<PerspectiveEntity> CREATOR = new Creator<PerspectiveEntity>() {
-        @Override
-        public PerspectiveEntity createFromParcel(Parcel in) {
-            return new PerspectiveEntity(in);
-        }
-
-        @Override
-        public PerspectiveEntity[] newArray(int size) {
-            return new PerspectiveEntity[size];
-        }
-    };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(month);
-        dest.writeInt(year);
     }
 
     public long getIdPerspective() {
@@ -90,6 +64,14 @@ public class PerspectiveEntity implements Parcelable {
 
     public void setMonth(String month) {
         this.month = month;
+    }
+
+    public String getUserUid() {
+        return userUid;
+    }
+
+    public void setUserUid(String userUid) {
+        this.userUid = userUid;
     }
 
     public int getYear() {

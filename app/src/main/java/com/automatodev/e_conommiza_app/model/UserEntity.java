@@ -14,26 +14,23 @@ import java.io.Serializable;
 import java.util.Date;
 
 
-@Entity(tableName = "tb_user")
 public class UserEntity implements Serializable {
 
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id_user")
+
     private int idUser;
 
-    @ColumnInfo(name = "user_name")
+
     private String userName;
 
-    @ColumnInfo(name = "user_email")
+
     private String userEmail;
 
-    @ColumnInfo(name = "url_photo")
+
     private String urlPhoto;
 
-    @ColumnInfo(name = "user_uid")
+
     private String userUid;
 
-    @Ignore
     @ServerTimestamp
     private Date dateSince;
 

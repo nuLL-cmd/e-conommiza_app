@@ -1,21 +1,17 @@
 package com.automatodev.e_conommiza_app.database.sqlite.config;
 
-import android.app.Application;
 import android.content.Context;
 
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
 
-import com.automatodev.e_conommiza_app.database.sqlite.repository.UserRepository;
 import com.automatodev.e_conommiza_app.database.sqlite.utils.Converters;
 import com.automatodev.e_conommiza_app.model.PerspectiveEntity;
-import com.automatodev.e_conommiza_app.model.UserEntity;
 
 @TypeConverters(Converters.class)
-@Database(entities = {UserEntity.class, PerspectiveEntity.class}, version = 2, exportSchema = false)
+@Database(entities = {PerspectiveEntity.class}, version = 2, exportSchema = false)
 public abstract class DatabaseConfig extends RoomDatabase {
     private static DatabaseConfig databaseConfig;
 
@@ -26,8 +22,6 @@ public abstract class DatabaseConfig extends RoomDatabase {
 
         return databaseConfig;
     }
-
-    public abstract UserRepository userRepository();
 
 
 }

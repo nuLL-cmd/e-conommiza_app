@@ -47,7 +47,6 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     public void splash(){
-
         new Thread(){
             @Override
             public void run(){
