@@ -34,8 +34,10 @@ public class PerspectiveEntity  {
     @Ignore
     private List<DataEntryEntity> itemsPerspective;
 
+    public PerspectiveEntity() {
+    }
 
-    public PerspectiveEntity(String month, String userUid,int year, BigDecimal totalDebit, BigDecimal totalCredit, List<DataEntryEntity> itemsPerspective) {
+    public PerspectiveEntity(String month, String userUid, int year, BigDecimal totalDebit, BigDecimal totalCredit, List<DataEntryEntity> itemsPerspective) {
         this.month = month;
         this.userUid = userUid;
         this.year = year;
