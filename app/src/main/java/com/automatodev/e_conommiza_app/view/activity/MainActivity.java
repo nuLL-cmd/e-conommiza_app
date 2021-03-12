@@ -1,9 +1,11 @@
 package com.automatodev.e_conommiza_app.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreGetCallback;
 import com.automatodev.e_conommiza_app.database.firebase.firestore.FirestoreService;
 import com.automatodev.e_conommiza_app.database.seed.MockFile;
+import com.automatodev.e_conommiza_app.database.sqlite.controller.PerspectiveController;
 import com.automatodev.e_conommiza_app.databinding.ActivityMainBinding;
 import com.automatodev.e_conommiza_app.model.PerspectiveEntity;
 import com.automatodev.e_conommiza_app.model.UserEntity;
@@ -22,8 +25,17 @@ import com.automatodev.e_conommiza_app.view.adapter.FragmentPageAdapter;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 
+import java.time.Year;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
 
 
 @SuppressLint("SetTextI18n")
@@ -78,6 +90,29 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             binding.menu.close(true);
         }
+    }
+
+    public void actMainPerspective(View view) {
+        ProgressDialog dialog = new ProgressDialog(this);
+        Locale locale = new Locale("pt", "br");
+        PerspectiveEntity perspectiveEntity = new PerspectiveEntity();
+        Calendar calendar = Calendar.getInstance();
+
+        dialog.setMessage("Aguarde...");
+        dialog.setCancelable(false);
+        dialog.show();
+
+        String month = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, locale);
+        perspectiveEntity.setMonth(month);
+        perspectiveEntity.setYear(Calendar.getInstance().get(Calendar.YEAR));
+        perspectiveEntity.setUserUid("QgL2IBmkNcPsGuBzgkasVCY0sCI2");
+        PerspectiveController pController = new ViewModelProvider(this).get(PerspectiveController.class);
+        new CompositeDisposable().add(pController.addPerspective(perspectiveEntity).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(() -> {
+                    dialog.dismiss();
+                    Toast.makeText(this,"Dado inserido com sucesso", Toast.LENGTH_LONG).show();
+                }));
+
     }
 
     @Override
@@ -137,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getUser() {
+
         auth = new Authentication();
         String uid = auth.getUser().getUid();
         firestoreService = new FirestoreService();
@@ -146,9 +182,11 @@ public class MainActivity extends AppCompatActivity {
                 public void onSuccess(Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
                         DocumentSnapshot snapshot = task.getResult();
-                        if (snapshot.exists())
+                        if (snapshot.exists()){
+                            binding.spinktNameMain.setVisibility(View.GONE);
                             userEntity = snapshot.toObject(UserEntity.class);
-                        binding.txtUserMain.setText(userEntity.getUserName());
+                            binding.txtUserMain.setText(userEntity.getUserName());
+                        }
                     }
                 }
 

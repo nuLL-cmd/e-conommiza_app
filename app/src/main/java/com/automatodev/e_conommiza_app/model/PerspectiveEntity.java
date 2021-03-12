@@ -14,24 +14,26 @@ import java.util.List;
 @Entity(tableName = "tb_perspective")
 public class PerspectiveEntity  {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_perspective")
     private long idPerspective;
 
-    @ColumnInfo(name = "id_user")
-    private long idUser;
-
     private String month;
+
+    @ColumnInfo(name = "user_uid")
     private String userUid;
+
     private int year;
+
+    @ColumnInfo(name = "total_debit")
     private BigDecimal totalDebit;
+
+    @ColumnInfo(name = "total_credit")
     private BigDecimal totalCredit;
 
     @Ignore
     private List<DataEntryEntity> itemsPerspective;
 
-    public PerspectiveEntity() {
-    }
 
     public PerspectiveEntity(String month, String userUid,int year, BigDecimal totalDebit, BigDecimal totalCredit, List<DataEntryEntity> itemsPerspective) {
         this.month = month;
@@ -48,14 +50,6 @@ public class PerspectiveEntity  {
 
     public void setIdPerspective(long idPerspective) {
         this.idPerspective = idPerspective;
-    }
-
-    public long getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(long idUser) {
-        this.idUser = idUser;
     }
 
     public String getMonth() {
