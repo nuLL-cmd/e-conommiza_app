@@ -18,20 +18,19 @@ import com.automatodev.e_conommiza_app.database.firebase.firestore.FirestoreServ
 import com.automatodev.e_conommiza_app.database.seed.MockFile;
 import com.automatodev.e_conommiza_app.database.sqlite.controller.PerspectiveController;
 import com.automatodev.e_conommiza_app.databinding.ActivityMainBinding;
-import com.automatodev.e_conommiza_app.model.PerspectiveEntity;
-import com.automatodev.e_conommiza_app.model.UserEntity;
+import com.automatodev.e_conommiza_app.entidade.model.PerspectiveEntity;
+import com.automatodev.e_conommiza_app.entidade.model.UserEntity;
+import com.automatodev.e_conommiza_app.entidade.modelBuild.PerspectiveEntityBuilder;
 import com.automatodev.e_conommiza_app.security.firebaseAuth.Authentication;
 import com.automatodev.e_conommiza_app.view.adapter.FragmentPageAdapter;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 
-import java.time.Year;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -95,21 +94,34 @@ public class MainActivity extends AppCompatActivity {
     public void actMainPerspective(View view) {
         ProgressDialog dialog = new ProgressDialog(this);
         Locale locale = new Locale("pt", "br");
-        PerspectiveEntity perspectiveEntity = new PerspectiveEntity();
         Calendar calendar = Calendar.getInstance();
 
         dialog.setMessage("Aguarde...");
         dialog.setCancelable(false);
         dialog.show();
-
         String month = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, locale);
-        perspectiveEntity.setMonth(month);
-        perspectiveEntity.setYear(Calendar.getInstance().get(Calendar.YEAR));
-        perspectiveEntity.setUserUid("QgL2IBmkNcPsGuBzgkasVCY0sCI2");
+
+        PerspectiveEntity perspectiveEntity = new PerspectiveEntityBuilder().month(month)
+                .year(Calendar.getInstance().get(Calendar.YEAR))
+                .userUid(auth.getUser().getUid())
+                .totalCredit(new BigDecimal("0.00"))
+                .totalDebit(new BigDecimal("0.00"))
+                .build();
+
         PerspectiveController pController = new ViewModelProvider(this).get(PerspectiveController.class);
         new CompositeDisposable().add(pController.addPerspective(perspectiveEntity).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(() -> {
-                    dialog.dismiss();
+                    new Thread(){
+                        @Override
+                        public void run(){
+                            try {
+                                sleep(1000);
+                                dialog.dismiss();
+                            }catch(InterruptedException e){
+                                e.printStackTrace();
+                            }
+                        }
+                    }.start();
                     Toast.makeText(this,"Dado inserido com sucesso", Toast.LENGTH_LONG).show();
                 }));
 

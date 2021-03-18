@@ -5,7 +5,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.automatodev.e_conommiza_app.model.PerspectiveEntity;
+import com.automatodev.e_conommiza_app.entidade.model.PerspectiveEntity;
 
 import java.util.List;
 
@@ -23,6 +23,5 @@ public interface PerspectiveDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     Completable addPerspective(PerspectiveEntity perspectiveEntity);
-
 
 }

@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
 import com.automatodev.e_conommiza_app.database.sqlite.config.DatabaseConfig;
-import com.automatodev.e_conommiza_app.model.PerspectiveEntity;
+import com.automatodev.e_conommiza_app.entidade.model.PerspectiveEntity;
 
 import java.util.List;
 

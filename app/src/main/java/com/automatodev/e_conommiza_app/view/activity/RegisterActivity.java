@@ -13,7 +13,8 @@ import android.view.View;
 import com.automatodev.e_conommiza_app.R;
 import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreSaveCallback;
 import com.automatodev.e_conommiza_app.database.firebase.firestore.FirestoreService;
-import com.automatodev.e_conommiza_app.model.UserEntity;
+import com.automatodev.e_conommiza_app.entidade.model.UserEntity;
+import com.automatodev.e_conommiza_app.entidade.modelBuild.UserEntityBuilder;
 import com.automatodev.e_conommiza_app.security.firebaseAuth.Authentication;
 import com.automatodev.e_conommiza_app.security.callback.FirebaseAuthCallback;
 import com.automatodev.e_conommiza_app.databinding.ActivityRegisterBinding;
@@ -76,9 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (user.isEmpty() || email.isEmpty() || password.isEmpty()) {
             Snackbar.make(binding.relativeDaddyRegister, "Necessário o preenchimento de todos os campos", Snackbar.LENGTH_LONG).show();
         } else {
-            UserEntity userEntity = new UserEntity();
-            userEntity.setUserName(user);
-            userEntity.setUserEmail(email);
+
             dialogProgress.show();
             bindingProgress.setIsLoading(true);
             bindingProgress.setInformation("Criando conta...");
@@ -86,7 +85,9 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        userEntity.setUserUid(auth.getUser().getUid());
+                        UserEntity userEntity = new UserEntityBuilder().userName(user)
+                                .userEmail(email)
+                                .userUid(auth.getUser().getUid()).build();
                         bindingProgress.setInformation("Salvando dados na nuvem...");
                         firestoreService.saveUser(userEntity, new FirestoreSaveCallback() {
                             @Override

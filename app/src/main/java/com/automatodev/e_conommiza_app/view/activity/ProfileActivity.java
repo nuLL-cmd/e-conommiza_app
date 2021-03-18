@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NavUtils;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.automatodev.e_conommiza_app.R;
 import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreGetCallback;
@@ -27,15 +28,14 @@ import com.automatodev.e_conommiza_app.database.firebase.callback.StorageCallbac
 import com.automatodev.e_conommiza_app.database.firebase.firestore.FirestoreService;
 import com.automatodev.e_conommiza_app.database.seed.MockFile;
 import com.automatodev.e_conommiza_app.database.firebase.storage.StorageService;
+import com.automatodev.e_conommiza_app.database.sqlite.controller.PerspectiveController;
 import com.automatodev.e_conommiza_app.databinding.ActivityProfileTwoBinding;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogAboutBinding;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogLogoutBinding;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogProgressBinding;
-import com.automatodev.e_conommiza_app.model.PerspectiveEntity;
-import com.automatodev.e_conommiza_app.model.UserEntity;
+import com.automatodev.e_conommiza_app.entidade.model.PerspectiveEntity;
+import com.automatodev.e_conommiza_app.entidade.model.UserEntity;
 import com.automatodev.e_conommiza_app.security.firebaseAuth.Authentication;
-import com.automatodev.e_conommiza_app.view.activity.LoginActivity;
-import com.automatodev.e_conommiza_app.view.activity.MainActivity;
 import com.automatodev.e_conommiza_app.view.adapter.ItemsProfileAdapter;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -54,6 +54,10 @@ import java.util.List;
 import java.util.Map;
 
 import id.zelory.compressor.Compressor;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -84,8 +88,13 @@ public class ProfileActivity extends AppCompatActivity {
         getUser();
         showData();
 
+        binding.swipeRefreshProfile.setColorSchemeResources(R.color.button_positive);
+        binding.swipeRefreshProfile.setRefreshing(true);
+
         binding.lblSinceProfile.setTexts(new String[]{"Você tem", "Você pode consultar um", "Organize seus gastos ", "Seu bolso agradeçe"});
-        binding.txtSinceProfile.setTexts(new String[]{perspectiveEntities.size() + " perspectivas cadastradas", "relatorio clicando no gráfico", "em proventos e despessas", "esta boa ação"});
+        binding.txtSinceProfile.setTexts(new String[]{"Você tem", "Você pode consultar um", "Organize seus gastos ", "Seu bolso agradeçe"});
+
+       //binding.txtSinceProfile.setTexts(new String[]{perspectiveEntities.size() + " perspectivas cadastradas", "relatorio clicando no gráfico", "em proventos e despessas", "esta boa ação"});
 
     }
 
@@ -322,12 +331,31 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void showData() {
-        MockFile mockFile = new MockFile();
-        perspectiveEntities = mockFile.getPerspectiveEntityLIst();
-        ItemsProfileAdapter adapter = new ItemsProfileAdapter(perspectiveEntities);
 
-        binding.recyclerItemsProfile.hasFixedSize();
-        binding.recyclerItemsProfile.setAdapter(adapter);
+        PerspectiveController perspectiveController  = new ViewModelProvider(this).get(PerspectiveController.class);
+        CompositeDisposable disposable = new CompositeDisposable();
+        disposable.add(perspectiveController.getAllPerspectives().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(perspectivies ->{
+            if (perspectivies != null){
+
+                ItemsProfileAdapter adapter = new ItemsProfileAdapter(perspectivies);
+                binding.recyclerItemsProfile.hasFixedSize();
+                binding.recyclerItemsProfile.setAdapter(adapter);
+
+                disposable.dispose();
+            }
+
+            new Thread(){
+                @Override
+                public void run(){
+                    try {
+                        sleep(1000);
+                        binding.swipeRefreshProfile.setRefreshing(false);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }.start();
+        } ));
 
     }
 
@@ -374,4 +402,6 @@ public class ProfileActivity extends AppCompatActivity {
             startActivityForResult(intent, 100);
         }
     }
+
+
 }

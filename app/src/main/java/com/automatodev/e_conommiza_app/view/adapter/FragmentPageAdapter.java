@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.automatodev.e_conommiza_app.model.PerspectiveEntity;
+import com.automatodev.e_conommiza_app.entidade.model.PerspectiveEntity;
 import com.automatodev.e_conommiza_app.view.activity.FragmentHost;
 
 import java.util.List;

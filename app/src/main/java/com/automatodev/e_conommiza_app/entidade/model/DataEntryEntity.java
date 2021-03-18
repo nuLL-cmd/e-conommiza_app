@@ -1,4 +1,4 @@
-package com.automatodev.e_conommiza_app.model;
+package com.automatodev.e_conommiza_app.entidade.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -12,7 +12,7 @@ public class DataEntryEntity {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_data")
-    private int idData;
+    private Integer idData;
 
     @ColumnInfo(name = "name_local")
     private String nameLocal;
@@ -33,11 +33,13 @@ public class DataEntryEntity {
         this.valueEntry = valueEntry;
     }
 
-    public int getIdData() {
+
+
+    public Integer getIdData() {
         return idData;
     }
 
-    public void setIdData(int idData) {
+    public void setIdData(Integer idData) {
         this.idData = idData;
     }
 

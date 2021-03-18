@@ -33,7 +33,6 @@ public class SplashActivity extends AppCompatActivity {
     }
 
 
-
     public void showVersion(){
         try{
             PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);

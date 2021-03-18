@@ -1,7 +1,4 @@
-package com.automatodev.e_conommiza_app.model;
-
-import android.os.Parcel;
-import android.os.Parcelable;
+package com.automatodev.e_conommiza_app.entidade.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -16,7 +13,7 @@ public class PerspectiveEntity  {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_perspective")
-    private long idPerspective;
+    private Long idPerspective;
 
     private String month;
 
@@ -46,11 +43,11 @@ public class PerspectiveEntity  {
         this.itemsPerspective = itemsPerspective;
     }
 
-    public long getIdPerspective() {
+    public Long getIdPerspective() {
         return idPerspective;
     }
 
-    public void setIdPerspective(long idPerspective) {
+    public void setIdPerspective(Long idPerspective) {
         this.idPerspective = idPerspective;
     }
 

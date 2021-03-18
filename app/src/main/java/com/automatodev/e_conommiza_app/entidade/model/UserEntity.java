@@ -1,12 +1,4 @@
-package com.automatodev.e_conommiza_app.model;
-
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
+package com.automatodev.e_conommiza_app.entidade.model;
 
 import com.google.firebase.firestore.ServerTimestamp;
 
@@ -17,46 +9,25 @@ import java.util.Date;
 public class UserEntity implements Serializable {
 
 
-    private int idUser;
-
-
     private String userName;
-
-
     private String userEmail;
-
-
     private String urlPhoto;
-
-
     private String userUid;
 
     @ServerTimestamp
     private Date dateSince;
 
 
-    protected UserEntity(Parcel in) {
-        idUser = in.readInt();
-        userName = in.readString();
-        userEmail = in.readString();
-        urlPhoto = in.readString();
-        userUid = in.readString();
-        dateSince = new Date((in.readLong()));
-    }
-
     public UserEntity(){
 
     }
-
-
-    public int getIdUser() {
-        return idUser;
+    public UserEntity( String userName, String userEmail, String urlPhoto, String userUid, Date dateSince) {
+        this.userName = userName;
+        this.userEmail = userEmail;
+        this.urlPhoto = urlPhoto;
+        this.userUid = userUid;
+        this.dateSince = dateSince;
     }
-
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
-    }
-
     public String getUserName() {
         return userName;
     }

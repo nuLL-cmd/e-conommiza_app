@@ -13,6 +13,10 @@
             name="isImage"
             type="Boolean" />
 
+        <variable
+            name="isLoading"
+            type="Boolean"/>
+
     </data>
 
     <RelativeLayout
