@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activity.AddItemActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_item"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_90sdp"
+        android:background="@color/background_form">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:title="">
+
+            <RelativeLayout
+                android:id="@+id/relativetoolbar_item"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/txtApp_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/txtWindow_item"
+                    android:layout_alignStart="@id/txtWindow_item"
+                    android:text="E-conommiza"
+                    android:textColor="#CDCBCB"
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtWindow_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_marginBottom="@dimen/_7sdp"
+                    android:text="Adicionar registro"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_18ssp"
+                    android:textStyle="bold" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imgUser_item"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_alignBottom="@id/txtWindow_item"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:src="@drawable/ic_user_web" />
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/appbarBottom_item"
+        android:layout_below="@id/appbar_item"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/titleOperation_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="Escolha o tipo de registro"
+                android:textColor="@color/color_gray_5A5A5A"
+                android:textSize="@dimen/_13ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtSubgtitle_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="O item será uma despesa ou provento?"
+                android:textColor="#CDCBCB"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/linearTypeItem_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/_10sdp">
+
+                <ImageButton
+                    android:id="@+id/btnUp_item"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/_60sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_button_back_form_global"
+                    android:src="@drawable/ic_up_48_8bc34a" />
+
+                <ImageButton
+                    android:id="@+id/btnDown_item"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/_60sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_button_back_form_global"
+                    android:src="@drawable/ic_down_48_ee0005" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtPerspective_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:text="Escolha a perspectiva"
+                android:textColor="#CDCBCB"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinnerPerspective_item"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:background="@drawable/layout_shadow_white" />
+
+
+            <TextView
+                android:id="@+id/txtNameValue_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:text="Dê um nome e um valor ao registro"
+                android:textColor="#CDCBCB"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edtName_item"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:background="@drawable/layout_shadow_white" />
+
+
+            <EditText
+                android:id="@+id/edtValue_item"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:background="@drawable/layout_shadow_white" />
+
+            <TextView
+                android:id="@+id/txtCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:text="Qual a categoria?"
+                android:textColor="#CDCBCB"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinnerCategory_item"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:background="@drawable/layout_shadow_white" />
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbarBottom_item"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/background_form">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:title="">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/_14sdp">
+
+                <com.github.clans.fab.FloatingActionButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+
+                    android:src="@drawable/ic_thumb_up"
+                    app:fab_colorNormal="#2196F3"
+                    app:fab_colorPressed="#3F51B5"
+                    app:fab_colorRipple="#99FFFFFF" />
+
+
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+</RelativeLayout>

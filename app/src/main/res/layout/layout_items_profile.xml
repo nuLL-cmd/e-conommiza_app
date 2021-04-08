@@ -5,7 +5,7 @@
     <data>
         <variable
             name="perspective"
-            type="com.automatodev.e_conommiza_app.model.PerspectiveEntity"/>
+            type="com.automatodev.e_conommiza_app.entidade.model.PerspectiveEntity"/>
 
     </data>
 
@@ -84,9 +84,8 @@
             android:layout_alignBottom="@id/lblAmount_layoutItem"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="@dimen/_10sdp"
-
             android:gravity="center|end"
-            android:text='@{"R$ "+perspective.totalCredit.subtract(perspective.totalDebit)}'
+            android:text='@{"R$ "+ perspective.totalCredit.subtract(perspective.totalDebit)}'
             android:textColor="@color/font_primary"
             android:textSize="@dimen/_9ssp"
             android:textStyle="bold" />

@@ -3,14 +3,12 @@ package com.automatodev.e_conommiza_app.view.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.automatodev.e_conommiza_app.R;
-import com.automatodev.e_conommiza_app.model.DataEntryEntity;
-import com.automatodev.e_conommiza_app.model.PerspectiveEntity;
+import com.automatodev.e_conommiza_app.entidade.model.PerspectiveEntity;
 
 import java.util.List;
 
