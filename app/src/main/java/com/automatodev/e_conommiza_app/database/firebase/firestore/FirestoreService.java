@@ -2,7 +2,7 @@ package com.automatodev.e_conommiza_app.database.firebase.firestore;
 
 import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreGetCallback;
 import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreSaveCallback;
-import com.automatodev.e_conommiza_app.model.UserEntity;
+import com.automatodev.e_conommiza_app.entidade.model.UserEntity;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 

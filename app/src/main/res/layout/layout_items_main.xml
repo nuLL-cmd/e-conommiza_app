@@ -7,7 +7,7 @@
         <import type="android.graphics.Color"/>
         <variable
             name="dataEntry"
-            type="com.automatodev.e_conommiza_app.model.DataEntryEntity" />
+            type="com.automatodev.e_conommiza_app.entidade.model.DataEntryEntity" />
     </data>
 
     <RelativeLayout
@@ -72,8 +72,8 @@
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_toEndOf="@id/txtDataItem_layout_item"
             android:gravity="center|end"
-            android:text='@{"R$ "+dataEntry.valueEntry}'
-            android:textColor='@{dataEntry.typeEntry.equals("entry") ? Color.parseColor("#4CAF50") : Color.parseColor("#ff5252")}'
+            android:text='@{dataEntry.typeEntry.equals("entry") ? "+ R$ "+dataEntry.valueEntry : "- R$ "+dataEntry.valueEntry}'
+            android:textColor="@color/font_primary"
             android:textSize="@dimen/_9ssp"
             android:textStyle="bold" />
 

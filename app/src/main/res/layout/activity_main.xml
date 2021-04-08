@@ -114,6 +114,19 @@
             android:layout_marginTop="@dimen/_35sdp"
             android:src="@drawable/ic_home" />
 
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/spinktName_main"
+            android:paddingTop="@dimen/_4sdp"
+            android:paddingEnd="@dimen/_3sdp"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@id/btnExit_main"
+            android:layout_alignTop="@id/btnExit_main"
+            android:layout_alignBottom="@id/btnExit_main"
+            app:SpinKit_Color="@color/white_fff"
+            app:SpinKit_Style="ThreeBounce"
+/>
+
 
         <TextView
             android:id="@+id/txtUser_main"
@@ -128,7 +141,6 @@
             android:layout_marginEnd="@dimen/_5sdp"
             android:layout_toEndOf="@id/btnExit_main"
             android:gravity="center|start"
-            android:text="MARCO"
             android:textColor="@color/background_form"
             android:textSize="@dimen/_12ssp" />
 
@@ -294,6 +306,7 @@
                 android:src="@drawable/ic_add_white"
                 app:fab_colorNormal="#FF9800"
                 fab:fab_label="Adicionar perspectiva"
+                android:onClick="actMainPerspective"
                 fab:fab_size="mini" />
 
 
@@ -303,6 +316,7 @@
                 android:layout_height="@dimen/_30sdp"
                 android:src="@drawable/ic_thumb_up"
                 app:fab_colorNormal="#4CAF50"
+                android:onClick="actMainProvento"
                 fab:fab_label="Adicionar provento"
                 fab:fab_size="mini" />
 
@@ -311,6 +325,7 @@
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
                 android:src="@drawable/ic_thumb_down"
+                android:onClick="actMainItem"
                 fab:fab_label="Adicionar despesa"
                 fab:fab_size="mini" />
 

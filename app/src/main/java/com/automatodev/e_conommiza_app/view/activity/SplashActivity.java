@@ -33,7 +33,6 @@ public class SplashActivity extends AppCompatActivity {
     }
 
 
-
     public void showVersion(){
         try{
             PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -47,7 +46,6 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     public void splash(){
-
         new Thread(){
             @Override
             public void run(){

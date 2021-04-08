@@ -13,6 +13,10 @@
             name="isImage"
             type="Boolean" />
 
+        <variable
+            name="isLoading"
+            type="Boolean"/>
+
     </data>
 
     <RelativeLayout
@@ -121,7 +125,6 @@
                 android:layout_marginStart="@dimen/_15sdp"
                 android:layout_marginTop="-70dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/image"
                 app:riv_border_color="@color/background_form"
                 app:riv_border_width="@dimen/_6sdp"
                 app:riv_corner_radius="@dimen/_35sdp" />

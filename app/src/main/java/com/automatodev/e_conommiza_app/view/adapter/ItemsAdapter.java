@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.automatodev.e_conommiza_app.R;
 import com.automatodev.e_conommiza_app.databinding.LayoutItemsMainBinding;
-import com.automatodev.e_conommiza_app.model.DataEntryEntity;
+import com.automatodev.e_conommiza_app.entidade.model.DataEntryEntity;
 
 import java.util.List;
 

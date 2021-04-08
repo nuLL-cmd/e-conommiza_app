@@ -13,7 +13,8 @@ import android.view.View;
 import com.automatodev.e_conommiza_app.R;
 import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreSaveCallback;
 import com.automatodev.e_conommiza_app.database.firebase.firestore.FirestoreService;
-import com.automatodev.e_conommiza_app.model.UserEntity;
+import com.automatodev.e_conommiza_app.entidade.model.UserEntity;
+import com.automatodev.e_conommiza_app.entidade.modelBuild.UserEntityBuilder;
 import com.automatodev.e_conommiza_app.security.firebaseAuth.Authentication;
 import com.automatodev.e_conommiza_app.security.callback.FirebaseAuthCallback;
 import com.automatodev.e_conommiza_app.databinding.ActivityRegisterBinding;
@@ -30,10 +31,6 @@ public class RegisterActivity extends AppCompatActivity {
     private final String LOG_X = "logx";
     public static boolean status;
 
-    private AlertDialog dialogProgress;
-    private LayoutDialogProgressBinding bindingProgress;
-    private Authentication auth;
-    private FirestoreService firestoreService;
     private ActivityRegisterBinding binding;
 
 
@@ -44,8 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
         View viewRegister = binding.getRoot();
         setContentView(viewRegister);
 
-        auth = new Authentication();
-        firestoreService = new FirestoreService();
+
     }
 
     @Override
@@ -66,9 +62,12 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void actRegisterMain(View view) {
-        dialogProgress = new AlertDialog.Builder(this).create();
+        Authentication auth = new Authentication();
+        FirestoreService firestoreService = new FirestoreService();
+        AlertDialog dialogProgress = new AlertDialog.Builder(this).create();
+        LayoutDialogProgressBinding bindingProgress = DataBindingUtil.inflate(getLayoutInflater().from(this), R.layout.layout_dialog_progress, binding.relativeDaddyRegister, false);
+
         dialogProgress.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        bindingProgress = DataBindingUtil.inflate(getLayoutInflater().from(this), R.layout.layout_dialog_progress, binding.relativeDaddyRegister, false);
         dialogProgress.setView(bindingProgress.getRoot());
 
         String user = binding.edtUserRegister.getText().toString().trim();
@@ -78,9 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (user.isEmpty() || email.isEmpty() || password.isEmpty()) {
             Snackbar.make(binding.relativeDaddyRegister, "Necessário o preenchimento de todos os campos", Snackbar.LENGTH_LONG).show();
         } else {
-            UserEntity userEntity = new UserEntity();
-            userEntity.setUserName(user);
-            userEntity.setUserEmail(email);
+
             dialogProgress.show();
             bindingProgress.setIsLoading(true);
             bindingProgress.setInformation("Criando conta...");
@@ -88,8 +85,10 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        userEntity.setUserUid(auth.getUser().getUid());
-                        bindingProgress.setInformation("Salvando dados...");
+                        UserEntity userEntity = new UserEntityBuilder().userName(user)
+                                .userEmail(email)
+                                .userUid(auth.getUser().getUid()).build();
+                        bindingProgress.setInformation("Salvando dados na nuvem...");
                         firestoreService.saveUser(userEntity, new FirestoreSaveCallback() {
                             @Override
                             public void onSuccess() {
@@ -113,7 +112,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                             @Override
                             public void onFailure(Exception e) {
-
+                                Log.e(LOG_X, "OnFailure saveUser: " + e.getMessage());
+                                e.printStackTrace();
                             }
                         });
 
@@ -149,7 +149,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Exception e) {
-                    Log.e(LOG_X, "Error actRegisterMain: " + e.getMessage());
+                    Log.e(LOG_X, "OnFailure registerWithEmail: " + e.getMessage());
                     e.printStackTrace();
                 }
             });
