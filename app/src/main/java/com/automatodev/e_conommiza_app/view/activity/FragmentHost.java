@@ -16,6 +16,8 @@ import com.automatodev.e_conommiza_app.view.adapter.ItemsAdapter;
 public class FragmentHost extends Fragment {
 
     private int position;
+    public static ItemsAdapter itemsAdapter;
+    private RecyclerView recyclerView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,16 +27,26 @@ public class FragmentHost extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.layout_perspectives,container,false);
+        View view = inflater.inflate(R.layout.layout_perspectives, container, false);
+        position = getArguments().getInt("position");
+        recyclerView = view.findViewById(R.id.recyclerItens_layoutPerspective);
+        itemsAdapter = new ItemsAdapter(MainActivity.perspectiveEntities.get(position).getItemsPerspective());
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        position = getArguments().getInt("position");
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerItens_layoutPerspective);
         recyclerView.hasFixedSize();
-        recyclerView.setAdapter(new ItemsAdapter(MainActivity.perspectiveEntities.get(position).getItemsPerspective()));
+        recyclerView.setAdapter(itemsAdapter);
+        itemsAdapter.notifyDataSetChanged();
 
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        itemsAdapter.notifyDataSetChanged();
     }
 }

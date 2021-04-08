@@ -21,6 +21,7 @@ public class UserEntity implements Serializable {
     public UserEntity(){
 
     }
+
     public UserEntity( String userName, String userEmail, String urlPhoto, String userUid, Date dateSince) {
         this.userName = userName;
         this.userEmail = userEmail;
@@ -28,6 +29,7 @@ public class UserEntity implements Serializable {
         this.userUid = userUid;
         this.dateSince = dateSince;
     }
+
     public String getUserName() {
         return userName;
     }

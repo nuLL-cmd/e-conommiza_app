@@ -95,7 +95,6 @@ public class ProfileActivity extends AppCompatActivity {
         binding.txtSinceProfile.setTexts(new String[]{"Você tem", "Você pode consultar um", "Organize seus gastos ", "Seu bolso agradeçe"});
 
        //binding.txtSinceProfile.setTexts(new String[]{perspectiveEntities.size() + " perspectivas cadastradas", "relatorio clicando no gráfico", "em proventos e despessas", "esta boa ação"});
-
     }
 
     @Override
@@ -109,7 +108,6 @@ public class ProfileActivity extends AppCompatActivity {
                 pickLib(binding.relativeDaddyProfile);
         }
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -153,12 +151,10 @@ public class ProfileActivity extends AppCompatActivity {
         status = false;
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_profile, menu);
         return super.onCreateOptionsMenu(menu);
-
     }
 
     @Override
@@ -190,7 +186,6 @@ public class ProfileActivity extends AppCompatActivity {
             return uriExternal = uri;
 
         }
-
     }
 
     public void updateUser(View view) {
@@ -331,19 +326,15 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void showData() {
-
         PerspectiveController perspectiveController  = new ViewModelProvider(this).get(PerspectiveController.class);
         CompositeDisposable disposable = new CompositeDisposable();
         disposable.add(perspectiveController.getAllPerspectives().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(perspectivies ->{
             if (perspectivies != null){
-
                 ItemsProfileAdapter adapter = new ItemsProfileAdapter(perspectivies);
                 binding.recyclerItemsProfile.hasFixedSize();
                 binding.recyclerItemsProfile.setAdapter(adapter);
-
                 disposable.dispose();
             }
-
             new Thread(){
                 @Override
                 public void run(){
@@ -356,7 +347,6 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             }.start();
         } ));
-
     }
 
     public void about() {

@@ -7,7 +7,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,31 +14,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Econommiza_app">
+        <activity android:name=".view.activity.AddItemActivity">
 
+        </activity>
         <activity
             android:name=".view.activity.ProfileActivity"
-            android:theme="@style/Theme.Econommiza_app_two"
-            android:parentActivityName=".view.activity.ProfileActivity">
-        </activity>
+            android:parentActivityName=".view.activity.ProfileActivity"
+            android:theme="@style/Theme.Econommiza_app_two">
 
+        </activity>
         <activity
             android:name=".view.activity.RegisterActivity"
             android:parentActivityName=".view.activity.RegisterActivity">
-        </activity>
-
-        <activity
-            android:name=".view.activity.LoginActivity" >
 
         </activity>
+        <activity android:name=".view.activity.LoginActivity">
 
-        <activity
-            android:name=".view.activity.SplashActivity">
+        </activity>
+        <activity android:name=".view.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".view.activity.MainActivity"
             android:theme="@style/Theme.Econommiza_app_two" />

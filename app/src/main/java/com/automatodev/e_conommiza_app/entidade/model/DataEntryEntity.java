@@ -14,6 +14,9 @@ public class DataEntryEntity {
     @ColumnInfo(name = "id_data")
     private Integer idData;
 
+    @ColumnInfo(name =  "id_persp")
+    private Long idPersp;
+
     @ColumnInfo(name = "name_local")
     private String nameLocal;
 
@@ -26,7 +29,9 @@ public class DataEntryEntity {
     @ColumnInfo(name = "value_entry")
     private BigDecimal valueEntry;
 
-    public DataEntryEntity(String nameLocal, long dateEntry, String typeEntry, BigDecimal valueEntry) {
+
+    public DataEntryEntity(Long idPerspective,String nameLocal, long dateEntry, String typeEntry, BigDecimal valueEntry) {
+        this.idPersp = idPerspective;
         this.nameLocal = nameLocal;
         this.dateEntry = dateEntry;
         this.typeEntry = typeEntry;
@@ -34,6 +39,16 @@ public class DataEntryEntity {
     }
 
 
+    public DataEntryEntity() {
+    }
+
+    public Long getIdPersp() {
+        return idPersp;
+    }
+
+    public void setIdPersp(Long idPersp) {
+        this.idPersp = idPersp;
+    }
 
     public Integer getIdData() {
         return idData;

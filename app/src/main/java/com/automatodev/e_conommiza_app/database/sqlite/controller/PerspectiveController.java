@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 
 import com.automatodev.e_conommiza_app.database.sqlite.config.DatabaseConfig;
 import com.automatodev.e_conommiza_app.entidade.model.PerspectiveEntity;
+import com.automatodev.e_conommiza_app.entidade.response.PerspectiveWithData;
 
 import java.util.List;
 
@@ -31,6 +32,11 @@ public class PerspectiveController extends AndroidViewModel {
 
     public Completable addPerspective(PerspectiveEntity perspectiveEntity){
         return databaseConfig.perspectiveDao().addPerspective(perspectiveEntity);
+    }
+
+
+    public Flowable<List<PerspectiveWithData>> getPerspectiveWithData(String uid){
+        return databaseConfig.perspectiveDao().getPerspectiveWithData(uid);
     }
 
 

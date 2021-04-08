@@ -316,6 +316,7 @@
                 android:layout_height="@dimen/_30sdp"
                 android:src="@drawable/ic_thumb_up"
                 app:fab_colorNormal="#4CAF50"
+                android:onClick="actMainProvento"
                 fab:fab_label="Adicionar provento"
                 fab:fab_size="mini" />
 
@@ -324,6 +325,7 @@
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
                 android:src="@drawable/ic_thumb_down"
+                android:onClick="actMainItem"
                 fab:fab_label="Adicionar despesa"
                 fab:fab_size="mini" />
 

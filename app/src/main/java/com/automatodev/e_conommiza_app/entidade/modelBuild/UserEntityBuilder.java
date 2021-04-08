@@ -12,6 +12,7 @@ public class UserEntityBuilder {
     private String userUid;
     private Date dateSince;
 
+
     public UserEntity build(){
         return new UserEntity( this.userName, this.userEmail, this.urlPhoto, this.userUid, this.dateSince);
     }
@@ -20,6 +21,7 @@ public class UserEntityBuilder {
         this.userName = userName;
         return this;
     }
+
     public UserEntityBuilder userEmail(String userEmail){
         this.userEmail = userEmail;
         return this;
