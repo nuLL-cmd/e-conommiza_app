@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 public class DataEntryEntityBuilder {
 
     private String nameLocal;
+    private String category;
     private Long idPersp;
     private Long dataEntry;
     private String typeEntry;
@@ -14,7 +15,7 @@ public class DataEntryEntityBuilder {
 
 
     public DataEntryEntity build(){
-        return new DataEntryEntity(this.idPersp,this.nameLocal,this.dataEntry, this.typeEntry, this.valueEntry);
+        return new DataEntryEntity(this.idPersp,this.nameLocal,this.category,this.dataEntry, this.typeEntry, this.valueEntry);
     }
 
 
@@ -42,6 +43,11 @@ public class DataEntryEntityBuilder {
 
     public DataEntryEntityBuilder valueEntry(BigDecimal valueEntry){
         this.valueEntry = valueEntry;
+        return this;
+    }
+
+    public DataEntryEntityBuilder category(String category){
+        this.category = category;
         return this;
     }
 }

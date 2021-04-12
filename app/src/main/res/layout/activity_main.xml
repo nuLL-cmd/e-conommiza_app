@@ -257,7 +257,7 @@
             fab:menu_animationDelayPerItem="50"
             fab:menu_backgroundColor="@android:color/transparent"
             fab:menu_buttonSpacing="0dp"
-            fab:menu_colorNormal="#2196F3"
+            fab:menu_colorNormal="@color/button_positive"
             fab:menu_colorPressed="#3F51B5"
             fab:menu_colorRipple="#99FFFFFF"
             fab:menu_fab_label="Toque para fechar"
@@ -293,7 +293,7 @@
                 android:id="@+id/menuProfile_item"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
-                android:src="@drawable/ic_person"
+                android:src="@drawable/ic_person_white"
                 android:onClick="actMainProfile"
                 app:fab_colorNormal="#E91E63"
                 fab:fab_label="Minha conta"
@@ -310,23 +310,14 @@
                 fab:fab_size="mini" />
 
 
-            <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/menuCredit_item"
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:src="@drawable/ic_thumb_up"
-                app:fab_colorNormal="#4CAF50"
-                android:onClick="actMainProvento"
-                fab:fab_label="Adicionar provento"
-                fab:fab_size="mini" />
 
             <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/menuDespesa_item"
+                android:id="@+id/menuRegister_item"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
-                android:src="@drawable/ic_thumb_down"
+                android:src="@drawable/ic_register"
                 android:onClick="actMainItem"
-                fab:fab_label="Adicionar despesa"
+                fab:fab_label="Adicionar registro"
                 fab:fab_size="mini" />
 
         </com.github.clans.fab.FloatingActionMenu>

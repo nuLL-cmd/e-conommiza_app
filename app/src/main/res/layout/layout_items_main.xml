@@ -37,7 +37,7 @@
             android:singleLine="true"
             android:ellipsize="marquee"
             android:layout_toEndOf="@id/imageItem_layoutItem"
-            android:text='@{dataEntry.nameLocal}'
+            android:text="@{dataEntry.nameLocal}"
             android:textColor="@color/font_primary"
             android:textSize="@dimen/_12ssp"
             android:textStyle="bold" />

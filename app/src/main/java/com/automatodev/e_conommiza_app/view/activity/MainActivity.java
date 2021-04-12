@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -24,9 +25,12 @@ import com.automatodev.e_conommiza_app.entidade.model.UserEntity;
 import com.automatodev.e_conommiza_app.entidade.response.PerspectiveWithData;
 import com.automatodev.e_conommiza_app.security.firebaseAuth.Authentication;
 import com.automatodev.e_conommiza_app.view.adapter.FragmentPageAdapter;
+import com.automatodev.e_conommiza_app.view.utils.ComponentUtils;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentSnapshot;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,8 +53,9 @@ public class MainActivity extends AppCompatActivity {
     private UserEntity userEntity;
     private MockFile mockFile;
     private ProgressDialog dialog;
-    private  FragmentPageAdapter fragmentAdapter;
+    private FragmentPageAdapter fragmentAdapter;
     private int positionLocal = 0;
+    private ComponentUtils componentUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         View viewBinding = binding.getRoot();
         setContentView(viewBinding);
 
+        componentUtils = new ComponentUtils(this);
         mockFile = new MockFile();
         dialog = new ProgressDialog(this);
 
@@ -92,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void actMainProfile(View view) {
+
         if (!ProfileActivity.status) {
             Intent intent = new Intent(this, ProfileActivity.class);
             intent.putExtra("user", userEntity);
@@ -99,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
             binding.menu.close(true);
         }
     }
+
 
     public void actMainPerspective(View view) {
         dialog.setMessage("Aguarde...");
@@ -121,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }.start();
                     Toast.makeText(this, "Dado inserido com sucesso", Toast.LENGTH_LONG).show();
+                    binding.viewPagerMain.setCurrentItem(0);
 
                 }));
     }
@@ -153,13 +162,18 @@ public class MainActivity extends AppCompatActivity {
         finishAffinity();
     }
 
-    public void actMainItem(View view){
-        if (!AddItemActivity.status){
+    public void actMainItem(View view) {
+        if (perspectiveEntities.size() == 0) {
+            componentUtils.showSnackbar("Você não tem nenhuma perspectiva cadastrada.\ncadastre uma perspecitve antes para adicionar um novo regisro", 2000);
+            return;
+        }
+
+        if (!AddItemActivity.status) {
             Intent intent = new Intent(this, AddItemActivity.class);
+            intent.putExtra("perspects", (Serializable) perspectiveEntities);
             startActivity(intent);
             binding.menu.close(true);
         }
-
 
 
     }

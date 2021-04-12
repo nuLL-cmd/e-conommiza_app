@@ -21,7 +21,7 @@ public class MockFile {
 
     public  List<PerspectiveEntity> getPerspectivesMock(){
 
-        dataEntryEntities.add(new DataEntryEntity(1L,"Fujioka", 1614900139724L,"entry",new BigDecimal("2800.33")));
+/*        dataEntryEntities.add(new DataEntryEntity(1L,"Fujioka", 1614900139724L,"entry",new BigDecimal("2800.33")));
         dataEntryEntities.add(new DataEntryEntity(1L,"McDonalds", 1614900139724L,"noEntry",new BigDecimal("35.33")));
         dataEntryEntities.add(new DataEntryEntity(1L,"Valesi", 1614900139724L,"noEntry",new BigDecimal("48.50")));
         dataEntryEntities.add(new DataEntryEntity(1L,"Laura", 1614900139724L,"entry",new BigDecimal("250.00")));
@@ -71,7 +71,7 @@ public class MockFile {
         dataEntryEntitiesTree.add(new DataEntryEntity(3L,"Cinema", 1614900139724L,"noEntry",new BigDecimal("150.00")));
         dataEntryEntitiesTree.add(new DataEntryEntity(3L,"Feira de quinta", 1614900139724L,"noEntry",new BigDecimal("199.00")));
         dataEntryEntitiesTree.add(new DataEntryEntity(3L,"Nubank", 1614900139724L,"noEntry",new BigDecimal("200.00")));
-        dataEntryEntitiesTree.add(new DataEntryEntity(3L,"SSD olx", 1614900139724L,"noEntry",new BigDecimal("28.00")));
+        dataEntryEntitiesTree.add(new DataEntryEntity(3L,"SSD olx", 1614900139724L,"noEntry",new BigDecimal("28.00")));*/
 
 
         perspectiveEntities.add(new PerspectiveEntity("Março","QgL2IBmkNcPsGuBzgkasVCY0sCI2",2021,new BigDecimal("1800.00"),new BigDecimal("3200.00"),dataEntryEntities));
@@ -92,7 +92,7 @@ public class MockFile {
     }
 
     public DataEntryEntity getDataEntryMock(){
-        return new DataEntryEntity(1L,"Cinema", 1614900139724L,"noEntry",new BigDecimal("150.00"));
+        return new DataEntryEntity(1L,"Cinema","Lazer", 1614900139724L,"noEntry",new BigDecimal("150.00"));
 
     }
 
@@ -100,7 +100,7 @@ public class MockFile {
         Locale locale = new Locale("pt", "br");
         Calendar calendar = Calendar.getInstance();
         String month = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, locale);
-        PerspectiveEntity perspectiveEntity = new PerspectiveEntityBuilder().month(month)
+        PerspectiveEntity perspectiveEntity = new PerspectiveEntityBuilder().month(month.toUpperCase())
                 .year(Calendar.getInstance().get(Calendar.YEAR))
                 .userUid("QgL2IBmkNcPsGuBzgkasVCY0sCI2")
                 .totalCredit(new BigDecimal("0.00"))

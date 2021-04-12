@@ -4,21 +4,25 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 
 @Entity(tableName = "tb_data_entry")
-public class DataEntryEntity {
+public class DataEntryEntity implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_data")
     private Integer idData;
 
-    @ColumnInfo(name =  "id_persp")
+    @ColumnInfo(name = "id_persp")
     private Long idPersp;
 
     @ColumnInfo(name = "name_local")
     private String nameLocal;
+
+    @ColumnInfo(name = "category")
+    private String category;
 
     @ColumnInfo(name = "data_entry")
     private long dateEntry;
@@ -30,9 +34,10 @@ public class DataEntryEntity {
     private BigDecimal valueEntry;
 
 
-    public DataEntryEntity(Long idPerspective,String nameLocal, long dateEntry, String typeEntry, BigDecimal valueEntry) {
+    public DataEntryEntity(Long idPerspective, String nameLocal, String category, long dateEntry, String typeEntry, BigDecimal valueEntry) {
         this.idPersp = idPerspective;
         this.nameLocal = nameLocal;
+        this.category = category;
         this.dateEntry = dateEntry;
         this.typeEntry = typeEntry;
         this.valueEntry = valueEntry;
@@ -66,6 +71,14 @@ public class DataEntryEntity {
         this.nameLocal = nameLocal;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public long getDateEntry() {
         return dateEntry;
     }
@@ -88,5 +101,19 @@ public class DataEntryEntity {
 
     public void setValueEntry(BigDecimal valueEntry) {
         this.valueEntry = valueEntry;
+    }
+
+
+    @Override
+    public String toString() {
+        return "DataEntryEntity{" +
+                "idData=" + idData +
+                ", idPersp=" + idPersp +
+                ", nameLocal='" + nameLocal + '\'' +
+                ", category='" + category + '\'' +
+                ", dateEntry=" + dateEntry +
+                ", typeEntry='" + typeEntry + '\'' +
+                ", valueEntry=" + valueEntry +
+                '}';
     }
 }

@@ -129,11 +129,16 @@
                     android:layout_width="match_parent"
                     android:background="@drawable/layout_shadow_white"
                     android:layout_height="@dimen/_50sdp"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:drawableStart="@drawable/ic_person"
                     android:layout_marginTop="@dimen/_20sdp"
+
+
                     android:text="programadormoderador@hotmail.com"
                     android:hint="Email"
                     android:inputType="textEmailAddress"
-                    android:paddingStart="@dimen/_15sdp"
+
                     android:paddingEnd="@dimen/_15sdp"
                     android:singleLine="true"
                     android:textColor="#A2A2A2"
@@ -143,6 +148,7 @@
                 <EditText
                     android:id="@+id/edtPassword_login"
                     android:layout_width="match_parent"
+                    android:drawableStart="@drawable/ic_lock"
                     android:text="402866"
                     android:layout_height="@dimen/_50sdp"
                     android:layout_marginTop="@dimen/_5sdp"
@@ -150,7 +156,8 @@
                     android:hint="Password"
                     android:inputType="numberPassword"
                     android:maxLength="6"
-                    android:paddingStart="@dimen/_15sdp"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:drawablePadding="@dimen/_5sdp"
                     android:paddingEnd="@dimen/_15sdp"
                     android:singleLine="true"
                     android:textColor="#A2A2A2"

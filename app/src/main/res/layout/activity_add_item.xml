@@ -8,6 +8,7 @@
     </data>
 
     <RelativeLayout
+        android:id="@+id/relativeDaddy_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -66,27 +67,28 @@
 
 
         <ScrollView
-            android:layout_width="match_parent"
-            android:layout_below="@id/appbar_item"
-            android:layout_height="match_parent"
             android:id="@+id/scrollDaddy_login"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/appbar_item"
             android:fillViewport="true">
 
             <LinearLayout
+                android:id="@+id/relativeDaddy_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/relativeDaddy_login"
                 android:background="#fff"
+                android:gravity="bottom"
                 android:orientation="vertical"
                 tools:context=".view.activity.LoginActivity">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center|start"
                     android:id="@+id/linearDataAccount_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|start"
                     android:orientation="vertical">
-
 
 
                     <TextView
@@ -125,18 +127,20 @@
                             android:id="@+id/btnUp_item"
                             android:layout_width="fill_parent"
                             android:layout_height="@dimen/_60sdp"
+                            android:onClick="setPositive"
                             android:layout_marginEnd="@dimen/_5sdp"
                             android:layout_weight="1"
-                            android:background="@drawable/bg_button_back_form_global"
+                            android:background="@drawable/bg_button_neutral"
                             android:src="@drawable/ic_up_48_8bc34a" />
 
                         <ImageButton
                             android:id="@+id/btnDown_item"
                             android:layout_width="fill_parent"
+                            android:onClick="setNegative"
                             android:layout_height="@dimen/_60sdp"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:layout_weight="1"
-                            android:background="@drawable/bg_button_back_form_global"
+                            android:background="@drawable/bg_button_neutral"
                             android:src="@drawable/ic_down_48_ee0005" />
 
 
@@ -151,6 +155,7 @@
                         android:layout_marginTop="@dimen/_10sdp"
                         android:text="Escolha a perspectiva"
                         android:textColor="#CDCBCB"
+                        android:textSize="@dimen/_10ssp"
                         android:textStyle="bold" />
 
                     <Spinner
@@ -159,8 +164,10 @@
                         android:layout_height="@dimen/_48sdp"
                         android:layout_marginStart="@dimen/_15sdp"
                         android:layout_marginTop="@dimen/_10sdp"
+                        android:clickable="true"
                         android:layout_marginEnd="@dimen/_15sdp"
-                        android:background="@drawable/layout_shadow_white" />
+                        android:background="@drawable/layout_shadow_white"
+                        android:textSize="@dimen/_10ssp" />
 
 
                     <TextView
@@ -168,9 +175,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:text="Dê um nome e um valor ao registro"
                         android:textColor="#CDCBCB"
+                        android:textSize="@dimen/_10ssp"
                         android:textStyle="bold" />
 
                     <EditText
@@ -180,26 +188,77 @@
                         android:layout_marginStart="@dimen/_15sdp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_15sdp"
-                        android:background="@drawable/layout_shadow_white" />
+                        android:background="@drawable/layout_shadow_white"
+                        android:drawableStart="@drawable/ic_text_name"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:hint="Ex: Farmacia"
+                        android:inputType="textCapWords"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:singleLine="true"
+                        android:textSize="@dimen/_11ssp"
+                        android:textColor="#656363"
+                        android:textColorHint="#656363"
 
 
-                    <EditText
-                        android:id="@+id/edtValue_item"
-                        android:layout_width="@dimen/_150sdp"
-                        android:layout_height="@dimen/_48sdp"
+                        />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_15sdp"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:layout_marginEnd="@dimen/_15sdp"
-                        android:background="@drawable/layout_shadow_white" />
+                        android:orientation="horizontal">
+
+
+                        <com.blackcat.currencyedittext.CurrencyEditText
+                            android:id="@+id/edtPrice_new"
+                            android:layout_width="fill_parent"
+                            android:layout_height="@dimen/_48sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/layout_shadow_white"
+                            android:drawableStart="@drawable/ic_monetization_on_black_24dp"
+                            android:drawablePadding="@dimen/_5sdp"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:paddingEnd="@dimen/_10sdp"
+                            android:singleLine="true"
+                            android:textColor="#656363"
+
+                            android:textSize="@dimen/_11ssp" />
+
+                        <Button
+                            android:id="@+id/btnDate_item"
+                            android:layout_width="fill_parent"
+                            android:onClick="showCalendar"
+                            android:layout_height="@dimen/_48sdp"
+                            android:text="Calendario"
+                            style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
+                            android:layout_weight="1.1"
+                            android:background="@drawable/bg_button_blue_noshadow_global"
+                            android:drawableStart="@drawable/ic_baseline_calendar_today_24"
+                            android:drawablePadding="@dimen/_5sdp"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_15sdp"
+                            android:singleLine="true"
+                            android:textColor="#fff"
+                            android:textSize="@dimen/_11ssp" />
+
+
+                    </LinearLayout>
+
 
                     <TextView
                         android:id="@+id/txtCategory"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:text="Qual a categoria?"
                         android:textColor="#CDCBCB"
+                        android:textSize="@dimen/_10ssp"
                         android:textStyle="bold" />
 
                     <Spinner
@@ -209,37 +268,44 @@
                         android:layout_marginStart="@dimen/_15sdp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_15sdp"
-                        android:background="@drawable/layout_shadow_white" />
 
+                        android:background="@drawable/layout_shadow_white"
+                        android:clickable="true"
+                        android:textSize="@dimen/_10ssp" />
 
 
                 </LinearLayout>
-                <LinearLayout
+
+                <RelativeLayout
                     android:id="@+id/linearSocial_login"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="6"
                     android:gravity="bottom"
                     android:orientation="vertical">
 
 
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_60sdp">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_60sdp"
+                        android:background="@drawable/bg_relative_data_main">
 
-                                <com.github.clans.fab.FloatingActionButton
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_centerInParent="true"
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/fbBolsa_main"
+                            android:layout_width="wrap_content"
+                            android:onClick="saveData"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:backgroundTint="@color/button_positive"
+                            android:elevation="3dp"
+                            android:src="@drawable/ic_add_white"
+                            app:backgroundTint="#fff"
+                            app:borderWidth="@dimen/_3sdp" />
 
-                                    android:src="@drawable/ic_thumb_up"
-                                    app:fab_colorNormal="#2196F3"
-                                    app:fab_colorPressed="#3F51B5"
-                                    app:fab_colorRipple="#99FFFFFF" />
 
+                    </RelativeLayout>
 
-                            </RelativeLayout>
-
-                </LinearLayout>
+                </RelativeLayout>
 
 
             </LinearLayout>

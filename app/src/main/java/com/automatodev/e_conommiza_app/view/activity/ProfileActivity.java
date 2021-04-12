@@ -26,7 +26,6 @@ import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreGetCa
 import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreSaveCallback;
 import com.automatodev.e_conommiza_app.database.firebase.callback.StorageCallback;
 import com.automatodev.e_conommiza_app.database.firebase.firestore.FirestoreService;
-import com.automatodev.e_conommiza_app.database.seed.MockFile;
 import com.automatodev.e_conommiza_app.database.firebase.storage.StorageService;
 import com.automatodev.e_conommiza_app.database.sqlite.controller.PerspectiveController;
 import com.automatodev.e_conommiza_app.databinding.ActivityProfileTwoBinding;
@@ -37,13 +36,13 @@ import com.automatodev.e_conommiza_app.entidade.model.PerspectiveEntity;
 import com.automatodev.e_conommiza_app.entidade.model.UserEntity;
 import com.automatodev.e_conommiza_app.security.firebaseAuth.Authentication;
 import com.automatodev.e_conommiza_app.view.adapter.ItemsProfileAdapter;
+import com.automatodev.e_conommiza_app.view.utils.ComponentUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.iceteck.silicompressorr.FileUtils;
 
@@ -56,7 +55,6 @@ import java.util.Map;
 import id.zelory.compressor.Compressor;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -69,6 +67,7 @@ public class ProfileActivity extends AppCompatActivity {
     private List<PerspectiveEntity> perspectiveEntities;
     private Uri uriInternal;
     private Uri uriExternal;
+    private ComponentUtils componentUtils;
 
     public static boolean status;
 
@@ -79,6 +78,7 @@ public class ProfileActivity extends AppCompatActivity {
         View viewBinding = binding.getRoot();
         setContentView(viewBinding);
 
+        componentUtils = new ComponentUtils(this);
         setSupportActionBar(binding.toolbarMenuProfile);
 
         auth = new Authentication();
@@ -102,8 +102,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         for (String permission : permissions) {
             if (ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED)
-                Snackbar.make(binding.relativeDaddyProfile,
-                        "Para usar este recurso, você precisa dessa permissão!", Snackbar.LENGTH_LONG).show();
+               componentUtils.showSnackbar("Para usar este recurso, você precisa dessa permissão!", 2000);
             else
                 pickLib(binding.relativeDaddyProfile);
         }
@@ -241,9 +240,8 @@ public class ProfileActivity extends AppCompatActivity {
                                     }
                                 }
                             }.start();
-                            Snackbar.make(binding.relativeDaddyProfile
-                                    , "Tivemos um problema ao salvar seus dados\n Tente novamente."
-                                    , Snackbar.LENGTH_LONG).show();
+                          componentUtils.showSnackbar("Tivemos um problema ao salvar seus dados\n Tente novamente."
+                                    ,2000);
                             Log.e("logx", "OnFailure updateUser: " + e.getMessage());
                         }
                     });
@@ -266,16 +264,15 @@ public class ProfileActivity extends AppCompatActivity {
                             }
                         }
                     }.start();
-                    Snackbar.make(binding.relativeDaddyProfile
-                            , "Tivemos um problema ao salvar seus dados\n Tente novamente."
-                            , Snackbar.LENGTH_LONG).show();
+                    componentUtils.showSnackbar("Tivemos um problema ao salvar seus dados\n Tente novamente."
+                            ,2000);
                     Log.e("logx", "OnFailure uploadPhoto: " + e.getMessage());
 
                 }
             });
 
         } else
-            Snackbar.make(binding.relativeDaddyProfile, "Nenhuma alteração detectada!", Snackbar.LENGTH_LONG).show();
+            componentUtils.showSnackbar("Nenhuma alteração detectada!",2000);
 
     }
 

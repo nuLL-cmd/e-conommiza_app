@@ -5,11 +5,12 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
 @Entity(tableName = "tb_perspective")
-public class PerspectiveEntity  {
+public class PerspectiveEntity implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_perspective")
@@ -34,6 +35,13 @@ public class PerspectiveEntity  {
     public PerspectiveEntity() {
     }
 
+    @Ignore
+    public PerspectiveEntity(String month,int year){
+        this.month = month;
+        this.year = year;
+    }
+
+    @Ignore
     public PerspectiveEntity( String month, String userUid, int year, BigDecimal totalDebit, BigDecimal totalCredit, List<DataEntryEntity> itemsPerspective) {
         this.month = month;
         this.userUid = userUid;

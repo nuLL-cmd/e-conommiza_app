@@ -146,11 +146,13 @@
                     android:background="@drawable/layout_shadow_white"
                     android:hint="Usuário"
                     android:inputType="textEmailAddress"
-                    android:paddingStart="@dimen/_15ssp"
-                    android:paddingEnd="@dimen/_10sdp"
+                                       android:paddingEnd="@dimen/_10sdp"
                     android:singleLine="true"
                     android:textColor="#A2A2A2"
-                    android:textSize="@dimen/_10ssp" />
+                    android:textSize="@dimen/_10ssp"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:drawableStart="@drawable/ic_person"/>
 
                 <EditText
                     android:id="@+id/edtEmail_register"
@@ -161,11 +163,13 @@
                     android:background="@drawable/layout_shadow_white"
                     android:hint="E-mail"
                     android:inputType="textEmailAddress"
-                    android:paddingStart="@dimen/_15ssp"
                     android:paddingEnd="@dimen/_10sdp"
                     android:singleLine="true"
                     android:textColor="#A2A2A2"
-                    android:textSize="@dimen/_10ssp" />
+                    android:textSize="@dimen/_10ssp"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:drawableStart="@drawable/ic_email"/>
 
                 <EditText
                     android:id="@+id/edtPassword_register"
@@ -177,11 +181,13 @@
                     android:hint="Senha"
                     android:inputType="numberPassword"
                     android:maxLength="6"
-                    android:paddingStart="@dimen/_15ssp"
                     android:paddingEnd="@dimen/_10sdp"
                     android:singleLine="true"
                     android:textColor="#A2A2A2"
-                    android:textSize="@dimen/_10ssp" />
+                    android:textSize="@dimen/_10ssp"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:drawableStart="@drawable/ic_lock"/>
 
 
                 <Button

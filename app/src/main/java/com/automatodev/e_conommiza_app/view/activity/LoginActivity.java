@@ -51,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
 
         bindingProgress = DataBindingUtil.inflate(getLayoutInflater().from(this), R.layout.layout_dialog_progress, binding.relativeDaddyLogin, false);
         dialogProgress = new AlertDialog.Builder(this).create();
+        dialogProgress.setCancelable(false);
         dialogProgress.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         dialogProgress.setView(bindingProgress.getRoot());
 
