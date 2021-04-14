@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +19,7 @@ public class FragmentHost extends Fragment {
     private int position;
     public static ItemsAdapter itemsAdapter;
     private RecyclerView recyclerView;
+    private RelativeLayout relativeNoContent;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,6 +32,12 @@ public class FragmentHost extends Fragment {
         View view = inflater.inflate(R.layout.layout_perspectives, container, false);
         position = getArguments().getInt("position");
         recyclerView = view.findViewById(R.id.recyclerItens_layoutPerspective);
+        relativeNoContent = view.findViewById(R.id.relativeNoContent_layoutPerspective);
+        if (MainActivity.perspectiveEntities.get(position).getItemsPerspective().size() == 0)
+            relativeNoContent.setVisibility(View.VISIBLE);
+        else
+            relativeNoContent.setVisibility(View.GONE);
+
         itemsAdapter = new ItemsAdapter(MainActivity.perspectiveEntities.get(position).getItemsPerspective());
         return view;
     }

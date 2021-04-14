@@ -54,9 +54,12 @@
                         android:textStyle="bold" />
 
                     <de.hdodenhof.circleimageview.CircleImageView
+                        app:civ_border_width="@dimen/_1sdp"
+                        app:civ_border_color="@color/button_positive"
                         android:id="@+id/imgUser_item"
                         android:layout_width="@dimen/_35sdp"
                         android:layout_height="@dimen/_35sdp"
+                        android:elevation="@dimen/_3sdp"
                         android:layout_alignBottom="@id/txtWindow_item"
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="@dimen/_15sdp"
@@ -148,25 +151,26 @@
 
 
                     <TextView
-                        android:id="@+id/txtPerspective_item"
+                        android:id="@+id/txtTitlePerspective_item"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_15sdp"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:text="Escolha a perspectiva"
+                        android:text="Perspectiva selecionada"
                         android:textColor="#CDCBCB"
                         android:textSize="@dimen/_10ssp"
                         android:textStyle="bold" />
 
-                    <Spinner
-                        android:id="@+id/spinnerPerspective_item"
+                    <TextView
+                        android:id="@+id/txtPerspective_item"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_48sdp"
+                        android:gravity="center"
+                        android:textStyle="bold"
                         android:layout_marginStart="@dimen/_15sdp"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:clickable="true"
                         android:layout_marginEnd="@dimen/_15sdp"
-                        android:background="@drawable/layout_shadow_white"
+                        android:background="@drawable/bg_edt_blue"
                         android:textSize="@dimen/_10ssp" />
 
 

@@ -28,7 +28,6 @@ public class ItemsAdapter  extends RecyclerView.Adapter<ItemsAdapter.DataHandler
         }
 
         LayoutItemsMainBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.layout_items_main,parent, false);
-
         return new DataHandler(binding);
     }
 

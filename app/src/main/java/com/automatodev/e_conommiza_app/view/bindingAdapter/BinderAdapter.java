@@ -26,9 +26,9 @@ public class BinderAdapter {
     }
 
     @BindingAdapter("android:setValue")
-    public static void setValue(TextView text, Long date){
+    public static void setValue(TextView text,Long date){
         Locale locale = new Locale("pt", "br");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyy HH:mm:ss", locale);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyy", locale);
         text.setText(dateFormat.format(date));
     }
 

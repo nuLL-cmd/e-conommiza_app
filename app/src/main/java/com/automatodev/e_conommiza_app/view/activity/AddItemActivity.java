@@ -1,6 +1,7 @@
 package com.automatodev.e_conommiza_app.view.activity;
 
 import android.app.ProgressDialog;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -25,6 +27,11 @@ import com.automatodev.e_conommiza_app.view.adapter.CategoryAdapter;
 import com.automatodev.e_conommiza_app.view.adapter.PerspectiveSpinnerAdapter;
 import com.automatodev.e_conommiza_app.view.utils.ComponentUtils;
 import com.automatodev.e_conommiza_app.view.utils.FormatUtils;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 
 import java.math.BigDecimal;
 import java.text.DateFormat;
@@ -42,7 +49,6 @@ import io.reactivex.schedulers.Schedulers;
 
 public class AddItemActivity extends AppCompatActivity {
     private ActivityAddItemBinding binding;
-    private List<PerspectiveEntity> perspectiveEntities;
     private ComponentUtils componentUtils;
 
     private DataEntryEntity data;
@@ -52,6 +58,8 @@ public class AddItemActivity extends AppCompatActivity {
     private boolean negative = false;
     public static boolean status;
 
+    private String perspective;
+    private String urlPhoto;
     private String nameEntry;
     private String categoryEntry;
     private String typeEntiry;
@@ -69,8 +77,8 @@ public class AddItemActivity extends AppCompatActivity {
         setContentView(view);
 
         componentUtils = new ComponentUtils(this);
-        perspectiveEntities = new ArrayList<>();
         data = new DataEntryEntity();
+
         getData();
         inflateSpinnerCategory();
 
@@ -85,7 +93,6 @@ public class AddItemActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        ;
         status = false;
     }
 
@@ -93,8 +100,14 @@ public class AddItemActivity extends AppCompatActivity {
     public void getData() {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            perspectiveEntities = (List<PerspectiveEntity>) bundle.getSerializable("perspects");
-            inflateSpinnerPerspective(perspectiveEntities);
+            perspective = bundle.getString("perspective");
+            idPerspective = bundle.getLong("idPerspective");
+            binding.txtPerspectiveItem.setText(perspective);
+            urlPhoto = bundle.getString("urlPhoto");
+            if (urlPhoto != null){
+                binding.imgUserItem.setAlpha(0f);
+                Glide.with(this).load(urlPhoto).addListener(componentUtils.listenerFadeImage(binding.imgUserItem,600)).into(binding.imgUserItem);
+            }
         } else {
             Toast.makeText(this, "Você não tem nenhuma perspectiva cadastrada.\ncadastre uma perspecitve antes para adicionar um novo regisro", Toast.LENGTH_LONG).show();
             finish();
@@ -112,8 +125,8 @@ public class AddItemActivity extends AppCompatActivity {
         alertCalendar.show();
 
 
-        DateFormat format = new SimpleDateFormat("MMMM-yyyy", new Locale("pt", "br"));
-        Date date = format.parse("ABRIL-2021");
+        DateFormat format = new SimpleDateFormat("MMMM / yyyy", new Locale("pt", "br"));
+        Date date = format.parse(perspective);
         Calendar c = Calendar.getInstance();
         c.setTime(date);
 
@@ -134,7 +147,7 @@ public class AddItemActivity extends AppCompatActivity {
 
     }
 
-    public void inflateSpinnerPerspective(List<PerspectiveEntity> perspectiveEntities) {
+/*    public void inflateSpinnerPerspective(List<PerspectiveEntity> perspectiveEntities) {
         PerspectiveSpinnerAdapter adapter = new PerspectiveSpinnerAdapter(this, perspectiveEntities);
         binding.spinnerPerspectiveItem.setAdapter(adapter);
         binding.spinnerPerspectiveItem.setSelection(adapter.getCount() - 1);
@@ -152,7 +165,7 @@ public class AddItemActivity extends AppCompatActivity {
             }
         });
 
-    }
+    }*/
 
     public void inflateSpinnerCategory() {
         CategoryAdapter adapter = new CategoryAdapter(this, CategoryEntity.getCategories());

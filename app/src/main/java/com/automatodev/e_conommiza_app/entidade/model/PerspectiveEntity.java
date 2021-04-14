@@ -36,9 +36,10 @@ public class PerspectiveEntity implements Serializable {
     }
 
     @Ignore
-    public PerspectiveEntity(String month,int year){
+    public PerspectiveEntity(Long idPerspective,String month,int year){
         this.month = month;
         this.year = year;
+        this.idPerspective = idPerspective;
     }
 
     @Ignore

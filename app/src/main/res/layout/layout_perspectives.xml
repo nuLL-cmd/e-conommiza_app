@@ -22,16 +22,8 @@
             android:background="@drawable/bg_relative_perspective">
 
 
-
-
-            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:id="@+id/swipeRefresh_layoutPerspective"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/_10sdp">
-
-
                 <androidx.recyclerview.widget.RecyclerView
+                    android:visibility="visible"
                     android:id="@+id/recyclerItens_layoutPerspective"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -40,8 +32,57 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/layout_items_main" />
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_centerInParent="true"
+                android:layout_height="match_parent"
+                android:id="@+id/relativeNoContent_layoutPerspective">
 
-            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                <ImageView
+                    android:layout_width="@dimen/_170sdp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:layout_height="@dimen/_170sdp"
+                    android:id="@+id/imgNoContent_layout_perspective"
+                    android:src="@drawable/illustrator_vetor_tree" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_above="@id/imgNoContent_layout_perspective">
+
+                    <TextView
+                        android:id="@+id/txtTitleNoContent_layutPerspective"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:text="Tudo certo por aqui"
+                        android:textSize="@dimen/_11ssp" />
+
+                    <TextView
+                        android:id="@+id/txtMessageNoContent_lauyoutPerspective"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Comece adicionando novos items a sua lista"
+                        android:layout_below="@+id/txtTitleNoContent_layutPerspective"
+                        android:textSize="@dimen/_11ssp"
+                        android:textStyle="bold"
+                        android:layout_centerHorizontal="true"/>
+
+
+                </RelativeLayout>
+
+
+
+
+            </RelativeLayout>
+
+
+
 
         </RelativeLayout>
 

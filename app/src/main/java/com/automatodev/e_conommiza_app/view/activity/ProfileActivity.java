@@ -290,17 +290,7 @@ public class ProfileActivity extends AppCompatActivity {
                         if (user.getUrlPhoto() != null){
                             binding.imageUserProfile.setAlpha(0f);
                             Glide.with(ProfileActivity.this).load(user.getUrlPhoto())
-                                    .addListener(new RequestListener<Drawable>() {
-                                        @Override
-                                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                            return false;
-                                        }
-                                        @Override
-                                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                            binding.imageUserProfile.animate().setDuration(300).alpha(1f).start();
-                                            return false;
-                                        }
-                                    }).into(binding.imageUserProfile);
+                                    .addListener(componentUtils.listenerFadeImage(binding.imageUserProfile,300)).into(binding.imageUserProfile);
                         }
                     }
                 }
@@ -336,7 +326,7 @@ public class ProfileActivity extends AppCompatActivity {
                 @Override
                 public void run(){
                     try {
-                        sleep(1000);
+                        sleep(300);
                         binding.swipeRefreshProfile.setRefreshing(false);
                     } catch (InterruptedException e) {
                         e.printStackTrace();

@@ -49,10 +49,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/txtItem_layoutItem"
             android:layout_alignStart="@id/txtItem_layoutItem"
-            android:text="23.05.18, 3:33 PM"
             android:layout_marginTop="@dimen/_5sdp"
             android:singleLine="true"
             android:ellipsize="marquee"
+            android:setValue='@{dataEntry.dateEntry}'
             android:textColor="@android:color/darker_gray"
             android:textSize="@dimen/_9ssp"
             android:textStyle="bold" />

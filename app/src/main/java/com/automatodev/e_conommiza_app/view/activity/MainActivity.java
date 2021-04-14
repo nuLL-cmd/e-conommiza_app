@@ -1,39 +1,54 @@
 package com.automatodev.e_conommiza_app.view.activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.print.PrintAttributes;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.DatePicker;
 import android.widget.Toast;
 
+import com.automatodev.e_conommiza_app.R;
 import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreGetCallback;
 import com.automatodev.e_conommiza_app.database.firebase.firestore.FirestoreService;
 import com.automatodev.e_conommiza_app.database.seed.MockFile;
 import com.automatodev.e_conommiza_app.database.sqlite.controller.DataEntryController;
 import com.automatodev.e_conommiza_app.database.sqlite.controller.PerspectiveController;
 import com.automatodev.e_conommiza_app.databinding.ActivityMainBinding;
+import com.automatodev.e_conommiza_app.databinding.LayoutDialogCalendarBinding;
 import com.automatodev.e_conommiza_app.entidade.model.PerspectiveEntity;
 import com.automatodev.e_conommiza_app.entidade.model.UserEntity;
+import com.automatodev.e_conommiza_app.entidade.modelBuild.PerspectiveEntityBuilder;
 import com.automatodev.e_conommiza_app.entidade.response.PerspectiveWithData;
 import com.automatodev.e_conommiza_app.security.firebaseAuth.Authentication;
 import com.automatodev.e_conommiza_app.view.adapter.FragmentPageAdapter;
 import com.automatodev.e_conommiza_app.view.utils.ComponentUtils;
+import com.automatodev.e_conommiza_app.view.utils.FormatUtils;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -41,21 +56,23 @@ import io.reactivex.schedulers.Schedulers;
 
 
 @SuppressLint("SetTextI18n")
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     public static boolean status;
     public static boolean refresh;
 
     private ActivityMainBinding binding;
     public static List<PerspectiveEntity> perspectiveEntities;
+    public List<PerspectiveEntity> perspectiveList;
     private FirestoreService firestoreService;
     private Authentication auth;
     private UserEntity userEntity;
-    private MockFile mockFile;
     private ProgressDialog dialog;
     private FragmentPageAdapter fragmentAdapter;
-    private int positionLocal = 0;
     private ComponentUtils componentUtils;
+    private Calendar c;
+    private CompositeDisposable disposable;
+    private PerspectiveController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,11 +81,15 @@ public class MainActivity extends AppCompatActivity {
         View viewBinding = binding.getRoot();
         setContentView(viewBinding);
 
-        componentUtils = new ComponentUtils(this);
-        mockFile = new MockFile();
-        dialog = new ProgressDialog(this);
-
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
+        componentUtils = new ComponentUtils(this);
+        dialog = new ProgressDialog(this);
+        perspectiveList = new ArrayList<>();
+        perspectiveEntities = new ArrayList<>();
+        disposable = new CompositeDisposable();
+        controller = new ViewModelProvider(this).get(PerspectiveController.class);
+        fragmentAdapter = new FragmentPageAdapter(getSupportFragmentManager(), 0, perspectiveEntities);
 
         binding.txtMonthBalance.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
@@ -76,10 +97,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        perspectiveEntities = new ArrayList<>();
-
-        fragmentAdapter = new FragmentPageAdapter(getSupportFragmentManager(), 0, perspectiveEntities);
         binding.viewPagerMain.setAdapter(fragmentAdapter);
+
         getUser();
         showData();
     }
@@ -108,54 +127,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void actMainPerspective(View view) {
-        dialog.setMessage("Aguarde...");
-        dialog.setCancelable(false);
-        dialog.show();
-
-
-        PerspectiveController pController = new ViewModelProvider(this).get(PerspectiveController.class);
-        new CompositeDisposable().add(pController.addPerspective(mockFile.getPerspectiveMock()).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(() -> {
-                    new Thread() {
-                        @Override
-                        public void run() {
-                            try {
-                                sleep(1000);
-                                dialog.dismiss();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }.start();
-                    Toast.makeText(this, "Dado inserido com sucesso", Toast.LENGTH_LONG).show();
-                    binding.viewPagerMain.setCurrentItem(0);
-
-                }));
-    }
-
-    public void actMainProvento(View view) {
-        dialog.setMessage("Aguarde...");
-        dialog.setCancelable(false);
-        dialog.show();
-        DataEntryController dataEntryController = new ViewModelProvider(this).get(DataEntryController.class);
-        new CompositeDisposable().add(dataEntryController.addDataEntry(mockFile.getDataEntryMock()).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(() -> {
-                    new Thread() {
-                        @Override
-                        public void run() {
-                            try {
-                                sleep(1000);
-                                dialog.dismiss();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }.start();
-                    Toast.makeText(this, "Dado inserido com sucesso", Toast.LENGTH_LONG).show();
-                }));
-    }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -169,71 +140,94 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (!AddItemActivity.status) {
-            Intent intent = new Intent(this, AddItemActivity.class);
-            intent.putExtra("perspects", (Serializable) perspectiveEntities);
-            startActivity(intent);
-            binding.menu.close(true);
+            try {
+                int position = binding.viewPagerMain.getCurrentItem();
+                String perspective = perspectiveEntities.get(position).getMonth()+" / "+perspectiveEntities.get(position).getYear();
+                long idPerspective = perspectiveEntities.get(position).getIdPerspective();
+
+                Intent intent = new Intent(this, AddItemActivity.class);
+                intent.putExtra("perspective",perspective);
+                intent.putExtra("urlPhoto", userEntity.getUrlPhoto());
+                intent.putExtra("idPerspective", idPerspective);
+                startActivity(intent);
+                binding.menu.close(true);
+            } catch (Exception e) {
+                componentUtils.showSnackbar("Dados ainda não carregados, aguarde sua conexão", 2000);
+            }
+
         }
 
 
     }
 
     public void showData() {
-        CompositeDisposable disposable = new CompositeDisposable();
-        PerspectiveController controller = new ViewModelProvider(this).get(PerspectiveController.class);
-        disposable.add(controller.getPerspectiveWithData(auth.getUser().getUid()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(dataList -> {
+
+        try {
+            disposable.add(controller.getPerspectiveWithData(auth.getUser().getUid()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(dataList -> {
+                perspectiveEntities.clear();
+                perspectiveList.clear();
+
+                for (PerspectiveWithData p : dataList) {
+                    PerspectiveEntity perspectiveEntity = p.perspectiveEntity;
+                    perspectiveEntity.setItemsPerspective(p.dataEntryEntities);
+                    perspectiveEntities.add(perspectiveEntity);
+                    perspectiveList.add(new PerspectiveEntity(perspectiveEntity.getIdPerspective(), perspectiveEntity.getMonth(), perspectiveEntity.getYear()));
+                }
+
+
+                fragmentAdapter.notifyDataSetChanged();
+
+
+                if (perspectiveEntities.size() == 0) {
+                    binding.txtPerspectiveMain.setText("Não há perspectivas");
+                    binding.txtCreditMain.setVisibility(View.GONE);
+                    binding.txtDebitMain.setVisibility(View.GONE);
+                    binding.txtAmountPerspectiveMain.setText("Comece adicionando \n uma nova perspectiva!");
+
+                } else {
+                    binding.viewPagerMain.setCurrentItem(dataList.size(), true);
+                    binding.txtCreditMain.setVisibility(View.VISIBLE);
+                    binding.txtDebitMain.setVisibility(View.VISIBLE);
+                    binding.txtPerspectiveMain.setText(perspectiveEntities.get(dataList.size() - 1).getMonth() + " / " +
+                            perspectiveEntities.get(fragmentAdapter.getIntemCount()).getYear());
+                    binding.txtCreditMain.setText("R$ " + perspectiveEntities.get(dataList.size() - 1).getTotalCredit());
+                    binding.txtDebitMain.setText("R$ " + perspectiveEntities.get(dataList.size() - 1).getTotalDebit());
+                    binding.txtAmountPerspectiveMain.setText("Saldo - " + perspectiveEntities.get(dataList.size() - 1).getMonth() + "\nR$ " +
+                            perspectiveEntities.get(dataList.size() - 1).getTotalCredit().subtract(perspectiveEntities.get(dataList.size() - 1).getTotalDebit()));
+                }
+
+                binding.viewPagerMain.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                    @Override
+                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                    }
+
+                    @Override
+                    public void onPageSelected(int position) {
+                        binding.txtPerspectiveMain.setText(perspectiveEntities.get(position).getMonth() + " / " +
+                                perspectiveEntities.get(position).getYear());
+                        binding.txtCreditMain.setText("R$ " + perspectiveEntities.get(position).getTotalCredit());
+                        binding.txtDebitMain.setText("R$ " + perspectiveEntities.get(position).getTotalDebit());
+                        binding.txtAmountPerspectiveMain.setText("Saldo - " + perspectiveEntities.get(position).getMonth() + "\nR$ " +
+                                perspectiveEntities.get(position).getTotalCredit().subtract(perspectiveEntities.get(position).getTotalDebit()));
+                    }
+
+                    @Override
+                    public void onPageScrollStateChanged(int state) {
+
+                    }
+                });
+            }));
+        } catch (Exception e) {
+            perspectiveList.clear();
             perspectiveEntities.clear();
-
-            for (PerspectiveWithData p : dataList) {
-                PerspectiveEntity perspectiveEntity = p.perspectiveEntity;
-                perspectiveEntity.setItemsPerspective(p.dataEntryEntities);
-                perspectiveEntities.add(perspectiveEntity);
-            }
-
-
             fragmentAdapter.notifyDataSetChanged();
+            binding.txtPerspectiveMain.setText("Pproblema ao \ncarregar as perspectivas");
+            binding.txtCreditMain.setVisibility(View.GONE);
+            binding.txtDebitMain.setVisibility(View.GONE);
+            binding.txtAmountPerspectiveMain.setText("Parece que tivemos um erro ao processar os dados.");
 
-            if (perspectiveEntities.size() == 0) {
-                binding.txtPerspectiveMain.setText("Não há perspectivas");
-                binding.txtCreditMain.setVisibility(View.GONE);
-                binding.txtDebitMain.setVisibility(View.GONE);
-                binding.txtAmountPerspectiveMain.setText("Comece adicionando \n uma nova perspectiva!");
-
-            } else {
-
-                binding.txtCreditMain.setVisibility(View.VISIBLE);
-                binding.txtDebitMain.setVisibility(View.VISIBLE);
-                binding.txtPerspectiveMain.setText(perspectiveEntities.get(0).getMonth() + " / " +
-                        perspectiveEntities.get(fragmentAdapter.getIntemCount()).getYear());
-                binding.txtCreditMain.setText("R$ " + perspectiveEntities.get(0).getTotalCredit());
-                binding.txtDebitMain.setText("R$ " + perspectiveEntities.get(0).getTotalDebit());
-                binding.txtAmountPerspectiveMain.setText("Saldo - " + perspectiveEntities.get(0).getMonth() + "\nR$ " +
-                        perspectiveEntities.get(0).getTotalCredit().subtract(perspectiveEntities.get(0).getTotalDebit()));
-            }
-
-            binding.viewPagerMain.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                @Override
-                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-
-                }
-
-                @Override
-                public void onPageSelected(int position) {
-                    binding.txtPerspectiveMain.setText(perspectiveEntities.get(position).getMonth() + " / " +
-                            perspectiveEntities.get(position).getYear());
-                    binding.txtCreditMain.setText("R$ " + perspectiveEntities.get(position).getTotalCredit());
-                    binding.txtDebitMain.setText("R$ " + perspectiveEntities.get(position).getTotalDebit());
-                    binding.txtAmountPerspectiveMain.setText("Saldo - " + perspectiveEntities.get(position).getMonth() + "\nR$ " +
-                            perspectiveEntities.get(position).getTotalCredit().subtract(perspectiveEntities.get(position).getTotalDebit()));
-                }
-
-                @Override
-                public void onPageScrollStateChanged(int state) {
-
-                }
-            });
-        }));
+        }
 
 
     }
@@ -288,4 +282,85 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void showPicker(View view) throws ParseException {
+        c = Calendar.getInstance();
+
+        DatePickerDialog dialog = new DatePickerDialog(this, R.style.DialogTheme, this, c.get(Calendar.YEAR), c.get(Calendar.MONTH), 1);
+        Date date1 = getDate();
+        c.setTime(date1);
+        c.set(Calendar.DAY_OF_MONTH, c.getActualMinimum(Calendar.DAY_OF_MONTH));
+        dialog.getDatePicker().setMinDate(c.getTime().getTime());
+        c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
+        dialog.getDatePicker().setMaxDate(c.getTime().getTime());
+        dialog.show();
+
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        binding.menu.close(true);
+        dialog.setMessage("Aguarde...");
+        dialog.setCancelable(false);
+        dialog.show();
+
+        try {
+            String monthSelected = c.getDisplayName(Calendar.MONTH, Calendar.LONG, new Locale("pt", "br"));
+            PerspectiveEntity perspectiveEntity = new PerspectiveEntityBuilder()
+                    .year(year)
+                    .month(monthSelected.toUpperCase()).userUid(userEntity.getUserUid())
+                    .userUid(userEntity.getUserUid())
+                    .totalCredit(new BigDecimal("0.00"))
+                    .totalDebit(new BigDecimal("0.00"))
+                    .build();
+
+
+            PerspectiveController pController = new ViewModelProvider(this).get(PerspectiveController.class);
+            new CompositeDisposable().add(pController.addPerspective(perspectiveEntity).subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread()).subscribe(() -> {
+                        new Thread() {
+                            @Override
+                            public void run() {
+                                try {
+                                    sleep(100);
+                                    dialog.dismiss();
+                                    componentUtils.showSnackbar("Dado inserido com sucesso", 2000);
+
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }.start();
+
+
+                    }));
+
+        } catch (Exception e) {
+            componentUtils.showSnackbar("Dados ainda não carregados, aguarde sua conexão", 2000);
+            dialog.dismiss();
+        }
+
+    }
+
+    public Date getDate() throws ParseException {
+        DateFormat format = new SimpleDateFormat("MMMM-yyyy", new Locale("pt", "br"));
+        String pattern;
+        Date date;
+        c = Calendar.getInstance();
+
+        if (perspectiveList.size() == 0) {
+            String monthFormat = Calendar.getInstance().getDisplayName(Calendar.MONTH, Calendar.LONG, new Locale("pt", "br"));
+            int year = Calendar.getInstance().get(Calendar.YEAR);
+            pattern = monthFormat + "-" + year;
+            date = format.parse(pattern);
+            date.setMonth(date.getMonth());
+
+        } else {
+            pattern = perspectiveList.get(perspectiveList.size() - 1).getMonth() + "-" + perspectiveList.get(perspectiveList.size() - 1).getYear();
+            date = format.parse(pattern);
+            date.setMonth(date.getMonth() + 1);
+
+        }
+
+        return date;
+    }
 }
