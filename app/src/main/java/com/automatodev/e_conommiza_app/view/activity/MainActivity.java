@@ -142,11 +142,11 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         if (!AddItemActivity.status) {
             try {
                 int position = binding.viewPagerMain.getCurrentItem();
-                String perspective = perspectiveEntities.get(position).getMonth()+" / "+perspectiveEntities.get(position).getYear();
+                String perspective = perspectiveEntities.get(position).getMonth() + " / " + perspectiveEntities.get(position).getYear();
                 long idPerspective = perspectiveEntities.get(position).getIdPerspective();
 
                 Intent intent = new Intent(this, AddItemActivity.class);
-                intent.putExtra("perspective",perspective);
+                intent.putExtra("perspective", perspective);
                 intent.putExtra("urlPhoto", userEntity.getUrlPhoto());
                 intent.putExtra("idPerspective", idPerspective);
                 startActivity(intent);
@@ -192,7 +192,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                             perspectiveEntities.get(fragmentAdapter.getIntemCount()).getYear());
                     binding.txtCreditMain.setText("R$ " + perspectiveEntities.get(dataList.size() - 1).getTotalCredit());
                     binding.txtDebitMain.setText("R$ " + perspectiveEntities.get(dataList.size() - 1).getTotalDebit());
-                    binding.txtAmountPerspectiveMain.setText("Saldo - " + perspectiveEntities.get(dataList.size() - 1).getMonth() + "\nR$ " +
+                    binding.txtAmountPerspectiveMain.setText("Saldo por perspectiva " + "\n\nR$ " +
                             perspectiveEntities.get(dataList.size() - 1).getTotalCredit().subtract(perspectiveEntities.get(dataList.size() - 1).getTotalDebit()));
                 }
 
@@ -208,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                                 perspectiveEntities.get(position).getYear());
                         binding.txtCreditMain.setText("R$ " + perspectiveEntities.get(position).getTotalCredit());
                         binding.txtDebitMain.setText("R$ " + perspectiveEntities.get(position).getTotalDebit());
-                        binding.txtAmountPerspectiveMain.setText("Saldo - " + perspectiveEntities.get(position).getMonth() + "\nR$ " +
+                        binding.txtAmountPerspectiveMain.setText("Saldo por perspectiva" + "\n\nR$ " +
                                 perspectiveEntities.get(position).getTotalCredit().subtract(perspectiveEntities.get(position).getTotalDebit()));
                     }
 
