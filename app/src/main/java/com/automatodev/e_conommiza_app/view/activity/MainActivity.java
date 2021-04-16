@@ -1,8 +1,6 @@
 package com.automatodev.e_conommiza_app.view.activity;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
@@ -11,9 +9,6 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.print.PrintAttributes;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.DatePicker;
@@ -22,11 +17,8 @@ import android.widget.Toast;
 import com.automatodev.e_conommiza_app.R;
 import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreGetCallback;
 import com.automatodev.e_conommiza_app.database.firebase.firestore.FirestoreService;
-import com.automatodev.e_conommiza_app.database.seed.MockFile;
-import com.automatodev.e_conommiza_app.database.sqlite.controller.DataEntryController;
 import com.automatodev.e_conommiza_app.database.sqlite.controller.PerspectiveController;
 import com.automatodev.e_conommiza_app.databinding.ActivityMainBinding;
-import com.automatodev.e_conommiza_app.databinding.LayoutDialogCalendarBinding;
 import com.automatodev.e_conommiza_app.entidade.model.PerspectiveEntity;
 import com.automatodev.e_conommiza_app.entidade.model.UserEntity;
 import com.automatodev.e_conommiza_app.entidade.modelBuild.PerspectiveEntityBuilder;
@@ -36,10 +28,8 @@ import com.automatodev.e_conommiza_app.view.adapter.FragmentPageAdapter;
 import com.automatodev.e_conommiza_app.view.utils.ComponentUtils;
 import com.automatodev.e_conommiza_app.view.utils.FormatUtils;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentSnapshot;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -142,13 +132,20 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         if (!AddItemActivity.status) {
             try {
                 int position = binding.viewPagerMain.getCurrentItem();
-                String perspective = perspectiveEntities.get(position).getMonth() + " / " + perspectiveEntities.get(position).getYear();
-                long idPerspective = perspectiveEntities.get(position).getIdPerspective();
-
+              /*  String perspective = perspectiveEntities.get(position).getMonth() + " / " + perspectiveEntities.get(position).getYear();
+                long idPerspective = perspectiveEntities.get(position).getIdPerspective();*/
+                PerspectiveEntity perspectiveEntity = new PerspectiveEntityBuilder()
+                        .idPerspective(perspectiveEntities.get(position).getIdPerspective())
+                        .totalDebit(perspectiveEntities.get(position).getTotalDebit())
+                        .totalCredit(perspectiveEntities.get(position).getTotalCredit())
+                        .userUid(perspectiveEntities.get(position).getUserUid())
+                        .month(perspectiveEntities.get(position).getMonth())
+                        .year(perspectiveEntities.get(position).getYear())
+                        .build();
                 Intent intent = new Intent(this, AddItemActivity.class);
-                intent.putExtra("perspective", perspective);
+                intent.putExtra("perspective", perspectiveEntity);
                 intent.putExtra("urlPhoto", userEntity.getUrlPhoto());
-                intent.putExtra("idPerspective", idPerspective);
+                intent.putExtra("typeIntent", "new");
                 startActivity(intent);
                 binding.menu.close(true);
             } catch (Exception e) {
@@ -185,15 +182,11 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                     binding.txtAmountPerspectiveMain.setText("Comece adicionando \n uma nova perspectiva!");
 
                 } else {
+                    //int positionTest = getPosition(perspectiveEntities);
                     binding.viewPagerMain.setCurrentItem(dataList.size(), true);
                     binding.txtCreditMain.setVisibility(View.VISIBLE);
                     binding.txtDebitMain.setVisibility(View.VISIBLE);
-                    binding.txtPerspectiveMain.setText(perspectiveEntities.get(dataList.size() - 1).getMonth() + " / " +
-                            perspectiveEntities.get(fragmentAdapter.getIntemCount()).getYear());
-                    binding.txtCreditMain.setText("R$ " + perspectiveEntities.get(dataList.size() - 1).getTotalCredit());
-                    binding.txtDebitMain.setText("R$ " + perspectiveEntities.get(dataList.size() - 1).getTotalDebit());
-                    binding.txtAmountPerspectiveMain.setText("Saldo por perspectiva " + "\n\nR$ " +
-                            perspectiveEntities.get(dataList.size() - 1).getTotalCredit().subtract(perspectiveEntities.get(dataList.size() - 1).getTotalDebit()));
+                    setDataViewPager(dataList.size() - 1);
                 }
 
                 binding.viewPagerMain.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -204,12 +197,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
                     @Override
                     public void onPageSelected(int position) {
-                        binding.txtPerspectiveMain.setText(perspectiveEntities.get(position).getMonth() + " / " +
-                                perspectiveEntities.get(position).getYear());
-                        binding.txtCreditMain.setText("R$ " + perspectiveEntities.get(position).getTotalCredit());
-                        binding.txtDebitMain.setText("R$ " + perspectiveEntities.get(position).getTotalDebit());
-                        binding.txtAmountPerspectiveMain.setText("Saldo por perspectiva" + "\n\nR$ " +
-                                perspectiveEntities.get(position).getTotalCredit().subtract(perspectiveEntities.get(position).getTotalDebit()));
+                        setDataViewPager(position);
                     }
 
                     @Override
@@ -253,14 +241,12 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
                 @Override
                 public void onFailure(Exception e) {
-                    Log.e("logx", "Error getUser: " + e.getMessage());
                     e.printStackTrace();
                     errorLogout();
                 }
             });
 
         } catch (Exception e) {
-            Log.e("logx", "Exception getUser: " + e.getMessage());
             e.printStackTrace();
             errorLogout();
         }
@@ -301,13 +287,12 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         binding.menu.close(true);
         dialog.setMessage("Aguarde...");
         dialog.setCancelable(false);
-        dialog.show();
 
         try {
             String monthSelected = c.getDisplayName(Calendar.MONTH, Calendar.LONG, new Locale("pt", "br"));
             PerspectiveEntity perspectiveEntity = new PerspectiveEntityBuilder()
                     .year(year)
-                    .month(monthSelected.toUpperCase()).userUid(userEntity.getUserUid())
+                    .month(monthSelected.toUpperCase())
                     .userUid(userEntity.getUserUid())
                     .totalCredit(new BigDecimal("0.00"))
                     .totalDebit(new BigDecimal("0.00"))
@@ -362,5 +347,37 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         }
 
         return date;
+    }
+
+    public int getPosition(List<PerspectiveEntity> perspectiveEntities) throws ParseException {
+        DateFormat dateFormat = new SimpleDateFormat("MMMM", new Locale("pt", "br"));
+        int position = 0;
+        String month;
+        int year;
+        Date date;
+        Calendar calendar = Calendar.getInstance();
+
+        for (PerspectiveEntity p : perspectiveEntities) {
+            month = p.getMonth();
+            date = dateFormat.parse(month);
+
+            if (calendar.get(Calendar.MONTH) == date.getMonth() && calendar.get(Calendar.YEAR) == p.getYear()) {
+                return position;
+            }
+
+            position++;
+        }
+
+        return 0;
+    }
+
+    public void setDataViewPager(int position) {
+        binding.txtPerspectiveMain.setText(perspectiveEntities.get(position).getMonth() + " / " +
+                perspectiveEntities.get(fragmentAdapter.getIntemCount()).getYear());
+        binding.txtCreditMain.setText(FormatUtils.numberFormat(perspectiveEntities.get(position).getTotalCredit()));
+        binding.txtDebitMain.setText(FormatUtils.numberFormat(perspectiveEntities.get(position).getTotalDebit()));
+        binding.txtAmountPerspectiveMain.setText("Saldo por perspectiva " + "\n\n R$ "
+                + FormatUtils.decimalFormat(
+                perspectiveEntities.get(position).getTotalCredit().subtract(perspectiveEntities.get(position).getTotalDebit())));
     }
 }

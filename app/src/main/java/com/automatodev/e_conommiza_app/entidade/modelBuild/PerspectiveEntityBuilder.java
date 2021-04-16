@@ -8,6 +8,7 @@ import java.util.List;
 
 public class PerspectiveEntityBuilder {
 
+    private Long idPerspective;
     private String month;
     private String userUid;
     private Integer year;
@@ -17,7 +18,7 @@ public class PerspectiveEntityBuilder {
 
 
     public PerspectiveEntity build(){
-        return new PerspectiveEntity(this.month, this.userUid, this.year, this.totalDebit, this.totalCredit, this.itemsPerspective);
+        return new PerspectiveEntity(this.idPerspective,this.month, this.userUid, this.year, this.totalDebit, this.totalCredit, this.itemsPerspective);
     }
 
     public PerspectiveEntityBuilder month(String month){
@@ -51,6 +52,10 @@ public class PerspectiveEntityBuilder {
 
     public PerspectiveEntityBuilder itemsPerspective(List<DataEntryEntity> itemsPerspective){
         this.itemsPerspective = itemsPerspective;
+        return this;
+    }
+    public PerspectiveEntityBuilder idPerspective(Long idPerspective){
+        this.idPerspective= idPerspective;
         return this;
     }
 }

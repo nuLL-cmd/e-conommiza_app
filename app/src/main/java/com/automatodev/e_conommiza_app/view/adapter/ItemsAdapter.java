@@ -16,9 +16,19 @@ import java.util.List;
 public class ItemsAdapter  extends RecyclerView.Adapter<ItemsAdapter.DataHandler>{
     private List<DataEntryEntity> dataEntryEntities;
     private LayoutInflater layoutInflater;
+    private OnItemClickListener listener;
+
+
+    public interface OnItemClickListener{
+        void onIitemClick(int position);
+    }
 
     public ItemsAdapter(List<DataEntryEntity> dataEntryEntities){
         this.dataEntryEntities = dataEntryEntities;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.listener = listener;
     }
     @NonNull
     @Override
@@ -28,7 +38,7 @@ public class ItemsAdapter  extends RecyclerView.Adapter<ItemsAdapter.DataHandler
         }
 
         LayoutItemsMainBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.layout_items_main,parent, false);
-        return new DataHandler(binding);
+        return new DataHandler(binding,listener);
     }
 
     @Override
@@ -43,9 +53,19 @@ public class ItemsAdapter  extends RecyclerView.Adapter<ItemsAdapter.DataHandler
 
     public class DataHandler extends RecyclerView.ViewHolder {
         LayoutItemsMainBinding binding;
-        public DataHandler(@NonNull LayoutItemsMainBinding binding) {
+        public DataHandler(@NonNull LayoutItemsMainBinding binding, OnItemClickListener listener) {
             super(binding.getRoot());
             this.binding = binding;
+
+            itemView.setOnClickListener(v ->{
+                if (listener != null){
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION){
+                        listener.onIitemClick(position);
+                    }
+                }
+            });
+
         }
 
         public void setBinding(DataEntryEntity dataEntryEntity){

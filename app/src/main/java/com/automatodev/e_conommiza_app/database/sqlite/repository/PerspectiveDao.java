@@ -5,6 +5,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Transaction;
+import androidx.room.Update;
 
 import com.automatodev.e_conommiza_app.entidade.model.PerspectiveEntity;
 import com.automatodev.e_conommiza_app.entidade.response.PerspectiveWithData;
@@ -29,5 +30,9 @@ public interface PerspectiveDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     Completable addPerspective(PerspectiveEntity perspectiveEntity);
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    Completable updatePerspective(PerspectiveEntity perspectiveEntity);
+
 
 }

@@ -39,5 +39,9 @@ public class PerspectiveController extends AndroidViewModel {
         return databaseConfig.perspectiveDao().getPerspectiveWithData(uid);
     }
 
+    public Completable updatePerspective(PerspectiveEntity perspectiveEntity){
+        return databaseConfig.perspectiveDao().updatePerspective(perspectiveEntity);
+    }
+
 
 }

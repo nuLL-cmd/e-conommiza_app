@@ -11,9 +11,10 @@
     </data>
 
     <RelativeLayout
+        android:animateLayoutChanges="true"
+        android:background="?android:attr/selectableItemBackground"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_70sdp"
-        android:background="@color/white_fff">
+        android:layout_height="@dimen/_70sdp">
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/imageItem_layoutItem"
@@ -25,6 +26,16 @@
             android:padding="@dimen/_10sdp"
             android:src="@drawable/ic_restaurant"
             app:riv_corner_radius="@dimen/_7sdp" />
+
+        <View
+            android:id="@+id/viewStatus_layoutItem"
+            android:layout_width="4dp"
+            android:visibility="visible"
+            android:layout_alignTop="@id/imageItem_layoutItem"
+            android:layout_alignBottom="@id/imageItem_layoutItem"
+            android:background='@{dataEntry.typeEntry.equals("entry") ? Color.parseColor("#8BC34A") : Color.parseColor("#ee0005")}'
+            android:layout_height="match_parent" />
+
 
 
         <TextView
@@ -72,12 +83,13 @@
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_toEndOf="@id/txtDataItem_layout_item"
             android:gravity="center|end"
-            android:text='@{dataEntry.typeEntry.equals("entry") ? "+ R$ "+dataEntry.valueEntry : "- R$ "+dataEntry.valueEntry}'
+            android:setRawValue='@{dataEntry.valueEntry}'
             android:textColor="@color/font_primary"
             android:textSize="@dimen/_9ssp"
             android:textStyle="bold" />
 
         <View
+            android:id="@+id/viewSeparator_layoutItem"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1sdp"
             android:background="#CDCDCD"

@@ -9,6 +9,7 @@ import androidx.databinding.BindingAdapter;
 import com.airbnb.lottie.LottieAnimationView;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
@@ -30,6 +31,13 @@ public class BinderAdapter {
         Locale locale = new Locale("pt", "br");
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyy", locale);
         text.setText(dateFormat.format(date));
+    }
+
+    @BindingAdapter("android:setRawValue")
+    public static void setRawValue(TextView textView, BigDecimal value){
+        NumberFormat format = NumberFormat.getCurrencyInstance();
+        textView.setText(format.format(value));
+
     }
 
 }

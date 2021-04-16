@@ -52,6 +52,17 @@ public class PerspectiveEntity implements Serializable {
         this.itemsPerspective = itemsPerspective;
     }
 
+    @Ignore
+    public PerspectiveEntity(Long idPerspective, String month, String userUid, int year, BigDecimal totalDebit, BigDecimal totalCredit, List<DataEntryEntity> itemsPerspective) {
+        this.idPerspective = idPerspective;
+        this.month = month;
+        this.userUid = userUid;
+        this.year = year;
+        this.totalDebit = totalDebit;
+        this.totalCredit = totalCredit;
+        this.itemsPerspective = itemsPerspective;
+    }
+
     public Long getIdPerspective() {
         return idPerspective;
     }
