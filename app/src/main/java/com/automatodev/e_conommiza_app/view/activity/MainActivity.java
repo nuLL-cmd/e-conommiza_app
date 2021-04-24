@@ -23,6 +23,7 @@ import com.automatodev.e_conommiza_app.entidade.model.PerspectiveEntity;
 import com.automatodev.e_conommiza_app.entidade.model.UserEntity;
 import com.automatodev.e_conommiza_app.entidade.modelBuild.PerspectiveEntityBuilder;
 import com.automatodev.e_conommiza_app.entidade.response.PerspectiveWithData;
+import com.automatodev.e_conommiza_app.preferences.UserPreferences;
 import com.automatodev.e_conommiza_app.security.firebaseAuth.Authentication;
 import com.automatodev.e_conommiza_app.view.adapter.FragmentPageAdapter;
 import com.automatodev.e_conommiza_app.view.utils.ComponentUtils;
@@ -110,7 +111,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
         if (!ProfileActivity.status) {
             Intent intent = new Intent(this, ProfileActivity.class);
-            intent.putExtra("user", userEntity);
             startActivity(intent);
             binding.menu.close(true);
         }
@@ -221,35 +221,44 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
     public void getUser() {
-
         auth = new Authentication();
         String uid = auth.getUser().getUid();
-        firestoreService = new FirestoreService();
-        try {
-            firestoreService.getUser(uid, new FirestoreGetCallback() {
-                @Override
-                public void onSuccess(Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot snapshot = task.getResult();
-                        if (snapshot.exists()) {
-                            binding.spinktNameMain.setVisibility(View.GONE);
-                            userEntity = snapshot.toObject(UserEntity.class);
-                            binding.txtUserMain.setText(userEntity.getUserName());
+        UserPreferences preferences = new UserPreferences(this, "user");
+        userEntity = preferences.getUser();
+
+        if (userEntity.getUserUid().equals(uid)) {
+            binding.txtUserMain.setText(userEntity.getUserName());
+        } else {
+            firestoreService = new FirestoreService();
+            try {
+                firestoreService.getUser(uid, new FirestoreGetCallback() {
+                    @Override
+                    public void onSuccess(Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot snapshot = task.getResult();
+                            if (snapshot.exists()) {
+                                binding.spinktNameMain.setVisibility(View.GONE);
+                                userEntity = snapshot.toObject(UserEntity.class);
+                                preferences.setUser(userEntity);
+                                binding.txtUserMain.setText(userEntity.getUserName());
+                            }
                         }
                     }
-                }
 
-                @Override
-                public void onFailure(Exception e) {
-                    e.printStackTrace();
-                    errorLogout();
-                }
-            });
+                    @Override
+                    public void onFailure(Exception e) {
+                        e.printStackTrace();
+                        errorLogout();
+                    }
+                });
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            errorLogout();
+            } catch (Exception e) {
+                e.printStackTrace();
+                errorLogout();
+            }
+
         }
+
     }
 
     private void errorLogout() {

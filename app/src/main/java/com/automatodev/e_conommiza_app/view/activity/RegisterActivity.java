@@ -15,6 +15,7 @@ import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreSaveC
 import com.automatodev.e_conommiza_app.database.firebase.firestore.FirestoreService;
 import com.automatodev.e_conommiza_app.entidade.model.UserEntity;
 import com.automatodev.e_conommiza_app.entidade.modelBuild.UserEntityBuilder;
+import com.automatodev.e_conommiza_app.preferences.UserPreferences;
 import com.automatodev.e_conommiza_app.security.firebaseAuth.Authentication;
 import com.automatodev.e_conommiza_app.security.callback.FirebaseAuthCallback;
 import com.automatodev.e_conommiza_app.databinding.ActivityRegisterBinding;
@@ -32,6 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
     public static boolean status;
 
     private ActivityRegisterBinding binding;
+    private UserPreferences preferences;
 
 
     @Override
@@ -62,6 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void actRegisterMain(View view) {
+        preferences = new UserPreferences(this, "user");
         Authentication auth = new Authentication();
         FirestoreService firestoreService = new FirestoreService();
         AlertDialog dialogProgress = new AlertDialog.Builder(this).create();
@@ -92,6 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
                         firestoreService.saveUser(userEntity, new FirestoreSaveCallback() {
                             @Override
                             public void onSuccess() {
+                                preferences.setUser(userEntity);
                                 bindingProgress.setIsLoading(false);
                                 bindingProgress.setStatus(true);
                                 bindingProgress.setInformation("Sucesso!!");

@@ -34,6 +34,7 @@ import com.automatodev.e_conommiza_app.databinding.LayoutDialogLogoutBinding;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogProgressBinding;
 import com.automatodev.e_conommiza_app.entidade.model.PerspectiveEntity;
 import com.automatodev.e_conommiza_app.entidade.model.UserEntity;
+import com.automatodev.e_conommiza_app.preferences.UserPreferences;
 import com.automatodev.e_conommiza_app.security.firebaseAuth.Authentication;
 import com.automatodev.e_conommiza_app.view.adapter.ItemsProfileAdapter;
 import com.automatodev.e_conommiza_app.view.utils.ComponentUtils;
@@ -44,6 +45,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.auth.User;
 import com.iceteck.silicompressorr.FileUtils;
 
 import java.io.File;
@@ -63,11 +65,10 @@ public class ProfileActivity extends AppCompatActivity {
     private Authentication auth;
     private FirestoreService firestoreService;
     private StorageService storageService;
-    private UserEntity user;
-    private List<PerspectiveEntity> perspectiveEntities;
     private Uri uriInternal;
     private Uri uriExternal;
     private ComponentUtils componentUtils;
+    private UserPreferences preferences;
 
     public static boolean status;
 
@@ -202,6 +203,9 @@ public class ProfileActivity extends AppCompatActivity {
                 public void onSuccess(Uri uri) {
                     bindingProgress.setInformation("Atualizando dados...");
                     map.put("urlPhoto", uri.toString());
+                    preferences = new UserPreferences(ProfileActivity.this, "user");
+                    preferences.updateField("urlPhoto",uri.toString());
+
                     firestoreService.updateUser(auth.getUser().getUid(), map, new FirestoreSaveCallback() {
                         @Override
                         public void onSuccess() {
@@ -209,6 +213,7 @@ public class ProfileActivity extends AppCompatActivity {
                             bindingProgress.setInformation("Sucesso!!");
                             bindingProgress.setIsLoading(false);
                             bindingProgress.setStatus(true);
+
                             new Thread() {
                                 @Override
                                 public void run() {
@@ -277,34 +282,16 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void getUser() {
-        String uid = auth.getUser().getUid();
+        UserPreferences preferences = new UserPreferences(this, "user");
+        String urlPhoto = preferences.getUser().getUrlPhoto();
         try {
-            firestoreService.getUser(uid, new FirestoreGetCallback() {
-                @Override
-                public void onSuccess(Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot doc = task.getResult();
-                        if (doc.exists()) {
-                            user = doc.toObject(UserEntity.class);
-                        }
-                        if (user.getUrlPhoto() != null){
-                            binding.imageUserProfile.setAlpha(0f);
-                            Glide.with(ProfileActivity.this).load(user.getUrlPhoto())
-                                    .addListener(componentUtils.listenerFadeImage(binding.imageUserProfile,300)).into(binding.imageUserProfile);
-                        }
-                    }
-                }
-                @Override
-                public void onFailure(Exception e) {
-                    Log.e("logx", "onFailure getUser: " + e.getMessage());
-                    Toast.makeText(ProfileActivity.this, "Houve complicações ao carregar seu perfil, favor feche a aplicação e tente novamente", Toast.LENGTH_SHORT).show();
-                    finish();
-                }
-            });
+            binding.imageUserProfile.setAlpha(0f);
+            Glide.with(ProfileActivity.this).load(urlPhoto)
+                    .addListener(componentUtils.listenerFadeImage(binding.imageUserProfile,300)).into(binding.imageUserProfile);
+
         } catch (Exception e) {
             Log.e("logx", "Exception getUser: " + e.getMessage());
-            Toast.makeText(this, "Houve complicações ao carregar seu perfil, favor feche a aplicação e tente novamente", Toast.LENGTH_SHORT).show();
-            finish();
+            componentUtils.showSnackbar("Houve um problema ao carregar seu perfil, favor feche a aplicação e tente novamente",2000);
         }
     }
 
