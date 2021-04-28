@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,7 +21,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.automatodev.e_conommiza_app.R;
-import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreGetCallback;
 import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreSaveCallback;
 import com.automatodev.e_conommiza_app.database.firebase.callback.StorageCallback;
 import com.automatodev.e_conommiza_app.database.firebase.firestore.FirestoreService;
@@ -32,26 +30,21 @@ import com.automatodev.e_conommiza_app.databinding.ActivityProfileTwoBinding;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogAboutBinding;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogLogoutBinding;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogProgressBinding;
-import com.automatodev.e_conommiza_app.entidade.model.PerspectiveEntity;
 import com.automatodev.e_conommiza_app.entidade.model.UserEntity;
 import com.automatodev.e_conommiza_app.preferences.UserPreferences;
 import com.automatodev.e_conommiza_app.security.firebaseAuth.Authentication;
 import com.automatodev.e_conommiza_app.view.adapter.ItemsProfileAdapter;
-import com.automatodev.e_conommiza_app.view.utils.ComponentUtils;
+import com.automatodev.e_conommiza_app.utils.ComponentUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.auth.User;
 import com.iceteck.silicompressorr.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import id.zelory.compressor.Compressor;
@@ -69,6 +62,7 @@ public class ProfileActivity extends AppCompatActivity {
     private Uri uriExternal;
     private ComponentUtils componentUtils;
     private UserPreferences preferences;
+    private UserEntity userEntity;
 
     public static boolean status;
 
@@ -87,7 +81,7 @@ public class ProfileActivity extends AppCompatActivity {
         storageService = new StorageService();
 
         getUser();
-        showData();
+
 
         binding.swipeRefreshProfile.setColorSchemeResources(R.color.button_positive);
         binding.swipeRefreshProfile.setRefreshing(true);
@@ -95,7 +89,7 @@ public class ProfileActivity extends AppCompatActivity {
         binding.lblSinceProfile.setTexts(new String[]{"Você tem", "Você pode consultar um", "Organize seus gastos ", "Seu bolso agradeçe"});
         binding.txtSinceProfile.setTexts(new String[]{"Você tem", "Você pode consultar um", "Organize seus gastos ", "Seu bolso agradeçe"});
 
-       //binding.txtSinceProfile.setTexts(new String[]{perspectiveEntities.size() + " perspectivas cadastradas", "relatorio clicando no gráfico", "em proventos e despessas", "esta boa ação"});
+        //binding.txtSinceProfile.setTexts(new String[]{perspectiveEntities.size() + " perspectivas cadastradas", "relatorio clicando no gráfico", "em proventos e despessas", "esta boa ação"});
     }
 
     @Override
@@ -103,7 +97,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         for (String permission : permissions) {
             if (ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED)
-               componentUtils.showSnackbar("Para usar este recurso, você precisa dessa permissão!", 2000);
+                componentUtils.showSnackbar("Para usar este recurso, você precisa dessa permissão!", 2000);
             else
                 pickLib(binding.relativeDaddyProfile);
         }
@@ -204,7 +198,7 @@ public class ProfileActivity extends AppCompatActivity {
                     bindingProgress.setInformation("Atualizando dados...");
                     map.put("urlPhoto", uri.toString());
                     preferences = new UserPreferences(ProfileActivity.this, "user");
-                    preferences.updateField("urlPhoto",uri.toString());
+                    preferences.updateField("urlPhoto", uri.toString());
 
                     firestoreService.updateUser(auth.getUser().getUid(), map, new FirestoreSaveCallback() {
                         @Override
@@ -245,8 +239,8 @@ public class ProfileActivity extends AppCompatActivity {
                                     }
                                 }
                             }.start();
-                          componentUtils.showSnackbar("Tivemos um problema ao salvar seus dados\n Tente novamente."
-                                    ,2000);
+                            componentUtils.showSnackbar("Tivemos um problema ao salvar seus dados\n Tente novamente."
+                                    , 2000);
                             Log.e("logx", "OnFailure updateUser: " + e.getMessage());
                         }
                     });
@@ -270,28 +264,43 @@ public class ProfileActivity extends AppCompatActivity {
                         }
                     }.start();
                     componentUtils.showSnackbar("Tivemos um problema ao salvar seus dados\n Tente novamente."
-                            ,2000);
+                            , 2000);
                     Log.e("logx", "OnFailure uploadPhoto: " + e.getMessage());
 
                 }
             });
 
         } else
-            componentUtils.showSnackbar("Nenhuma alteração detectada!",2000);
+            componentUtils.showSnackbar("Nenhuma alteração detectada!", 2000);
 
     }
 
     public void getUser() {
         UserPreferences preferences = new UserPreferences(this, "user");
-        String urlPhoto = preferences.getUser().getUrlPhoto();
-        try {
-            binding.imageUserProfile.setAlpha(0f);
-            Glide.with(ProfileActivity.this).load(urlPhoto)
-                    .addListener(componentUtils.listenerFadeImage(binding.imageUserProfile,300)).into(binding.imageUserProfile);
+        userEntity = preferences.getUser();
 
-        } catch (Exception e) {
-            Log.e("logx", "Exception getUser: " + e.getMessage());
-            componentUtils.showSnackbar("Houve um problema ao carregar seu perfil, favor feche a aplicação e tente novamente",2000);
+        if (!userEntity.getUserUid().equals("")) {
+                binding.imageUserProfile.setAlpha(0f);
+                Glide.with(ProfileActivity.this).load(userEntity.getUrlPhoto())
+                        .addListener(componentUtils.listenerFadeImage(binding.imageUserProfile, 300)).into(binding.imageUserProfile);
+                showData(userEntity.getUserUid());
+
+        } else {
+            componentUtils.showSnackbar("Houve um problema ao carregar suas perspectivas, favor feche a aplicação e tente novamente", 1500);
+            new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        sleep(1500);
+                        finish();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        finish();
+
+                    }
+                }
+            }.start();
+
         }
     }
 
@@ -299,28 +308,46 @@ public class ProfileActivity extends AppCompatActivity {
         NavUtils.navigateUpFromSameTask(this);
     }
 
-    public void showData() {
-        PerspectiveController perspectiveController  = new ViewModelProvider(this).get(PerspectiveController.class);
-        CompositeDisposable disposable = new CompositeDisposable();
-        disposable.add(perspectiveController.getAllPerspectives().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(perspectivies ->{
-            if (perspectivies != null){
-                ItemsProfileAdapter adapter = new ItemsProfileAdapter(perspectivies);
-                binding.recyclerItemsProfile.hasFixedSize();
-                binding.recyclerItemsProfile.setAdapter(adapter);
-                disposable.dispose();
-            }
-            new Thread(){
+    public void showData(String uid) {
+        try{
+            PerspectiveController perspectiveController = new ViewModelProvider(this).get(PerspectiveController.class);
+            CompositeDisposable disposable = new CompositeDisposable();
+            disposable.add(perspectiveController.getPerspectiveById(uid).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(perspectivies -> {
+                if (perspectivies != null) {
+                    ItemsProfileAdapter adapter = new ItemsProfileAdapter(perspectivies);
+                    binding.recyclerItemsProfile.hasFixedSize();
+                    binding.recyclerItemsProfile.setAdapter(adapter);
+                    disposable.dispose();
+                }
+                new Thread() {
+                    @Override
+                    public void run() {
+                        try {
+                            sleep(300);
+                            binding.swipeRefreshProfile.setRefreshing(false);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }.start();
+            }));
+
+        }catch (Exception e){
+            componentUtils.showSnackbar("Houve um problema ao carregar suas perspectivas, favor feche a aplicação e tente novamente", 1500);
+            new Thread() {
                 @Override
-                public void run(){
+                public void run() {
                     try {
-                        sleep(300);
-                        binding.swipeRefreshProfile.setRefreshing(false);
+                        sleep(1500);
+                        finish();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
+                        finish();
+
                     }
                 }
             }.start();
-        } ));
+        }
     }
 
     public void about() {

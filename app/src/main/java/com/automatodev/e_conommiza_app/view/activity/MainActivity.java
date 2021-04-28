@@ -26,8 +26,8 @@ import com.automatodev.e_conommiza_app.entidade.response.PerspectiveWithData;
 import com.automatodev.e_conommiza_app.preferences.UserPreferences;
 import com.automatodev.e_conommiza_app.security.firebaseAuth.Authentication;
 import com.automatodev.e_conommiza_app.view.adapter.FragmentPageAdapter;
-import com.automatodev.e_conommiza_app.view.utils.ComponentUtils;
-import com.automatodev.e_conommiza_app.view.utils.FormatUtils;
+import com.automatodev.e_conommiza_app.utils.ComponentUtils;
+import com.automatodev.e_conommiza_app.utils.FormatUtils;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 
@@ -52,9 +52,9 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     public static boolean status;
     public static boolean refresh;
 
-    private ActivityMainBinding binding;
     public static List<PerspectiveEntity> perspectiveEntities;
-    public List<PerspectiveEntity> perspectiveList;
+    private List<PerspectiveEntity> perspectiveList;
+    private ActivityMainBinding binding;
     private FirestoreService firestoreService;
     private Authentication auth;
     private UserEntity userEntity;
@@ -82,11 +82,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         controller = new ViewModelProvider(this).get(PerspectiveController.class);
         fragmentAdapter = new FragmentPageAdapter(getSupportFragmentManager(), 0, perspectiveEntities);
 
-        binding.txtMonthBalance.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus) {
-                binding.txtMonthBalance.setSelected(true);
-            }
-        });
 
         binding.viewPagerMain.setAdapter(fragmentAdapter);
 
@@ -132,8 +127,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         if (!AddItemActivity.status) {
             try {
                 int position = binding.viewPagerMain.getCurrentItem();
-              /*  String perspective = perspectiveEntities.get(position).getMonth() + " / " + perspectiveEntities.get(position).getYear();
-                long idPerspective = perspectiveEntities.get(position).getIdPerspective();*/
                 PerspectiveEntity perspectiveEntity = new PerspectiveEntityBuilder()
                         .idPerspective(perspectiveEntities.get(position).getIdPerspective())
                         .totalDebit(perspectiveEntities.get(position).getTotalDebit())
@@ -144,7 +137,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                         .build();
                 Intent intent = new Intent(this, AddItemActivity.class);
                 intent.putExtra("perspective", perspectiveEntity);
-                intent.putExtra("urlPhoto", userEntity.getUrlPhoto());
                 intent.putExtra("typeIntent", "new");
                 startActivity(intent);
                 binding.menu.close(true);
@@ -154,13 +146,14 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
         }
 
-
     }
 
     public void showData() {
 
         try {
             disposable.add(controller.getPerspectiveWithData(auth.getUser().getUid()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(dataList -> {
+                binding.txtValueBalanceMain.animate().setDuration(300).alpha(0f).start();
+                binding.spinktBalanceMain.setVisibility(View.VISIBLE);
                 perspectiveEntities.clear();
                 perspectiveList.clear();
 
@@ -180,13 +173,17 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                     binding.txtCreditMain.setVisibility(View.GONE);
                     binding.txtDebitMain.setVisibility(View.GONE);
                     binding.txtAmountPerspectiveMain.setText("Comece adicionando \n uma nova perspectiva!");
+                    calculeBalance();
 
                 } else {
                     //int positionTest = getPosition(perspectiveEntities);
-                    binding.viewPagerMain.setCurrentItem(dataList.size(), true);
+                    binding.viewPagerMain.setCurrentItem(0, true);
                     binding.txtCreditMain.setVisibility(View.VISIBLE);
                     binding.txtDebitMain.setVisibility(View.VISIBLE);
                     setDataViewPager(dataList.size() - 1);
+                    calculeBalance();
+
+
                 }
 
                 binding.viewPagerMain.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -215,6 +212,8 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
             binding.txtDebitMain.setVisibility(View.GONE);
             binding.txtAmountPerspectiveMain.setText("Parece que tivemos um erro ao processar os dados.");
 
+        }finally {
+            Toast.makeText(this, "teste", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -228,6 +227,8 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
         if (userEntity.getUserUid().equals(uid)) {
             binding.txtUserMain.setText(userEntity.getUserName());
+            stateRefreshUserName();
+
         } else {
             firestoreService = new FirestoreService();
             try {
@@ -237,10 +238,10 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                         if (task.isSuccessful()) {
                             DocumentSnapshot snapshot = task.getResult();
                             if (snapshot.exists()) {
-                                binding.spinktNameMain.setVisibility(View.GONE);
                                 userEntity = snapshot.toObject(UserEntity.class);
                                 preferences.setUser(userEntity);
                                 binding.txtUserMain.setText(userEntity.getUserName());
+                                stateRefreshUserName();
                             }
                         }
                     }
@@ -260,6 +261,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         }
 
     }
+
 
     private void errorLogout() {
         Toast.makeText(this, "Tivemos um problema ao carregar sessão... Saindo...", Toast.LENGTH_LONG).show();
@@ -389,4 +391,54 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                 + FormatUtils.decimalFormat(
                 perspectiveEntities.get(position).getTotalCredit().subtract(perspectiveEntities.get(position).getTotalDebit())));
     }
+
+    public void calculeBalance(){
+        BigDecimal balance = new BigDecimal("0.00");
+        BigDecimal value;
+        for (PerspectiveEntity p: perspectiveEntities){
+            value = p.getTotalCredit().subtract(p.getTotalDebit());
+            balance = balance.add(value);
+        }
+        binding.txtValueBalanceMain.setText(FormatUtils.decimalFormat(balance));
+        new Thread(){
+            @Override
+            public void run(){
+                try{
+                    sleep(1000);
+                    binding.spinktBalanceMain.post(() -> {
+                        binding.spinktBalanceMain.setVisibility(View.GONE);
+                        binding.txtValueBalanceMain.animate().setDuration(500).alpha(1f).start();
+                    });
+
+                }catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+
+    }
+
+    private void stateRefreshUserName() {
+        new Thread(){
+            @Override
+            public void run(){
+                try {
+                    sleep(1000);
+                    binding.spinktNameMain.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            binding.spinktNameMain.setVisibility(View.GONE);
+                            binding.txtUserMain.animate().setDuration(500).alpha(1f).start();
+                        }
+                    });
+
+
+                }catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+
+
 }

@@ -25,7 +25,7 @@ public interface PerspectiveDao {
     @Query("SELECT * FROM tb_perspective WHERE user_uid = :uid")
     Flowable<List<PerspectiveWithData>> getPerspectiveWithData(String uid);
 
-    @Query("SELECT * FROM tb_perspective")
+    @Query("SELECT * FROM tb_perspective ")
     Flowable<List<PerspectiveEntity>> getAllPerspectives();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

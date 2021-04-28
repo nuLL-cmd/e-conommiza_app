@@ -55,7 +55,7 @@
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         app:civ_border_width="@dimen/_1sdp"
-                        app:civ_border_color="@color/button_positive"
+                        app:civ_border_color="@color/white_fff"
                         android:id="@+id/imgUser_item"
                         android:layout_width="@dimen/_35sdp"
                         android:layout_height="@dimen/_35sdp"
@@ -295,15 +295,15 @@
                         android:background="@drawable/bg_relative_data_main">
 
                         <com.google.android.material.floatingactionbutton.FloatingActionButton
-                            android:id="@+id/fbBolsa_main"
+                            android:id="@+id/btnSave_item"
                             android:layout_width="wrap_content"
                             android:onClick="saveData"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:backgroundTint="@color/button_positive"
+                            android:backgroundTint="#fff"
                             android:elevation="3dp"
-                            android:src="@drawable/ic_add_white"
-                            app:backgroundTint="#fff"
+                            android:src="@drawable/ic_add"
+                            app:backgroundTint="@color/button_positive"
                             app:borderWidth="@dimen/_3sdp" />
 
 

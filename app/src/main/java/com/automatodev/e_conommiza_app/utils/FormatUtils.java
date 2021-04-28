@@ -1,9 +1,8 @@
-package com.automatodev.e_conommiza_app.view.utils;
-
-import android.widget.TextView;
+package com.automatodev.e_conommiza_app.utils;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -21,7 +20,7 @@ public class FormatUtils {
     }
 
     public static String decimalFormat(BigDecimal value){
-        DecimalFormat format = new DecimalFormat("0.00");
+        DecimalFormat format = new DecimalFormat("#,##0.00", new DecimalFormatSymbols(new Locale ("pt", "BR")));
         return format.format(value);
     }
 

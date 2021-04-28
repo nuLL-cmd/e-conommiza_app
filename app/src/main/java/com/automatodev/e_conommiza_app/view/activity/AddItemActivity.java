@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -21,9 +20,11 @@ import com.automatodev.e_conommiza_app.databinding.LayoutDialogCalendarBinding;
 import com.automatodev.e_conommiza_app.entidade.model.CategoryEntity;
 import com.automatodev.e_conommiza_app.entidade.model.DataEntryEntity;
 import com.automatodev.e_conommiza_app.entidade.model.PerspectiveEntity;
+import com.automatodev.e_conommiza_app.entidade.model.UserEntity;
+import com.automatodev.e_conommiza_app.preferences.UserPreferences;
 import com.automatodev.e_conommiza_app.view.adapter.CategoryAdapter;
-import com.automatodev.e_conommiza_app.view.utils.ComponentUtils;
-import com.automatodev.e_conommiza_app.view.utils.FormatUtils;
+import com.automatodev.e_conommiza_app.utils.ComponentUtils;
+import com.automatodev.e_conommiza_app.utils.FormatUtils;
 import com.bumptech.glide.Glide;
 
 import java.math.BigDecimal;
@@ -42,6 +43,7 @@ public class AddItemActivity extends AppCompatActivity {
     private ActivityAddItemBinding binding;
     private ComponentUtils componentUtils;
     private DataEntryEntity data;
+    private UserEntity userEntity;
     private PerspectiveEntity perspectiveEntity;
 
     private boolean isSelected = false;
@@ -51,7 +53,6 @@ public class AddItemActivity extends AppCompatActivity {
 
     String typeIntent;
     private String perspectiveDate;
-    private String urlPhoto;
     private String nameEntry;
     private String categoryEntry;
     private String typeEntry;
@@ -70,6 +71,7 @@ public class AddItemActivity extends AppCompatActivity {
         componentUtils = new ComponentUtils(this);
 
         getData();
+        getUser();
         inflateSpinnerCategory();
 
     }
@@ -86,14 +88,13 @@ public class AddItemActivity extends AppCompatActivity {
         status = false;
     }
 
-
     public void getData() {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             typeIntent = bundle.getString("typeIntent");
             perspectiveEntity = (PerspectiveEntity) bundle.getSerializable("perspective");
             data = (DataEntryEntity) bundle.getSerializable("data");
-            if (typeIntent.equals("edit")) {
+            if (typeIntent.equals("edit") && data != null) {
                 binding.txtWindowItem.setText("Editar registro");
                 if (perspectiveEntity != null && data != null)
                     populeData(data);
@@ -103,11 +104,6 @@ public class AddItemActivity extends AppCompatActivity {
                 idPerspective = perspectiveEntity.getIdPerspective();
                 perspectiveDate = perspectiveEntity.getMonth() + " / " + perspectiveEntity.getYear();
                 binding.txtPerspectiveItem.setText(perspectiveDate);
-                urlPhoto = bundle.getString("urlPhoto");
-                if (urlPhoto != null) {
-                    binding.imgUserItem.setAlpha(0f);
-                    Glide.with(this).load(urlPhoto).addListener(componentUtils.listenerFadeImage(binding.imgUserItem, 600)).into(binding.imgUserItem);
-                }
             } else {
                 Toast.makeText(this, "Tivemos um problema ao carregar os dados.\nReinicie o app e tente novamente.", Toast.LENGTH_LONG).show();
                 finish();
@@ -120,9 +116,16 @@ public class AddItemActivity extends AppCompatActivity {
 
     }
 
+    public void getUser() {
+        UserPreferences preferences = new UserPreferences(this, "user");
+        userEntity = preferences.getUser();
+            binding.imgUserItem.setAlpha(0f);
+            Glide.with(this).load(userEntity.getUrlPhoto())
+                    .addListener(componentUtils.listenerFadeImage(binding.imgUserItem, 600)).into(binding.imgUserItem);
+    }
+
     private void populeData(DataEntryEntity data) {
         if (data != null) {
-
             idPerspective = perspectiveEntity.getIdPerspective();
             perspectiveDate = perspectiveEntity.getMonth() + " / " + perspectiveEntity.getYear();
             dateEntry = data.getDateEntry();
@@ -135,15 +138,21 @@ public class AddItemActivity extends AppCompatActivity {
             binding.edtPriceNew.setText(String.valueOf(data.getValueEntry()));
 
             if (typeEntry.equals("entry")) {
+                componentUtils.stateColorComponent(new View[]{
+                        binding.getRoot(), binding.btnUpItem, binding.btnDownItem, binding.btnDateItem, binding.btnSaveItem,
+                        binding.appbarItem, binding.txtWindowItem, binding.txtAppItem, binding.txtPerspectiveItem
+                }, new Integer[]{R.color.green_8BC34A,R.drawable.ic_up_48_fff,R.drawable.ic_down_48_ee0005, R.drawable.bg_edt_green}, false);
+
                 perspectiveEntity.setTotalCredit(perspectiveEntity.getTotalCredit().subtract(valueEntry));
-                binding.btnUpItem.setBackground(getResources().getDrawable(R.drawable.bg_button_positive_green));
-                binding.btnUpItem.setImageDrawable(getResources().getDrawable(R.drawable.ic_up_48_fff));
                 isSelected = true;
                 positive = true;
 
             } else {
-                binding.btnDownItem.setBackground(getResources().getDrawable(R.drawable.bg_button_negative_red));
-                binding.btnDownItem.setImageDrawable(getResources().getDrawable(R.drawable.ic_down_48_fff));
+                componentUtils.stateColorComponent(new View[]{
+                        binding.getRoot(), binding.btnDownItem, binding.btnUpItem, binding.btnDateItem, binding.btnSaveItem,
+                        binding.appbarItem, binding.txtWindowItem, binding.txtAppItem, binding.txtPerspectiveItem
+                }, new Integer[]{R.color.red_ee0005,R.drawable.ic_down_48_fff,R.drawable.ic_up_48_8bc34a, R.drawable.bg_edt_orange}, false);
+
                 perspectiveEntity.setTotalDebit(perspectiveEntity.getTotalDebit().subtract(valueEntry));
                 isSelected = true;
                 negative = true;
@@ -156,7 +165,6 @@ public class AddItemActivity extends AppCompatActivity {
 
 
     public void showCalendar(View view) throws ParseException {
-        binding.btnDateItem.setBackground(getResources().getDrawable(R.drawable.bg_button_blue_noeffects));
 
         LayoutDialogCalendarBinding calendarBinding = DataBindingUtil.inflate(getLayoutInflater().from(this), R.layout.layout_dialog_calendar, binding.relativeDaddyItem, false);
         AlertDialog alertCalendar = new AlertDialog.Builder(this).create();
@@ -214,15 +222,16 @@ public class AddItemActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     public void setPositive(View view) {
 
         if (!isSelected || negative) {
-            componentUtils.fadeViewEffect(new ImageButton[]{binding.btnUpItem, binding.btnDownItem},
-                    new Integer[]{R.drawable.bg_button_positive_green, R.drawable.ic_up_48_fff
-                            , R.drawable.bg_button_neutral, R.drawable.ic_down_48_ee0005}, 120, true);
+
+            componentUtils.stateColorComponent(new View[]{
+                    binding.getRoot(), binding.btnUpItem, binding.btnDownItem, binding.btnDateItem, binding.btnSaveItem,
+                    binding.appbarItem, binding.txtWindowItem, binding.txtAppItem, binding.txtPerspectiveItem
+            }, new Integer[]{R.color.green_8BC34A,R.drawable.ic_up_48_fff,R.drawable.ic_down_48_ee0005, R.drawable.bg_edt_green}, false);
 
             negative = false;
             positive = true;
@@ -230,24 +239,25 @@ public class AddItemActivity extends AppCompatActivity {
             isSelected = true;
 
         } else {
-            componentUtils.fadeViewEffect(new ImageButton[]{binding.btnUpItem, null},
-                    new Integer[]{R.drawable.bg_button_neutral, R.drawable.ic_up_48_8bc34a
-                            , null, null}, 120, false);
+            componentUtils.stateColorComponent(new View[]{binding.btnUpItem
+                    , binding.appbarItem, binding.txtWindowItem, binding.txtAppItem
+                    , binding.txtPerspectiveItem, binding.btnSaveItem, binding.btnDateItem}, new Integer[]{R.drawable.ic_up_48_8bc34a}, true);
 
             isSelected = false;
             positive = false;
             typeEntry = null;
-
-
         }
 
     }
 
     public void setNegative(View view) {
         if (!isSelected || positive) {
-            componentUtils.fadeViewEffect(new ImageButton[]{binding.btnDownItem, binding.btnUpItem},
-                    new Integer[]{R.drawable.bg_button_negative_red, R.drawable.ic_down_48_fff
-                            , R.drawable.bg_button_neutral, R.drawable.ic_up_48_8bc34a}, 120, true);
+
+            componentUtils.stateColorComponent(new View[]{
+                    binding.getRoot(), binding.btnDownItem, binding.btnUpItem, binding.btnDateItem, binding.btnSaveItem,
+                    binding.appbarItem, binding.txtWindowItem, binding.txtAppItem, binding.txtPerspectiveItem
+            }, new Integer[]{R.color.red_ee0005,R.drawable.ic_down_48_fff,R.drawable.ic_up_48_8bc34a, R.drawable.bg_edt_orange}, false);
+
 
             negative = true;
             positive = false;
@@ -255,14 +265,13 @@ public class AddItemActivity extends AppCompatActivity {
             isSelected = true;
 
         } else {
-            componentUtils.fadeViewEffect(new ImageButton[]{binding.btnDownItem, null},
-                    new Integer[]{R.drawable.bg_button_neutral, R.drawable.ic_down_48_ee0005
-                            , null, null}, 120, false);
+            componentUtils.stateColorComponent(new View[]{binding.btnDownItem
+                    , binding.appbarItem, binding.txtWindowItem, binding.txtAppItem
+                    , binding.txtPerspectiveItem, binding.btnSaveItem, binding.btnDateItem}, new Integer[]{R.drawable.ic_down_48_ee0005}, true);
 
             isSelected = false;
             negative = false;
             typeEntry = null;
-
 
         }
 
@@ -284,7 +293,6 @@ public class AddItemActivity extends AppCompatActivity {
 
         if (dateEntry == null) {
             componentUtils.showSnackbar("Necessário informar uma data para o registro", 2000);
-            binding.btnDateItem.setBackground(getResources().getDrawable(R.drawable.bg_button_red_noshadow_global));
             return;
         }
 
@@ -305,44 +313,32 @@ public class AddItemActivity extends AppCompatActivity {
         else
             perspectiveEntity.setTotalDebit(perspectiveEntity.getTotalDebit().add(valueEntry));
 
-
         ProgressDialog dialog = new ProgressDialog(this);
         dialog.setMessage("Aguarde...");
         dialog.setCancelable(false);
         dialog.show();
         DataEntryController dataEntryController = new ViewModelProvider(this).get(DataEntryController.class);
-        new
+        new CompositeDisposable().add(dataEntryController.addDataEntry(data).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(() -> {
+                    PerspectiveController perspectiveController = new ViewModelProvider(this).get(PerspectiveController.class);
+                    new CompositeDisposable().add(perspectiveController.updatePerspective(perspectiveEntity).subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread()).subscribe(() -> {
+                                new Thread() {
+                                    @Override
+                                    public void run() {
+                                        try {
+                                            sleep(500);
+                                            dialog.dismiss();
+                                            finish();
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }.start();
+                                Toast.makeText(AddItemActivity.this, "Dado inserido com sucesso", Toast.LENGTH_LONG).show();
+                            }));
 
-                CompositeDisposable().
-
-                add(dataEntryController.addDataEntry(data).
-
-                        subscribeOn(Schedulers.io())
-                        .
-
-                                observeOn(AndroidSchedulers.mainThread()).
-
-                                subscribe(() ->
-
-                                {
-                                    PerspectiveController perspectiveController = new ViewModelProvider(this).get(PerspectiveController.class);
-                                    new CompositeDisposable().add(perspectiveController.updatePerspective(perspectiveEntity).subscribeOn(Schedulers.io())
-                                            .observeOn(AndroidSchedulers.mainThread()).subscribe(() -> {
-                                                new Thread() {
-                                                    @Override
-                                                    public void run() {
-                                                        try {
-                                                            sleep(800);
-                                                            dialog.dismiss();
-                                                        } catch (InterruptedException e) {
-                                                            e.printStackTrace();
-                                                        }
-                                                    }
-                                                }.start();
-                                                componentUtils.showSnackbar("Dado inserido com sucesso", 1200);
-                                            }));
-
-                                }));
+                }));
 
     }
 

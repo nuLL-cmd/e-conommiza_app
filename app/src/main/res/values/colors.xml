@@ -15,9 +15,11 @@
     <color name ="font_secondary">#8896c2</color>
     <color name="orange_f68059">#f68059</color>
     <color name="red_ee0005">#ee0005</color>
+    <color name="red_FF5722">#FF9800</color>
     <color name="blue_3ecdff">#3ecdff</color>
-    <color name="background_form">#f3f6ff</color>
+    <color name="background_form">#f3f6ff</color>E
     <color name = "green_1DC1A0">#1DC1A0</color>
     <color name="color_gray_5A5A5A">#5A5A5A</color>
+    <color name="color_gray_CDCBCB">#CDCBCB</color>
 
 </resources>

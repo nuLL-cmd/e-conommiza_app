@@ -71,20 +71,25 @@
             android:paddingEnd="@dimen/_10sdp"
             android:layout_alignTop="@id/txtPerspective_main"
             android:layout_alignBottom="@id/txtPerspective_main"
-            android:textColor="#F44336"
+            android:textColor="@color/red_ee0005"
             android:layout_toStartOf="@id/txtCredit_main"
             android:id="@+id/txtDebit_main"
             android:textStyle="bold"
             android:textSize="@dimen/_9ssp"/>
 
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewPager_main"
-            android:layout_width="match_parent"
-            android:layout_below="@id/txtPerspective_main"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_height="@dimen/_320sdp"
-            android:orientation="horizontal" />
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPager_main"
+                android:layout_width="match_parent"
+                android:layout_below="@id/txtPerspective_main"
+                android:layout_marginTop="@dimen/_10sdp"
+
+                android:layout_height="@dimen/_320sdp"
+                android:orientation="horizontal" />
+
+
+
+
 
     </RelativeLayout>
 
@@ -106,6 +111,24 @@
             android:layout_marginTop="@dimen/_35sdp"
             android:src="@drawable/ic_home" />
 
+
+        <TextView
+            android:id="@+id/txtUser_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/btnExit_main"
+            android:alpha="0"
+            android:layout_alignBottom="@id/btnExit_main"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:layout_alignEnd="@id/viewSuportImage_main"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_toEndOf="@id/btnExit_main"
+            android:gravity="center|start"
+            android:textColor="@color/background_form"
+            android:textSize="@dimen/_12ssp" />
+
         <com.github.ybq.android.spinkit.SpinKitView
             android:id="@+id/spinktName_main"
             android:paddingTop="@dimen/_4sdp"
@@ -117,24 +140,7 @@
             android:layout_alignBottom="@id/btnExit_main"
             app:SpinKit_Color="@color/white_fff"
             app:SpinKit_Style="ThreeBounce"
-/>
-
-
-        <TextView
-            android:id="@+id/txtUser_main"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/btnExit_main"
-            android:layout_alignBottom="@id/btnExit_main"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:singleLine="true"
-            android:ellipsize="marquee"
-            android:layout_alignEnd="@id/viewSuportImage_main"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:layout_toEndOf="@id/btnExit_main"
-            android:gravity="center|start"
-            android:textColor="@color/background_form"
-            android:textSize="@dimen/_12ssp" />
+            />
 
 
         <View
@@ -157,6 +163,8 @@
             android:layout_above="@id/relativeData_main"
             android:layout_below="@id/btnExit_main"
             android:layout_toStartOf="@id/viewSuportImage_main">
+
+
 
             <TextView
                 android:id="@+id/txtMonthBalance"
@@ -192,6 +200,7 @@
                 android:layout_centerInParent="true"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_marginStart="@dimen/_10sdp"
+                android:scrollbarStyle="insideInset"
                 android:scrollbars="none"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_height="wrap_content"
@@ -199,20 +208,32 @@
                 android:fillViewport="true">
 
                 <TextView
+                    android:alpha="0"
                     android:id="@+id/txtValueBalance_main"
                     android:layout_width="wrap_content"
-                    android:scrollbars="horizontal"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@id/lblValueBalance_main"
                     android:singleLine="true"
                     android:textStyle="bold"
-                    android:text="12.000,00"
                     android:textAlignment="center"
                     android:layout_centerInParent="true"
                     android:textColor="@color/background_form"
                     android:textSize="@dimen/_30ssp"/>
 
             </HorizontalScrollView>
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/spinktBalance_main"
+                android:paddingTop="@dimen/_4sdp"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="match_parent"
+                android:layout_alignStart="@+id/scrollTxtValueBalance_main"
+                android:layout_alignEnd="@+id/scrollTxtValueBalance_main"
+                android:layout_alignTop="@id/scrollTxtValueBalance_main"
+                android:layout_alignBottom="@id/scrollTxtValueBalance_main"
+                app:SpinKit_Color="@color/white_fff"
+                app:SpinKit_Style="ThreeBounce"
+                />
 
 
             <!---->
