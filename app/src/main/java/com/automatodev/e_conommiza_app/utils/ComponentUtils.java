@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -49,9 +50,11 @@ public class ComponentUtils {
            //txtPerspectiveItem
            views[4].setBackgroundResource(R.drawable.bg_edt_blue);
            //btnSave
-           ((FloatingActionButton) views[5]).setSupportBackgroundTintList(context.getResources().getColorStateList(R.color.button_positive));
+            //views[5].getBackground().setColorFilter(ContextCompat.getColor(context, R.color.background_form), PorterDuff.Mode.SRC);
+           ((Button) views[5]).setTextColor(context.getResources().getColor(R.color.button_positive));
            //btnDate
            views[6].getBackground().setColorFilter(ContextCompat.getColor(context, R.color.button_positive), PorterDuff.Mode.SRC);
+
 
        }else{
            ((Activity)context).getWindow().getDecorView().setSystemUiVisibility(views[0].getSystemUiVisibility());
@@ -65,7 +68,8 @@ public class ComponentUtils {
            //btnDate
             views[3].getBackground().setColorFilter(ContextCompat.getColor(context,resources[0]), PorterDuff.Mode.SRC);
             //btnSave
-           ((FloatingActionButton)views[4]).setSupportBackgroundTintList(context.getResources().getColorStateList(resources[0]));
+           //views[4].getBackground().setColorFilter(ContextCompat.getColor(context, resources[0]), PorterDuff.Mode.SRC);
+           ((Button) views[4]).setTextColor(context.getResources().getColor(resources[0]));
            //appbar
            views[5].setBackground(context.getResources().getDrawable(resources[0]));
            //txtWindowItem

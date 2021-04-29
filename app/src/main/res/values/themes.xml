@@ -32,7 +32,7 @@
     </style>
 
 
-    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+    <style name="DatePickerDefaultTheme" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorAccent">@color/button_positive</item>
     </style>
 </resources>

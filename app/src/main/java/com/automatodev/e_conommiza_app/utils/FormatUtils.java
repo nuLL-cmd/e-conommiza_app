@@ -24,5 +24,4 @@ public class FormatUtils {
         return format.format(value);
     }
 
-
 }

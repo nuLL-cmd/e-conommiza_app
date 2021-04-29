@@ -34,5 +34,4 @@ public interface PerspectiveDao {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     Completable updatePerspective(PerspectiveEntity perspectiveEntity);
 
-
 }

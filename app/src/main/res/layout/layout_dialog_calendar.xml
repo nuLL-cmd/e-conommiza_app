@@ -49,7 +49,7 @@
                 <CalendarView
                     android:id="@+id/calendar_layoutCalendar"
                     android:layout_width="match_parent"
-                    android:theme="@style/DialogTheme"
+                    android:theme="@style/DatePickerDefaultTheme"
                     android:layout_height="wrap_content" />
             </LinearLayout>
 

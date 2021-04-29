@@ -1,7 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/background_form"/>
-    <corners
-        android:topLeftRadius="@dimen/_30sdp"
-        android:topRightRadius="@dimen/_30sdp"/>
-</shape>
+<ripple
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?android:colorControlHighlight">
+
+    <item android:id="@+id/mask">
+        <shape android:name="shape_unselected">
+            <solid android:color="@color/background_form"/>
+            <corners android:topLeftRadius="@dimen/_30sdp"
+                android:topRightRadius="@dimen/_30sdp"/>
+        </shape>
+
+    </item>
+</ripple>
+

@@ -116,6 +116,7 @@
                         android:textSize="@dimen/_10ssp"
                         android:textStyle="bold" />
 
+
                     <LinearLayout
                         android:id="@+id/linearTypeItem_item"
                         android:layout_width="match_parent"
@@ -284,30 +285,29 @@
                     android:id="@+id/linearSocial_login"
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
-                    android:layout_weight="6"
+                    android:layout_weight="7"
                     android:gravity="bottom"
                     android:orientation="vertical">
 
 
-                    <RelativeLayout
+                    <Button
+                        android:id="@+id/btnSave_item"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_60sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:clickable="true"
+                        android:onClick="saveData"
+                        android:focusable="true"
+                        android:text="Salvar"
+                        android:textSize="@dimen/_11ssp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:textStyle="bold"
+                        android:textColor="@color/button_positive"
+                        style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
                         android:background="@drawable/bg_relative_data_main">
 
-                        <com.google.android.material.floatingactionbutton.FloatingActionButton
-                            android:id="@+id/btnSave_item"
-                            android:layout_width="wrap_content"
-                            android:onClick="saveData"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:backgroundTint="#fff"
-                            android:elevation="3dp"
-                            android:src="@drawable/ic_add"
-                            app:backgroundTint="@color/button_positive"
-                            app:borderWidth="@dimen/_3sdp" />
 
 
-                    </RelativeLayout>
+                    </Button>
 
                 </RelativeLayout>
 

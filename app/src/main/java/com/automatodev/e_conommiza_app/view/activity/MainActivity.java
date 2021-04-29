@@ -282,7 +282,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     public void showPicker(View view) throws ParseException {
         c = Calendar.getInstance();
 
-        DatePickerDialog dialog = new DatePickerDialog(this, R.style.DialogTheme, this, c.get(Calendar.YEAR), c.get(Calendar.MONTH), 1);
+        DatePickerDialog dialog = new DatePickerDialog(this, R.style.DatePickerDefaultTheme, this, c.get(Calendar.YEAR), c.get(Calendar.MONTH), 1);
         Date date1 = getDate();
         c.setTime(date1);
         c.set(Calendar.DAY_OF_MONTH, c.getActualMinimum(Calendar.DAY_OF_MONTH));

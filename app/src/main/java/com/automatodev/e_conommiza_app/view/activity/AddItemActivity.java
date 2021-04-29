@@ -1,22 +1,21 @@
 package com.automatodev.e_conommiza_app.view.activity;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.automatodev.e_conommiza_app.R;
 import com.automatodev.e_conommiza_app.database.sqlite.controller.DataEntryController;
 import com.automatodev.e_conommiza_app.database.sqlite.controller.PerspectiveController;
 import com.automatodev.e_conommiza_app.databinding.ActivityAddItemBinding;
-import com.automatodev.e_conommiza_app.databinding.LayoutDialogCalendarBinding;
 import com.automatodev.e_conommiza_app.entidade.model.CategoryEntity;
 import com.automatodev.e_conommiza_app.entidade.model.DataEntryEntity;
 import com.automatodev.e_conommiza_app.entidade.model.PerspectiveEntity;
@@ -39,7 +38,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class AddItemActivity extends AppCompatActivity {
+public class AddItemActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
     private ActivityAddItemBinding binding;
     private ComponentUtils componentUtils;
     private DataEntryEntity data;
@@ -138,6 +137,8 @@ public class AddItemActivity extends AppCompatActivity {
             binding.edtPriceNew.setText(String.valueOf(data.getValueEntry()));
 
             if (typeEntry.equals("entry")) {
+
+
                 componentUtils.stateColorComponent(new View[]{
                         binding.getRoot(), binding.btnUpItem, binding.btnDownItem, binding.btnDateItem, binding.btnSaveItem,
                         binding.appbarItem, binding.txtWindowItem, binding.txtAppItem, binding.txtPerspectiveItem
@@ -166,11 +167,7 @@ public class AddItemActivity extends AppCompatActivity {
 
     public void showCalendar(View view) throws ParseException {
 
-        LayoutDialogCalendarBinding calendarBinding = DataBindingUtil.inflate(getLayoutInflater().from(this), R.layout.layout_dialog_calendar, binding.relativeDaddyItem, false);
-        AlertDialog alertCalendar = new AlertDialog.Builder(this).create();
-        alertCalendar.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        alertCalendar.setView(calendarBinding.getRoot());
-        alertCalendar.show();
+
 
 
         DateFormat format = new SimpleDateFormat("MMMM / yyyy", new Locale("pt", "br"));
@@ -178,22 +175,21 @@ public class AddItemActivity extends AppCompatActivity {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
 
-        c.set(Calendar.DAY_OF_MONTH, c.getActualMinimum(Calendar.DAY_OF_MONTH));
-        calendarBinding.calendarLayoutCalendar.setMinDate(c.getTime().getTime());
-        c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
-        calendarBinding.calendarLayoutCalendar.setMaxDate(c.getTime().getTime());
+        DatePickerDialog dateDialog = new DatePickerDialog(this, R.style.DatePickerDefaultTheme,this,
+                c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH));
 
-        if (dateEntry != null)
-            calendarBinding.calendarLayoutCalendar.setDate(dateEntry);
 
-        calendarBinding.calendarLayoutCalendar.setOnDateChangeListener((calendarView, year, month, dayOfMonth) -> {
+
+        if (dateEntry != null){
             Calendar calendar = Calendar.getInstance();
-            calendar.set(year, month, dayOfMonth);
-            binding.btnDateItem.setText(FormatUtils.format(calendar.getTime().getTime()));
-            dateEntry = calendar.getTime().getTime();
-            alertCalendar.dismiss();
+            calendar.setTime(new Date(dateEntry));
+            dateDialog.updateDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
 
-        });
+        }
+
+        c.set(Calendar.DAY_OF_MONTH, c.getActualMinimum(Calendar.DAY_OF_MONTH));
+        dateDialog.getDatePicker().setMinDate(c.getTime().getTime());
+        dateDialog.show();
 
     }
 
@@ -307,7 +303,6 @@ public class AddItemActivity extends AppCompatActivity {
         data.setIdPersp(idPerspective);
         data.setDateEntry(dateEntry);
 
-
         if (typeEntry.equals("entry"))
             perspectiveEntity.setTotalCredit(perspectiveEntity.getTotalCredit().add(valueEntry));
         else
@@ -349,7 +344,7 @@ public class AddItemActivity extends AppCompatActivity {
         fields[0] = binding.edtNameItem;
         fields[1] = binding.edtPriceNew;
         for (EditText e : fields) {
-            if (e.getText().toString().trim().isEmpty() || e.getText().toString().equals("R$ 0,00")) {
+            if (e.getText().toString().trim().isEmpty() || e.getText().toString().equals("R$ 0,00") || e.getText().toString().equals("$0.00")) {
                 e.setBackgroundResource(R.drawable.bg_edt_global_error);
                 componentUtils.onTextListener(e);
                 count++;
@@ -358,4 +353,11 @@ public class AddItemActivity extends AppCompatActivity {
         return count != 0;
     }
 
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, dayOfMonth);
+        binding.btnDateItem.setText(FormatUtils.format(calendar.getTime().getTime()));
+        dateEntry = calendar.getTime().getTime();
+    }
 }

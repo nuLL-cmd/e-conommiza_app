@@ -33,7 +33,7 @@
             android:visibility="visible"
             android:layout_alignTop="@id/imageItem_layoutItem"
             android:layout_alignBottom="@id/imageItem_layoutItem"
-            android:background='@{dataEntry.typeEntry.equals("entry") ? Color.parseColor("#8BC34A") : Color.parseColor("#ee0005")}'
+            android:background='@{dataEntry.typeEntry.equals("entry") ? Color.parseColor("#8BC34A") : Color.parseColor("#FF9800")}'
             android:layout_height="match_parent" />
 
 
