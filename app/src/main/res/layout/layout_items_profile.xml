@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
         <variable
@@ -12,18 +11,24 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/_70sdp"
-        android:background="@color/white_fff">
+        android:animateLayoutChanges="true"
+        android:background="?android:attr/selectableItemBackground">
 
-        <com.makeramen.roundedimageview.RoundedImageView
+
+        <TextView
             android:id="@+id/imageItem_layoutItem"
             android:layout_width="@dimen/_48sdp"
             android:layout_height="@dimen/_48sdp"
-            android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_10sdp"
-            android:background="@color/blue_545de8"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bg_button_blue_noshadow_global"
             android:padding="@dimen/_10sdp"
-            android:src="@drawable/ic_restaurant"
-            app:riv_corner_radius="@dimen/_7sdp" />
+            android:gravity="center"
+            android:textSize="@dimen/_22ssp"
+            android:textColor="@color/white_fff"
+            android:text='@{perspective.month.substring(0,1)}'
+            />
+
 
 
         <TextView
@@ -68,7 +73,7 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:singleLine="true"
             android:ellipsize="marquee"
-            android:textColor="@color/green_8BC34A"
+            android:textColor="@color/green_00c853"
             android:textSize="@dimen/_9ssp"
             android:textStyle="bold" />
 

@@ -12,142 +12,267 @@
         android:id="@+id/relativeDaddy_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_relative_main"
+        android:background="@color/button_positive"
         tools:context=".view.activity.MainActivity">
-        
 
 
-    <RelativeLayout
-        android:id="@+id/relativeData_main"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_320sdp"
-        android:layout_below="@id/viewSuportLayout_main"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/bg_relative_data_main">
+        <RelativeLayout
+            android:id="@+id/relativeData_main"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_320sdp"
+            android:layout_below="@id/viewSuportLayout_main"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/bg_relative_data_main">
 
-        <TextView
-            android:id="@+id/txtPerspective_main"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_28sdp"
-            android:gravity="center"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:shadowColor="#953F3F3F"
-            android:shadowDx="3"
-            android:shadowDy="3"
-            android:shadowRadius="20"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:textStyle="bold"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:layout_marginEnd="@dimen/_10sdp"
+            <TextView
+                android:id="@+id/txtPerspective_main"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_28sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:shadowColor="#683F3F3F"
+                android:shadowDx="3"
+                android:shadowDy="3"
+                android:shadowRadius="20"
+                android:singleLine="true"
+                android:textAlignment="center"
 
-            android:textAlignment="center"
-            android:textColor="#939090"
-            android:textSize="@dimen/_11ssp" />
+                android:textColor="#939090"
+                android:textSize="@dimen/_11ssp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:gravity="center"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/txtCredit_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/txtDebit_main"
+                android:layout_alignBottom="@id/txtDebit_main"
 
-            android:layout_alignTop="@id/txtDebit_main"
-            android:layout_alignBottom="@id/txtDebit_main"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:textColor="#4CAF50"
-            android:layout_alignParentEnd="true"
-            android:id="@+id/txtCredit_main"
-            android:textStyle="bold"
-            android:textSize="@dimen/_9ssp"/>
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:gravity="center"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:shadowColor="#953F3F3F"
+                android:shadowDx="3"
+                android:shadowDy="3"
+                android:shadowRadius="20"
+                android:textColor="@color/green_00c853"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:layout_alignTop="@id/txtPerspective_main"
-            android:layout_alignBottom="@id/txtPerspective_main"
-            android:textColor="@color/red_ee0005"
-            android:layout_toStartOf="@id/txtCredit_main"
-            android:id="@+id/txtDebit_main"
-            android:textStyle="bold"
-            android:textSize="@dimen/_9ssp"/>
+            <TextView
+                android:id="@+id/txtDebit_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/txtPerspective_main"
+                android:layout_alignBottom="@id/txtPerspective_main"
+                android:layout_toStartOf="@id/txtCredit_main"
+                android:gravity="center"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:shadowColor="#953F3F3F"
+                android:shadowDx="3"
+                android:shadowDy="3"
+                android:shadowRadius="20"
+                android:textColor="@color/red_e65100"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="bold" />
 
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewPager_main"
                 android:layout_width="match_parent"
+                android:layout_height="@dimen/_320sdp"
                 android:layout_below="@id/txtPerspective_main"
                 android:layout_marginTop="@dimen/_10sdp"
-
-                android:layout_height="@dimen/_320sdp"
                 android:orientation="horizontal" />
 
 
+        </RelativeLayout>
 
-
-
-    </RelativeLayout>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/relativeData_main"
-            android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@id/viewSuportImage_main"
-            android:scaleType="centerCrop"
-            android:src="@drawable/clip_dancer" />
-
-
-        <ImageView
-            android:id="@+id/btnExit_main"
-            android:layout_width="@dimen/_28sdp"
-            android:layout_height="@dimen/_28sdp"
-            android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_35sdp"
-            android:src="@drawable/ic_home" />
-
-
-        <TextView
-            android:id="@+id/txtUser_main"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/btnExit_main"
-            android:alpha="0"
-            android:layout_alignBottom="@id/btnExit_main"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:singleLine="true"
-            android:ellipsize="marquee"
-            android:layout_alignEnd="@id/viewSuportImage_main"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:layout_toEndOf="@id/btnExit_main"
-            android:gravity="center|start"
-            android:textColor="@color/background_form"
-            android:textSize="@dimen/_12ssp" />
-
-        <com.github.ybq.android.spinkit.SpinKitView
-            android:id="@+id/spinktName_main"
-            android:paddingTop="@dimen/_4sdp"
-            android:paddingEnd="@dimen/_3sdp"
-            android:layout_width="@dimen/_70sdp"
+        <LinearLayout
+            android:id="@+id/linearData_main"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_toEndOf="@id/btnExit_main"
-            android:layout_alignTop="@id/btnExit_main"
-            android:layout_alignBottom="@id/btnExit_main"
-            app:SpinKit_Color="@color/white_fff"
-            app:SpinKit_Style="ThreeBounce"
-            />
+            android:layout_above="@id/viewSuportLayout_main"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/btnExit_main"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_35sdp"
+                    android:src="@drawable/ic_home" />
 
 
-        <View
-            android:id="@+id/viewSuportImage_main"
-            android:layout_width="@dimen/_1sdp"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true" />
+                <TextView
+                    android:id="@+id/txtUser_main"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/btnExit_main"
+                    android:layout_alignBottom="@id/btnExit_main"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_toEndOf="@id/btnExit_main"
+                    android:alpha="0"
+                    android:padding="@dimen/_5sdp"
+                    android:shadowColor="#FCD8D8D8"
+                    android:shadowDx="3"
+                    android:shadowDy="3"
+                    android:shadowRadius="20"
+                    android:ellipsize="marquee"
+                    android:gravity="center|start"
+                    android:singleLine="true"
+                    android:textColor="@color/background_form"
+                    android:textSize="@dimen/_12ssp" />
+
+                <com.github.ybq.android.spinkit.SpinKitView
+                    android:id="@+id/spinktName_main"
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="match_parent"
+                    android:layout_alignTop="@id/btnExit_main"
+                    android:layout_alignBottom="@id/btnExit_main"
+                    android:layout_toEndOf="@id/btnExit_main"
+                    android:paddingTop="@dimen/_4sdp"
+                    android:paddingEnd="@dimen/_3sdp"
+                    app:SpinKit_Color="@color/white_fff"
+                    app:SpinKit_Style="ThreeBounce" />
+
+                <RelativeLayout
+                    android:id="@+id/relativeDataBalance_main"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/btnExit_main">
+
+
+                    <TextView
+                        android:id="@+id/txtMonthBalance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@id/scrollTxtValueBalance_main"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:text="Balanço"
+                        android:textColor="@color/background_form"
+                        android:textSize="@dimen/_15ssp"
+                        android:textStyle="bold"
+                        android:padding="@dimen/_5sdp"
+                        android:shadowColor="#FCD8D8D8"
+                        android:shadowDx="3"
+                        android:shadowDy="3"
+                        android:shadowRadius="20"/>
+
+
+                    <TextView
+                        android:id="@+id/lblValueBalance_main"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignStart="@id/txtMonthBalance"
+                        android:layout_alignTop="@id/scrollTxtValueBalance_main"
+                        android:layout_alignBottom="@id/scrollTxtValueBalance_main"
+                        android:gravity="center"
+                        android:text="R$"
+
+                        android:shadowColor="#FCD8D8D8"
+                        android:shadowDx="3"
+                        android:shadowDy="3"
+                        android:shadowRadius="20"
+                        android:textColor="@color/background_form"
+                        android:textSize="@dimen/_13ssp" />
+
+
+                    <HorizontalScrollView
+                        android:id="@+id/scrollTxtValueBalance_main"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_toEndOf="@id/lblValueBalance_main"
+                        android:fillViewport="true"
+                        android:scrollbarStyle="insideInset"
+                        android:scrollbars="none">
+
+                        <TextView
+                            android:id="@+id/txtValueBalance_main"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_toEndOf="@id/lblValueBalance_main"
+                            android:alpha="0"
+                            android:singleLine="true"
+                            android:textAlignment="center"
+                            android:textColor="@color/background_form"
+                            android:textSize="@dimen/_35ssp"
+                            android:textStyle="bold" />
+
+                    </HorizontalScrollView>
+
+                    <com.github.ybq.android.spinkit.SpinKitView
+                        android:id="@+id/spinktBalance_main"
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="match_parent"
+                        android:layout_alignStart="@+id/scrollTxtValueBalance_main"
+                        android:layout_alignTop="@id/scrollTxtValueBalance_main"
+                        android:layout_alignEnd="@+id/scrollTxtValueBalance_main"
+                        android:layout_alignBottom="@id/scrollTxtValueBalance_main"
+                        android:paddingTop="@dimen/_4sdp"
+
+                        app:SpinKit_Color="@color/white_fff"
+                        app:SpinKit_Style="ThreeBounce" />
+
+
+                    <!---->
+
+
+                    <TextView
+                        android:id="@+id/txtAmountPerspective_main"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignStart="@id/lblValueBalance_main"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:padding="@dimen/_10sdp"
+                        android:shadowColor="#FCD8D8D8"
+                        android:shadowDx="3"
+                        android:shadowDy="3"
+                        android:shadowRadius="20"
+                        android:textAlignment="center"
+                        android:textColor="@color/background_form"
+                        android:textSize="@dimen/_10ssp" />
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/imgSituation_main"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:layout_weight="1.4"
+                android:scaleType="centerCrop"
+                android:src="@drawable/clip_dancer" />
+
+
+        </LinearLayout>
+
 
         <View
             android:id="@+id/viewSuportLayout_main"
@@ -156,117 +281,14 @@
             android:layout_centerInParent="true" />
 
 
-        <RelativeLayout
-            android:id="@+id/relativeDataBalance_main"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@id/relativeData_main"
-            android:layout_below="@id/btnExit_main"
-            android:layout_toStartOf="@id/viewSuportImage_main">
-
-
-
-            <TextView
-                android:id="@+id/txtMonthBalance"
-                android:layout_marginStart="@dimen/_15sdp"
-
-
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/scrollTxtValueBalance_main"
-                android:text="Balanço"
-                android:textStyle="bold"
-                android:textColor="@color/background_form"
-                android:textSize="@dimen/_15ssp" />
-
-
-            <TextView
-                android:id="@+id/lblValueBalance_main"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/scrollTxtValueBalance_main"
-                android:layout_alignBottom="@id/scrollTxtValueBalance_main"
-                android:layout_alignStart="@id/txtMonthBalance"
-                android:gravity="center"
-                android:text="R$"
-                android:textColor="@color/background_form"
-                android:textSize="@dimen/_13ssp" />
-
-
-            <HorizontalScrollView
-                android:id="@+id/scrollTxtValueBalance_main"
-                android:layout_width="match_parent"
-                android:layout_centerInParent="true"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:scrollbarStyle="insideInset"
-                android:scrollbars="none"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/lblValueBalance_main"
-                android:fillViewport="true">
-
-                <TextView
-                    android:alpha="0"
-                    android:id="@+id/txtValueBalance_main"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/lblValueBalance_main"
-                    android:singleLine="true"
-                    android:textStyle="bold"
-                    android:textAlignment="center"
-                    android:layout_centerInParent="true"
-                    android:textColor="@color/background_form"
-                    android:textSize="@dimen/_30ssp"/>
-
-            </HorizontalScrollView>
-
-            <com.github.ybq.android.spinkit.SpinKitView
-                android:id="@+id/spinktBalance_main"
-                android:paddingTop="@dimen/_4sdp"
-                android:layout_width="@dimen/_70sdp"
-                android:layout_height="match_parent"
-                android:layout_alignStart="@+id/scrollTxtValueBalance_main"
-                android:layout_alignEnd="@+id/scrollTxtValueBalance_main"
-                android:layout_alignTop="@id/scrollTxtValueBalance_main"
-                android:layout_alignBottom="@id/scrollTxtValueBalance_main"
-                app:SpinKit_Color="@color/white_fff"
-                app:SpinKit_Style="ThreeBounce"
-                />
-
-
-            <!---->
-
-
-
-            <TextView
-                android:id="@+id/txtAmountPerspective_main"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:shadowColor="#D7FFFFFF"
-                android:shadowDx="3"
-                android:padding="@dimen/_10sdp"
-                android:shadowDy="3"
-                android:shadowRadius="20"
-                android:layout_alignParentBottom="true"
-                android:textAlignment="center"
-                android:layout_alignStart="@id/lblValueBalance_main"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:textColor="@color/background_form"
-                android:textSize="@dimen/_10ssp" />
-
-        </RelativeLayout>
-
-
         <com.github.clans.fab.FloatingActionMenu
             android:id="@+id/menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginBottom="@dimen/_30sdp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
             fab:menu_animationDelayPerItem="50"
             fab:menu_backgroundColor="@android:color/transparent"
             fab:menu_buttonSpacing="0dp"
@@ -306,8 +328,8 @@
                 android:id="@+id/menuProfile_item"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
-                android:src="@drawable/ic_person_white"
                 android:onClick="actMainProfile"
+                android:src="@drawable/ic_person_white"
                 app:fab_colorNormal="#E91E63"
                 fab:fab_label="Minha conta"
                 fab:fab_size="mini" />
@@ -316,20 +338,19 @@
                 android:id="@+id/menuPerspective_item"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
+                android:onClick="showPicker"
                 android:src="@drawable/ic_add_white"
                 app:fab_colorNormal="#FF9800"
                 fab:fab_label="Adicionar perspectiva"
-                android:onClick="showPicker"
                 fab:fab_size="mini" />
-
 
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/menuRegister_item"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
-                android:src="@drawable/ic_register"
                 android:onClick="actMainItem"
+                android:src="@drawable/ic_register"
                 fab:fab_label="Adicionar registro"
                 fab:fab_size="mini" />
 

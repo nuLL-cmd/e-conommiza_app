@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,9 +31,12 @@ import com.automatodev.e_conommiza_app.databinding.ActivityProfileTwoBinding;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogAboutBinding;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogLogoutBinding;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogProgressBinding;
+import com.automatodev.e_conommiza_app.entidade.model.PerspectiveEntity;
 import com.automatodev.e_conommiza_app.entidade.model.UserEntity;
+import com.automatodev.e_conommiza_app.entidade.response.PerspectiveWithData;
 import com.automatodev.e_conommiza_app.preferences.UserPreferences;
 import com.automatodev.e_conommiza_app.security.firebaseAuth.Authentication;
+import com.automatodev.e_conommiza_app.utils.FormatUtils;
 import com.automatodev.e_conommiza_app.view.adapter.ItemsProfileAdapter;
 import com.automatodev.e_conommiza_app.utils.ComponentUtils;
 import com.bumptech.glide.Glide;
@@ -44,13 +48,20 @@ import com.iceteck.silicompressorr.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import id.zelory.compressor.Compressor;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+
+import static com.automatodev.e_conommiza_app.R.*;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -62,7 +73,13 @@ public class ProfileActivity extends AppCompatActivity {
     private Uri uriExternal;
     private ComponentUtils componentUtils;
     private UserPreferences preferences;
-    private UserEntity userEntity;
+
+    private BigDecimal totalDebit = new BigDecimal("0.00");
+    private BigDecimal totalCredit = new BigDecimal("0.00");
+    private Integer registerCount = 0;
+
+
+
 
     public static boolean status;
 
@@ -83,13 +100,16 @@ public class ProfileActivity extends AppCompatActivity {
         getUser();
 
 
-        binding.swipeRefreshProfile.setColorSchemeResources(R.color.button_positive);
+        binding.swipeRefreshProfile.setColorSchemeResources(color.button_positive);
         binding.swipeRefreshProfile.setRefreshing(true);
+        binding.swipeRefreshProfile.setOnRefreshListener(() -> binding.swipeRefreshProfile.setRefreshing(false));
 
-        binding.lblSinceProfile.setTexts(new String[]{"Você tem", "Você pode consultar um", "Organize seus gastos ", "Seu bolso agradeçe"});
-        binding.txtSinceProfile.setTexts(new String[]{"Você tem", "Você pode consultar um", "Organize seus gastos ", "Seu bolso agradeçe"});
+        String[] phraseOe = {"Verificando"};
+        String[] phraseTo = {"seus dados"};
+        binding.txtFadeOneProfile.setTexts(phraseOe);
+        binding.txtFadeTwoProfile.setTexts(phraseTo);
 
-        //binding.txtSinceProfile.setTexts(new String[]{perspectiveEntities.size() + " perspectivas cadastradas", "relatorio clicando no gráfico", "em proventos e despessas", "esta boa ação"});
+
     }
 
     @Override
@@ -154,13 +174,13 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.itemAbout:
+            case id.itemAbout:
                 about();
                 break;
-            case R.id.itemExit:
+            case id.itemExit:
                 logout();
                 break;
-            case R.id.itemFeedback:
+            case id.itemFeedback:
                 feedback();
                 break;
         }
@@ -185,7 +205,7 @@ public class ProfileActivity extends AppCompatActivity {
     public void updateUser(View view) {
         AlertDialog dialogProgress = new AlertDialog.Builder(this).create();
         dialogProgress.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        LayoutDialogProgressBinding bindingProgress = DataBindingUtil.inflate(getLayoutInflater().from(this), R.layout.layout_dialog_progress, binding.relativeDaddyProfile, false);
+        LayoutDialogProgressBinding bindingProgress = DataBindingUtil.inflate(getLayoutInflater().from(this), layout.layout_dialog_progress, binding.relativeDaddyProfile, false);
         dialogProgress.setView(bindingProgress.getRoot());
         Map<String, Object> map = new HashMap<>();
         if (uriExternal != null) {
@@ -277,7 +297,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void getUser() {
         UserPreferences preferences = new UserPreferences(this, "user");
-        userEntity = preferences.getUser();
+        UserEntity userEntity = preferences.getUser();
 
         if (!userEntity.getUserUid().equals("")) {
                 binding.imageUserProfile.setAlpha(0f);
@@ -312,18 +332,32 @@ public class ProfileActivity extends AppCompatActivity {
         try{
             PerspectiveController perspectiveController = new ViewModelProvider(this).get(PerspectiveController.class);
             CompositeDisposable disposable = new CompositeDisposable();
-            disposable.add(perspectiveController.getPerspectiveById(uid).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(perspectivies -> {
+            disposable.add(perspectiveController.getPerspectiveWithData(uid).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(perspectivies -> {
                 if (perspectivies != null) {
-                    ItemsProfileAdapter adapter = new ItemsProfileAdapter(perspectivies);
+                    List<PerspectiveEntity> perspectiveList = new ArrayList<>();
+
+                    for (PerspectiveWithData p : perspectivies) {
+                        PerspectiveEntity perspectiveEntity = p.perspectiveEntity;
+                        perspectiveEntity.setItemsPerspective(p.dataEntryEntities);
+                        perspectiveList.add(perspectiveEntity);
+
+                    }
+
+                    phraseArray(perspectiveList);
+                    ItemsProfileAdapter adapter = new ItemsProfileAdapter(perspectiveList);
                     binding.recyclerItemsProfile.hasFixedSize();
                     binding.recyclerItemsProfile.setAdapter(adapter);
                     disposable.dispose();
+
+                    adapter.setOnItemClickListener(position ->{
+
+                    });
                 }
                 new Thread() {
                     @Override
                     public void run() {
                         try {
-                            sleep(300);
+                            sleep(450);
                             binding.swipeRefreshProfile.setRefreshing(false);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
@@ -331,6 +365,8 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                 }.start();
             }));
+
+
 
         }catch (Exception e){
             componentUtils.showSnackbar("Houve um problema ao carregar suas perspectivas, favor feche a aplicação e tente novamente", 1500);
@@ -351,7 +387,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void about() {
-        LayoutDialogAboutBinding layoutBinding = DataBindingUtil.inflate(getLayoutInflater().from(this), R.layout.layout_dialog_about, binding.relativeDaddyProfile, false);
+        LayoutDialogAboutBinding layoutBinding = DataBindingUtil.inflate(getLayoutInflater().from(this), layout.layout_dialog_about, binding.relativeDaddyProfile, false);
         AlertDialog dialog = new AlertDialog.Builder(this).create();
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         dialog.setView(layoutBinding.getRoot());
@@ -362,7 +398,7 @@ public class ProfileActivity extends AppCompatActivity {
     public void logout() {
         AlertDialog dialogLogout = new AlertDialog.Builder(this).create();
         dialogLogout.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        LayoutDialogLogoutBinding bindingLogout = DataBindingUtil.inflate(getLayoutInflater().from(this), R.layout.layout_dialog_logout, binding.relativeDaddyProfile, false);
+        LayoutDialogLogoutBinding bindingLogout = DataBindingUtil.inflate(getLayoutInflater().from(this), layout.layout_dialog_logout, binding.relativeDaddyProfile, false);
         dialogLogout.setView(bindingLogout.getRoot());
         dialogLogout.show();
         bindingLogout.btnYesDialogLogout.setOnClickListener(v -> {
@@ -394,5 +430,55 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
+    public void phraseArray(List<PerspectiveEntity> perspectivies){
+
+        if (perspectivies.size() != 0){
+
+             String[] phraseOne = new String[6];
+             String[] phraseTwo = new String[6];
+
+
+            perspectivies.stream().forEach(perspectiveEntity -> {
+                totalDebit = totalDebit.add(perspectiveEntity.getTotalDebit());
+                totalCredit =  totalCredit.add(perspectiveEntity.getTotalCredit());
+            });
+
+            BigDecimal bigDebit = perspectivies.stream().map(PerspectiveEntity::getTotalDebit).max(Comparator.naturalOrder()).orElse(BigDecimal.ZERO);
+            BigDecimal bigCredit = perspectivies.stream().map(PerspectiveEntity::getTotalCredit).max(Comparator.naturalOrder()).orElse(BigDecimal.ZERO);
+
+
+            perspectivies.stream().forEach(perspectiveEntity -> registerCount+=perspectiveEntity.getItemsPerspective().size());
+
+            phraseOne[0] = "Você tem";
+            phraseTwo[0] = perspectivies.size()+ " perspectivas";
+
+            phraseOne[1] = "Seus proventos somam";
+            phraseTwo[1] = FormatUtils.numberFormat(totalCredit)+ " reais";
+
+            phraseOne[2] = "Você possui um total";
+            phraseTwo[2] = "de " + registerCount + " itens cadastrados" ;
+
+            phraseOne[3] = "Você chegou a receber";
+            phraseTwo[3] = FormatUtils.numberFormat(bigCredit)+ "\nem um mês";
+
+            phraseOne[4] = "Porém gastou";
+            phraseTwo[4] = FormatUtils.numberFormat(bigDebit)+ "\ndentro de um mês";
+
+            phraseOne[5] = "Suas despesas somam";
+            phraseTwo[5] = FormatUtils.numberFormat(totalDebit)+ " reais";
+
+
+            binding.txtFadeOneProfile.setTexts(phraseOne);
+            binding.txtFadeTwoProfile.setTexts(phraseTwo);
+
+
+
+        }else{
+             String[] phraseOne = {"Você não tem", "Com as perspectivas", "Organiza seus gastos ", "Fazendo isso", "Confia!"};
+             String[] phraseTwo = {"nehuma pespectiva.", "você controla e", "por categoria ", "seu bolso agradece",":D"};
+            binding.txtFadeOneProfile.setTexts(phraseOne);
+            binding.txtFadeTwoProfile.setTexts(phraseTwo);
+        }
+    }
 
 }

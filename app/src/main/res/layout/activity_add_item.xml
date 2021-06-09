@@ -12,18 +12,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <RelativeLayout
             android:id="@+id/appbar_item"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_60sdp"
-            android:background="@color/background_form">
+            android:background="@drawable/bg_relative_toolbar">
 
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar_item"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:title="">
 
                 <RelativeLayout
                     android:id="@+id/relativetoolbar_item"
@@ -37,7 +32,7 @@
                         android:layout_above="@id/txtWindow_item"
                         android:layout_alignStart="@id/txtWindow_item"
                         android:text="E-conommiza"
-                        android:textColor="#CDCBCB"
+                        android:textColor="@color/white_fff"
                         android:textSize="@dimen/_10ssp"
                         android:textStyle="bold" />
 
@@ -46,10 +41,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginStart="@dimen/_3sdp"
-                        android:layout_marginBottom="@dimen/_7sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
                         android:text="Adicionar registro"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/white_fff"
                         android:textSize="@dimen/_18ssp"
                         android:textStyle="bold" />
 
@@ -62,11 +57,11 @@
                         android:elevation="@dimen/_3sdp"
                         android:layout_alignBottom="@id/txtWindow_item"
                         android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:layout_marginEnd="@dimen/_12sdp"
                         android:src="@drawable/ic_user_web" />
                 </RelativeLayout>
-            </androidx.appcompat.widget.Toolbar>
-        </com.google.android.material.appbar.AppBarLayout>
+
+        </RelativeLayout>
 
 
         <ScrollView
@@ -162,17 +157,36 @@
                         android:textSize="@dimen/_10ssp"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/txtPerspective_item"
+                    <LinearLayout
+                        android:id="@+id/relativePerspective_item"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_48sdp"
+                        android:layout_height="@dimen/_50sdp"
                         android:gravity="center"
-                        android:textStyle="bold"
+                        android:background="@drawable/bg_button_white_shadow_global"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal"
                         android:layout_marginStart="@dimen/_15sdp"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_15sdp"
-                        android:background="@drawable/bg_edt_blue"
-                        android:textSize="@dimen/_10ssp" />
+                        android:layout_marginEnd="@dimen/_15sdp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_calendar_blue"/>
+
+                        <TextView
+                            android:id="@+id/txtPerspective_item"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Fevereiro"
+                            android:padding="@dimen/_5sdp"
+                            android:textSize="@dimen/_11ssp"
+                            android:textColor="#878585"
+                            android:shadowColor="#703F3F3F"
+                            android:shadowDx="3"
+                            android:shadowDy="3"
+                            android:shadowRadius="20"/>
+                    </LinearLayout>
 
 
                     <TextView
@@ -189,7 +203,7 @@
                     <EditText
                         android:id="@+id/edtName_item"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_48sdp"
+                        android:layout_height="@dimen/_50sdp"
                         android:layout_marginStart="@dimen/_15sdp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_15sdp"
@@ -221,7 +235,7 @@
                         <com.blackcat.currencyedittext.CurrencyEditText
                             android:id="@+id/edtPrice_new"
                             android:layout_width="fill_parent"
-                            android:layout_height="@dimen/_48sdp"
+                            android:layout_height="@dimen/_50sdp"
                             android:layout_weight="1"
                             android:background="@drawable/layout_shadow_white"
                             android:drawableStart="@drawable/ic_monetization_on_black_24dp"
@@ -238,18 +252,21 @@
                             android:id="@+id/btnDate_item"
                             android:layout_width="fill_parent"
                             android:onClick="showCalendar"
-                            android:layout_height="@dimen/_48sdp"
+                            android:layout_height="@dimen/_50sdp"
                             android:text="Calendario"
                             style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
                             android:layout_weight="1.1"
-                            android:background="@drawable/bg_button_blue_noshadow_global"
-                            android:drawableStart="@drawable/ic_baseline_calendar_today_24"
-                            android:drawablePadding="@dimen/_5sdp"
-                            android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_15sdp"
+                            android:background="@drawable/bg_button_blue_global"
+                            android:drawableStart="@drawable/ic_calendar_white"
+                            android:paddingStart="@dimen/_20sdp"
+                            android:paddingEnd="@dimen/_20sdp"
                             android:singleLine="true"
                             android:textColor="#fff"
-                            android:textSize="@dimen/_11ssp" />
+                            android:textSize="@dimen/_11ssp"
+                            android:shadowColor="#FCD8D8D8"
+                            android:shadowDx="3"
+                            android:shadowDy="3"
+                            android:shadowRadius="20"/>
 
 
                     </LinearLayout>
@@ -269,14 +286,14 @@
                     <Spinner
                         android:id="@+id/spinnerCategory_item"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_48sdp"
+                        android:layout_height="@dimen/_50sdp"
                         android:layout_marginStart="@dimen/_15sdp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_15sdp"
 
                         android:background="@drawable/layout_shadow_white"
                         android:clickable="true"
-                        android:textSize="@dimen/_10ssp" />
+                        android:textSize="@dimen/_11sdp" />
 
 
                 </LinearLayout>
@@ -285,8 +302,8 @@
                     android:id="@+id/linearSocial_login"
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
-                    android:layout_weight="7"
-                    android:gravity="bottom"
+                    android:layout_weight="5"
+                    android:gravity="center"
                     android:orientation="vertical">
 
 
@@ -300,10 +317,16 @@
                         android:text="Salvar"
                         android:textSize="@dimen/_11ssp"
                         android:layout_marginTop="@dimen/_20sdp"
-                        android:textStyle="bold"
-                        android:textColor="@color/button_positive"
+                        android:textColor="@color/white_fff"
                         style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
-                        android:background="@drawable/bg_relative_data_main">
+                        android:layout_marginStart="@dimen/_60sdp"
+                        android:layout_marginEnd="@dimen/_60sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:background="@drawable/bg_button_blue_global"
+                        android:shadowColor="#FCD8D8D8"
+                        android:shadowDx="3"
+                        android:shadowDy="3"
+                        android:shadowRadius="20">
 
 
 

@@ -92,7 +92,7 @@ public class MockFile {
     }
 
     public DataEntryEntity getDataEntryMock(){
-        return new DataEntryEntity(1L,"Cinema","Lazer", 1614900139724L,"noEntry",new BigDecimal("150.00"));
+        return new DataEntryEntity(1L,"Cinema","Lazer", 1614900139724L,"noEntry",new BigDecimal("150.00"),0);
 
     }
 

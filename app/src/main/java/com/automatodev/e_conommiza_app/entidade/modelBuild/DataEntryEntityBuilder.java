@@ -12,10 +12,11 @@ public class DataEntryEntityBuilder {
     private Long dataEntry;
     private String typeEntry;
     private BigDecimal valueEntry;
+    private Integer payment;
 
 
     public DataEntryEntity build(){
-        return new DataEntryEntity(this.idPersp,this.nameLocal,this.category,this.dataEntry, this.typeEntry, this.valueEntry);
+        return new DataEntryEntity(this.idPersp,this.nameLocal,this.category,this.dataEntry, this.typeEntry, this.valueEntry, this.payment);
     }
 
 
@@ -48,6 +49,11 @@ public class DataEntryEntityBuilder {
 
     public DataEntryEntityBuilder category(String category){
         this.category = category;
+        return this;
+    }
+
+    public DataEntryEntityBuilder category(Integer payment){
+        this.payment = payment;
         return this;
     }
 }

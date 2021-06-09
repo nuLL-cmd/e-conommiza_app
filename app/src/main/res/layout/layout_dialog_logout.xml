@@ -32,9 +32,13 @@
                 android:text="Sair"
                 android:id="@+id/lblTitle_dialogLogout"
                 android:textColor="@color/background_form"
-                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:gravity="center"
-                android:textSize="@dimen/_14ssp"/>
+                android:textSize="@dimen/_14ssp"
+                android:shadowColor="#FCD8D8D8"
+                android:shadowDx="3"
+                android:shadowDy="3"
+                android:shadowRadius="20"/>
 
 
 
@@ -68,8 +72,13 @@
                 android:layout_marginEnd="@dimen/_18sdp"
                 android:text="Sim"
                 android:id="@+id/btnYes_dialogLogout"
+                android:textSize="@dimen/_11sdp"
                 style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
                 android:textColor="@color/background_form"
+                android:shadowColor="#FCD8D8D8"
+                android:shadowDx="3"
+                android:shadowDy="3"
+                android:shadowRadius="20"
                 android:background="@drawable/bg_button_blue_noshadow_global" />
 
 
@@ -79,6 +88,11 @@
                 android:text="Cancelar"
                 android:id="@+id/btnCancel_dialogLogout"
                 android:layout_marginStart="@dimen/_18sdp"
+                android:textSize="@dimen/_11sdp"
+                android:shadowColor="#703F3F3F"
+                android:shadowDx="3"
+                android:shadowDy="3"
+                android:shadowRadius="20"
                 style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
                 android:textColor="@color/font_primary"
                 android:background="@drawable/bg_button_cancel_noshadow_global" />

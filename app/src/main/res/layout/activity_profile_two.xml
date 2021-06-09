@@ -61,13 +61,12 @@
 
                 </androidx.appcompat.widget.Toolbar>
 
-
                 <com.tomer.fadingtextview.FadingTextView
-                    android:id="@+id/lblSince_profile"
+                    android:id="@+id/txtFadeOne_profile"
                     android:layout_width="wrap_content"
                     app:timeout="2500"
                     android:layout_height="wrap_content"
-                    android:layout_above="@id/txtSince_profile"
+                    android:layout_above="@id/txtFadeTwo_profile"
                     android:layout_centerHorizontal="true"
                     android:layout_marginStart="@dimen/_15sdp"
                     android:layout_marginEnd="@dimen/_15sdp"
@@ -79,7 +78,7 @@
 
 
                 <com.tomer.fadingtextview.FadingTextView
-                    android:id="@+id/txtSince_profile"
+                    android:id="@+id/txtFadeTwo_profile"
                     android:layout_width="wrap_content"
                     app:timeout="2500"
                     android:layout_height="wrap_content"
@@ -152,9 +151,9 @@
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_alignBottom="@id/fab_one"
                 android:layout_toEndOf="@id/fab_one"
-                android:backgroundTint="#4CAF50"
+                android:backgroundTint="@color/green_00c853"
                 android:onClick="updateUser"
-                android:src="@drawable/ic_save_green"
+                android:src="@drawable/ic_save_white"
                 app:backgroundTint="@color/background_form"
                 app:borderWidth="@dimen/_5sdp" />
         </RelativeLayout>
@@ -193,7 +192,10 @@
                 android:textAlignment="center"
                 android:textColor="#939090"
                 android:textSize="@dimen/_10ssp"
-                android:textStyle="bold" />
+                android:shadowColor="#703F3F3F"
+                android:shadowDx="3"
+                android:shadowDy="3"
+                android:shadowRadius="20"/>
 
 
             <ImageButton
@@ -226,7 +228,7 @@
 
                 android:layout_alignParentBottom="true"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/bg_relative_perspective">
+                android:background="@drawable/bg_relative_data_main_two">
 
                 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                     android:id="@+id/swipeRefresh_profile"

@@ -1,41 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
-        <import type="android.graphics.Color"/>
+        <import type="android.graphics.Color" />
+
         <variable
             name="dataEntry"
             type="com.automatodev.e_conommiza_app.entidade.model.DataEntryEntity" />
+
+        <variable
+            name="activity"
+            type="androidx.appcompat.app.AppCompatActivity" />
+
+        <variable
+            name="component"
+            type="com.automatodev.e_conommiza_app.utils.ComponentUtils" />
     </data>
 
     <RelativeLayout
-        android:animateLayoutChanges="true"
-        android:background="?android:attr/selectableItemBackground"
+        android:id="@+id/relativeDaddy_layoutItems"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_70sdp">
+        android:layout_height="@dimen/_70sdp"
+        android:animateLayoutChanges="true"
+        android:background="?android:attr/selectableItemBackground">
+
+        <View
+            android:id="@+id/imageType"
+            android:layout_width="@dimen/_48sdp"
+            android:layout_height="@dimen/_48sdp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:background="@drawable/bg_button_white_global"
+            android:setColor='@{dataEntry.typeEntry.equals("entry") ? component.colorEntry() : component.colorExit()}' />
+
+        <View
+            android:id="@+id/imagePayment"
+            android:layout_width="@dimen/_48sdp"
+            android:layout_height="@dimen/_48sdp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:background="@drawable/bg_button_white_global"
+            android:setStatus='@{dataEntry.payment}' />
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/imageItem_layoutItem"
             android:layout_width="@dimen/_48sdp"
             android:layout_height="@dimen/_48sdp"
             android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:background="@color/blue_545de8"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:background="@drawable/bg_button_blue_noshadow_global"
             android:padding="@dimen/_10sdp"
-            android:src="@drawable/ic_restaurant"
-            app:riv_corner_radius="@dimen/_7sdp" />
+            android:src="@drawable/ic_restaurant" />
 
-        <View
-            android:id="@+id/viewStatus_layoutItem"
-            android:layout_width="4dp"
-            android:visibility="visible"
-            android:layout_alignTop="@id/imageItem_layoutItem"
-            android:layout_alignBottom="@id/imageItem_layoutItem"
-            android:background='@{dataEntry.typeEntry.equals("entry") ? Color.parseColor("#8BC34A") : Color.parseColor("#FF9800")}'
-            android:layout_height="match_parent" />
+        <!--   <View
+               android:id="@+id/viewStatus_layoutItem"
+               android:layout_width="@dimen/_6sdp"
+               android:visibility="visible"
+               android:layout_alignTop="@id/viewPayment_layoutItem"
+               android:layout_alignBottom="@id/viewPayment_layoutItem"
+               android:background='@{dataEntry.typeEntry.equals("entry") ? Color.parseColor("#00c853") : Color.parseColor("#ee0005")}'
+               android:layout_height="match_parent" />
 
+           <View
+               android:id="@+id/viewPayment_layoutItem"
+               android:layout_width="@dimen/_6sdp"
+               android:layout_marginTop="@dimen/_5sdp"
+               android:layout_marginBottom="@dimen/_5sdp"
+               android:visibility="visible"
+               android:layout_alignTop="@id/imageItem_layoutItem"
+               android:layout_alignBottom="@id/imageItem_layoutItem"
+               android:layout_toEndOf="@id/viewStatus_layoutItem"
+               android:background='@{dataEntry.payment == true ? Color.parseColor("#29b6f6") : Color.parseColor("#ffffff")}'
+               android:layout_height="match_parent" />-->
 
 
         <TextView
@@ -45,9 +82,9 @@
             android:layout_alignTop="@id/imageItem_layoutItem"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:singleLine="true"
-            android:ellipsize="marquee"
             android:layout_toEndOf="@id/imageItem_layoutItem"
+            android:ellipsize="marquee"
+            android:singleLine="true"
             android:text="@{dataEntry.nameLocal}"
             android:textColor="@color/font_primary"
             android:textSize="@dimen/_12ssp"
@@ -61,9 +98,9 @@
             android:layout_below="@id/txtItem_layoutItem"
             android:layout_alignStart="@id/txtItem_layoutItem"
             android:layout_marginTop="@dimen/_5sdp"
-            android:singleLine="true"
             android:ellipsize="marquee"
             android:setValue='@{dataEntry.dateEntry}'
+            android:singleLine="true"
             android:textColor="@android:color/darker_gray"
             android:textSize="@dimen/_9ssp"
             android:textStyle="bold" />
@@ -72,18 +109,17 @@
         <TextView
             android:id="@+id/txtValueItem_layout_item"
             android:layout_width="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:singleLine="true"
-            android:ellipsize="marquee"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/txtDataItem_layout_item"
-            android:setValue='@{dataEntry.dateEntry}'
             android:layout_alignBottom="@id/txtDataItem_layout_item"
             android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_toEndOf="@id/txtDataItem_layout_item"
+            android:ellipsize="marquee"
             android:gravity="center|end"
             android:setRawValue='@{dataEntry.valueEntry}'
+            android:singleLine="true"
             android:textColor="@color/font_primary"
             android:textSize="@dimen/_9ssp"
             android:textStyle="bold" />
@@ -92,10 +128,10 @@
             android:id="@+id/viewSeparator_layoutItem"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1sdp"
-            android:background="#CDCDCD"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp" />
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="#CDCDCD" />
 
     </RelativeLayout>
 </layout>

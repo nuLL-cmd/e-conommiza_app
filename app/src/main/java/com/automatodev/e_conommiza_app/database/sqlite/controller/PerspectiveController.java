@@ -13,21 +13,23 @@ import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
+import io.reactivex.Single;
 
 public class PerspectiveController extends AndroidViewModel {
-    private DatabaseConfig databaseConfig;
+    private final DatabaseConfig databaseConfig;
+
     public PerspectiveController(@NonNull Application application) {
         super(application);
 
         databaseConfig = DatabaseConfig.getDatabaseConfig(application);
     }
 
-    public Flowable<List<PerspectiveEntity>> getPerspectiveById(String uid){
-        return databaseConfig.perspectiveDao().getPerspectiveById(uid);
+    public Flowable<List<PerspectiveEntity>> getPerspectiveByUid(String uid){
+        return databaseConfig.perspectiveDao().getPerspectiveByUid(uid);
     }
 
-    public Flowable<List<PerspectiveEntity>> getAllPerspectives(){
-        return databaseConfig.perspectiveDao().getAllPerspectives();
+    public Single<PerspectiveEntity> getPerspectiveById(Long id){
+        return databaseConfig.perspectiveDao().getPerspectiveById(id);
     }
 
     public Completable addPerspective(PerspectiveEntity perspectiveEntity){

@@ -33,14 +33,17 @@ public class DataEntryEntity implements Serializable {
     @ColumnInfo(name = "value_entry")
     private BigDecimal valueEntry;
 
+    @ColumnInfo(name = "payment")
+    private Integer payment;
 
-    public DataEntryEntity(Long idPerspective, String nameLocal, String category, long dateEntry, String typeEntry, BigDecimal valueEntry) {
+    public DataEntryEntity(Long idPerspective, String nameLocal, String category, long dateEntry, String typeEntry, BigDecimal valueEntry, Integer payment) {
         this.idPersp = idPerspective;
         this.nameLocal = nameLocal;
         this.category = category;
         this.dateEntry = dateEntry;
         this.typeEntry = typeEntry;
         this.valueEntry = valueEntry;
+        this.payment = payment;
     }
 
 
@@ -103,6 +106,13 @@ public class DataEntryEntity implements Serializable {
         this.valueEntry = valueEntry;
     }
 
+    public Integer getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Integer payment) {
+        this.payment = payment;
+    }
 
     @Override
     public String toString() {

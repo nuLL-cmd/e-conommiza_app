@@ -5,98 +5,91 @@
 
     </data>
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
     <RelativeLayout
-        android:id="@+id/relativeDaddy_dialogAbout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_180sdp"
-        android:layout_marginStart="@dimen/_25sdp"
-        android:layout_marginTop="@dimen/_25sdp"
-        android:layout_marginEnd="@dimen/_25sdp"
-        android:layout_marginBottom="@dimen/_25sdp"
-        android:background="@drawable/bg_dialog_global">
-
+        android:layout_height="match_parent">
 
         <RelativeLayout
-            android:id="@+id/relativeTitle_dialogAbout"
+            android:id="@+id/relativeDaddy_dialogAbout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
-            android:background="@drawable/bg_dialog_view">
+            android:layout_height="@dimen/_150sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:background="@drawable/bg_dialog_global">
+
+
+            <RelativeLayout
+                android:id="@+id/relativeTitle_dialogAbout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                android:background="@drawable/bg_dialog_view">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:text="E-conommiza"
+                    android:textColor="@color/background_form"
+                    android:textSize="@dimen/_14ssp" />
+
+
+                <ImageButton
+                    android:id="@+id/btnClose_dialogAbout"
+                    android:layout_width="@dimen/_26sdp"
+                    android:layout_height="@dimen/_26sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/bg_button_back_form_global"
+                    android:src="@drawable/ic_close" />
+
+
+                <ImageButton
+                    android:id="@+id/btnLinkedin_dialogAbout"
+                    android:layout_width="@dimen/_26sdp"
+                    android:layout_height="@dimen/_26sdp"
+                    android:layout_alignTop="@id/btnClose_dialogAbout"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:paddingBottom="@dimen/_6sdp"
+                    android:layout_toStartOf="@id/btnClose_dialogAbout"
+                    android:background="@drawable/bg_button_back_form_global"
+                    android:src="@drawable/ic_linkedin" />
+
+                <ImageButton
+                    android:id="@+id/btnPlay_dialogAbout"
+                    android:layout_width="@dimen/_26sdp"
+                    android:layout_height="@dimen/_26sdp"
+                    android:layout_toStartOf="@id/btnLinkedin_dialogAbout"
+                    android:layout_alignTop="@id/btnLinkedin_dialogAbout"
+                    android:layout_alignBottom="@id/btnLinkedin_dialogAbout"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:paddingStart="@dimen/_3sdp"
+                    android:background="@drawable/bg_button_back_form_global"
+                    android:src="@drawable/ic_playstore" />
+
+            </RelativeLayout>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="E-conommiza"
-                android:textColor="@color/background_form"
-                android:layout_marginStart="@dimen/_20sdp"
+
+                android:layout_below="@id/relativeTitle_dialogAbout"
+                android:layout_margin="@dimen/_5sdp"
                 android:gravity="center"
-                android:textSize="@dimen/_14ssp"/>
+                android:text="Aplicativo de finanças. \nVisite a pagina do ptojryo na playstore \n \nVersão 1.0.0"
+                android:textSize="@dimen/_10ssp" />
 
 
 
-            <ImageButton
-                android:id="@+id/btnClose_dialogAbout"
-                android:layout_width="@dimen/_26sdp"
-                android:layout_height="@dimen/_26sdp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:background="@drawable/bg_button_back_form_global"
-                android:src="@drawable/ic_close" />
+
 
         </RelativeLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            android:gravity="center"
-            android:layout_below="@id/relativeTitle_dialogAbout"
-            android:layout_above="@+id/linearSocial_dialogAbout"
-            android:layout_margin="@dimen/_5sdp"
-            android:text="Aplicativo de finanças. \nVisite a pagina do ptojryo na playstore \n \nVersão 1.0.0"
-            android:textSize="@dimen/_10ssp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_alignParentBottom="true"
-            android:id="@+id/linearSocial_dialogAbout"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-
-            <ImageButton
-                android:id="@+id/btnLinkedin_dialogAbout"
-                android:layout_width="@dimen/_45sdp"
-                android:layout_height="@dimen/_45sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:paddingBottom="@dimen/_15sdp"
-                android:background="@drawable/bg_button_white_shadow_global"
-                android:src="@drawable/ic_linkedin" />
-
-            <ImageButton
-                android:id="@+id/btnPlay_dialogAbout"
-                android:paddingStart="@dimen/_8sdp"
-                android:background="@drawable/bg_button_white_shadow_global"
-                android:layout_width="@dimen/_45sdp"
-                android:src="@drawable/ic_playstore"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_height="@dimen/_45sdp"/>
-
-
-        </LinearLayout>
-
-
-
     </RelativeLayout>
-
-</RelativeLayout>
 
 </layout>

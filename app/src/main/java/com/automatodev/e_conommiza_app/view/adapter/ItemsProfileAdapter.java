@@ -17,6 +17,15 @@ public class ItemsProfileAdapter extends RecyclerView.Adapter<ItemsProfileAdapte
 
     private List<PerspectiveEntity> perspectiveEntities;
     private LayoutInflater layoutInflater;
+    private OnItemClickListener listener;
+
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.listener = listener;
+    }
 
     public ItemsProfileAdapter(List<PerspectiveEntity> perspectiveEntities){
         this.perspectiveEntities = perspectiveEntities;
@@ -29,7 +38,7 @@ public class ItemsProfileAdapter extends RecyclerView.Adapter<ItemsProfileAdapte
         }
 
         LayoutItemsProfileBinding binding = DataBindingUtil.inflate(layoutInflater,R.layout.layout_items_profile,parent, false);
-        return new DataHandler(binding);
+        return new DataHandler(binding, listener);
     }
 
     @Override
@@ -45,9 +54,19 @@ public class ItemsProfileAdapter extends RecyclerView.Adapter<ItemsProfileAdapte
     public class DataHandler extends RecyclerView.ViewHolder{
         LayoutItemsProfileBinding binding;
 
-        public DataHandler(LayoutItemsProfileBinding binding){
+        public DataHandler(LayoutItemsProfileBinding binding, OnItemClickListener listener){
             super(binding.getRoot());
             this.binding = binding;
+
+            itemView.setOnClickListener(view ->{
+                if (listener != null){
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION){
+                        listener.onItemClick(position);
+                    }
+                }
+            });
+
         }
 
         public void setBinding(PerspectiveEntity perspectiveEntity) {

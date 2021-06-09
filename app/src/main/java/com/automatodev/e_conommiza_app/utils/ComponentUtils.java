@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.automatodev.e_conommiza_app.R;
@@ -36,24 +37,24 @@ public class ComponentUtils {
     public void stateColorComponent(View views[], Integer[]resources, boolean condition){
 
        if (condition){
-           ((Activity) context).getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-           ((Activity) context).getWindow().setStatusBarColor(context.getResources().getColor(R.color.background_form));
+          // ((Activity) context).getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+           ((Activity) context).getWindow().setStatusBarColor(context.getResources().getColor(R.color.button_positive));
            //btnUpItem
             views[0].getBackground().setColorFilter(ContextCompat.getColor(context, R.color.background_form), PorterDuff.Mode.SRC);
            ((ImageButton)views[0]).setImageDrawable(context.getResources().getDrawable(resources[0]));
            //AppBar
-           views[1].setBackground(context.getResources().getDrawable(R.color.background_form));
+           views[1].getBackground().setColorFilter(ContextCompat.getColor(context, R.color.button_positive), PorterDuff.Mode.SRC);
            //txtWindowItem
-           ((TextView)views[2]).setTextColor(context.getResources().getColor(android.R.color.black));
+           ((TextView)views[2]).setTextColor(context.getResources().getColor(R.color.white_fff));
            //txtAppItem
-           ((TextView)views[3]).setTextColor(context.getResources().getColor(R.color.color_gray_CDCBCB));
+           ((TextView)views[3]).setTextColor(context.getResources().getColor(R.color.white_fff));
            //txtPerspectiveItem
-           views[4].setBackgroundResource(R.drawable.bg_edt_blue);
+           //views[4].setBackgroundResource(R.drawable.bg_edt_blue);
            //btnSave
-            //views[5].getBackground().setColorFilter(ContextCompat.getColor(context, R.color.background_form), PorterDuff.Mode.SRC);
-           ((Button) views[5]).setTextColor(context.getResources().getColor(R.color.button_positive));
+           // views[5].getBackground().setColorFilter(ContextCompat.getColor(context, R.color.button_positive), PorterDuff.Mode.SRC);
            //btnDate
-           views[6].getBackground().setColorFilter(ContextCompat.getColor(context, R.color.button_positive), PorterDuff.Mode.SRC);
+           //views[6].getBackground().setColorFilter(ContextCompat.getColor(context, R.color.button_positive), PorterDuff.Mode.SRC);
+
 
 
        }else{
@@ -66,18 +67,18 @@ public class ComponentUtils {
            views[2].getBackground().setColorFilter(ContextCompat.getColor(context, R.color.background_form), PorterDuff.Mode.SRC);
            ((ImageButton)views[2]).setImageDrawable(context.getResources().getDrawable(resources[2]));
            //btnDate
-            views[3].getBackground().setColorFilter(ContextCompat.getColor(context,resources[0]), PorterDuff.Mode.SRC);
+           // views[3].getBackground().setColorFilter(ContextCompat.getColor(context,resources[0]), PorterDuff.Mode.SRC);
             //btnSave
-           //views[4].getBackground().setColorFilter(ContextCompat.getColor(context, resources[0]), PorterDuff.Mode.SRC);
-           ((Button) views[4]).setTextColor(context.getResources().getColor(resources[0]));
+          //views[4].getBackground().setColorFilter(ContextCompat.getColor(context,resources[0]), PorterDuff.Mode.SRC);
            //appbar
-           views[5].setBackground(context.getResources().getDrawable(resources[0]));
+           views[3].getBackground().setColorFilter(ContextCompat.getColor(context,resources[0]), PorterDuff.Mode.SRC);;
            //txtWindowItem
-           ((TextView)views[6]).setTextColor(context.getResources().getColor(android.R.color.white));
+           ((TextView)views[4]).setTextColor(context.getResources().getColor(R.color.white_fff));
            //txtAppItem
-           ((TextView)views[7]).setTextColor(context.getResources().getColor(android.R.color.white));
+           ((TextView)views[5]).setTextColor(context.getResources().getColor(R.color.white_fff));
            //txtPerspectiveItem
-           views[8].setBackgroundResource(resources[3]);
+           //views[6].setBackgroundResource(resources[3]);
+
        }
 
     }
@@ -107,7 +108,7 @@ public class ComponentUtils {
     public void showSnackbar(String message, int duration){
         CustomSnackbar snackbar = new CustomSnackbar(context);
         snackbar.message(message);
-        snackbar.padding(120);
+        snackbar.padding(30);
         snackbar.cornerRadius(15);
         snackbar.duration(duration);
         snackbar.show();
@@ -128,5 +129,13 @@ public class ComponentUtils {
         };
     }
 
+    public static int colorExit(){
+        return R.color.red_e65100;
+
+    }
+    public static int colorEntry(){
+        return R.color.green_00c853;
+
+    }
 
 }

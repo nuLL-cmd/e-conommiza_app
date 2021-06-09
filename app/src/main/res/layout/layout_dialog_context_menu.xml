@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/relativeDaddy_dialogLogout"
+        android:layout_width="@dimen/_180sdp"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:background="@drawable/bg_dialog_global">
+
+
+        <RelativeLayout
+            android:id="@+id/relativeTitle_dialogLogout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_38sdp"
+            android:background="@drawable/bg_dialog_view">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Ações"
+                android:id="@+id/lblTitle_dialogLogout"
+                android:textColor="@color/background_form"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:gravity="center"
+                android:textSize="@dimen/_14ssp"/>
+
+
+
+        </RelativeLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/linearSocial_dialogLogout"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:layout_gravity="center"
+            android:gravity="left|center"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/relativeTitle_dialogLogout"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                android:text="Pagar"
+                android:drawableStart="@drawable/ic_payment_16_blue"
+                android:paddingStart="@dimen/_30sdp"
+                android:paddingEnd="@dimen/_30sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:id="@+id/btnYes_dialogLogout"
+                style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
+                android:textColor="@color/font_primary"
+                android:background="@drawable/bg_button_white_shadow_global" />
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                android:text="Congelar"
+                android:paddingStart="@dimen/_30sdp"
+                android:paddingEnd="@dimen/_30sdp"
+                android:drawableStart="@drawable/ic_hand_16"
+                android:id="@+id/btnCancel_dialogLogout"
+                style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
+                android:textColor="@color/font_primary"
+                android:background="@drawable/bg_button_white_shadow_global" />
+        </LinearLayout>
+
+
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
+
+</layout>

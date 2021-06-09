@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:id="@+id/relativeDaddy_layoutPerspective"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_relative_perspective">
+        android:background="@drawable/bg_relative_data_main_two">
 
 
         <RelativeLayout
@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/bg_relative_perspective">
+            android:background="@drawable/bg_relative_data_main_two">
 
 
                 <androidx.recyclerview.widget.RecyclerView

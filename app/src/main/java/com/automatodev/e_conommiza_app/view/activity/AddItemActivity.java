@@ -38,7 +38,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class AddItemActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
+public class AddItemActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private ActivityAddItemBinding binding;
     private ComponentUtils componentUtils;
     private DataEntryEntity data;
@@ -55,6 +55,7 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
     private String nameEntry;
     private String categoryEntry;
     private String typeEntry;
+    private Integer payment;
     private BigDecimal valueEntry;
     private Long dateEntry;
     private Long idPerspective;
@@ -95,6 +96,7 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
             data = (DataEntryEntity) bundle.getSerializable("data");
             if (typeIntent.equals("edit") && data != null) {
                 binding.txtWindowItem.setText("Editar registro");
+
                 if (perspectiveEntity != null && data != null)
                     populeData(data);
 
@@ -102,6 +104,7 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
                 data = new DataEntryEntity();
                 idPerspective = perspectiveEntity.getIdPerspective();
                 perspectiveDate = perspectiveEntity.getMonth() + " / " + perspectiveEntity.getYear();
+                payment = 0;
                 binding.txtPerspectiveItem.setText(perspectiveDate);
             } else {
                 Toast.makeText(this, "Tivemos um problema ao carregar os dados.\nReinicie o app e tente novamente.", Toast.LENGTH_LONG).show();
@@ -118,9 +121,9 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
     public void getUser() {
         UserPreferences preferences = new UserPreferences(this, "user");
         userEntity = preferences.getUser();
-            binding.imgUserItem.setAlpha(0f);
-            Glide.with(this).load(userEntity.getUrlPhoto())
-                    .addListener(componentUtils.listenerFadeImage(binding.imgUserItem, 600)).into(binding.imgUserItem);
+        binding.imgUserItem.setAlpha(0f);
+        Glide.with(this).load(userEntity.getUrlPhoto())
+                .addListener(componentUtils.listenerFadeImage(binding.imgUserItem, 600)).into(binding.imgUserItem);
     }
 
     private void populeData(DataEntryEntity data) {
@@ -132,6 +135,7 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
             categoryEntry = data.getCategory();
             nameEntry = data.getNameLocal();
             valueEntry = data.getValueEntry();
+            payment = data.getPayment();
             binding.txtPerspectiveItem.setText(perspectiveDate);
             binding.edtNameItem.setText(nameEntry);
             binding.edtPriceNew.setText(String.valueOf(data.getValueEntry()));
@@ -140,9 +144,9 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
 
 
                 componentUtils.stateColorComponent(new View[]{
-                        binding.getRoot(), binding.btnUpItem, binding.btnDownItem, binding.btnDateItem, binding.btnSaveItem,
-                        binding.appbarItem, binding.txtWindowItem, binding.txtAppItem, binding.txtPerspectiveItem
-                }, new Integer[]{R.color.green_8BC34A,R.drawable.ic_up_48_fff,R.drawable.ic_down_48_ee0005, R.drawable.bg_edt_green}, false);
+                        binding.getRoot(), binding.btnUpItem, binding.btnDownItem,
+                        binding.appbarItem, binding.txtWindowItem, binding.txtAppItem
+                }, new Integer[]{R.color.green_00c853, R.drawable.ic_up_48_fff, R.drawable.ic_down_48_ee0005, R.drawable.bg_edt_green}, false);
 
                 perspectiveEntity.setTotalCredit(perspectiveEntity.getTotalCredit().subtract(valueEntry));
                 isSelected = true;
@@ -150,9 +154,9 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
 
             } else {
                 componentUtils.stateColorComponent(new View[]{
-                        binding.getRoot(), binding.btnDownItem, binding.btnUpItem, binding.btnDateItem, binding.btnSaveItem,
-                        binding.appbarItem, binding.txtWindowItem, binding.txtAppItem, binding.txtPerspectiveItem
-                }, new Integer[]{R.color.red_ee0005,R.drawable.ic_down_48_fff,R.drawable.ic_up_48_8bc34a, R.drawable.bg_edt_orange}, false);
+                        binding.getRoot(), binding.btnDownItem, binding.btnUpItem,
+                        binding.appbarItem, binding.txtWindowItem, binding.txtAppItem
+                }, new Integer[]{R.color.red_e65100, R.drawable.ic_down_48_fff, R.drawable.ic_up_48_8bc34a, R.drawable.bg_edt_orange}, false);
 
                 perspectiveEntity.setTotalDebit(perspectiveEntity.getTotalDebit().subtract(valueEntry));
                 isSelected = true;
@@ -168,19 +172,16 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
     public void showCalendar(View view) throws ParseException {
 
 
-
-
         DateFormat format = new SimpleDateFormat("MMMM / yyyy", new Locale("pt", "br"));
         Date date = format.parse(perspectiveDate);
         Calendar c = Calendar.getInstance();
         c.setTime(date);
 
-        DatePickerDialog dateDialog = new DatePickerDialog(this, R.style.DatePickerDefaultTheme,this,
-                c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH));
+        DatePickerDialog dateDialog = new DatePickerDialog(this, R.style.DatePickerDefaultTheme, this,
+                c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
 
 
-
-        if (dateEntry != null){
+        if (dateEntry != null) {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(new Date(dateEntry));
             dateDialog.updateDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
@@ -225,9 +226,9 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
         if (!isSelected || negative) {
 
             componentUtils.stateColorComponent(new View[]{
-                    binding.getRoot(), binding.btnUpItem, binding.btnDownItem, binding.btnDateItem, binding.btnSaveItem,
-                    binding.appbarItem, binding.txtWindowItem, binding.txtAppItem, binding.txtPerspectiveItem
-            }, new Integer[]{R.color.green_8BC34A,R.drawable.ic_up_48_fff,R.drawable.ic_down_48_ee0005, R.drawable.bg_edt_green}, false);
+                    binding.getRoot(), binding.btnUpItem, binding.btnDownItem,
+                    binding.appbarItem, binding.txtWindowItem, binding.txtAppItem
+            }, new Integer[]{R.color.green_00c853, R.drawable.ic_up_48_fff, R.drawable.ic_down_48_ee0005, R.drawable.bg_edt_green}, false);
 
             negative = false;
             positive = true;
@@ -236,8 +237,7 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
 
         } else {
             componentUtils.stateColorComponent(new View[]{binding.btnUpItem
-                    , binding.appbarItem, binding.txtWindowItem, binding.txtAppItem
-                    , binding.txtPerspectiveItem, binding.btnSaveItem, binding.btnDateItem}, new Integer[]{R.drawable.ic_up_48_8bc34a}, true);
+                    , binding.appbarItem, binding.txtWindowItem, binding.txtAppItem}, new Integer[]{R.drawable.ic_up_48_8bc34a}, true);
 
             isSelected = false;
             positive = false;
@@ -250,9 +250,9 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
         if (!isSelected || positive) {
 
             componentUtils.stateColorComponent(new View[]{
-                    binding.getRoot(), binding.btnDownItem, binding.btnUpItem, binding.btnDateItem, binding.btnSaveItem,
-                    binding.appbarItem, binding.txtWindowItem, binding.txtAppItem, binding.txtPerspectiveItem
-            }, new Integer[]{R.color.red_ee0005,R.drawable.ic_down_48_fff,R.drawable.ic_up_48_8bc34a, R.drawable.bg_edt_orange}, false);
+                    binding.getRoot(), binding.btnDownItem, binding.btnUpItem,
+                    binding.appbarItem, binding.txtWindowItem, binding.txtAppItem
+            }, new Integer[]{R.color.red_e65100, R.drawable.ic_down_48_fff, R.drawable.ic_up_48_8bc34a, R.drawable.bg_edt_orange}, false);
 
 
             negative = true;
@@ -262,8 +262,7 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
 
         } else {
             componentUtils.stateColorComponent(new View[]{binding.btnDownItem
-                    , binding.appbarItem, binding.txtWindowItem, binding.txtAppItem
-                    , binding.txtPerspectiveItem, binding.btnSaveItem, binding.btnDateItem}, new Integer[]{R.drawable.ic_down_48_ee0005}, true);
+                    , binding.appbarItem, binding.txtWindowItem, binding.txtAppItem}, new Integer[]{R.drawable.ic_down_48_ee0005}, true);
 
             isSelected = false;
             negative = false;
@@ -277,18 +276,18 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
 
 
         if (validateFields()) {
-            componentUtils.showSnackbar("Existem campos que serem preenchidos!", 2000);
+            componentUtils.showSnackbar("Existem campos que serem preenchidos!", 700);
             return;
         }
 
         if (typeEntry == null) {
-            componentUtils.showSnackbar("Você precisa informar o tipo do registro!", 2000);
+            componentUtils.showSnackbar("Você precisa informar o tipo do registro!", 700);
 
             return;
         }
 
         if (dateEntry == null) {
-            componentUtils.showSnackbar("Necessário informar uma data para o registro", 2000);
+            componentUtils.showSnackbar("Necessário informar uma data para o registro", 700);
             return;
         }
 
@@ -298,10 +297,10 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
         data.setNameLocal(nameEntry);
         data.setValueEntry(valueEntry);
         data.setTypeEntry(typeEntry);
-        data.setValueEntry(valueEntry);
         data.setCategory(categoryEntry);
         data.setIdPersp(idPerspective);
         data.setDateEntry(dateEntry);
+        data.setPayment(payment);
 
         if (typeEntry.equals("entry"))
             perspectiveEntity.setTotalCredit(perspectiveEntity.getTotalCredit().add(valueEntry));
@@ -330,7 +329,6 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
                                         }
                                     }
                                 }.start();
-                                Toast.makeText(AddItemActivity.this, "Dado inserido com sucesso", Toast.LENGTH_LONG).show();
                             }));
 
                 }));
