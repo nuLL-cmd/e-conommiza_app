@@ -38,10 +38,12 @@ Technologies used
 * Firebase authentication
 * Sqlite with persistence RoomDatabase
 * RxJava
+* MVVM architecture
 * Lottie Animation (for Animations After Effects)
+* Google auth
 * Facebook auth
-* Tweeter
-* Android-SpinKit (Para loadings animados)
+* Tweeter auth
+* Android-SpinKit (for loadings animate)
 
 
 Development environment
