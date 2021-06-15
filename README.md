@@ -18,9 +18,11 @@ User
 <br/>
 <br/>
 <p float="left">
-<img src="https://user-images.githubusercontent.com/58223932/110860939-2d36b080-829c-11eb-982b-5f5847197da3.jpeg" wwidth="300" height="600"/>
-<img src="https://user-images.githubusercontent.com/58223932/110860486-9669f400-829b-11eb-9a10-cfbd51e9281c.jpeg" wwidth="300" height="600"/>
-<img src="https://user-images.githubusercontent.com/58223932/110860487-97028a80-829b-11eb-859b-b0e98fa09b73.jpeg" wwidth="300" height="600"/>
+<img src="https://user-images.githubusercontent.com/58223932/122053766-6d3a9180-cdbd-11eb-96ea-320e24d311fb.png" wwidth="300" height="600"/>
+<img src="https://user-images.githubusercontent.com/58223932/122053780-70358200-cdbd-11eb-85a7-6737ce41dcc6.png" wwidth="300" height="600"/>
+<img src="https://user-images.githubusercontent.com/58223932/122053820-79beea00-cdbd-11eb-83c4-b7054798c24c.png" wwidth="300" height="600"/>
+<img src="https://user-images.githubusercontent.com/58223932/122053834-7b88ad80-cdbd-11eb-9e4e-268d548dae1f.png" wwidth="300" height="600"/>
+<img src="https://user-images.githubusercontent.com/58223932/122053849-7e839e00-cdbd-11eb-91d7-0f1eb7f1196c.png" wwidth="300" height="600"/>
 </p>
 <br/>
 <br/>
@@ -36,10 +38,12 @@ Technologies used
 * Firebase authentication
 * Sqlite with persistence RoomDatabase
 * RxJava
+* MVVM architecture
 * Lottie Animation (for Animations After Effects)
+* Google auth
 * Facebook auth
-* Tweeter
-* Android-SpinKit (Para loadings animados)
+* Tweeter auth
+* Android-SpinKit (for loadings animate)
 
 
 Development environment
