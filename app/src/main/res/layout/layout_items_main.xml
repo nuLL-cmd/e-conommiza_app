@@ -7,7 +7,7 @@
 
         <variable
             name="dataEntry"
-            type="com.automatodev.e_conommiza_app.entidade.model.DataEntryEntity" />
+            type="com.automatodev.e_conommiza_app.entity.model.DataEntryEntity" />
 
         <variable
             name="activity"
@@ -16,6 +16,10 @@
         <variable
             name="component"
             type="com.automatodev.e_conommiza_app.utils.ComponentUtils" />
+
+        <variable
+            name="typeEnum"
+            type="com.automatodev.e_conommiza_app.enumarator.TypeEnum" />
     </data>
 
     <RelativeLayout
@@ -32,7 +36,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_5sdp"
             android:background="@drawable/bg_button_white_global"
-            android:setColor='@{dataEntry.typeEntry.equals("entry") ? component.colorEntry() : component.colorExit()}' />
+            android:setColor='@{dataEntry.typeEntry.code.equals(typeEnum.INPUT.code) ? component.colorEntry() : component.colorExit()}' />
 
         <View
             android:id="@+id/imagePayment"

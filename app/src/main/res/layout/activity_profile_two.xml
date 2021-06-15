@@ -207,10 +207,12 @@
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_25sdp"
                 android:background="@drawable/bg_button_white_global"
-                android:src="@drawable/ic_icont_chart_one" />
+                android:src="@drawable/ic_chart"
+                android:onClick="actProfileReport"/>
 
             <ImageButton
                 android:id="@+id/btnAddPerspective_profile"
+                android:onClick="showPicker"
                 android:layout_width="@dimen/_28sdp"
                 android:layout_height="@dimen/_28sdp"
                 android:layout_alignTop="@id/txtCash_profile"

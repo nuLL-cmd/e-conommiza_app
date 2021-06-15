@@ -1,6 +1,6 @@
-package com.automatodev.e_conommiza_app.entidade.modelBuild;
+package com.automatodev.e_conommiza_app.entity.modelBuild;
 
-import com.automatodev.e_conommiza_app.entidade.model.UserEntity;
+import com.automatodev.e_conommiza_app.entity.model.UserEntity;
 
 import java.util.Date;
 

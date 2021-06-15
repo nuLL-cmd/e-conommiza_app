@@ -35,14 +35,13 @@
                 android:gravity="center"
                 android:paddingStart="@dimen/_10sdp"
                 android:paddingEnd="@dimen/_10sdp"
+                android:textColor="#939090"
                 android:shadowColor="#683F3F3F"
                 android:shadowDx="3"
                 android:shadowDy="3"
                 android:shadowRadius="20"
                 android:singleLine="true"
                 android:textAlignment="center"
-
-                android:textColor="#939090"
                 android:textSize="@dimen/_11ssp"
                 android:textStyle="bold" />
 

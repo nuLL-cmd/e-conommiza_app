@@ -14,32 +14,41 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Econommiza_app">
-        <activity android:name=".view.activity.AddItemActivity"
+        <activity android:name=".view.activity.ReportActivity"
+            android:parentActivityName=".view.activity.ReportActivity"
+            android:theme="@style/Theme.Econommiza_app_two">
+
+        </activity>
+        <activity
+            android:name=".view.activity.AddItemActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Econommiza_app_two">
 
         </activity>
         <activity
             android:name=".view.activity.ProfileActivity"
-            android:screenOrientation="portrait"
             android:parentActivityName=".view.activity.ProfileActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Econommiza_app_two">
 
         </activity>
         <activity
             android:name=".view.activity.RegisterActivity"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".view.activity.RegisterActivity">
-
-        </activity>
-        <activity android:name=".view.activity.LoginActivity"
+            android:parentActivityName=".view.activity.RegisterActivity"
             android:screenOrientation="portrait">
 
         </activity>
-        <activity android:name=".view.activity.SplashActivity"
+        <activity
+            android:name=".view.activity.LoginActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name=".view.activity.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

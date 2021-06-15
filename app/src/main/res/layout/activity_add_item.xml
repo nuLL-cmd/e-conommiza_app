@@ -7,109 +7,69 @@
 
     </data>
 
-    <RelativeLayout
-        android:id="@+id/relativeDaddy_item"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <RelativeLayout
-            android:id="@+id/appbar_item"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_60sdp"
-            android:background="@drawable/bg_relative_toolbar">
-
-
-
-                <RelativeLayout
-                    android:id="@+id/relativetoolbar_item"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/txtApp_item"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_above="@id/txtWindow_item"
-                        android:layout_alignStart="@id/txtWindow_item"
-                        android:text="E-conommiza"
-                        android:textColor="@color/white_fff"
-                        android:textSize="@dimen/_10ssp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/txtWindow_item"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginBottom="@dimen/_10sdp"
-                        android:text="Adicionar registro"
-                        android:textColor="@color/white_fff"
-                        android:textSize="@dimen/_18ssp"
-                        android:textStyle="bold" />
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        app:civ_border_width="@dimen/_1sdp"
-                        app:civ_border_color="@color/white_fff"
-                        android:id="@+id/imgUser_item"
-                        android:layout_width="@dimen/_35sdp"
-                        android:layout_height="@dimen/_35sdp"
-                        android:elevation="@dimen/_3sdp"
-                        android:layout_alignBottom="@id/txtWindow_item"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="@dimen/_12sdp"
-                        android:src="@drawable/ic_user_web" />
-                </RelativeLayout>
-
-        </RelativeLayout>
-
-
         <ScrollView
             android:id="@+id/scrollDaddy_login"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/appbar_item"
             android:fillViewport="true">
 
             <LinearLayout
-                android:id="@+id/relativeDaddy_login"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#fff"
-                android:gravity="bottom"
                 android:orientation="vertical"
-                tools:context=".view.activity.LoginActivity">
+                android:layout_height="wrap_content">
+
 
                 <LinearLayout
-                    android:id="@+id/linearDataAccount_login"
+                    android:id="@+id/appbar_item"
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:gravity="center|start"
+                    android:gravity="center"
+                    android:background="@drawable/bg_relative_toolbar"
                     android:orientation="vertical">
 
-
-                    <TextView
-                        android:id="@+id/titleOperation_item"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:id="@+id/linearTitleWindow_item"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginTop="@dimen/_20sdp"
-                        android:text="Escolha o tipo de registro"
-                        android:textColor="@color/color_gray_5A5A5A"
-                        android:textSize="@dimen/_13ssp"
-                        android:textStyle="bold" />
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_5sdp"
+                        tools:ignore="UseCompoundDrawables">
+
+
+                        <TextView
+                            android:id="@+id/txtWindow_item"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Adicionar registro"
+                            android:textColor="#95FFFFFF"
+                            android:textSize="@dimen/_20sdp"
+                            android:textStyle="bold" />
+
+
+
+
+                    </LinearLayout>
+
 
                     <TextView
                         android:id="@+id/txtSubgtitle_item"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
                         android:text="O item será uma despesa ou provento?"
-                        android:textColor="#CDCBCB"
+                        android:textColor="@color/background_form"
+                        android:padding="@dimen/_3sdp"
+                        android:shadowColor="#FCD8D8D8"
+                        android:shadowDx="3"
+                        android:shadowDy="3"
+                        android:shadowRadius="20"
                         android:textSize="@dimen/_10ssp"
-                        android:textStyle="bold" />
+                         />
 
 
                     <LinearLayout
@@ -126,75 +86,94 @@
                             android:id="@+id/btnUp_item"
                             android:layout_width="fill_parent"
                             android:layout_height="@dimen/_60sdp"
-                            android:onClick="setPositive"
                             android:layout_marginEnd="@dimen/_5sdp"
                             android:layout_weight="1"
                             android:background="@drawable/bg_button_neutral"
+                            android:onClick="setPositive"
                             android:src="@drawable/ic_up_48_8bc34a" />
 
                         <ImageButton
                             android:id="@+id/btnDown_item"
                             android:layout_width="fill_parent"
-                            android:onClick="setNegative"
                             android:layout_height="@dimen/_60sdp"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:layout_weight="1"
                             android:background="@drawable/bg_button_neutral"
+                            android:onClick="setNegative"
                             android:src="@drawable/ic_down_48_ee0005" />
 
 
                     </LinearLayout>
 
-
                     <TextView
                         android:id="@+id/txtTitlePerspective_item"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginStart="@dimen/_35sdp"
+                        android:layout_marginEnd="@dimen/_35sdp"
                         android:layout_marginTop="@dimen/_10sdp"
+                        android:padding="@dimen/_3sdp"
                         android:text="Perspectiva selecionada"
-                        android:textColor="#CDCBCB"
+                        android:textColor="@color/background_form"
+                        android:shadowColor="#FCD8D8D8"
+                        android:shadowDx="3"
+                        android:shadowDy="3"
+                        android:shadowRadius="20"
                         android:textSize="@dimen/_10ssp"
-                        android:textStyle="bold" />
+                     />
 
                     <LinearLayout
                         android:id="@+id/relativePerspective_item"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_50sdp"
-                        android:gravity="center"
-                        android:background="@drawable/bg_button_white_shadow_global"
                         android:layout_gravity="center"
-                        android:orientation="horizontal"
-                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginStart="@dimen/_35sdp"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_15sdp">
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_35sdp"
+                        android:background="@drawable/bg_button_white_shadow_global"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_calendar_blue"/>
+                            android:src="@drawable/ic_calendar_blue" />
 
                         <TextView
                             android:id="@+id/txtPerspective_item"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Fevereiro"
                             android:padding="@dimen/_5sdp"
-                            android:textSize="@dimen/_11ssp"
-                            android:textColor="#878585"
                             android:shadowColor="#703F3F3F"
                             android:shadowDx="3"
                             android:shadowDy="3"
-                            android:shadowRadius="20"/>
+                            android:shadowRadius="20"
+                            android:text="Fevereiro"
+                            android:textColor="#878585"
+                            android:textSize="@dimen/_11ssp" />
                     </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relativeDaddy_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    tools:context=".view.activity.LoginActivity">
 
 
                     <TextView
                         android:id="@+id/txtNameValue_item"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
                         android:text="Dê um nome e um valor ao registro"
                         android:textColor="#CDCBCB"
                         android:textSize="@dimen/_10ssp"
@@ -215,11 +194,9 @@
                         android:paddingStart="@dimen/_10sdp"
                         android:paddingEnd="@dimen/_10sdp"
                         android:singleLine="true"
-                        android:textSize="@dimen/_11ssp"
                         android:textColor="#656363"
                         android:textColorHint="#656363"
-
-
+                        android:textSize="@dimen/_11ssp"
                         />
 
 
@@ -236,12 +213,12 @@
                             android:id="@+id/edtPrice_new"
                             android:layout_width="fill_parent"
                             android:layout_height="@dimen/_50sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
                             android:layout_weight="1"
                             android:background="@drawable/layout_shadow_white"
                             android:drawableStart="@drawable/ic_monetization_on_black_24dp"
                             android:drawablePadding="@dimen/_5sdp"
                             android:paddingStart="@dimen/_10sdp"
-                            android:layout_marginEnd="@dimen/_5sdp"
                             android:paddingEnd="@dimen/_10sdp"
                             android:singleLine="true"
                             android:textColor="#656363"
@@ -250,23 +227,23 @@
 
                         <Button
                             android:id="@+id/btnDate_item"
-                            android:layout_width="fill_parent"
-                            android:onClick="showCalendar"
-                            android:layout_height="@dimen/_50sdp"
-                            android:text="Calendario"
                             style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
+                            android:layout_width="fill_parent"
+                            android:layout_height="@dimen/_50sdp"
                             android:layout_weight="1.1"
                             android:background="@drawable/bg_button_blue_global"
                             android:drawableStart="@drawable/ic_calendar_white"
+                            android:onClick="showCalendar"
                             android:paddingStart="@dimen/_20sdp"
                             android:paddingEnd="@dimen/_20sdp"
-                            android:singleLine="true"
-                            android:textColor="#fff"
-                            android:textSize="@dimen/_11ssp"
                             android:shadowColor="#FCD8D8D8"
                             android:shadowDx="3"
                             android:shadowDy="3"
-                            android:shadowRadius="20"/>
+                            android:shadowRadius="20"
+                            android:singleLine="true"
+                            android:text="Calendario"
+                            android:textColor="#fff"
+                            android:textSize="@dimen/_11ssp" />
 
 
                     </LinearLayout>
@@ -274,9 +251,10 @@
 
                     <TextView
                         android:id="@+id/txtCategory"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:text="Qual a categoria?"
                         android:textColor="#CDCBCB"
@@ -294,18 +272,6 @@
                         android:background="@drawable/layout_shadow_white"
                         android:clickable="true"
                         android:textSize="@dimen/_11sdp" />
-
-
-                </LinearLayout>
-
-                <RelativeLayout
-                    android:id="@+id/linearSocial_login"
-                    android:layout_width="match_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="5"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
 
                     <Button
                         android:id="@+id/btnSave_item"
@@ -326,18 +292,13 @@
                         android:shadowColor="#FCD8D8D8"
                         android:shadowDx="3"
                         android:shadowDy="3"
-                        android:shadowRadius="20">
-
-
-
-                    </Button>
-
-                </RelativeLayout>
+                        android:shadowRadius="20"/>
+         </LinearLayout>
 
 
             </LinearLayout>
+
+
         </ScrollView>
 
-
-    </RelativeLayout>
 </layout>

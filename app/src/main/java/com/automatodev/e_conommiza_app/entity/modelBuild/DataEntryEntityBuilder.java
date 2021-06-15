@@ -1,6 +1,7 @@
-package com.automatodev.e_conommiza_app.entidade.modelBuild;
+package com.automatodev.e_conommiza_app.entity.modelBuild;
 
-import com.automatodev.e_conommiza_app.entidade.model.DataEntryEntity;
+import com.automatodev.e_conommiza_app.entity.model.DataEntryEntity;
+import com.automatodev.e_conommiza_app.enumarator.TypeEnum;
 
 import java.math.BigDecimal;
 
@@ -10,7 +11,7 @@ public class DataEntryEntityBuilder {
     private String category;
     private Long idPersp;
     private Long dataEntry;
-    private String typeEntry;
+    private TypeEnum typeEntry;
     private BigDecimal valueEntry;
     private Integer payment;
 
@@ -37,7 +38,7 @@ public class DataEntryEntityBuilder {
         return this;
     }
 
-    public DataEntryEntityBuilder typeEntry(String typeEntry){
+    public DataEntryEntityBuilder typeEntry(TypeEnum typeEntry){
         this.typeEntry = typeEntry;
         return this;
     }

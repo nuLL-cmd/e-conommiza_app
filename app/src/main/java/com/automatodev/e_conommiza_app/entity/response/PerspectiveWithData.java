@@ -1,10 +1,10 @@
-package com.automatodev.e_conommiza_app.entidade.response;
+package com.automatodev.e_conommiza_app.entity.response;
 
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
-import com.automatodev.e_conommiza_app.entidade.model.DataEntryEntity;
-import com.automatodev.e_conommiza_app.entidade.model.PerspectiveEntity;
+import com.automatodev.e_conommiza_app.entity.model.DataEntryEntity;
+import com.automatodev.e_conommiza_app.entity.model.PerspectiveEntity;
 
 import java.util.List;
 

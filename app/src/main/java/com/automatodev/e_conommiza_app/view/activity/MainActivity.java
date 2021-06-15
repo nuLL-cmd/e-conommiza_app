@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
@@ -19,10 +20,10 @@ import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreGetCa
 import com.automatodev.e_conommiza_app.database.firebase.firestore.FirestoreService;
 import com.automatodev.e_conommiza_app.database.sqlite.controller.PerspectiveController;
 import com.automatodev.e_conommiza_app.databinding.ActivityMainBinding;
-import com.automatodev.e_conommiza_app.entidade.model.PerspectiveEntity;
-import com.automatodev.e_conommiza_app.entidade.model.UserEntity;
-import com.automatodev.e_conommiza_app.entidade.modelBuild.PerspectiveEntityBuilder;
-import com.automatodev.e_conommiza_app.entidade.response.PerspectiveWithData;
+import com.automatodev.e_conommiza_app.entity.model.PerspectiveEntity;
+import com.automatodev.e_conommiza_app.entity.model.UserEntity;
+import com.automatodev.e_conommiza_app.entity.modelBuild.PerspectiveEntityBuilder;
+import com.automatodev.e_conommiza_app.entity.response.PerspectiveWithData;
 import com.automatodev.e_conommiza_app.preferences.UserPreferences;
 import com.automatodev.e_conommiza_app.security.firebaseAuth.Authentication;
 import com.automatodev.e_conommiza_app.utils.ComponentUtils;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     public static boolean refresh;
     private boolean isShow = false;
 
+    private CompositeDisposable disposable;
     public static List<PerspectiveEntity> perspectiveEntities;
     private List<PerspectiveEntity> perspectiveList;
     private ActivityMainBinding binding;
@@ -62,8 +64,8 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     private FragmentPageAdapter fragmentAdapter;
     private ComponentUtils componentUtils;
     private Calendar c;
-    private CompositeDisposable disposable;
     private PerspectiveController controller;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +89,12 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        super.onPause();
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
 
@@ -99,19 +107,30 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         status = false;
     }
 
+
+
+
     public void actMainProfile(View view) {
 
         if (!ProfileActivity.status) {
             Intent intent = new Intent(this, ProfileActivity.class);
+
             startActivity(intent);
             binding.menu.close(true);
         }
     }
 
 
+
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        disposable.dispose();
+        fragmentAdapter = null;
+        perspectiveList.clear();
+        perspectiveEntities.clear();
+        userEntity = null;
         finishAffinity();
     }
 
@@ -158,7 +177,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                             binding.spinktBalanceMain.setVisibility(View.VISIBLE);
                         }
 
-
                         perspectiveEntities.clear();
                         perspectiveList.clear();
 
@@ -167,10 +185,10 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                             perspectiveEntity.setItemsPerspective(p.dataEntryEntities);
                             perspectiveEntities.add(perspectiveEntity);
                             perspectiveList.add(new PerspectiveEntity(perspectiveEntity.getIdPerspective(), perspectiveEntity.getMonth(), perspectiveEntity.getYear()));
+                            fragmentAdapter.notifyDataSetChanged();
                         }
 
 
-                        fragmentAdapter.notifyDataSetChanged();
 
 
                         if (perspectiveEntities.size() == 0) {
@@ -283,6 +301,8 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         }
 
     }
+
+
 
     public void showPicker(View view) throws ParseException {
         c = Calendar.getInstance();

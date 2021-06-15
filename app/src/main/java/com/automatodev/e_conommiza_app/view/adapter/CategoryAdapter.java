@@ -13,8 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.automatodev.e_conommiza_app.R;
-import com.automatodev.e_conommiza_app.entidade.model.CategoryEntity;
-import com.automatodev.e_conommiza_app.entidade.model.PerspectiveEntity;
+import com.automatodev.e_conommiza_app.entity.model.CategoryEntity;
 
 
 import java.util.List;

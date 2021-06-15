@@ -1,4 +1,4 @@
-package com.automatodev.e_conommiza_app.entidade.model;
+package com.automatodev.e_conommiza_app.entity.model;
 
 import com.automatodev.e_conommiza_app.R;
 

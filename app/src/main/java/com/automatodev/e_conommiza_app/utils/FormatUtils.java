@@ -19,6 +19,11 @@ public class FormatUtils {
         return format.format(value);
     }
 
+    public static String percentFormat(Double value, boolean percent){
+        DecimalFormat format = new DecimalFormat("#.##");
+        return percent ? format.format(value)+"%": format.format(value);
+    }
+
     public static String decimalFormat(BigDecimal value){
         DecimalFormat format = new DecimalFormat("#,##0.00", new DecimalFormatSymbols(new Locale ("pt", "BR")));
         return format.format(value);

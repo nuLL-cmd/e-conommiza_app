@@ -2,6 +2,7 @@ package com.automatodev.e_conommiza_app.view.activity;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,21 +11,21 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.automatodev.e_conommiza_app.R;
 import com.automatodev.e_conommiza_app.database.sqlite.controller.DataEntryController;
 import com.automatodev.e_conommiza_app.database.sqlite.controller.PerspectiveController;
 import com.automatodev.e_conommiza_app.databinding.ActivityAddItemBinding;
-import com.automatodev.e_conommiza_app.entidade.model.CategoryEntity;
-import com.automatodev.e_conommiza_app.entidade.model.DataEntryEntity;
-import com.automatodev.e_conommiza_app.entidade.model.PerspectiveEntity;
-import com.automatodev.e_conommiza_app.entidade.model.UserEntity;
-import com.automatodev.e_conommiza_app.preferences.UserPreferences;
+import com.automatodev.e_conommiza_app.entity.model.CategoryEntity;
+import com.automatodev.e_conommiza_app.entity.model.DataEntryEntity;
+import com.automatodev.e_conommiza_app.entity.model.PerspectiveEntity;
+import com.automatodev.e_conommiza_app.entity.model.UserEntity;
+import com.automatodev.e_conommiza_app.enumarator.TypeEnum;
 import com.automatodev.e_conommiza_app.view.adapter.CategoryAdapter;
 import com.automatodev.e_conommiza_app.utils.ComponentUtils;
 import com.automatodev.e_conommiza_app.utils.FormatUtils;
-import com.bumptech.glide.Glide;
 
 import java.math.BigDecimal;
 import java.text.DateFormat;
@@ -54,7 +55,7 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
     private String perspectiveDate;
     private String nameEntry;
     private String categoryEntry;
-    private String typeEntry;
+    private TypeEnum typeEntry;
     private Integer payment;
     private BigDecimal valueEntry;
     private Long dateEntry;
@@ -70,8 +71,7 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
 
         componentUtils = new ComponentUtils(this);
 
-        getData();
-        getUser();
+        getData();;
         inflateSpinnerCategory();
 
     }
@@ -118,13 +118,7 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
 
     }
 
-    public void getUser() {
-        UserPreferences preferences = new UserPreferences(this, "user");
-        userEntity = preferences.getUser();
-        binding.imgUserItem.setAlpha(0f);
-        Glide.with(this).load(userEntity.getUrlPhoto())
-                .addListener(componentUtils.listenerFadeImage(binding.imgUserItem, 600)).into(binding.imgUserItem);
-    }
+
 
     private void populeData(DataEntryEntity data) {
         if (data != null) {
@@ -140,12 +134,12 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
             binding.edtNameItem.setText(nameEntry);
             binding.edtPriceNew.setText(String.valueOf(data.getValueEntry()));
 
-            if (typeEntry.equals("entry")) {
+            if (typeEntry.getCode().equals(TypeEnum.INPUT.toString())) {
 
 
                 componentUtils.stateColorComponent(new View[]{
                         binding.getRoot(), binding.btnUpItem, binding.btnDownItem,
-                        binding.appbarItem, binding.txtWindowItem, binding.txtAppItem
+                        binding.appbarItem
                 }, new Integer[]{R.color.green_00c853, R.drawable.ic_up_48_fff, R.drawable.ic_down_48_ee0005, R.drawable.bg_edt_green}, false);
 
                 perspectiveEntity.setTotalCredit(perspectiveEntity.getTotalCredit().subtract(valueEntry));
@@ -155,7 +149,7 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
             } else {
                 componentUtils.stateColorComponent(new View[]{
                         binding.getRoot(), binding.btnDownItem, binding.btnUpItem,
-                        binding.appbarItem, binding.txtWindowItem, binding.txtAppItem
+                        binding.appbarItem
                 }, new Integer[]{R.color.red_e65100, R.drawable.ic_down_48_fff, R.drawable.ic_up_48_8bc34a, R.drawable.bg_edt_orange}, false);
 
                 perspectiveEntity.setTotalDebit(perspectiveEntity.getTotalDebit().subtract(valueEntry));
@@ -227,17 +221,17 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
 
             componentUtils.stateColorComponent(new View[]{
                     binding.getRoot(), binding.btnUpItem, binding.btnDownItem,
-                    binding.appbarItem, binding.txtWindowItem, binding.txtAppItem
+                    binding.appbarItem
             }, new Integer[]{R.color.green_00c853, R.drawable.ic_up_48_fff, R.drawable.ic_down_48_ee0005, R.drawable.bg_edt_green}, false);
 
             negative = false;
             positive = true;
-            typeEntry = "entry";
+            typeEntry = TypeEnum.INPUT;
             isSelected = true;
 
         } else {
             componentUtils.stateColorComponent(new View[]{binding.btnUpItem
-                    , binding.appbarItem, binding.txtWindowItem, binding.txtAppItem}, new Integer[]{R.drawable.ic_up_48_8bc34a}, true);
+                    , binding.appbarItem}, new Integer[]{R.drawable.ic_up_48_8bc34a}, true);
 
             isSelected = false;
             positive = false;
@@ -251,18 +245,18 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
 
             componentUtils.stateColorComponent(new View[]{
                     binding.getRoot(), binding.btnDownItem, binding.btnUpItem,
-                    binding.appbarItem, binding.txtWindowItem, binding.txtAppItem
+                    binding.appbarItem
             }, new Integer[]{R.color.red_e65100, R.drawable.ic_down_48_fff, R.drawable.ic_up_48_8bc34a, R.drawable.bg_edt_orange}, false);
 
 
             negative = true;
             positive = false;
-            typeEntry = "exit";
+            typeEntry = TypeEnum.OUTPUT;
             isSelected = true;
 
         } else {
             componentUtils.stateColorComponent(new View[]{binding.btnDownItem
-                    , binding.appbarItem, binding.txtWindowItem, binding.txtAppItem}, new Integer[]{R.drawable.ic_down_48_ee0005}, true);
+                    , binding.appbarItem}, new Integer[]{R.drawable.ic_down_48_ee0005}, true);
 
             isSelected = false;
             negative = false;
@@ -282,6 +276,9 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
 
         if (typeEntry == null) {
             componentUtils.showSnackbar("Você precisa informar o tipo do registro!", 700);
+            binding.appbarItem.getBackground().setColorFilter(ContextCompat.getColor(this, R.color.orange_f68059), PorterDuff.Mode.SRC);
+            getWindow().setStatusBarColor(getResources().getColor(R.color.orange_f68059));
+
 
             return;
         }
@@ -302,7 +299,7 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
         data.setDateEntry(dateEntry);
         data.setPayment(payment);
 
-        if (typeEntry.equals("entry"))
+        if (typeEntry.getCode().equals(TypeEnum.INPUT.toString()))
             perspectiveEntity.setTotalCredit(perspectiveEntity.getTotalCredit().add(valueEntry));
         else
             perspectiveEntity.setTotalDebit(perspectiveEntity.getTotalDebit().add(valueEntry));

@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.activity.ReportActivity">
+
+        <RelativeLayout
+            android:id="@+id/relativeBar_report"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@id/viewSuportLayout_main"
+            android:background="@drawable/bg_relative_toolbar" />
+
+
+        <ImageButton
+            android:id="@+id/btnBack_regoster"
+            android:layout_width="@dimen/_32sdp"
+            android:layout_height="@dimen/_32sdp"
+            android:onClick="actReportProfile"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:background="@drawable/bg_button_blue_noshadow_global"
+            android:src="@drawable/ic_arrow_back_white" />
+
+
+        <LinearLayout
+            android:id="@+id/linearTitleWindow_report"
+            android:layout_width="match_parent"
+            android:padding="@dimen/_5sdp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtWindow_report"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Resumo"
+                android:textColor="#95FFFFFF"
+                android:textSize="@dimen/_25ssp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="@dimen/_28sdp"
+                android:layout_height="@dimen/_28sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:src="@drawable/ic_chart"
+                android:id="@+id/imgTitleWindow_repo" />
+
+
+        </LinearLayout>
+
+
+        <View
+            android:id="@+id/viewSuportLayout_main"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_centerInParent="true" />
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/scrollDaddy_report"
+            android:scrollbars="none"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_below="@+id/linearTitleWindow_report"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relativeDaddy_login"
+
+                android:orientation="vertical"
+                tools:context=".view.activity.LoginActivity">
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_160sdp"
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    app:cardElevation="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp" >
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/lblPercentCardOne_report"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Proventos a mais em relação ao ultimo mês"
+                            android:layout_above="@id/txtPercentCardOne_report"
+                            android:gravity="center"
+                            android:fontFamily="@font/cairo_light"
+                            android:textSize="@dimen/_15ssp"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:singleLine="true"
+                            android:ellipsize="marquee"
+                            android:shadowColor="#683F3F3F"
+                            android:shadowDx="3"
+                            android:shadowDy="3"
+                            android:shadowRadius="20"/>
+
+                        <TextView
+                            android:id="@+id/txtPercentCardOne_report"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="12%"
+                            android:textSize="@dimen/_70ssp"
+                            android:padding="@dimen/_3sdp"
+                            android:layout_alignParentEnd="true"
+                            android:fontFamily="@font/cairo_light"
+                            android:textColor="@color/button_positive"
+
+                            android:layout_centerVertical="true"
+                            android:textAlignment="center"
+                            android:layout_alignParentBottom="true"
+                            android:shadowColor="#683F3F3F"
+                            android:shadowDx="3"
+                            android:shadowDy="3"
+                            android:shadowRadius="20"/>
+
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_160sdp"
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    app:cardElevation="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp" >
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/lblPercentCardTwo_report"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_above="@id/txtPercentCardTwo_report"
+                            android:fontFamily="@font/cairo_light"
+                            android:gravity="center"
+                            android:shadowColor="#683F3F3F"
+                            android:shadowDx="3"
+                            android:shadowDy="3"
+                            android:shadowRadius="20"
+                            android:text="Gastos a mais em relação ao ultimo mês"
+                            android:textSize="@dimen/_15ssp"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:singleLine="true"
+                            android:ellipsize="marquee"/>
+
+                        <TextView
+                            android:id="@+id/txtPercentCardTwo_report"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:layout_alignParentBottom="true"
+                            android:text="8%"
+                            android:padding="@dimen/_3sdp"
+                            android:textSize="@dimen/_70ssp"
+                            android:layout_alignParentEnd="true"
+                            android:fontFamily="@font/cairo_light"
+                            android:textColor="@color/red_e65100"
+                            android:layout_centerVertical="true"
+                            android:shadowColor="#683F3F3F"
+                            android:shadowDx="3"
+                            android:shadowDy="3"
+                            android:shadowRadius="20"/>
+
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_250sdp"
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    app:cardElevation="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/txtPercentCredit_report"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:layout_alignParentBottom="true"
+                            android:text="8%"
+                            android:padding="@dimen/_3sdp"
+                            android:textSize="@dimen/_70ssp"
+                            android:layout_alignParentEnd="true"
+                            android:fontFamily="@font/cairo_light"
+                            android:textColor="@color/red_e65100"
+                            android:layout_centerVertical="true"
+                            android:shadowColor="#683F3F3F"
+                            android:shadowDx="3"
+                            android:shadowDy="3"
+                            android:shadowRadius="20"/>
+
+
+                        <TextView
+                            android:id="@+id/txtPercentDebit_report"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="12%"
+                            android:textSize="@dimen/_70ssp"
+                            android:padding="@dimen/_3sdp"
+                            android:layout_alignParentEnd="true"
+                            android:fontFamily="@font/cairo_light"
+                            android:textColor="@color/button_positive"
+
+                            android:layout_centerVertical="true"
+                            android:textAlignment="center"
+                            android:layout_alignParentBottom="true"
+                            android:shadowColor="#683F3F3F"
+                            android:shadowDx="3"
+                            android:shadowDy="3"
+                            android:shadowRadius="20"/>
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_160sdp"
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    app:cardElevation="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp" />
+
+            </LinearLayout>
+        </ScrollView>
+
+
+    </RelativeLayout>
+</layout>

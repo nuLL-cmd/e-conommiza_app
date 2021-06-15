@@ -45,9 +45,9 @@ public class ComponentUtils {
            //AppBar
            views[1].getBackground().setColorFilter(ContextCompat.getColor(context, R.color.button_positive), PorterDuff.Mode.SRC);
            //txtWindowItem
-           ((TextView)views[2]).setTextColor(context.getResources().getColor(R.color.white_fff));
+          // ((TextView)views[2]).setTextColor(context.getResources().getColor(R.color.white_fff));
            //txtAppItem
-           ((TextView)views[3]).setTextColor(context.getResources().getColor(R.color.white_fff));
+           //((TextView)views[3]).setTextColor(context.getResources().getColor(R.color.white_fff));
            //txtPerspectiveItem
            //views[4].setBackgroundResource(R.drawable.bg_edt_blue);
            //btnSave
@@ -73,9 +73,9 @@ public class ComponentUtils {
            //appbar
            views[3].getBackground().setColorFilter(ContextCompat.getColor(context,resources[0]), PorterDuff.Mode.SRC);;
            //txtWindowItem
-           ((TextView)views[4]).setTextColor(context.getResources().getColor(R.color.white_fff));
+          // ((TextView)views[4]).setTextColor(context.getResources().getColor(R.color.white_fff));
            //txtAppItem
-           ((TextView)views[5]).setTextColor(context.getResources().getColor(R.color.white_fff));
+          // ((TextView)views[5]).setTextColor(context.getResources().getColor(R.color.white_fff));
            //txtPerspectiveItem
            //views[6].setBackgroundResource(resources[3]);
 

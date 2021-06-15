@@ -1,16 +1,18 @@
 package com.automatodev.e_conommiza_app.view.activity;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.DatePicker;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,9 +33,10 @@ import com.automatodev.e_conommiza_app.databinding.ActivityProfileTwoBinding;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogAboutBinding;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogLogoutBinding;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogProgressBinding;
-import com.automatodev.e_conommiza_app.entidade.model.PerspectiveEntity;
-import com.automatodev.e_conommiza_app.entidade.model.UserEntity;
-import com.automatodev.e_conommiza_app.entidade.response.PerspectiveWithData;
+import com.automatodev.e_conommiza_app.entity.model.PerspectiveEntity;
+import com.automatodev.e_conommiza_app.entity.model.UserEntity;
+import com.automatodev.e_conommiza_app.entity.modelBuild.PerspectiveEntityBuilder;
+import com.automatodev.e_conommiza_app.entity.response.PerspectiveWithData;
 import com.automatodev.e_conommiza_app.preferences.UserPreferences;
 import com.automatodev.e_conommiza_app.security.firebaseAuth.Authentication;
 import com.automatodev.e_conommiza_app.utils.FormatUtils;
@@ -44,17 +47,24 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.google.firebase.auth.FirebaseAuth;
 import com.iceteck.silicompressorr.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import id.zelory.compressor.Compressor;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -63,7 +73,7 @@ import io.reactivex.schedulers.Schedulers;
 
 import static com.automatodev.e_conommiza_app.R.*;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private ActivityProfileTwoBinding binding;
     private Authentication auth;
@@ -72,13 +82,16 @@ public class ProfileActivity extends AppCompatActivity {
     private Uri uriInternal;
     private Uri uriExternal;
     private ComponentUtils componentUtils;
+    private CompositeDisposable disposable;
     private UserPreferences preferences;
+    private Calendar c;
+    private List<PerspectiveEntity> perspectiveList;
+    private ItemsProfileAdapter adapter;
 
-    private BigDecimal totalDebit = new BigDecimal("0.00");
-    private BigDecimal totalCredit = new BigDecimal("0.00");
+
+    private BigDecimal totalDebit;
+    private BigDecimal totalCredit;
     private Integer registerCount = 0;
-
-
 
 
     public static boolean status;
@@ -93,9 +106,18 @@ public class ProfileActivity extends AppCompatActivity {
         componentUtils = new ComponentUtils(this);
         setSupportActionBar(binding.toolbarMenuProfile);
 
+        disposable = new CompositeDisposable();
+
+
         auth = new Authentication();
         firestoreService = new FirestoreService();
         storageService = new StorageService();
+
+        perspectiveList = new ArrayList<>();
+
+        adapter = new ItemsProfileAdapter(perspectiveList);
+        binding.recyclerItemsProfile.hasFixedSize();
+        binding.recyclerItemsProfile.setAdapter(adapter);
 
         getUser();
 
@@ -163,6 +185,12 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         status = false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        disposable.dispose();
+        super.onBackPressed();
     }
 
     @Override
@@ -300,10 +328,10 @@ public class ProfileActivity extends AppCompatActivity {
         UserEntity userEntity = preferences.getUser();
 
         if (!userEntity.getUserUid().equals("")) {
-                binding.imageUserProfile.setAlpha(0f);
-                Glide.with(ProfileActivity.this).load(userEntity.getUrlPhoto())
-                        .addListener(componentUtils.listenerFadeImage(binding.imageUserProfile, 300)).into(binding.imageUserProfile);
-                showData(userEntity.getUserUid());
+            binding.imageUserProfile.setAlpha(0f);
+            Glide.with(ProfileActivity.this).load(userEntity.getUrlPhoto())
+                    .addListener(componentUtils.listenerFadeImage(binding.imageUserProfile, 300)).into(binding.imageUserProfile);
+            showData(userEntity.getUserUid());
 
         } else {
             componentUtils.showSnackbar("Houve um problema ao carregar suas perspectivas, favor feche a aplicação e tente novamente", 1500);
@@ -325,17 +353,17 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void actProfileMain(View view) {
+        disposable.dispose();
         NavUtils.navigateUpFromSameTask(this);
     }
 
     public void showData(String uid) {
-        try{
+        try {
             PerspectiveController perspectiveController = new ViewModelProvider(this).get(PerspectiveController.class);
-            CompositeDisposable disposable = new CompositeDisposable();
+            disposable = new CompositeDisposable();
             disposable.add(perspectiveController.getPerspectiveWithData(uid).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(perspectivies -> {
                 if (perspectivies != null) {
-                    List<PerspectiveEntity> perspectiveList = new ArrayList<>();
-
+                    perspectiveList.clear();
                     for (PerspectiveWithData p : perspectivies) {
                         PerspectiveEntity perspectiveEntity = p.perspectiveEntity;
                         perspectiveEntity.setItemsPerspective(p.dataEntryEntities);
@@ -344,12 +372,10 @@ public class ProfileActivity extends AppCompatActivity {
                     }
 
                     phraseArray(perspectiveList);
-                    ItemsProfileAdapter adapter = new ItemsProfileAdapter(perspectiveList);
-                    binding.recyclerItemsProfile.hasFixedSize();
-                    binding.recyclerItemsProfile.setAdapter(adapter);
-                    disposable.dispose();
 
-                    adapter.setOnItemClickListener(position ->{
+                    adapter.notifyDataSetChanged();
+
+                    adapter.setOnItemClickListener(position -> {
 
                     });
                 }
@@ -367,8 +393,7 @@ public class ProfileActivity extends AppCompatActivity {
             }));
 
 
-
-        }catch (Exception e){
+        } catch (Exception e) {
             componentUtils.showSnackbar("Houve um problema ao carregar suas perspectivas, favor feche a aplicação e tente novamente", 1500);
             new Thread() {
                 @Override
@@ -430,55 +455,159 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-    public void phraseArray(List<PerspectiveEntity> perspectivies){
+    public void phraseArray(List<PerspectiveEntity> perspectivies) {
+        registerCount = 0;
+        totalDebit = new BigDecimal("0.00");
+        totalCredit = new BigDecimal("0.00");
 
-        if (perspectivies.size() != 0){
 
-             String[] phraseOne = new String[6];
-             String[] phraseTwo = new String[6];
+        if (perspectivies.size() != 0) {
+
+            String[] phraseOne = new String[10];
+            String[] phraseTwo = new String[10];
 
 
             perspectivies.stream().forEach(perspectiveEntity -> {
                 totalDebit = totalDebit.add(perspectiveEntity.getTotalDebit());
-                totalCredit =  totalCredit.add(perspectiveEntity.getTotalCredit());
+                totalCredit = totalCredit.add(perspectiveEntity.getTotalCredit());
             });
 
             BigDecimal bigDebit = perspectivies.stream().map(PerspectiveEntity::getTotalDebit).max(Comparator.naturalOrder()).orElse(BigDecimal.ZERO);
             BigDecimal bigCredit = perspectivies.stream().map(PerspectiveEntity::getTotalCredit).max(Comparator.naturalOrder()).orElse(BigDecimal.ZERO);
 
 
-            perspectivies.stream().forEach(perspectiveEntity -> registerCount+=perspectiveEntity.getItemsPerspective().size());
+            perspectivies.stream().forEach(perspectiveEntity -> registerCount += perspectiveEntity.getItemsPerspective().size());
 
             phraseOne[0] = "Você tem";
-            phraseTwo[0] = perspectivies.size()+ " perspectivas";
+            phraseTwo[0] = perspectivies.size() + " perspectivas";
 
             phraseOne[1] = "Seus proventos somam";
-            phraseTwo[1] = FormatUtils.numberFormat(totalCredit)+ " reais";
+            phraseTwo[1] = FormatUtils.numberFormat(totalCredit) + " reais";
 
             phraseOne[2] = "Você possui um total";
-            phraseTwo[2] = "de " + registerCount + " itens cadastrados" ;
+            phraseTwo[2] = "de " + registerCount + " itens cadastrados";
 
             phraseOne[3] = "Você chegou a receber";
-            phraseTwo[3] = FormatUtils.numberFormat(bigCredit)+ "\nem um mês";
+            phraseTwo[3] = FormatUtils.numberFormat(bigCredit) + "\nem um mês";
 
             phraseOne[4] = "Porém gastou";
-            phraseTwo[4] = FormatUtils.numberFormat(bigDebit)+ "\ndentro de um mês";
+            phraseTwo[4] = FormatUtils.numberFormat(bigDebit) + "\ndentro de um mês";
 
             phraseOne[5] = "Suas despesas somam";
-            phraseTwo[5] = FormatUtils.numberFormat(totalDebit)+ " reais";
+            phraseTwo[5] = FormatUtils.numberFormat(totalDebit) + " reais";
+
+            phraseOne[6] = "Continue gerindo ";
+            phraseTwo[6] = "seus gastos pelo app";
+
+            phraseOne[7] = "Usando as perspectivas";
+            phraseTwo[7] = "voce se controla";
+
+            phraseOne[8] = "Seu bolso";
+            phraseTwo[8] = "agradece";
+
+            phraseOne[9] = "Confia!";
+            phraseTwo[9] = "\uD83D\uDE0E";
 
 
             binding.txtFadeOneProfile.setTexts(phraseOne);
             binding.txtFadeTwoProfile.setTexts(phraseTwo);
 
 
-
-        }else{
-             String[] phraseOne = {"Você não tem", "Com as perspectivas", "Organiza seus gastos ", "Fazendo isso", "Confia!"};
-             String[] phraseTwo = {"nehuma pespectiva.", "você controla e", "por categoria ", "seu bolso agradece",":D"};
+        } else {
+            String[] phraseOne = {"Você não tem", "Com as perspectivas", "Organiza seus gastos ", "Fazendo isso", "Confia!"};
+            String[] phraseTwo = {"nehuma pespectiva.", "você controla e", "por categoria ", "seu bolso agradece", ":D"};
             binding.txtFadeOneProfile.setTexts(phraseOne);
             binding.txtFadeTwoProfile.setTexts(phraseTwo);
         }
     }
+
+    public void showPicker(View view) throws ParseException {
+        c = Calendar.getInstance();
+
+        DatePickerDialog dialog = new DatePickerDialog(this, R.style.DatePickerDefaultTheme, this, c.get(Calendar.YEAR), c.get(Calendar.MONTH), 1);
+        Date date1 = getDate();
+        c.setTime(date1);
+        c.set(Calendar.DAY_OF_MONTH, c.getActualMinimum(Calendar.DAY_OF_MONTH));
+        dialog.getDatePicker().setMinDate(c.getTime().getTime());
+        c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
+        dialog.getDatePicker().setMaxDate(c.getTime().getTime());
+        dialog.show();
+    }
+
+    public Date getDate() throws java.text.ParseException {
+        DateFormat format = new SimpleDateFormat("MMMM-yyyy", new Locale("pt", "br"));
+        String pattern;
+        Date date;
+        c = Calendar.getInstance();
+
+        if (perspectiveList.size() == 0) {
+            String monthFormat = Calendar.getInstance().getDisplayName(Calendar.MONTH, Calendar.LONG, new Locale("pt", "br"));
+            int year = Calendar.getInstance().get(Calendar.YEAR);
+            pattern = monthFormat + "-" + year;
+            date = format.parse(pattern);
+            date.setMonth(date.getMonth());
+
+        } else {
+            pattern = perspectiveList.get(perspectiveList.size() - 1).getMonth() + "-" + perspectiveList.get(perspectiveList.size() - 1).getYear();
+            date = format.parse(pattern);
+            date.setMonth(date.getMonth() + 1);
+
+        }
+
+        return date;
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+        try {
+            String monthSelected = c.getDisplayName(Calendar.MONTH, Calendar.LONG, new Locale("pt", "br"));
+
+            PerspectiveEntity perspectiveEntity = new PerspectiveEntityBuilder()
+                    .year(year)
+                    .month(monthSelected.substring(0, 1).toUpperCase() + monthSelected.substring(1))
+                    .userUid(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .totalCredit(new BigDecimal("0.00"))
+                    .totalDebit(new BigDecimal("0.00"))
+                    .build();
+
+
+            PerspectiveController pController = new ViewModelProvider(this).get(PerspectiveController.class);
+            new CompositeDisposable().add(pController.addPerspective(perspectiveEntity).subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread()).subscribe(() -> {
+                        new Thread() {
+                            @Override
+                            public void run() {
+                                try {
+                                    sleep(100);
+                                    componentUtils.showSnackbar("Dado inserido com sucesso", 500);
+
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }.start();
+
+
+                    }));
+
+        } catch (Exception e) {
+            componentUtils.showSnackbar("Dados ainda não carregados, aguarde sua conexão", 1700);
+        }
+
+    }
+
+    public void actProfileReport(View view) {
+        if (perspectiveList.size() == 0) {
+            componentUtils.showSnackbar("Você não tem dados para gerar um relatório.", 1700);
+        } else {
+            if (!ReportActivity.status) {
+                Intent intent = new Intent(this, ReportActivity.class);
+                intent.putExtra("data", (Serializable) perspectiveList);
+                startActivity(intent);
+            }
+        }
+    }
+
 
 }

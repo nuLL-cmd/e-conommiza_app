@@ -1,7 +1,7 @@
-package com.automatodev.e_conommiza_app.entidade.modelBuild;
+package com.automatodev.e_conommiza_app.entity.modelBuild;
 
-import com.automatodev.e_conommiza_app.entidade.model.DataEntryEntity;
-import com.automatodev.e_conommiza_app.entidade.model.PerspectiveEntity;
+import com.automatodev.e_conommiza_app.entity.model.DataEntryEntity;
+import com.automatodev.e_conommiza_app.entity.model.PerspectiveEntity;
 
 import java.math.BigDecimal;
 import java.util.List;

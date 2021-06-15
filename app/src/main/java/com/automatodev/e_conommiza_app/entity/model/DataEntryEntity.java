@@ -1,8 +1,10 @@
-package com.automatodev.e_conommiza_app.entidade.model;
+package com.automatodev.e_conommiza_app.entity.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import com.automatodev.e_conommiza_app.enumarator.TypeEnum;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -28,7 +30,7 @@ public class DataEntryEntity implements Serializable {
     private long dateEntry;
 
     @ColumnInfo(name = "type_entry")
-    private String typeEntry;
+    private TypeEnum typeEntry;
 
     @ColumnInfo(name = "value_entry")
     private BigDecimal valueEntry;
@@ -36,7 +38,7 @@ public class DataEntryEntity implements Serializable {
     @ColumnInfo(name = "payment")
     private Integer payment;
 
-    public DataEntryEntity(Long idPerspective, String nameLocal, String category, long dateEntry, String typeEntry, BigDecimal valueEntry, Integer payment) {
+    public DataEntryEntity(Long idPerspective, String nameLocal, String category, long dateEntry, TypeEnum typeEntry, BigDecimal valueEntry, Integer payment) {
         this.idPersp = idPerspective;
         this.nameLocal = nameLocal;
         this.category = category;
@@ -90,11 +92,11 @@ public class DataEntryEntity implements Serializable {
         this.dateEntry = dateEntry;
     }
 
-    public String getTypeEntry() {
+    public TypeEnum getTypeEntry() {
         return typeEntry;
     }
 
-    public void setTypeEntry(String typeEntry) {
+    public void setTypeEntry(TypeEnum typeEntry) {
         this.typeEntry = typeEntry;
     }
 

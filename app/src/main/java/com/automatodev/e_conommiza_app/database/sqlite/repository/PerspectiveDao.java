@@ -7,8 +7,8 @@ import androidx.room.Query;
 import androidx.room.Transaction;
 import androidx.room.Update;
 
-import com.automatodev.e_conommiza_app.entidade.model.PerspectiveEntity;
-import com.automatodev.e_conommiza_app.entidade.response.PerspectiveWithData;
+import com.automatodev.e_conommiza_app.entity.model.PerspectiveEntity;
+import com.automatodev.e_conommiza_app.entity.response.PerspectiveWithData;
 
 import java.util.List;
 

@@ -4,7 +4,7 @@
     <data>
         <variable
             name="perspective"
-            type="com.automatodev.e_conommiza_app.entidade.model.PerspectiveEntity"/>
+            type="com.automatodev.e_conommiza_app.entity.model.PerspectiveEntity"/>
 
     </data>
 

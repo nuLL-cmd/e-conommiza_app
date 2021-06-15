@@ -3,8 +3,8 @@ package com.automatodev.e_conommiza_app.preferences;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.automatodev.e_conommiza_app.entidade.model.UserEntity;
-import com.automatodev.e_conommiza_app.entidade.modelBuild.UserEntityBuilder;
+import com.automatodev.e_conommiza_app.entity.model.UserEntity;
+import com.automatodev.e_conommiza_app.entity.modelBuild.UserEntityBuilder;
 
 public class UserPreferences  {
 

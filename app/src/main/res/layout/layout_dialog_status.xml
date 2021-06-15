@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linear_layoutCalendar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/bg_dialog_global">
+
+
+            <LinearLayout
+                android:id="@+id/relativeTitle_layoutContent"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_height="@dimen/_45sdp"
+                android:background="@drawable/bg_dialog_view">
+
+                <ImageButton
+                    android:id="@+id/btnBack_layoutStatus"
+                    android:layout_width="@dimen/_32sdp"
+                    android:layout_height="@dimen/_32sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:background="@drawable/bg_button_blue_noshadow_global"
+                    android:src="@drawable/ic_arrow_back_white" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Todos os status"
+                    android:id="@+id/lblTitle_layoutCalendar"
+                    android:textColor="@color/background_form"
+                    android:gravity="center|start"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:textSize="@dimen/_14ssp" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/linearCalendar_layoutCalendar"
+                android:layout_width="match_parent"
+                android:paddingStart="@dimen/_5sdp"
+                android:paddingEnd="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:layout_height="match_parent">
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardExit_layoutStatus"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_18sdp"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    app:cardElevation="@dimen/_10sdp"
+                    android:backgroundTint="@color/red_e65100"/>
+
+
+                <TextView
+                    android:id="@+id/txtExit_layoutStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/cardExit_layoutStatus"
+                    android:layout_alignTop="@id/cardExit_layoutStatus"
+                    android:layout_alignBottom="@id/cardExit_layoutStatus"
+                    android:gravity="center|start"
+                    android:text="Despesa (saída)"
+                    android:textColor="#939090"
+                    android:shadowColor="#683F3F3F"
+                    android:shadowDx="3"
+                    android:shadowDy="3"
+                    android:shadowRadius="20"
+                    android:textSize="@dimen/_12ssp"
+                  />
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardEntry_layoutStatus"
+                    android:layout_below="@id/cardExit_layoutStatus"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_18sdp"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    app:cardElevation="@dimen/_10sdp"
+                    android:backgroundTint="@color/green_00c853"/>
+
+                <TextView
+                    android:id="@+id/txtEntry_layoutStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/cardEntry_layoutStatus"
+                    android:layout_alignTop="@id/cardEntry_layoutStatus"
+                    android:layout_alignBottom="@id/cardEntry_layoutStatus"
+                    android:gravity="center|start"
+                    android:text="Provento (entrada)"
+                    android:textColor="#939090"
+                    android:shadowColor="#683F3F3F"
+                    android:shadowDx="3"
+                    android:shadowDy="3"
+                    android:shadowRadius="20"
+                    android:textSize="@dimen/_12ssp"
+                  />
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardPay_layoutStatus"
+                    android:layout_below="@id/cardEntry_layoutStatus"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_18sdp"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    app:cardElevation="@dimen/_10sdp"
+                    android:backgroundTint="@color/blue_58a5f0"/>
+
+
+                <TextView
+                    android:id="@+id/txtPay_layoutStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/cardPay_layoutStatus"
+                    android:layout_alignTop="@id/cardPay_layoutStatus"
+                    android:layout_alignBottom="@id/cardPay_layoutStatus"
+                    android:gravity="center|start"
+                    android:text="Pago / Recebido"
+                    android:textColor="#939090"
+                    android:shadowColor="#683F3F3F"
+                    android:shadowDx="3"
+                    android:shadowDy="3"
+                    android:shadowRadius="20"
+                    android:textSize="@dimen/_12ssp"
+                  />
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardNothing_layoutStatus"
+                    android:layout_below="@id/cardPay_layoutStatus"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_18sdp"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    app:cardElevation="@dimen/_10sdp"
+                    android:backgroundTint="@color/white_fff"/>
+
+
+                <TextView
+                    android:id="@+id/txtBlank_layoutStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/cardNothing_layoutStatus"
+                    android:layout_alignTop="@id/cardNothing_layoutStatus"
+                    android:layout_alignBottom="@id/cardNothing_layoutStatus"
+                    android:gravity="center|start"
+                    android:text="Sem status"
+                    android:textColor="#939090"
+                    android:shadowColor="#683F3F3F"
+                    android:shadowDx="3"
+                    android:shadowDy="3"
+                    android:shadowRadius="20"
+                    android:textSize="@dimen/_12ssp"
+                  />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardFrozen_layoutStatus"
+                    android:layout_below="@id/cardNothing_layoutStatus"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_18sdp"
+                    android:layout_marginBottom="@dimen/_18sdp"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    app:cardElevation="@dimen/_10sdp"
+                    android:backgroundTint="@color/yellow_ffca28"/>
+
+                <TextView
+                    android:id="@+id/txtFrozen_layoutStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/cardFrozen_layoutStatus"
+                    android:layout_alignTop="@id/cardFrozen_layoutStatus"
+                    android:layout_alignBottom="@id/cardFrozen_layoutStatus"
+                    android:gravity="center|start"
+                    android:text="Congelado"
+                    android:textColor="#939090"
+                    android:shadowColor="#683F3F3F"
+                    android:shadowDx="3"
+                    android:shadowDy="3"
+                    android:shadowRadius="20"
+                    android:textSize="@dimen/_12ssp"
+                  />
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</layout>

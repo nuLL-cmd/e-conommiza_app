@@ -1,8 +1,6 @@
 package com.automatodev.e_conommiza_app.view.adapter;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.graphics.PorterDuff;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -10,13 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.automatodev.e_conommiza_app.R;
 import com.automatodev.e_conommiza_app.databinding.LayoutItemsMainBinding;
-import com.automatodev.e_conommiza_app.entidade.model.DataEntryEntity;
+import com.automatodev.e_conommiza_app.entity.model.DataEntryEntity;
+import com.automatodev.e_conommiza_app.enumarator.TypeEnum;
 import com.automatodev.e_conommiza_app.listener.ItemContract;
 
 import java.util.List;
@@ -113,10 +111,10 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.DataHandler>
                 MenuItem unFrozen = menu.add(0, 4, 2, "Descongelar");
                 unFrozen.setOnMenuItemClickListener(itemListener);
             }else{
-                MenuItem pay = dataEntryEntity.getTypeEntry().equals("entry")
+                MenuItem pay = dataEntryEntity.getTypeEntry().getCode().equals(TypeEnum.INPUT.getCode())
                         ? menu.add(0, dataEntryEntity.getPayment().equals(1) ? 2 : 1, 1, dataEntryEntity.getPayment().equals(1) ? "Não recebido" : "Recebido")
                         : menu.add(0, dataEntryEntity.getPayment().equals(1) ? 2 : 1, 1, dataEntryEntity.getPayment().equals(1) ? "Não pago" : "Pago");
-                MenuItem frozen = menu.add(0, 3, 2, "Congelar");
+                MenuItem frozen = menu.add(0,3, 2, "Congelar");
 
                 pay.setOnMenuItemClickListener(itemListener);
                 frozen.setOnMenuItemClickListener(itemListener);

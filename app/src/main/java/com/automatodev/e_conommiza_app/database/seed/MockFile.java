@@ -1,8 +1,9 @@
 package com.automatodev.e_conommiza_app.database.seed;
 
-import com.automatodev.e_conommiza_app.entidade.model.DataEntryEntity;
-import com.automatodev.e_conommiza_app.entidade.model.PerspectiveEntity;
-import com.automatodev.e_conommiza_app.entidade.modelBuild.PerspectiveEntityBuilder;
+import com.automatodev.e_conommiza_app.entity.model.DataEntryEntity;
+import com.automatodev.e_conommiza_app.entity.model.PerspectiveEntity;
+import com.automatodev.e_conommiza_app.entity.modelBuild.PerspectiveEntityBuilder;
+import com.automatodev.e_conommiza_app.enumarator.TypeEnum;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -92,7 +93,7 @@ public class MockFile {
     }
 
     public DataEntryEntity getDataEntryMock(){
-        return new DataEntryEntity(1L,"Cinema","Lazer", 1614900139724L,"noEntry",new BigDecimal("150.00"),0);
+        return new DataEntryEntity(1L,"Cinema","Lazer", 1614900139724L, TypeEnum.OUTPUT,new BigDecimal("150.00"),0);
 
     }
 

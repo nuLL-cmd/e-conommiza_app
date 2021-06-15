@@ -10,8 +10,8 @@ import androidx.room.TypeConverters;
 import com.automatodev.e_conommiza_app.database.sqlite.repository.DataEntryDao;
 import com.automatodev.e_conommiza_app.database.sqlite.repository.PerspectiveDao;
 import com.automatodev.e_conommiza_app.database.sqlite.utils.Converters;
-import com.automatodev.e_conommiza_app.entidade.model.DataEntryEntity;
-import com.automatodev.e_conommiza_app.entidade.model.PerspectiveEntity;
+import com.automatodev.e_conommiza_app.entity.model.DataEntryEntity;
+import com.automatodev.e_conommiza_app.entity.model.PerspectiveEntity;
 
 @TypeConverters(Converters.class)
 @Database(entities = {PerspectiveEntity.class, DataEntryEntity.class}, version = 2, exportSchema = false)

@@ -3,5 +3,7 @@
     <solid android:color="@color/button_positive"/>
     <corners
 
-        android:bottomRightRadius="@dimen/_30sdp"/>
+        android:bottomRightRadius="@dimen/_30sdp"
+        android:bottomLeftRadius="@dimen/_30sdp"
+        />
 </shape>
