@@ -68,7 +68,6 @@ public class ReportActivity extends AppCompatActivity {
 
 
 
-
     public void populeCardPercentInput(List<PerspectiveEntity> perspectiveEntities) {
 
         BigDecimal creditCurrentMont = new BigDecimal("0.00");

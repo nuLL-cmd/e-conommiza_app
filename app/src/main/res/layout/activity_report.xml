@@ -95,16 +95,18 @@
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_10sdp" >
 
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
+                        android:orientation="vertical"
                         android:layout_height="match_parent">
 
                         <TextView
                             android:id="@+id/lblPercentCardOne_report"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/_10sdp"
+                            android:paddingBottom="@dimen/_10sdp"
                             android:text="Proventos a mais em relação ao ultimo mês"
-                            android:layout_above="@id/txtPercentCardOne_report"
                             android:gravity="center"
                             android:fontFamily="@font/cairo_light"
                             android:textSize="@dimen/_15ssp"
@@ -117,27 +119,33 @@
                             android:shadowDy="3"
                             android:shadowRadius="20"/>
 
+                        <View
+                            android:id="@+id/viewSeparatorCredit_report"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_1sdp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginStart="@dimen/_20sdp"
+                            android:layout_marginEnd="@dimen/_20sdp"
+                            android:background="#CDCDCD" />
+
                         <TextView
                             android:id="@+id/txtPercentCardOne_report"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="1"
                             android:text="12%"
                             android:textSize="@dimen/_70ssp"
                             android:padding="@dimen/_3sdp"
-                            android:layout_alignParentEnd="true"
                             android:fontFamily="@font/cairo_light"
                             android:textColor="@color/button_positive"
-
-                            android:layout_centerVertical="true"
                             android:textAlignment="center"
-                            android:layout_alignParentBottom="true"
                             android:shadowColor="#683F3F3F"
                             android:shadowDx="3"
                             android:shadowDy="3"
                             android:shadowRadius="20"/>
 
 
-                    </RelativeLayout>
+                    </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
 
@@ -151,15 +159,17 @@
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_10sdp" >
 
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
+                        android:orientation="vertical"
                         android:layout_height="match_parent">
 
                         <TextView
                             android:id="@+id/lblPercentCardTwo_report"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_above="@id/txtPercentCardTwo_report"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/_10sdp"
+                            android:paddingBottom="@dimen/_10sdp"
                             android:fontFamily="@font/cairo_light"
                             android:gravity="center"
                             android:shadowColor="#683F3F3F"
@@ -173,26 +183,32 @@
                             android:singleLine="true"
                             android:ellipsize="marquee"/>
 
+                        <View
+                            android:id="@+id/viewSeparatorDebit_report"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_1sdp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginStart="@dimen/_20sdp"
+                            android:layout_marginEnd="@dimen/_20sdp"
+                            android:background="#CDCDCD" />
+
                         <TextView
                             android:id="@+id/txtPercentCardTwo_report"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textAlignment="center"
-                            android:layout_alignParentBottom="true"
                             android:text="8%"
                             android:padding="@dimen/_3sdp"
                             android:textSize="@dimen/_70ssp"
-                            android:layout_alignParentEnd="true"
                             android:fontFamily="@font/cairo_light"
                             android:textColor="@color/red_e65100"
-                            android:layout_centerVertical="true"
                             android:shadowColor="#683F3F3F"
                             android:shadowDx="3"
                             android:shadowDy="3"
                             android:shadowRadius="20"/>
 
 
-                    </RelativeLayout>
+                    </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
 
