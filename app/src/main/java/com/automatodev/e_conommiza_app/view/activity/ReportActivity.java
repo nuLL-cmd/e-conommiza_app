@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.automatodev.e_conommiza_app.databinding.ActivityReportBinding;
@@ -52,7 +53,7 @@ public class ReportActivity extends AppCompatActivity {
         NavUtils.navigateUpFromSameTask(ReportActivity.this);
     }
 
-    public void populeReport() {
+    private void populeReport() {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             List<PerspectiveEntity> perspectiveEntities = (List<PerspectiveEntity>) bundle.getSerializable("data");
@@ -61,7 +62,8 @@ public class ReportActivity extends AppCompatActivity {
 
                 populeCardPercentInput(perspectiveEntities);
                 populeCardPercentOutput(perspectiveEntities);
-                populeCardPercentItems(perspectiveEntities);
+                populeCardPercentItems();
+                populeCardAllBalance();
             }
         }
     }
@@ -90,7 +92,7 @@ public class ReportActivity extends AppCompatActivity {
         }
     }
 
-    public void populeCardPercentOutput(List<PerspectiveEntity> perspectiveEntities) {
+    private void populeCardPercentOutput(List<PerspectiveEntity> perspectiveEntities) {
 
         BigDecimal debitCurrentMont = new BigDecimal("0.00");
         BigDecimal debitBeforeMont = new BigDecimal("0.00");
@@ -112,13 +114,18 @@ public class ReportActivity extends AppCompatActivity {
         }
     }
 
-    public void populeCardPercentItems(List<PerspectiveEntity> perspectiveEntities){
+    private void populeCardPercentItems(){
 
         binding.txtPercentCreditReport.setText(operationsReport.getPercentRegister().get(0));
         binding.txtPercentDebitReport.setText(operationsReport.getPercentRegister().get(1));
     }
 
 
+    private void populeCardAllBalance() {
+        List<BigDecimal> allBalanceList = operationsReport.getAllBalance();
+
+        Log.d("logx","Total balance size: "+allBalanceList.size());
+    }
 
 
 }

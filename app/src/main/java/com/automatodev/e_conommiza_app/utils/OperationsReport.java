@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class OperationsReport {
 
@@ -73,6 +74,7 @@ public class OperationsReport {
             txtResult = output + " em relação ao último mês";
             map.put("title",txtResult );
             map.put("value",FormatUtils.percentFormat((double)0, true));
+
             return  map;
         }
 
@@ -126,5 +128,13 @@ public class OperationsReport {
     }
 
 
+    public List<BigDecimal> getAllBalance(){
+
+        List<BigDecimal> allBalance;
+
+        allBalance = this.perspectiveEntities.stream().map(p -> p.getTotalCredit().subtract(p.getTotalDebit()) ).collect(Collectors.toList());
+
+        return allBalance;
+    }
 
 }

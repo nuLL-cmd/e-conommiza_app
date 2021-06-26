@@ -86,6 +86,7 @@
 
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cardPercentInput"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_160sdp"
                     app:cardCornerRadius="@dimen/_10sdp"
@@ -150,6 +151,7 @@
 
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cardPercentOutput"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_160sdp"
                     app:cardCornerRadius="@dimen/_10sdp"
@@ -213,6 +215,7 @@
 
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cardPercentItems"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_250sdp"
                     app:cardCornerRadius="@dimen/_10sdp"
@@ -269,6 +272,7 @@
 
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cardAllBalance"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_160sdp"
                     app:cardCornerRadius="@dimen/_10sdp"
