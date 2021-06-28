@@ -7,131 +7,145 @@
 
     </data>
 
-        <ScrollView
-            android:id="@+id/scrollDaddy_login"
+    <ScrollView
+        android:id="@+id/scrollDaddy_login"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
 
             <LinearLayout
+                android:id="@+id/appbar_item"
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="wrap_content">
+                android:layout_height="fill_parent"
+                android:layout_weight="2.5"
+                android:background="@drawable/bg_relative_toolbar"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/linearTitleWindow_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_5sdp"
+                    tools:ignore="UseCompoundDrawables">
+
+
+                    <TextView
+                        android:id="@+id/txtWindow_item"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Novo item"
+                        android:textColor="#95FFFFFF"
+                        android:textSize="@dimen/_20sdp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/txtSubgtitle_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:padding="@dimen/_3sdp"
+                    android:shadowColor="#FCD8D8D8"
+                    android:shadowDx="3"
+                    android:shadowDy="3"
+                    android:shadowRadius="20"
+                    android:text="O item será uma despesa ou provento?"
+                    android:textColor="@color/background_form"
+                    android:textSize="@dimen/_10ssp" />
 
 
                 <LinearLayout
-                    android:id="@+id/appbar_item"
+                    android:id="@+id/linearTypeItem_item"
                     android:layout_width="match_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
                     android:gravity="center"
-                    android:background="@drawable/bg_relative_toolbar"
-                    android:orientation="vertical">
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/_20sdp"
+                    android:paddingEnd="@dimen/_20sdp"
+               >
 
-                    <LinearLayout
-                        android:id="@+id/linearTitleWindow_item"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_15sdp"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/_5sdp"
-                        tools:ignore="UseCompoundDrawables">
+                    <ImageButton
+                        android:id="@+id/btnUp_item"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/_60sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_button_neutral"
+                        android:onClick="setPositive"
+                        android:src="@drawable/ic_up_48_8bc34a" />
 
-
-                        <TextView
-                            android:id="@+id/txtWindow_item"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Adicionar registro"
-                            android:textColor="#95FFFFFF"
-                            android:textSize="@dimen/_20sdp"
-                            android:textStyle="bold" />
-
-
-
-
-                    </LinearLayout>
+                    <ImageButton
+                        android:id="@+id/btnDown_item"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/_60sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_button_neutral"
+                        android:onClick="setNegative"
+                        android:src="@drawable/ic_down_48_ee0005" />
 
 
-                    <TextView
-                        android:id="@+id/txtSubgtitle_item"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginEnd="@dimen/_15sdp"
-                        android:layout_marginTop="@dimen/_15sdp"
-                        android:text="O item será uma despesa ou provento?"
-                        android:textColor="@color/background_form"
-                        android:padding="@dimen/_3sdp"
-                        android:shadowColor="#FCD8D8D8"
-                        android:shadowDx="3"
-                        android:shadowDy="3"
-                        android:shadowRadius="20"
-                        android:textSize="@dimen/_10ssp"
-                         />
+                </LinearLayout>
 
 
-                    <LinearLayout
-                        android:id="@+id/linearTypeItem_item"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/_10sdp">
-
-                        <ImageButton
-                            android:id="@+id/btnUp_item"
-                            android:layout_width="fill_parent"
-                            android:layout_height="@dimen/_60sdp"
-                            android:layout_marginEnd="@dimen/_5sdp"
-                            android:layout_weight="1"
-                            android:background="@drawable/bg_button_neutral"
-                            android:onClick="setPositive"
-                            android:src="@drawable/ic_up_48_8bc34a" />
-
-                        <ImageButton
-                            android:id="@+id/btnDown_item"
-                            android:layout_width="fill_parent"
-                            android:layout_height="@dimen/_60sdp"
-                            android:layout_marginStart="@dimen/_5sdp"
-                            android:layout_weight="1"
-                            android:background="@drawable/bg_button_neutral"
-                            android:onClick="setNegative"
-                            android:src="@drawable/ic_down_48_ee0005" />
+            </LinearLayout>
 
 
-                    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/relativeDaddy_login"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/txtTitlePerspective_item"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_35sdp"
-                        android:layout_marginEnd="@dimen/_35sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:padding="@dimen/_3sdp"
-                        android:text="Perspectiva selecionada"
-                        android:textColor="@color/background_form"
-                        android:shadowColor="#FCD8D8D8"
-                        android:shadowDx="3"
-                        android:shadowDy="3"
-                        android:shadowRadius="20"
-                        android:textSize="@dimen/_10ssp"
-                     />
+                <TextView
+                    android:id="@+id/txtTitlePerspective_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_35sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_35sdp"
+                    android:textAlignment="center"
+                    android:padding="@dimen/_3sdp"
+                    android:text="Dados do item"
+                    android:textColor="#CDCBCB"
+                    android:textSize="@dimen/_20ssp"
+                    android:textStyle="bold" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_35sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_35sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    app:cardCornerRadius="@dimen/_10sdp">
 
                     <LinearLayout
                         android:id="@+id/relativePerspective_item"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_50sdp"
+                        android:layout_height="match_parent"
+
                         android:layout_gravity="center"
-                        android:layout_marginStart="@dimen/_35sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_marginBottom="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_35sdp"
-                        android:background="@drawable/bg_button_white_shadow_global"
                         android:gravity="center"
                         android:orientation="horizontal">
 
@@ -145,160 +159,227 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/_5sdp"
-                            android:shadowColor="#703F3F3F"
-                            android:shadowDx="3"
-                            android:shadowDy="3"
-                            android:shadowRadius="20"
-                            android:text="Fevereiro"
-                            android:textColor="#878585"
-                            android:textSize="@dimen/_11ssp" />
+                            android:textColor="@color/color_gray_5A5A5A"
+                            android:textSize="@dimen/_9ssp" />
                     </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <View
+                    android:id="@+id/viewSeparator_layoutItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="@dimen/_35sdp"
+                    android:layout_marginEnd="@dimen/_35sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="#E1DFDF" />
+
+                <EditText
+                    android:id="@+id/edtName_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:background="@drawable/layout_shadow_white"
+                    android:drawableStart="@drawable/ic_text_name"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:hint="Ex: Farmácia"
+                    android:inputType="textAutoComplete"
+                    android:paddingStart="@dimen/_12sdp"
+                    android:paddingEnd="@dimen/_12sdp"
+                    android:singleLine="true"
+                    android:textColor="#656363"
+                    android:textSize="@dimen/_9ssp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:orientation="horizontal">
+
+
+                    <com.blackcat.currencyedittext.CurrencyEditText
+                        android:id="@+id/edtPrice_new"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_weight="1"
+                        android:background="@drawable/layout_shadow_white"
+                        android:drawableStart="@drawable/ic_monetization_on_black_24dp"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:singleLine="true"
+                        android:textColor="#656363"
+                        android:textSize="@dimen/_9ssp" />
+
+                    <Button
+                        android:id="@+id/btnDate_item"
+                        style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_weight="1.1"
+                        android:background="@drawable/bg_button_blue_global"
+                        android:drawableStart="@drawable/ic_calendar_white"
+                        android:onClick="showCalendar"
+                        android:paddingStart="@dimen/_20sdp"
+                        android:paddingEnd="@dimen/_20sdp"
+                        android:shadowColor="#FCD8D8D8"
+                        android:shadowDx="3"
+                        android:shadowDy="3"
+                        android:shadowRadius="20"
+                        android:singleLine="true"
+                        android:text="Calendário"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/_9ssp" />
+
+
+                </LinearLayout>
+
+
+                <View
+                    android:id="@+id/viewSeparato_layoutItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="@dimen/_35sdp"
+                    android:layout_marginEnd="@dimen/_35sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:background="#E1DFDF" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_weight="1"
+                        android:animateLayoutChanges="true"
+                        android:background="@drawable/bg_button_white_shadow_global">
+
+
+                        <ImageView
+                            android:id="@+id/imageItem_item"
+                            android:layout_width="@dimen/_48sdp"
+                            android:layout_height="@dimen/_48sdp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:background="@drawable/bg_button_blue_noshadow_global"
+                            android:padding="@dimen/_10sdp"
+                            android:src="@drawable/ic_nada"
+
+                            />
+
+
+                        <TextView
+                            android:id="@+id/txtCategory_item"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@id/imageItem_item"
+                            android:layout_alignBottom="@id/imageItem_item"
+                            android:layout_toEndOf="@id/imageItem_item"
+                            android:ellipsize="marquee"
+                            android:gravity="center"
+                            android:padding="@dimen/_5sdp"
+                            android:lineSpacingExtra="@dimen/_6sdp"
+                            android:singleLine="true"
+                            android:text="Escolha uma categoria"
+                            android:textAlignment="center"
+                            android:textColor="@color/color_gray_5A5A5A"
+                            android:textSize="@dimen/_9ssp" />
+
+
+                    </RelativeLayout>
+
+                    <ImageButton
+                        style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_weight="0.3"
+                        android:background="@drawable/bg_button_blue_global"
+                        android:onClick="actAddItemsCategory"
+                        android:src="@drawable/ic_search" />
 
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/relativeDaddy_login"
                     android:layout_width="match_parent"
-                    android:layout_height="fill_parent"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    tools:context=".view.activity.LoginActivity">
-
-
-                    <TextView
-                        android:id="@+id/txtNameValue_item"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginEnd="@dimen/_15sdp"
-                        android:layout_marginTop="@dimen/_15sdp"
-                        android:text="Dê um nome e um valor ao registro"
-                        android:textColor="#CDCBCB"
-                        android:textSize="@dimen/_10ssp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/edtName_item"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_50sdp"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_15sdp"
-                        android:background="@drawable/layout_shadow_white"
-                        android:drawableStart="@drawable/ic_text_name"
-                        android:drawablePadding="@dimen/_5sdp"
-                        android:hint="Ex: Farmacia"
-                        android:inputType="textCapWords"
-                        android:paddingStart="@dimen/_10sdp"
-                        android:paddingEnd="@dimen/_10sdp"
-                        android:singleLine="true"
-                        android:textColor="#656363"
-                        android:textColorHint="#656363"
-                        android:textSize="@dimen/_11ssp"
-                        />
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_marginEnd="@dimen/_15sdp"
-                        android:orientation="horizontal">
-
-
-                        <com.blackcat.currencyedittext.CurrencyEditText
-                            android:id="@+id/edtPrice_new"
-                            android:layout_width="fill_parent"
-                            android:layout_height="@dimen/_50sdp"
-                            android:layout_marginEnd="@dimen/_5sdp"
-                            android:layout_weight="1"
-                            android:background="@drawable/layout_shadow_white"
-                            android:drawableStart="@drawable/ic_monetization_on_black_24dp"
-                            android:drawablePadding="@dimen/_5sdp"
-                            android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_10sdp"
-                            android:singleLine="true"
-                            android:textColor="#656363"
-
-                            android:textSize="@dimen/_11ssp" />
-
-                        <Button
-                            android:id="@+id/btnDate_item"
-                            style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
-                            android:layout_width="fill_parent"
-                            android:layout_height="@dimen/_50sdp"
-                            android:layout_weight="1.1"
-                            android:background="@drawable/bg_button_blue_global"
-                            android:drawableStart="@drawable/ic_calendar_white"
-                            android:onClick="showCalendar"
-                            android:paddingStart="@dimen/_20sdp"
-                            android:paddingEnd="@dimen/_20sdp"
-                            android:shadowColor="#FCD8D8D8"
-                            android:shadowDx="3"
-                            android:shadowDy="3"
-                            android:shadowRadius="20"
-                            android:singleLine="true"
-                            android:text="Calendario"
-                            android:textColor="#fff"
-                            android:textSize="@dimen/_11ssp" />
-
-
-                    </LinearLayout>
-
-
-                    <TextView
-                        android:id="@+id/txtCategory"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginEnd="@dimen/_15sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:text="Qual a categoria?"
-                        android:textColor="#CDCBCB"
-                        android:textSize="@dimen/_10ssp"
-                        android:textStyle="bold" />
-
-                    <Spinner
-                        android:id="@+id/spinnerCategory_item"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_50sdp"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_15sdp"
-
-                        android:background="@drawable/layout_shadow_white"
-                        android:clickable="true"
-                        android:textSize="@dimen/_11sdp" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/btnSave_item"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_50sdp"
-                        android:clickable="true"
-                        android:onClick="saveData"
-                        android:focusable="true"
-                        android:text="Salvar"
-                        android:textSize="@dimen/_11ssp"
-                        android:layout_marginTop="@dimen/_20sdp"
-                        android:textColor="@color/white_fff"
                         style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
-                        android:layout_marginStart="@dimen/_60sdp"
-                        android:layout_marginEnd="@dimen/_60sdp"
-                        android:layout_marginBottom="@dimen/_10sdp"
-                        android:background="@drawable/bg_button_blue_global"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="@dimen/_50sdp"
+                        android:background="@drawable/bg_button_white_shadow_global"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:drawableStart="@drawable/ic_save_blue"
+                        android:paddingStart="@dimen/_25sdp"
+                        android:paddingEnd="@dimen/_25sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:onClick="saveData"
                         android:shadowColor="#FCD8D8D8"
                         android:shadowDx="3"
                         android:shadowDy="3"
-                        android:shadowRadius="20"/>
-         </LinearLayout>
+                        android:shadowRadius="20"
+                        android:text="Salvar"
+                        android:textColor="@color/color_gray_5A5A5A"
+                        android:textSize="@dimen/_9ssp" />
 
+                    <Button
+                        android:id="@+id/btnDelete_item"
+                        style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="@dimen/_50sdp"
+                        android:background="@drawable/bg_button_white_shadow_global"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:onClick="saveData"
+                        android:shadowColor="#FCD8D8D8"
+                        android:shadowDx="3"
+                        android:shadowDy="3"
+                        android:drawableStart="@drawable/ic_delete"
+                        android:paddingStart="@dimen/_25sdp"
+                        android:paddingEnd="@dimen/_25sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:shadowRadius="20"
+                        android:text="Deletar"
+                        android:textColor="@color/color_gray_5A5A5A"
+                        android:textSize="@dimen/_9ssp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
 
-        </ScrollView>
+        </LinearLayout>
+
+
+    </ScrollView>
 
 </layout>

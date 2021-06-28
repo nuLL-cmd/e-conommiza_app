@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="category"
+            type="com.automatodev.e_conommiza_app.entity.model.CategoryEntity"/>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_70sdp"
+        android:animateLayoutChanges="true"
+        android:background="?android:attr/selectableItemBackground">
+
+
+        <ImageView
+            android:id="@+id/imageItem_layoutCategory"
+            android:layout_width="@dimen/_48sdp"
+            android:layout_height="@dimen/_48sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bg_button_blue_noshadow_global"
+            android:padding="@dimen/_10sdp"
+            android:setImage='@{category.image}'
+
+            />
+
+
+        <TextView
+            android:id="@+id/txtCategory_layoutCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{category.name}'
+            android:singleLine="true"
+            android:layout_toEndOf="@id/imageItem_layoutCategory"
+            android:layout_alignTop="@id/imageItem_layoutCategory"
+            android:layout_alignBottom="@id/imageItem_layoutCategory"
+            android:ellipsize="marquee"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:gravity="center|end"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="#CDCDCD"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp" />
+
+    </RelativeLayout>
+</layout>

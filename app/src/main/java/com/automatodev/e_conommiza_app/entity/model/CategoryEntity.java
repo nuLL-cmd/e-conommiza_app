@@ -20,20 +20,29 @@ public class CategoryEntity implements Serializable {
     public static List<CategoryEntity> getCategories(){
         List<CategoryEntity> categoryEntities = new ArrayList<>();
 
-        categoryEntities.add(new CategoryEntity("Saude", R.drawable.ic_medicine));
-        categoryEntities.add(new CategoryEntity("Lanche",R.drawable.ic_food_24));
-        categoryEntities.add(new CategoryEntity("Restaurante",R.drawable.ic_restaurant_24));
-        categoryEntities.add(new CategoryEntity("Mercado",R.drawable.ic_market_24));
-        categoryEntities.add(new CategoryEntity("Lazer",R.drawable.ic_play_24));
-        categoryEntities.add(new CategoryEntity("Oficina",R.drawable.ic_workshop_24));
-        categoryEntities.add(new CategoryEntity("Carro",R.drawable.ic_car_24));
-        categoryEntities.add(new CategoryEntity("Moto",R.drawable.ic_bike_24));
-        categoryEntities.add(new CategoryEntity("Taxi",R.drawable.ic_taxi_24));
-        categoryEntities.add(new CategoryEntity("Office",R.drawable.ic_work_24));
-        categoryEntities.add(new CategoryEntity("Hobby",R.drawable.ic_hobby_24));
-        categoryEntities.add(new CategoryEntity("Estudos",R.drawable.ic_school_24));
-        categoryEntities.add(new CategoryEntity("Diversos",R.drawable.ic_other_24));
-
+        categoryEntities.add(new CategoryEntity("Amazon",R.drawable.ic_amazon));
+        categoryEntities.add(new CategoryEntity("Casa",R.drawable.ic_casa));
+        categoryEntities.add(new CategoryEntity("Carro",R.drawable.ic_carro));
+        categoryEntities.add(new CategoryEntity("Cinema",R.drawable.ic_cinema));
+        categoryEntities.add(new CategoryEntity("Despesas de casa",R.drawable.ic_despesas_casa));
+        categoryEntities.add(new CategoryEntity("Estudos",R.drawable.ic_estudos));
+        categoryEntities.add(new CategoryEntity("Fast-food",R.drawable.ic_lanche));
+        categoryEntities.add(new CategoryEntity("Hobby",R.drawable.ic_hobby));
+        categoryEntities.add(new CategoryEntity("Itaú",R.drawable.ic_itau));
+        categoryEntities.add(new CategoryEntity("Inter",R.drawable.ic_inter));
+        categoryEntities.add(new CategoryEntity("Mercado pago",R.drawable.ic_mercado_pago));
+        categoryEntities.add(new CategoryEntity("Mercado",R.drawable.ic_mercado));
+        categoryEntities.add(new CategoryEntity("Moto",R.drawable.ic_moto));
+        categoryEntities.add(new CategoryEntity("Nubank",R.drawable.ic_nubank));
+        categoryEntities.add(new CategoryEntity("Netflix",R.drawable.ic_netflix_logo));
+        categoryEntities.add(new CategoryEntity("Oficina",R.drawable.ic_oficina));
+        categoryEntities.add(new CategoryEntity("Outras entradas",R.drawable.ic_outras_entradas));
+        categoryEntities.add(new CategoryEntity("Outras saídas",R.drawable.ic_outras_saidas));
+        categoryEntities.add(new CategoryEntity("Restaurante",R.drawable.ic_restaurante));
+        categoryEntities.add(new CategoryEntity("Saúde", R.drawable.ic_saude));
+        categoryEntities.add(new CategoryEntity("Taxi",R.drawable.ic_taxi));
+        categoryEntities.add(new CategoryEntity("Trabalho",R.drawable.ic_trabalho));
+        categoryEntities.add(new CategoryEntity("Uber",R.drawable.ic_uber));
 
         return categoryEntities;
     }

@@ -1,23 +1,18 @@
 package com.automatodev.e_conommiza_app.view.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NavUtils;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
+
 import com.automatodev.e_conommiza_app.databinding.ActivityReportBinding;
 import com.automatodev.e_conommiza_app.entity.model.PerspectiveEntity;
-import com.automatodev.e_conommiza_app.enumarator.TypeEnum;
-import com.automatodev.e_conommiza_app.utils.FormatUtils;
 import com.automatodev.e_conommiza_app.utils.OperationsReport;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 

@@ -22,6 +22,7 @@ import com.automatodev.e_conommiza_app.R;
 import com.automatodev.e_conommiza_app.database.sqlite.controller.DataEntryController;
 import com.automatodev.e_conommiza_app.database.sqlite.controller.PerspectiveController;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogStatusBinding;
+import com.automatodev.e_conommiza_app.entity.model.CategoryEntity;
 import com.automatodev.e_conommiza_app.entity.model.DataEntryEntity;
 import com.automatodev.e_conommiza_app.entity.model.PerspectiveEntity;
 import com.automatodev.e_conommiza_app.entity.modelBuild.PerspectiveEntityBuilder;
@@ -165,6 +166,11 @@ public class FragmentHost extends Fragment implements ItemContract {
                 dialog.show();
                 break;
         }
+
+    }
+
+    @Override
+    public void itemCategory(CategoryEntity categoryEntity) {
 
     }
 

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.automatodev.e_conommiza_app.R;
 import com.automatodev.e_conommiza_app.databinding.LayoutItemsMainBinding;
+import com.automatodev.e_conommiza_app.entity.model.CategoryEntity;
 import com.automatodev.e_conommiza_app.entity.model.DataEntryEntity;
 import com.automatodev.e_conommiza_app.enumarator.TypeEnum;
 import com.automatodev.e_conommiza_app.listener.ItemContract;
@@ -21,6 +22,7 @@ import java.util.List;
 
 @SuppressLint("NonConstantResourceId")
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.DataHandler> {
+
     private List<DataEntryEntity> dataEntryEntities;
     private LayoutInflater layoutInflater;
     private OnItemClickListener listener;
@@ -31,16 +33,14 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.DataHandler>
         void onIitemClick(int position);
     }
 
-    public ItemsAdapter(List<DataEntryEntity> dataEntryEntities, ItemContract itemContract) {
-        this.dataEntryEntities = dataEntryEntities;
-        this.itemContract = itemContract;
-
-
-
-    }
-
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
+    }
+
+    public ItemsAdapter(List<DataEntryEntity> dataEntryEntities, ItemContract itemContract) {
+
+        this.dataEntryEntities = dataEntryEntities;
+        this.itemContract = itemContract;
     }
 
     @NonNull
@@ -81,7 +81,6 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.DataHandler>
 
         public DataHandler(@NonNull LayoutItemsMainBinding binding, OnItemClickListener listener) {
 
-
             super(binding.getRoot());
             this.binding = binding;
             binding.getRoot().setOnCreateContextMenuListener(this);
@@ -98,6 +97,10 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.DataHandler>
         }
 
         public void setBinding(DataEntryEntity dataEntryEntity) {
+            CategoryEntity.getCategories().stream()
+                    .filter(category -> category.getName().equals(dataEntryEntity.getCategory()))
+                    .findFirst().ifPresent(categoryEntity -> binding.setCategory(categoryEntity));
+
             binding.setDataEntry(dataEntryEntity);
             this.dataEntryEntity = dataEntryEntity;
             binding.executePendingBindings();
@@ -106,7 +109,6 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.DataHandler>
         @Override
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
             menu.setHeaderTitle("Status");
-            menu.setHeaderIcon(R.drawable.ic_payment_16_blue);
             if(dataEntryEntity.getPayment().equals(2)){
                 MenuItem unFrozen = menu.add(0, 4, 2, "Descongelar");
                 unFrozen.setOnMenuItemClickListener(itemListener);

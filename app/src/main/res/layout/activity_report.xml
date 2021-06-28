@@ -21,7 +21,7 @@
 
 
         <ImageButton
-            android:id="@+id/btnBack_regoster"
+            android:id="@+id/btnBack_register"
             android:layout_width="@dimen/_32sdp"
             android:layout_height="@dimen/_32sdp"
             android:onClick="actReportProfile"

@@ -2,10 +2,10 @@ package com.automatodev.e_conommiza_app.view.activity;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.automatodev.e_conommiza_app.CategoryActivity;
 import com.automatodev.e_conommiza_app.R;
 import com.automatodev.e_conommiza_app.database.sqlite.controller.DataEntryController;
 import com.automatodev.e_conommiza_app.database.sqlite.controller.PerspectiveController;
@@ -21,9 +22,7 @@ import com.automatodev.e_conommiza_app.databinding.ActivityAddItemBinding;
 import com.automatodev.e_conommiza_app.entity.model.CategoryEntity;
 import com.automatodev.e_conommiza_app.entity.model.DataEntryEntity;
 import com.automatodev.e_conommiza_app.entity.model.PerspectiveEntity;
-import com.automatodev.e_conommiza_app.entity.model.UserEntity;
 import com.automatodev.e_conommiza_app.enumarator.TypeEnum;
-import com.automatodev.e_conommiza_app.view.adapter.CategoryAdapter;
 import com.automatodev.e_conommiza_app.utils.ComponentUtils;
 import com.automatodev.e_conommiza_app.utils.FormatUtils;
 
@@ -43,12 +42,13 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
     private ActivityAddItemBinding binding;
     private ComponentUtils componentUtils;
     private DataEntryEntity data;
-    private UserEntity userEntity;
     private PerspectiveEntity perspectiveEntity;
 
     private boolean isSelected = false;
     private boolean positive = false;
     private boolean negative = false;
+    public static int resourceCategory = 0;
+    public static String nameCategory;
     public static boolean status;
 
     String typeIntent;
@@ -72,7 +72,6 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
         componentUtils = new ComponentUtils(this);
 
         getData();;
-        inflateSpinnerCategory();
 
     }
 
@@ -86,6 +85,19 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
     protected void onStop() {
         super.onStop();
         status = false;
+        resourceCategory = 0;
+        nameCategory = "";
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(resourceCategory != 0){
+            binding.txtCategoryItem.setText(nameCategory);
+            binding.imageItemItem.setImageResource(resourceCategory);
+            categoryEntry = nameCategory;
+
+        }
     }
 
     public void getData() {
@@ -95,7 +107,7 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
             perspectiveEntity = (PerspectiveEntity) bundle.getSerializable("perspective");
             data = (DataEntryEntity) bundle.getSerializable("data");
             if (typeIntent.equals("edit") && data != null) {
-                binding.txtWindowItem.setText("Editar registro");
+                binding.txtWindowItem.setText("Editar item");
 
                 if (perspectiveEntity != null && data != null)
                     populeData(data);
@@ -134,8 +146,16 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
             binding.edtNameItem.setText(nameEntry);
             binding.edtPriceNew.setText(String.valueOf(data.getValueEntry()));
 
-            if (typeEntry.getCode().equals(TypeEnum.INPUT.toString())) {
+            CategoryEntity categoryEntity = CategoryEntity.getCategories().stream()
+                    .filter(category -> category.getName().equals(categoryEntry))
+                    .findFirst().orElse(null);
 
+            if (categoryEntity != null){
+                binding.txtCategoryItem.setText(categoryEntity.getName());
+                binding.imageItemItem.setImageResource(categoryEntity.getImage());
+            }
+
+            if (typeEntry.getCode().equals(TypeEnum.INPUT.toString())) {
 
                 componentUtils.stateColorComponent(new View[]{
                         binding.getRoot(), binding.btnUpItem, binding.btnDownItem,
@@ -188,32 +208,6 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
 
     }
 
-
-    public void inflateSpinnerCategory() {
-        CategoryAdapter adapter = new CategoryAdapter(this, CategoryEntity.getCategories());
-        binding.spinnerCategoryItem.setAdapter(adapter);
-        if (categoryEntry != null) {
-            for (int i = 0; i < CategoryEntity.getCategories().size(); i++) {
-                if (categoryEntry.equals(CategoryEntity.getCategories().get(i).getName()))
-                    binding.spinnerCategoryItem.setSelection(i);
-            }
-        } else
-            binding.spinnerCategoryItem.setSelection(0);
-
-        binding.spinnerCategoryItem.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                categoryEntry = CategoryEntity.getCategories().get(position).getName();
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-    }
 
     public void setPositive(View view) {
 
@@ -270,12 +264,12 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
 
 
         if (validateFields()) {
-            componentUtils.showSnackbar("Existem campos que serem preenchidos!", 700);
+            componentUtils.showSnackbar("Existem campos que serem preenchidos!", 800);
             return;
         }
 
         if (typeEntry == null) {
-            componentUtils.showSnackbar("Você precisa informar o tipo do registro!", 700);
+            componentUtils.showSnackbar("Você precisa informar o tipo do registro!", 800);
             binding.appbarItem.getBackground().setColorFilter(ContextCompat.getColor(this, R.color.orange_f68059), PorterDuff.Mode.SRC);
             getWindow().setStatusBarColor(getResources().getColor(R.color.orange_f68059));
 
@@ -284,7 +278,12 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
         }
 
         if (dateEntry == null) {
-            componentUtils.showSnackbar("Necessário informar uma data para o registro", 700);
+            componentUtils.showSnackbar("Informe uma data para o registro", 800);
+            return;
+        }
+
+        if(categoryEntry == null){
+            componentUtils.showSnackbar("O registro precisa de uma categoria",800);
             return;
         }
 
@@ -354,5 +353,13 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
         calendar.set(year, month, dayOfMonth);
         binding.btnDateItem.setText(FormatUtils.format(calendar.getTime().getTime()));
         dateEntry = calendar.getTime().getTime();
+    }
+
+    public void actAddItemsCategory(View viw){
+        if (!CategoryActivity.status){
+            Intent intent = new Intent(this, CategoryActivity.class);
+            startActivity(intent);
+        }
+
     }
 }

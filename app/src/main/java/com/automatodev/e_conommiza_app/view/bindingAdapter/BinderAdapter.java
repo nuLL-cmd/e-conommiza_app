@@ -3,6 +3,7 @@ package com.automatodev.e_conommiza_app.view.bindingAdapter;
 import android.graphics.PorterDuff;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -71,6 +72,16 @@ public class BinderAdapter {
         }catch (Exception e){
             e.printStackTrace();
             Log.e("logx","Error setBackgroundCOlor: "+e.getMessage());
+        }
+    }
+
+    @BindingAdapter("android:setImage")
+    public static void setImage(ImageView image, int resource){
+        try{
+            image.setImageResource(resource);
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.e("logx","Error binding setImage: "+e.getMessage());
         }
     }
 

@@ -10,16 +10,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:id="@+id/relativeDaddy_layoutPerspective"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_relative_data_main_two">
+        android:layout_height="match_parent">
 
 
         <RelativeLayout
             android:id="@+id/relativeChildData_layoutPerspective"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/bg_relative_data_main_two">
+            android:layout_alignParentBottom="true">
 
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -39,6 +37,24 @@
                 android:layout_height="match_parent"
                 android:id="@+id/relativeNoContent_layoutPerspective">
 
+                <TextView
+                    android:id="@+id/txtMessageNoContent_lauyoutPerspective"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/imgNoContent_layout_perspective"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:text="Hum, parece que você não adicionou \nnenhum item a sua nova perspectiva"
+                    android:lineSpacingExtra="@dimen/_6sdp"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/_11ssp"
+                    android:textStyle="bold"
+                    android:textColor="#939090"
+                    android:shadowColor="#683F3F3F"
+                    android:shadowDx="3"
+                    android:shadowDy="3"
+                    android:shadowRadius="20"
+                    android:layout_centerHorizontal="true"/>
+
                 <ImageView
                     android:layout_width="@dimen/_170sdp"
                     android:layout_alignParentBottom="true"
@@ -48,30 +64,6 @@
                     android:id="@+id/imgNoContent_layout_perspective"
                     android:src="@drawable/illustrator_vetor_tree" />
 
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:layout_above="@id/imgNoContent_layout_perspective">
-
-                    <TextView
-                        android:id="@+id/txtTitleNoContent_layutPerspective"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:text="Tudo certo por aqui"
-                        android:textSize="@dimen/_11ssp" />
-
-                    <TextView
-                        android:id="@+id/txtMessageNoContent_lauyoutPerspective"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Comece adicionando novos items a sua lista"
-                        android:layout_below="@+id/txtTitleNoContent_layutPerspective"
-                        android:textSize="@dimen/_11ssp"
-                        android:textStyle="bold"
-                        android:layout_centerHorizontal="true"/>
 
 
                 </RelativeLayout>
@@ -86,6 +78,4 @@
 
         </RelativeLayout>
 
-
-    </RelativeLayout>
 </layout>

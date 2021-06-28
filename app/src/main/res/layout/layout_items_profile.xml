@@ -24,7 +24,7 @@
             android:background="@drawable/bg_button_blue_noshadow_global"
             android:padding="@dimen/_10sdp"
             android:gravity="center"
-            android:textSize="@dimen/_22ssp"
+            android:textSize="@dimen/_20sdp"
             android:textColor="@color/white_fff"
             android:text='@{perspective.month.substring(0,1)}'
             />
@@ -90,7 +90,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="@dimen/_10sdp"
             android:gravity="center|end"
-            android:text='@{"R$ "+ perspective.totalCredit.subtract(perspective.totalDebit)}'
+            android:setRawValue='@{perspective.totalCredit.subtract(perspective.totalDebit)}'
             android:textColor="@color/font_primary"
             android:textSize="@dimen/_9ssp"
             android:textStyle="bold" />

@@ -20,6 +20,10 @@
         <variable
             name="typeEnum"
             type="com.automatodev.e_conommiza_app.enumarator.TypeEnum" />
+
+        <variable
+            name="category"
+            type="com.automatodev.e_conommiza_app.entity.model.CategoryEntity"/>
     </data>
 
     <RelativeLayout
@@ -55,28 +59,7 @@
             android:layout_marginStart="@dimen/_15sdp"
             android:background="@drawable/bg_button_blue_noshadow_global"
             android:padding="@dimen/_10sdp"
-            android:src="@drawable/ic_restaurant" />
-
-        <!--   <View
-               android:id="@+id/viewStatus_layoutItem"
-               android:layout_width="@dimen/_6sdp"
-               android:visibility="visible"
-               android:layout_alignTop="@id/viewPayment_layoutItem"
-               android:layout_alignBottom="@id/viewPayment_layoutItem"
-               android:background='@{dataEntry.typeEntry.equals("entry") ? Color.parseColor("#00c853") : Color.parseColor("#ee0005")}'
-               android:layout_height="match_parent" />
-
-           <View
-               android:id="@+id/viewPayment_layoutItem"
-               android:layout_width="@dimen/_6sdp"
-               android:layout_marginTop="@dimen/_5sdp"
-               android:layout_marginBottom="@dimen/_5sdp"
-               android:visibility="visible"
-               android:layout_alignTop="@id/imageItem_layoutItem"
-               android:layout_alignBottom="@id/imageItem_layoutItem"
-               android:layout_toEndOf="@id/viewStatus_layoutItem"
-               android:background='@{dataEntry.payment == true ? Color.parseColor("#29b6f6") : Color.parseColor("#ffffff")}'
-               android:layout_height="match_parent" />-->
+            android:setImage='@{category.image}'/>
 
 
         <TextView
@@ -84,6 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/imageItem_layoutItem"
+            android:layout_toStartOf="@id/txtValueItem_layout_item"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_toEndOf="@id/imageItem_layoutItem"
@@ -119,7 +103,6 @@
             android:layout_alignParentEnd="true"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_toEndOf="@id/txtDataItem_layout_item"
             android:ellipsize="marquee"
             android:gravity="center|end"
             android:setRawValue='@{dataEntry.valueEntry}'
