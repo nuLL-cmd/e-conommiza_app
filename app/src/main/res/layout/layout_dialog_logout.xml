@@ -45,6 +45,7 @@
         </RelativeLayout>
 
         <TextView
+
             android:layout_width="match_parent"
             android:paddingTop="@dimen/_10sdp"
             android:paddingBottom="@dimen/_10sdp"

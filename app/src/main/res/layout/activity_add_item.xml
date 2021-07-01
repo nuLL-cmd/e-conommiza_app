@@ -8,12 +8,13 @@
     </data>
 
     <ScrollView
-        android:id="@+id/scrollDaddy_login"
+        android:id="@+id/scrollDaddy_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
 
         <LinearLayout
+            android:id="@+id/linearDaddy_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -110,7 +111,7 @@
 
 
             <LinearLayout
-                android:id="@+id/relativeDaddy_login"
+                android:id="@+id/relativeDaddy_item"
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
@@ -368,7 +369,7 @@
                         android:background="@drawable/bg_button_white_shadow_global"
                         android:clickable="true"
                         android:focusable="true"
-                        android:onClick="saveData"
+                        android:onClick="deleteItem"
                         android:shadowColor="#FCD8D8D8"
                         android:shadowDx="3"
                         android:shadowDy="3"

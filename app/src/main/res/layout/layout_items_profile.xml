@@ -43,7 +43,7 @@
             android:layout_toEndOf="@id/imageItem_layoutItem"
             android:text="@{perspective.month}"
             android:textColor="@color/font_primary"
-            android:textSize="@dimen/_12ssp"
+            android:textSize="@dimen/_10ssp"
             android:textStyle="bold" />
 
 
@@ -59,7 +59,7 @@
             android:ellipsize="marquee"
             android:gravity="center|end"
             android:textColor="@android:color/darker_gray"
-            android:textSize="@dimen/_9ssp"
+            android:textSize="@dimen/_8ssp"
             android:textStyle="bold" />
 
 
@@ -74,7 +74,7 @@
             android:singleLine="true"
             android:ellipsize="marquee"
             android:textColor="@color/green_00c853"
-            android:textSize="@dimen/_9ssp"
+            android:textSize="@dimen/_8ssp"
             android:textStyle="bold" />
 
 
@@ -92,7 +92,7 @@
             android:gravity="center|end"
             android:setRawValue='@{perspective.totalCredit.subtract(perspective.totalDebit)}'
             android:textColor="@color/font_primary"
-            android:textSize="@dimen/_9ssp"
+            android:textSize="@dimen/_8ssp"
             android:textStyle="bold" />
 
         <View

@@ -1,6 +1,7 @@
 package com.automatodev.e_conommiza_app.database.sqlite.repository;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 
@@ -13,4 +14,8 @@ public interface DataEntryDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     Completable addDataEntry(DataEntryEntity dataEntryEntity);
+
+    @Delete
+     Completable deleteDataEntry(DataEntryEntity dataEntry);
+
 }

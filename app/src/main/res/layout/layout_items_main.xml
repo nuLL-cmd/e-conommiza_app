@@ -75,7 +75,7 @@
             android:singleLine="true"
             android:text="@{dataEntry.nameLocal}"
             android:textColor="@color/font_primary"
-            android:textSize="@dimen/_12ssp"
+            android:textSize="@dimen/_10ssp"
             android:textStyle="bold" />
 
 
@@ -90,7 +90,7 @@
             android:setValue='@{dataEntry.dateEntry}'
             android:singleLine="true"
             android:textColor="@android:color/darker_gray"
-            android:textSize="@dimen/_9ssp"
+            android:textSize="@dimen/_8ssp"
             android:textStyle="bold" />
 
 
@@ -108,7 +108,7 @@
             android:setRawValue='@{dataEntry.valueEntry}'
             android:singleLine="true"
             android:textColor="@color/font_primary"
-            android:textSize="@dimen/_9ssp"
+            android:textSize="@dimen/_8ssp"
             android:textStyle="bold" />
 
         <View

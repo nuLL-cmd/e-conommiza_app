@@ -186,22 +186,26 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                         }
 
                         fragmentAdapter.notifyDataSetChanged();
-
+                        int positionTest = getPosition(perspectiveEntities);
 
                         if (perspectiveEntities.size() == 0) {
+
                             binding.txtAmountPerspectiveMain.setText("Não há perspectivas");
                             binding.relativeNoContentMain.setVisibility(View.VISIBLE);
                             calculeBalance();
 
                         } else {
+
                             if (goToActualPerspective) {
                                 binding.relativeNoContentMain.setVisibility(View.GONE);
-                                int positionTest = getPosition(perspectiveEntities);
                                 binding.viewPagerMain.setCurrentItem(positionTest, true);
-                                setDataViewPager(positionTest);
                                 goToActualPerspective = false;
+                                setDataViewPager(positionTest);
 
-                            }
+                            }else
+                                setDataViewPager(binding.viewPagerMain.getCurrentItem());
+
+
 
                             calculeBalance();
 

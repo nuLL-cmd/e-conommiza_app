@@ -23,4 +23,8 @@ public class DataEntryController extends AndroidViewModel {
     public Completable addDataEntry(DataEntryEntity dataEntryEntity){
         return databaseConfig.dataEntryDao().addDataEntry(dataEntryEntity);
     }
+
+    public Completable deleteDataEntry(DataEntryEntity dataEntry){
+        return databaseConfig.dataEntryDao().deleteDataEntry(dataEntry);
+    }
 }
