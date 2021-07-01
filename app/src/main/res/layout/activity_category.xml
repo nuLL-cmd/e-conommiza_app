@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
 
         android:orientation="vertical"
-        tools:context=".CategoryActivity">
+        tools:context=".view.activity.CategoryActivity">
 
         <RelativeLayout
             android:layout_width="match_parent"

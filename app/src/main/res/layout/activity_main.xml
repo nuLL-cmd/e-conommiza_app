@@ -16,7 +16,6 @@
         tools:context=".view.activity.MainActivity">
 
 
-
         <RelativeLayout
             android:id="@+id/relativeData_main"
             android:layout_width="match_parent"
@@ -27,15 +26,15 @@
 
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardCreditDebit_main"
                 android:layout_width="@dimen/_150sdp"
                 android:layout_height="0dp"
-                android:layout_alignParentEnd="true"
                 android:layout_alignTop="@id/txtPerspective_main"
                 android:layout_alignBottom="@id/txtPerspective_main"
-                app:cardElevation="@dimen/_10sdp"
-                app:cardCornerRadius="@dimen/_10sdp"
+                android:layout_alignParentEnd="true"
                 android:layout_marginEnd="@dimen/_20sdp"
-                >
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:cardElevation="@dimen/_10sdp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -56,7 +55,7 @@
                         android:shadowDy="3"
                         android:shadowRadius="20"
                         android:textColor="@color/green_00c853"
-                        android:textSize="@dimen/_9ssp"
+                        android:textSize="@dimen/_9sdp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -72,7 +71,7 @@
                         android:shadowDy="3"
                         android:shadowRadius="20"
                         android:textColor="@color/red_e65100"
-                        android:textSize="@dimen/_9ssp"
+                        android:textSize="@dimen/_9sdp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -81,38 +80,65 @@
 
             <TextView
                 android:id="@+id/txtPerspective_main"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/_28sdp"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_toStartOf="@id/cardCreditDebit_main"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:paddingStart="@dimen/_10sdp"
                 android:paddingEnd="@dimen/_10sdp"
-                android:textColor="@color/button_positive"
                 android:shadowColor="#683F3F3F"
                 android:shadowDx="3"
                 android:shadowDy="3"
                 android:shadowRadius="20"
                 android:singleLine="true"
                 android:textAlignment="center"
-                android:textSize="@dimen/_11ssp"
+                android:textColor="@color/button_positive"
+                android:textSize="@dimen/_9ssp"
                 android:textStyle="bold" />
 
 
-                <RelativeLayout
-                    android:id="@+id/relativeNoContent_main"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_320sdp"
-                    android:layout_alignTop="@id/viewPager_main"
-                    android:layout_alignBottom="@id/viewPager_main"
-                    android:layout_alignStart="@id/viewPager_main"
-                    android:layout_alignEnd="@id/viewPager_main">
+            <RelativeLayout
+                android:visibility="visible"
+                android:id="@+id/relativeNoContent_main"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_320sdp"
+                android:layout_alignStart="@id/viewPager_main"
+                android:layout_alignTop="@id/viewPager_main"
+                android:layout_alignEnd="@id/viewPager_main"
+                android:layout_alignBottom="@id/viewPager_main">
+
+                <TextView
+                    android:id="@+id/txtMessageNoContent_lauyoutPerspective"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/imgNoContent_layout_perspective"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:lineSpacingExtra="@dimen/_3sdp"
+                    android:shadowColor="#683F3F3F"
+                    android:shadowDx="3"
+                    android:shadowDy="3"
+                    android:shadowRadius="20"
+                    android:text="Vamos la! \nClique no menu e cadastre uma nova pespectiva "
+                    android:textAlignment="center"
+                    android:textColor="#939090"
+                    android:textSize="@dimen/_9sdp" />
+
+                <ImageView
+                    android:id="@+id/imgNoContent_layout_perspective"
+                    android:layout_width="@dimen/_150sdp"
+                    android:layout_height="@dimen/_150sdp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:src="@drawable/illustrator_vector_one"/>
 
 
-
-                </RelativeLayout>
+            </RelativeLayout>
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewPager_main"
@@ -158,24 +184,27 @@
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:layout_toEndOf="@id/btnExit_main"
                     android:alpha="0"
+                    android:ellipsize="marquee"
+                    android:gravity="center"
                     android:padding="@dimen/_5sdp"
                     android:shadowColor="#FCD8D8D8"
                     android:shadowDx="3"
                     android:shadowDy="3"
                     android:shadowRadius="20"
-                    android:ellipsize="marquee"
-                    android:gravity="center|start"
                     android:singleLine="true"
                     android:textColor="@color/background_form"
                     android:textSize="@dimen/_12ssp" />
 
                 <com.github.ybq.android.spinkit.SpinKitView
                     android:id="@+id/spinktName_main"
-                    android:layout_width="@dimen/_70sdp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_alignStart="@id/txtUser_main"
                     android:layout_alignTop="@id/btnExit_main"
+                    android:layout_alignEnd="@id/txtUser_main"
                     android:layout_alignBottom="@id/btnExit_main"
                     android:layout_toEndOf="@id/btnExit_main"
+                    android:paddingStart="@dimen/_3sdp"
                     android:paddingTop="@dimen/_4sdp"
                     android:paddingEnd="@dimen/_3sdp"
                     app:SpinKit_Color="@color/white_fff"
@@ -194,15 +223,15 @@
                         android:layout_height="wrap_content"
                         android:layout_above="@id/scrollTxtValueBalance_main"
                         android:layout_marginStart="@dimen/_15sdp"
-                        android:text="Balanço"
-                        android:textColor="@color/background_form"
-                        android:textSize="@dimen/_15ssp"
-                        android:textStyle="bold"
                         android:padding="@dimen/_5sdp"
                         android:shadowColor="#FCD8D8D8"
                         android:shadowDx="3"
                         android:shadowDy="3"
-                        android:shadowRadius="20"/>
+                        android:shadowRadius="20"
+                        android:text="Balanço"
+                        android:textColor="@color/background_form"
+                        android:textSize="@dimen/_13ssp"
+                        android:textStyle="bold" />
 
 
                     <TextView
@@ -213,14 +242,14 @@
                         android:layout_alignTop="@id/scrollTxtValueBalance_main"
                         android:layout_alignBottom="@id/scrollTxtValueBalance_main"
                         android:gravity="center"
-                        android:text="R$"
-
                         android:shadowColor="#FCD8D8D8"
+
                         android:shadowDx="3"
                         android:shadowDy="3"
                         android:shadowRadius="20"
+                        android:text="R$"
                         android:textColor="@color/background_form"
-                        android:textSize="@dimen/_13ssp" />
+                        android:textSize="@dimen/_13sdp" />
 
 
                     <HorizontalScrollView
@@ -246,7 +275,7 @@
                             android:singleLine="true"
                             android:textAlignment="center"
                             android:textColor="@color/background_form"
-                            android:textSize="@dimen/_35ssp"
+                            android:textSize="@dimen/_32sdp"
                             android:textStyle="bold" />
 
                     </HorizontalScrollView>
@@ -275,6 +304,7 @@
                         android:layout_alignStart="@id/lblValueBalance_main"
                         android:layout_alignParentBottom="true"
                         android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
                         android:padding="@dimen/_10sdp"
                         android:shadowColor="#FCD8D8D8"
                         android:shadowDx="3"

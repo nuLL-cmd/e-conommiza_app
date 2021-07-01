@@ -103,7 +103,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="E"
                                 android:textColor="@color/white_fff"
-                                android:textSize="@dimen/_20ssp" />
+                                android:textSize="@dimen/_20sdp" />
                         </RelativeLayout>
 
 
@@ -115,7 +115,7 @@
                             android:gravity="center"
                             android:text="conommiza :)"
                             android:textColor="@color/font_primary"
-                            android:textSize="@dimen/_20ssp"
+                            android:textSize="@dimen/_20sdp"
 
                             android:textStyle="bold" />
 
@@ -133,6 +133,8 @@
                     android:layout_marginStart="@dimen/_5sdp"
                     android:id="@+id/lblTitleLogin_register"
                     android:text="Crie sua conta ja!"
+                    android:ellipsize="end"
+                    android:singleLine="true"
                     android:textSize="@dimen/_15ssp"
                     android:textStyle="bold" />
 

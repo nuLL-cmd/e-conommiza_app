@@ -16,8 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Econommiza_app"
         tools:ignore="AllowBackup">
-        <activity android:name=".CategoryActivity"
-            android:parentActivityName=".CategoryActivity"
+        <activity android:name=".view.activity.CategoryActivity"
+            android:parentActivityName=".view.activity.CategoryActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden"
             android:theme="@style/Theme.Econommiza_app_two">

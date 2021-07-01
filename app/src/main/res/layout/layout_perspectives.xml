@@ -43,11 +43,10 @@
                     android:layout_height="wrap_content"
                     android:layout_above="@id/imgNoContent_layout_perspective"
                     android:layout_marginBottom="@dimen/_20sdp"
-                    android:text="Hum, parece que você não adicionou \nnenhum item a sua nova perspectiva"
-                    android:lineSpacingExtra="@dimen/_6sdp"
+                    android:text="Clique no menu flutuante \npara adicionar um item a sua perspectiva"
+                    android:lineSpacingExtra="@dimen/_3sdp"
                     android:textAlignment="center"
-                    android:textSize="@dimen/_11ssp"
-                    android:textStyle="bold"
+                    android:textSize="@dimen/_9sdp"
                     android:textColor="#939090"
                     android:shadowColor="#683F3F3F"
                     android:shadowDx="3"
@@ -56,11 +55,11 @@
                     android:layout_centerHorizontal="true"/>
 
                 <ImageView
-                    android:layout_width="@dimen/_170sdp"
+                    android:layout_width="@dimen/_150sdp"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="@dimen/_20sdp"
-                    android:layout_height="@dimen/_170sdp"
+                    android:layout_height="@dimen/_150sdp"
                     android:id="@+id/imgNoContent_layout_perspective"
                     android:src="@drawable/illustrator_vetor_tree" />
 

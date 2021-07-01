@@ -1,9 +1,8 @@
-package com.automatodev.e_conommiza_app;
+package com.automatodev.e_conommiza_app.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -14,11 +13,7 @@ import com.automatodev.e_conommiza_app.databinding.ActivityCategoryBinding;
 import com.automatodev.e_conommiza_app.entity.model.CategoryEntity;
 import com.automatodev.e_conommiza_app.entity.model.DataEntryEntity;
 import com.automatodev.e_conommiza_app.listener.ItemContract;
-import com.automatodev.e_conommiza_app.view.activity.AddItemActivity;
 import com.automatodev.e_conommiza_app.view.adapter.AdapterCategory;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class CategoryActivity extends AppCompatActivity implements ItemContract {
 

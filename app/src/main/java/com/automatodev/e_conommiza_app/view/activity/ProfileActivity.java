@@ -375,6 +375,13 @@ public class ProfileActivity extends AppCompatActivity implements DatePickerDial
 
                     adapter.notifyDataSetChanged();
 
+                    if(perspectivies.size() == 0)
+                        binding.relativeNoContentProfile.setVisibility(View.VISIBLE);
+                    else{
+                        binding.txtPerspectiveProfile.setText("Perspectivas cadastradas");
+                        binding.relativeNoContentProfile.setVisibility(View.GONE);
+                    }
+
                     adapter.setOnItemClickListener(position -> {
 
                     });

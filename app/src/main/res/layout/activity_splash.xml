@@ -64,7 +64,7 @@
                     android:id="@+id/lblChar_logo_splash"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/_20ssp"
+                    android:textSize="@dimen/_20sdp"
                     android:text="E"
                     android:textColor="@color/white_fff" />
             </RelativeLayout>
@@ -97,12 +97,11 @@
                 android:id="@+id/lblSlogan_splash"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
                 android:fontFamily="@font/aldrich"
                 android:gravity="center"
                 android:text="conommiza :)"
                 android:textColor="@color/font_primary"
-                android:textSize="@dimen/_20ssp"
+                android:textSize="@dimen/_20sdp"
 
                 android:textStyle="bold" />
 
@@ -132,6 +131,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/_20sdp"
             android:textStyle="bold"
+            android:textSize="@dimen/_10sdp"
             android:id="@+id/txtVersao_splash"
             android:fontFamily="@font/aldrich" />
 

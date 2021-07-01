@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.automatodev.e_conommiza_app.CategoryActivity;
 import com.automatodev.e_conommiza_app.R;
 import com.automatodev.e_conommiza_app.database.sqlite.controller.DataEntryController;
 import com.automatodev.e_conommiza_app.database.sqlite.controller.PerspectiveController;

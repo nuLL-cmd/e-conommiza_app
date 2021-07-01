@@ -45,9 +45,7 @@
                         android:layout_height="@dimen/_2sdp"
                         android:layout_above="@id/linearLogo_login"
                         android:layout_alignStart="@id/linearLogo_login"
-                        android:layout_alignLeft="@id/linearLogo_login"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_marginBottom="-2.8dp"
                         android:background="@drawable/bg_resources_logo" />
 
@@ -57,9 +55,7 @@
                         android:layout_height="@dimen/_2sdp"
                         android:layout_below="@id/linearLogo_login"
                         android:layout_alignStart="@id/linearLogo_login"
-                        android:layout_alignLeft="@id/linearLogo_login"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_marginTop="-2.8dp"
                         android:background="@drawable/bg_resources_logo" />
 
@@ -91,7 +87,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="E"
                                 android:textColor="@color/white_fff"
-                                android:textSize="@dimen/_20ssp" />
+                                android:textSize="@dimen/_20sdp" />
                         </RelativeLayout>
 
 
@@ -103,7 +99,7 @@
                             android:gravity="center"
                             android:text="conommiza :)"
                             android:textColor="@color/font_primary"
-                            android:textSize="@dimen/_20ssp"
+                            android:textSize="@dimen/_20sdp"
 
                             android:textStyle="bold" />
 
@@ -121,6 +117,8 @@
                     android:layout_marginStart="@dimen/_5sdp"
                     android:id="@+id/lblTitleLogin_login"
                     android:text="Fazer login na sua conta"
+                    android:ellipsize="end"
+                    android:singleLine="true"
                     android:textSize="@dimen/_15ssp"
                     android:textStyle="bold" />
 
@@ -281,6 +279,8 @@
                         android:id="@+id/lblRegister_login"
                         android:gravity="center"
                         android:textSize="@dimen/_10ssp"
+                        android:singleLine="true"
+                        android:ellipsize="end"
                         android:text="Não possui uma conta?"
                         android:textAlignment="center" />
 
@@ -290,13 +290,16 @@
                         android:layout_marginStart="@dimen/_5sdp"
                         android:clickable="true"
                         android:textSize="@dimen/_10ssp"
+                        android:singleLine="true"
+                        android:ellipsize="end"
                         android:onClick="actLoginRegister"
                         android:gravity="center"
                         android:id="@+id/txtRegister_login"
                         android:text="Registre-se"
                         android:textAlignment="center"
                         android:textColor="@color/button_positive"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:focusable="true" />
 
 
                 </LinearLayout>

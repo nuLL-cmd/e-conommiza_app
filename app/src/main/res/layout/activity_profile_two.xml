@@ -91,8 +91,6 @@
                     android:textColor="#BCFFFFFF"
                     android:textSize="@dimen/_25ssp"
                     android:textStyle="bold" />
-
-
             </RelativeLayout>
 
 
@@ -179,17 +177,16 @@
 
 
             <TextView
-                android:id="@+id/txtCash_profile"
-                android:layout_width="wrap_content"
+                android:id="@+id/txtPerspective_profile"
+                android:layout_width="match_parent"
+                android:layout_toStartOf="@id/btnAddPerspective_profile"
                 android:layout_height="@dimen/_28sdp"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:ellipsize="end"
-                android:gravity="center"
+                android:gravity="center|start"
                 android:singleLine="true"
-                android:text="Perspectivas cadastradas"
-                android:textAlignment="center"
                 android:textColor="#939090"
                 android:textSize="@dimen/_10ssp"
                 android:shadowColor="#703F3F3F"
@@ -202,7 +199,7 @@
                 android:id="@+id/btnChart_profile"
                 android:layout_width="@dimen/_28sdp"
                 android:layout_height="@dimen/_28sdp"
-                android:layout_alignTop="@id/txtCash_profile"
+                android:layout_alignTop="@id/txtPerspective_profile"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_25sdp"
@@ -215,7 +212,7 @@
                 android:onClick="showPicker"
                 android:layout_width="@dimen/_28sdp"
                 android:layout_height="@dimen/_28sdp"
-                android:layout_alignTop="@id/txtCash_profile"
+                android:layout_alignTop="@id/txtPerspective_profile"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_toStartOf="@id/btnChart_profile"
                 android:background="@drawable/bg_button_white_global"
@@ -226,11 +223,45 @@
                 android:id="@+id/relativeChildData_profile"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/txtCash_profile"
-
+                android:layout_below="@id/txtPerspective_profile"
                 android:layout_alignParentBottom="true"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/bg_relative_data_main_two">
+
+                <RelativeLayout
+                    android:visibility="gone"
+                    android:id="@+id/relativeNoContent_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_320sdp">
+
+                    <TextView
+                        android:id="@+id/txtMessageNoContent_profile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@id/imgNoContent_profile"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:lineSpacingExtra="@dimen/_3sdp"
+                        android:shadowColor="#683F3F3F"
+                        android:shadowDx="3"
+                        android:shadowDy="3"
+                        android:shadowRadius="20"
+                        android:text="Vamos la! \nClique no botão e cadastre uma nova pespectiva "
+                        android:textAlignment="center"
+                        android:textColor="#939090"
+                        android:textSize="@dimen/_9sdp" />
+
+                    <ImageView
+                        android:id="@+id/imgNoContent_profile"
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_150sdp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="@dimen/_20sdp"
+                        android:src="@drawable/illustrator_vector_one"/>
+
+
+                </RelativeLayout>
 
                 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                     android:id="@+id/swipeRefresh_profile"
@@ -258,7 +289,7 @@
                 android:id="@+id/relativeResource_profile"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/txtCash_profile"
+                android:layout_below="@id/txtPerspective_profile"
                 android:padding="@dimen/_10sdp"
                 android:visibility="gone">
 

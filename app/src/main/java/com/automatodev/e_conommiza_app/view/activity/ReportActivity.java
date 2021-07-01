@@ -64,7 +64,6 @@ public class ReportActivity extends AppCompatActivity {
     }
 
 
-
     public void populeCardPercentInput(List<PerspectiveEntity> perspectiveEntities) {
 
         BigDecimal creditCurrentMont = new BigDecimal("0.00");
@@ -80,7 +79,7 @@ public class ReportActivity extends AppCompatActivity {
         }
 
         Map<String, String> map = operationsReport.getPercentDebitCredit("Proventos", creditCurrentMont, creditBeforeMont);
-        if (map != null){
+        if (map != null) {
             binding.lblPercentCardOneReport.setText(Objects.requireNonNull(map.get("title")));
             binding.txtPercentCardOneReport.setText(Objects.requireNonNull(map.get("value")));
 
@@ -102,14 +101,14 @@ public class ReportActivity extends AppCompatActivity {
         }
 
         Map<String, String> map = operationsReport.getPercentDebitCredit("Gastos", debitCurrentMont, debitBeforeMont);
-        if (map != null){
+        if (map != null) {
             binding.lblPercentCardTwoReport.setText(Objects.requireNonNull(map.get("title")));
             binding.txtPercentCardTwoReport.setText(Objects.requireNonNull(map.get("value")));
 
         }
     }
 
-    private void populeCardPercentItems(){
+    private void populeCardPercentItems() {
 
         binding.txtPercentCreditReport.setText(operationsReport.getPercentRegister().get(0));
         binding.txtPercentDebitReport.setText(operationsReport.getPercentRegister().get(1));
@@ -119,7 +118,8 @@ public class ReportActivity extends AppCompatActivity {
     private void populeCardAllBalance() {
         List<BigDecimal> allBalanceList = operationsReport.getAllBalance();
 
-        Log.d("logx","Total balance size: "+allBalanceList.size());
+        Log.d("logx", "Total balance size: " + allBalanceList.size());
+
     }
 
 

@@ -134,7 +134,7 @@ public class OperationsReport {
 
         allBalance = this.perspectiveEntities.stream().map(p -> p.getTotalCredit().subtract(p.getTotalDebit()) ).collect(Collectors.toList());
 
-        return allBalance;
+        return allBalance.size() != 0 ? allBalance: new ArrayList<>();
     }
 
 }

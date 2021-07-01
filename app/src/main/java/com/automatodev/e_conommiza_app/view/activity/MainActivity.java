@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     public static boolean status;
     public static boolean refresh;
     private boolean isShow = false;
+    private boolean goToActualPerspective = true;
 
     private CompositeDisposable disposable;
     public static List<PerspectiveEntity> perspectiveEntities;
@@ -108,8 +109,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
 
-
-
     public void actMainProfile(View view) {
 
         if (!ProfileActivity.status) {
@@ -119,8 +118,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
             binding.menu.close(true);
         }
     }
-
-
 
 
     @Override
@@ -185,27 +182,28 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                             perspectiveEntity.setItemsPerspective(p.dataEntryEntities);
                             perspectiveEntities.add(perspectiveEntity);
                             perspectiveList.add(new PerspectiveEntity(perspectiveEntity.getIdPerspective(), perspectiveEntity.getMonth(), perspectiveEntity.getYear()));
-                            fragmentAdapter.notifyDataSetChanged();
+
                         }
 
-
+                        fragmentAdapter.notifyDataSetChanged();
 
 
                         if (perspectiveEntities.size() == 0) {
-                            binding.txtPerspectiveMain.setText("Não há perspectivas");
-                            binding.txtCreditMain.setVisibility(View.GONE);
-                            binding.txtDebitMain.setVisibility(View.GONE);
-                            binding.txtAmountPerspectiveMain.setText("Comece adicionando \n uma nova perspectiva!");
+                            binding.txtAmountPerspectiveMain.setText("Não há perspectivas");
+                            binding.relativeNoContentMain.setVisibility(View.VISIBLE);
                             calculeBalance();
 
                         } else {
-                            //int positionTest = getPosition(perspectiveEntities);
-                            binding.viewPagerMain.setCurrentItem(0, true);
-                            binding.txtCreditMain.setVisibility(View.VISIBLE);
-                            binding.txtDebitMain.setVisibility(View.VISIBLE);
-                            setDataViewPager(0);
-                            calculeBalance();
+                            if (goToActualPerspective) {
+                                binding.relativeNoContentMain.setVisibility(View.GONE);
+                                int positionTest = getPosition(perspectiveEntities);
+                                binding.viewPagerMain.setCurrentItem(positionTest, true);
+                                setDataViewPager(positionTest);
+                                goToActualPerspective = false;
 
+                            }
+
+                            calculeBalance();
 
                         }
 
@@ -301,7 +299,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         }
 
     }
-
 
 
     public void showPicker(View view) throws ParseException {

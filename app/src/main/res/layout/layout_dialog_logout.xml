@@ -12,7 +12,7 @@
     <RelativeLayout
         android:id="@+id/relativeDaddy_dialogLogout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_150sdp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_15sdp"
         android:layout_marginTop="@dimen/_15sdp"
         android:layout_marginEnd="@dimen/_15sdp"
@@ -58,12 +58,11 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_alignParentBottom="true"
             android:id="@+id/linearSocial_dialogLogout"
             android:layout_gravity="center"
             android:layout_below="@id/lblMessage_dialogLogout"
             android:gravity="center"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_60sdp"
             android:orientation="horizontal">
 
             <Button
