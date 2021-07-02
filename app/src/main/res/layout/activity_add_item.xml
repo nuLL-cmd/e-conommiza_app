@@ -330,29 +330,24 @@
                     android:background="#E1DFDF" />
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginEnd="@dimen/_15sdp"
-                    android:orientation="horizontal">
+
 
                     <Button
                         android:id="@+id/btnSave_item"
                         style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_width="match_parent"
                         android:layout_height="@dimen/_50sdp"
                         android:background="@drawable/bg_button_white_shadow_global"
                         android:clickable="true"
                         android:focusable="true"
                         android:drawableStart="@drawable/ic_save_blue"
-                        android:paddingStart="@dimen/_25sdp"
-                        android:paddingEnd="@dimen/_25sdp"
-                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:paddingStart="@dimen/_100sdp"
+                        android:paddingEnd="@dimen/_100sdp"
                         android:onClick="saveData"
                         android:shadowColor="#FCD8D8D8"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
                         android:shadowDx="3"
                         android:shadowDy="3"
                         android:shadowRadius="20"
@@ -360,29 +355,6 @@
                         android:textColor="@color/color_gray_5A5A5A"
                         android:textSize="@dimen/_9ssp" />
 
-                    <Button
-                        android:id="@+id/btnDelete_item"
-                        style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="@dimen/_50sdp"
-                        android:background="@drawable/bg_button_white_shadow_global"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:onClick="deleteItem"
-                        android:shadowColor="#FCD8D8D8"
-                        android:shadowDx="3"
-                        android:shadowDy="3"
-                        android:drawableStart="@drawable/ic_delete"
-                        android:paddingStart="@dimen/_25sdp"
-                        android:paddingEnd="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:shadowRadius="20"
-                        android:text="Deletar"
-                        android:textColor="@color/color_gray_5A5A5A"
-                        android:textSize="@dimen/_9ssp" />
-
-                </LinearLayout>
 
             </LinearLayout>
 

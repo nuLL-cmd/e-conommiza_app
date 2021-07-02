@@ -247,7 +247,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Ou registre-se com"
+                        android:text="Ou faça login com"
                         android:id="@+id/lblSocial_register"
                         android:background="#fff"
                         android:padding="@dimen/_5sdp"

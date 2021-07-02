@@ -96,6 +96,9 @@ dependencies {
     // FirebaseAuthentication
     implementation 'com.google.firebase:firebase-auth'
 
+    //Google play services sdk
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
+
     //Firebase Storage
     implementation 'com.google.firebase:firebase-storage'
 

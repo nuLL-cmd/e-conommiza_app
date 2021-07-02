@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.automatodev.e_conommiza_app.R;
 import com.automatodev.e_conommiza_app.database.sqlite.controller.DataEntryController;
 import com.automatodev.e_conommiza_app.database.sqlite.controller.PerspectiveController;
+import com.automatodev.e_conommiza_app.databinding.LayoutDialogChoiseGlobalBinding;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogStatusBinding;
 import com.automatodev.e_conommiza_app.entity.model.CategoryEntity;
 import com.automatodev.e_conommiza_app.entity.model.DataEntryEntity;
@@ -30,7 +31,6 @@ import com.automatodev.e_conommiza_app.enumarator.TypeEnum;
 import com.automatodev.e_conommiza_app.listener.ItemContract;
 import com.automatodev.e_conommiza_app.utils.ComponentUtils;
 import com.automatodev.e_conommiza_app.view.adapter.ItemsAdapter;
-import com.google.firebase.components.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +49,10 @@ public class FragmentHost extends Fragment implements ItemContract {
     private List<DataEntryEntity> dataEntryEntities;
     private PerspectiveEntity perspectiveEntity;
     private ComponentUtils componentUtils;
+    private CompositeDisposable compositeDisposable;
+    private PerspectiveController perspectiveController;
+    private DataEntryController dataEntryController;
+
 
     private ViewGroup viewGroup;
 
@@ -68,7 +72,14 @@ public class FragmentHost extends Fragment implements ItemContract {
         position = getArguments().getInt("position");
         recyclerView = view.findViewById(R.id.recyclerItens_layoutPerspective);
         relativeNoContent = view.findViewById(R.id.relativeNoContent_layoutPerspective);
+
         componentUtils = new ComponentUtils(getActivity());
+
+        compositeDisposable = new CompositeDisposable();
+        dataEntryController = new ViewModelProvider(this).get(DataEntryController.class);
+        perspectiveController = new ViewModelProvider(this).get(PerspectiveController.class);
+
+
         return view;
     }
 
@@ -125,7 +136,7 @@ public class FragmentHost extends Fragment implements ItemContract {
     @Override
     public void onResume() {
         super.onResume();
-        itemsAdapter.notifyDataSetChanged();
+        //itemsAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -136,6 +147,7 @@ public class FragmentHost extends Fragment implements ItemContract {
         final int OPTION_FROZEN = 3;
         final int OPTION_UNFROZEN = 4;
         final int OPTION_MORE = 5;
+        final int OPTION_DELETE = 6;
 
         DataEntryController dataEntryController = new ViewModelProvider(this).get(DataEntryController.class);
         switch (itemId) {
@@ -165,6 +177,22 @@ public class FragmentHost extends Fragment implements ItemContract {
                 dialog.setView(binding.getRoot());
                 dialog.show();
                 break;
+            case OPTION_DELETE:
+                AlertDialog dialogConfirm = new AlertDialog.Builder(getContext()).create();
+                LayoutDialogChoiseGlobalBinding dialogBinding = DataBindingUtil.inflate(getLayoutInflater(),R.layout.layout_dialog_choise_global,getViewGroup(),false);
+                dialogConfirm.setCancelable(false);
+                dialogConfirm.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                dialogConfirm.setView(dialogBinding.getRoot());
+                dialogBinding.lblMessageDialogLogout.setText("Confirma a remoção deste item? \n(Procedimento não pode ser desfeito))");
+                dialogBinding.lblTitleDialogLogout.setText("Remover item");
+                dialogConfirm.show();
+                dialogBinding.btnYesDialogLogout.setOnClickListener(v -> {
+                    dialogConfirm.dismiss();
+                    deleteItemDatabase(dataEntryEntity);
+                });
+                dialogBinding.btnCancelDialogLogout.setOnClickListener(v2 -> dialogConfirm.dismiss());
+                break;
+
         }
 
     }
@@ -175,9 +203,7 @@ public class FragmentHost extends Fragment implements ItemContract {
     }
 
     public void updatePerspective(DataEntryEntity dataEntryEntity, Integer payment, String operation) {
-        PerspectiveController perspectiveController = new ViewModelProvider(this).get(PerspectiveController.class);
-        DataEntryController dataEntryController = new ViewModelProvider(this).get(DataEntryController.class);
-        CompositeDisposable compositeDisposable = new CompositeDisposable();
+
         compositeDisposable.add(perspectiveController.getPerspectiveById(dataEntryEntity.getIdPersp()).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(perspectiveEntity -> {
                     if (operation.equals("frozen")){
@@ -199,10 +225,44 @@ public class FragmentHost extends Fragment implements ItemContract {
                             .observeOn(AndroidSchedulers.mainThread()).subscribe(() ->{
                                    compositeDisposable.add(perspectiveController.updatePerspective(perspectiveEntity)
                                            .subscribeOn(Schedulers.io())
-                                           .observeOn(AndroidSchedulers.mainThread()).subscribe());
+                                           .observeOn(AndroidSchedulers.mainThread()).subscribe(compositeDisposable::dispose));
+
                             }));
 
                 }));
+
+
+
+    }
+
+    public void deleteItemDatabase(DataEntryEntity dataEntryEntity){
+
+        try{
+            compositeDisposable.add(perspectiveController.getPerspectiveById(dataEntryEntity.getIdPersp()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(perspective ->{
+                    compositeDisposable.add(dataEntryController.deleteDataEntry(dataEntryEntity).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(()->{
+
+                        boolean typeData = dataEntryEntity.getTypeEntry().equals(TypeEnum.INPUT);
+                        if (typeData)
+                            perspective.setTotalCredit(perspective.getTotalCredit().subtract(dataEntryEntity.getValueEntry()));
+                        else
+                            perspective.setTotalDebit(perspective.getTotalDebit().subtract(dataEntryEntity.getValueEntry()));
+
+
+                        compositeDisposable.add(perspectiveController.updatePerspective(perspective).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(()->{
+                            compositeDisposable.dispose();
+                            componentUtils.showSnackbar("Item removido com sucesso!",800);
+                        }));
+
+                    }));
+            }));
+
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.e("logx","Error deleteItemDatabase: "+e.getMessage());
+
+        }
 
     }
 }

@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,7 +30,7 @@ import com.automatodev.e_conommiza_app.database.firebase.storage.StorageService;
 import com.automatodev.e_conommiza_app.database.sqlite.controller.PerspectiveController;
 import com.automatodev.e_conommiza_app.databinding.ActivityProfileTwoBinding;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogAboutBinding;
-import com.automatodev.e_conommiza_app.databinding.LayoutDialogLogoutBinding;
+import com.automatodev.e_conommiza_app.databinding.LayoutDialogChoiseGlobalBinding;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogProgressBinding;
 import com.automatodev.e_conommiza_app.entity.model.PerspectiveEntity;
 import com.automatodev.e_conommiza_app.entity.model.UserEntity;
@@ -430,7 +429,9 @@ public class ProfileActivity extends AppCompatActivity implements DatePickerDial
     public void logout() {
         AlertDialog dialogLogout = new AlertDialog.Builder(this).create();
         dialogLogout.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        LayoutDialogLogoutBinding bindingLogout = DataBindingUtil.inflate(getLayoutInflater().from(this), layout.layout_dialog_logout, binding.relativeDaddyProfile, false);
+        LayoutDialogChoiseGlobalBinding bindingLogout = DataBindingUtil.inflate(getLayoutInflater().from(this), layout.layout_dialog_choise_global, binding.relativeDaddyProfile, false);
+        bindingLogout.lblTitleDialogLogout.setText("Sair");
+        bindingLogout.lblMessageDialogLogout.setText("Deseja fazer logout do aplicativo?");
         dialogLogout.setView(bindingLogout.getRoot());
         dialogLogout.show();
         bindingLogout.btnYesDialogLogout.setOnClickListener(v -> {

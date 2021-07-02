@@ -20,7 +20,6 @@ import com.automatodev.e_conommiza_app.R;
 import com.automatodev.e_conommiza_app.database.sqlite.controller.DataEntryController;
 import com.automatodev.e_conommiza_app.database.sqlite.controller.PerspectiveController;
 import com.automatodev.e_conommiza_app.databinding.ActivityAddItemBinding;
-import com.automatodev.e_conommiza_app.databinding.LayoutDialogLogoutBinding;
 import com.automatodev.e_conommiza_app.entity.model.CategoryEntity;
 import com.automatodev.e_conommiza_app.entity.model.DataEntryEntity;
 import com.automatodev.e_conommiza_app.entity.model.PerspectiveEntity;
@@ -366,56 +365,6 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
 
     }
 
-    public void deleteItem(View view){
-        boolean ehNulo = data.getIdData() == null;
-            if (ehNulo ) {
-               componentUtils.showSnackbar("Ops! Este registro ainda não foi criado",800);
-                return;
-            }
-        AlertDialog dialog = new AlertDialog.Builder(this).create();
-        LayoutDialogLogoutBinding dialogBinding = DataBindingUtil.inflate(getLayoutInflater(),R.layout.layout_dialog_logout, binding.linearDaddyItem,false);
-        dialog.setCancelable(false);
-        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        dialog.setView(dialogBinding.getRoot());
-        dialogBinding.lblMessageDialogLogout.setText("Deseja remover este item?");
-        dialogBinding.lblTitleDialogLogout.setText("Remover item");
-        dialog.show();
-        dialogBinding.btnYesDialogLogout.setOnClickListener(v -> {
-            dialog.dismiss();
-            deleteItemDatabase();
-        });
-        dialogBinding.btnCancelDialogLogout.setOnClickListener(v2 -> dialog.dismiss());
 
-    }
-
-    public void deleteItemDatabase(){
-        boolean ehNulo = data.getIdData() == null;
-        try{
-            if (!ehNulo ) {
-                DataEntryController controller = new ViewModelProvider(this).get(DataEntryController.class);
-                new CompositeDisposable().add(controller.deleteDataEntry(data).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(() ->{
-                    boolean typeData = data.getTypeEntry().equals(TypeEnum.INPUT);
-                    if (typeData)
-                        perspectiveEntity.setTotalCredit(perspectiveEntity.getTotalCredit().subtract(data.getValueEntry()));
-                    else
-                        perspectiveEntity.setTotalDebit(perspectiveEntity.getTotalDebit().subtract(data.getValueEntry()));
-
-                    PerspectiveController perspectiveController = new ViewModelProvider(this).get(PerspectiveController.class);
-                    new CompositeDisposable().add(perspectiveController.updatePerspective(perspectiveEntity).observeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(() ->{
-                        Toast.makeText(this, "Sucesso!", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }));
-                }));
-            }else{
-                Toast.makeText(this, "Ops! Este registro não pode ser deletado.", Toast.LENGTH_SHORT).show();
-                finish();
-                            }
-        }catch (Exception e){
-            Toast.makeText(this, "Ops! Este registro não pode ser deletado.", Toast.LENGTH_SHORT).show();
-            finish();
-
-        }
-
-    }
 
 }

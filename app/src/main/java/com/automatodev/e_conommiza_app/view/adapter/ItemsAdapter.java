@@ -117,12 +117,17 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.DataHandler>
                         ? menu.add(0, dataEntryEntity.getPayment().equals(1) ? 2 : 1, 1, dataEntryEntity.getPayment().equals(1) ? "Não recebido" : "Recebido")
                         : menu.add(0, dataEntryEntity.getPayment().equals(1) ? 2 : 1, 1, dataEntryEntity.getPayment().equals(1) ? "Não pago" : "Pago");
                 MenuItem frozen = menu.add(0,3, 2, "Congelar");
+                MenuItem delete = menu.add(0,6,3,"Deletar");
 
                 pay.setOnMenuItemClickListener(itemListener);
                 frozen.setOnMenuItemClickListener(itemListener);
+                delete.setOnMenuItemClickListener(itemListener);
             }
-            MenuItem subtitle = menu.add(0, 5,3,"Ver todos");
+
+            MenuItem separator =  menu.add(0,7,4,"");
+            MenuItem subtitle = menu.add(0, 5,5,"Ver todos");
             subtitle.setOnMenuItemClickListener(itemListener);
+
 
         }
 
