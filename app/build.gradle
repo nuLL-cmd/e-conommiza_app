@@ -84,6 +84,9 @@ dependencies {
     //LottieAnimation
     implementation 'com.airbnb.android:lottie:3.6.1'
 
+    //Facebook sdk
+    implementation 'com.facebook.android:facebook-android-sdk:[5,15)'
+
     //FloatActionMenu
     implementation 'com.github.clans:fab:1.6.4'
 

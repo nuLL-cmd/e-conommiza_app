@@ -236,15 +236,16 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
+
                     <ImageButton
                         android:id="@+id/btnFacebook_login"
-                        android:background="@drawable/bg_button_white_shadow_global"
                         android:layout_width="@dimen/_60sdp"
-                        android:padding="@dimen/_10sdp"
-                        android:src="@drawable/ic_facebook_svg"
+                        android:layout_height="@dimen/_60sdp"
+                        android:onClick="loginFacebook"
                         android:layout_marginEnd="@dimen/_5sdp"
-                        android:layout_height="@dimen/_60sdp" />
-
+                        android:background="@drawable/bg_button_white_shadow_global"
+                        android:padding="@dimen/_10sdp"
+                        android:src="@drawable/ic_facebook_svg" />
 
                     <ImageButton
                         android:id="@+id/btnGoogle_login"

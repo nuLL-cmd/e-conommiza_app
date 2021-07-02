@@ -46,6 +46,7 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.iceteck.silicompressorr.FileUtils;
 
@@ -436,6 +437,7 @@ public class ProfileActivity extends AppCompatActivity implements DatePickerDial
         dialogLogout.show();
         bindingLogout.btnYesDialogLogout.setOnClickListener(v -> {
             auth.logout();
+            LoginManager.getInstance().logOut();
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         });
