@@ -10,13 +10,12 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.automatodev.e_conommiza_app.databinding.ActivitySplashBinding;
-import com.automatodev.e_conommiza_app.security.firebaseAuth.Authentication;
-import com.google.rpc.context.AttributeContext;
+import com.automatodev.e_conommiza_app.security.FirebaseAuthentication;
 
 @SuppressLint("SetTextI18n")
 public class SplashActivity extends AppCompatActivity {
     private ActivitySplashBinding binding;
-    private Authentication auth;
+    private FirebaseAuthentication auth;
 
 
     @Override
@@ -26,12 +25,11 @@ public class SplashActivity extends AppCompatActivity {
         View viewSplash = binding.getRoot();
         setContentView(viewSplash);
 
-        auth = new Authentication();
+        auth = new FirebaseAuthentication(this);
 
         showVersion();
         splash();
     }
-
 
     public void showVersion(){
         try{

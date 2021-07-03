@@ -37,7 +37,7 @@ import com.automatodev.e_conommiza_app.entity.model.UserEntity;
 import com.automatodev.e_conommiza_app.entity.modelBuild.PerspectiveEntityBuilder;
 import com.automatodev.e_conommiza_app.entity.response.PerspectiveWithData;
 import com.automatodev.e_conommiza_app.preferences.UserPreferences;
-import com.automatodev.e_conommiza_app.security.firebaseAuth.Authentication;
+import com.automatodev.e_conommiza_app.security.FirebaseAuthentication;
 import com.automatodev.e_conommiza_app.utils.FormatUtils;
 import com.automatodev.e_conommiza_app.view.adapter.ItemsProfileAdapter;
 import com.automatodev.e_conommiza_app.utils.ComponentUtils;
@@ -76,7 +76,7 @@ import static com.automatodev.e_conommiza_app.R.*;
 public class ProfileActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private ActivityProfileTwoBinding binding;
-    private Authentication auth;
+    private FirebaseAuthentication auth;
     private FirestoreService firestoreService;
     private StorageService storageService;
     private Uri uriInternal;
@@ -109,7 +109,7 @@ public class ProfileActivity extends AppCompatActivity implements DatePickerDial
         disposable = new CompositeDisposable();
 
 
-        auth = new Authentication();
+        auth = new FirebaseAuthentication(this);
         firestoreService = new FirestoreService();
         storageService = new StorageService();
 

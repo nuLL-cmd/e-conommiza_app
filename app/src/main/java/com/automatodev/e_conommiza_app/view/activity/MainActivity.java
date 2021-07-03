@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
@@ -25,7 +24,7 @@ import com.automatodev.e_conommiza_app.entity.model.UserEntity;
 import com.automatodev.e_conommiza_app.entity.modelBuild.PerspectiveEntityBuilder;
 import com.automatodev.e_conommiza_app.entity.response.PerspectiveWithData;
 import com.automatodev.e_conommiza_app.preferences.UserPreferences;
-import com.automatodev.e_conommiza_app.security.firebaseAuth.Authentication;
+import com.automatodev.e_conommiza_app.security.FirebaseAuthentication;
 import com.automatodev.e_conommiza_app.utils.ComponentUtils;
 import com.automatodev.e_conommiza_app.utils.FormatUtils;
 import com.automatodev.e_conommiza_app.view.adapter.FragmentPageAdapter;
@@ -60,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     private List<PerspectiveEntity> perspectiveList;
     private ActivityMainBinding binding;
     private FirestoreService firestoreService;
-    private Authentication auth;
+    private FirebaseAuthentication auth;
     private UserEntity userEntity;
     private FragmentPageAdapter fragmentAdapter;
     private ComponentUtils componentUtils;
@@ -245,7 +244,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
     public void getUser() {
-        auth = new Authentication();
+        auth = new FirebaseAuthentication(this);
         String uid = auth.getUser().getUid();
         UserPreferences preferences = new UserPreferences(this, "user");
         userEntity = preferences.getUser();
