@@ -270,6 +270,7 @@
                         android:background="@drawable/bg_button_white_shadow_global"
                         android:layout_width="@dimen/_60sdp"
                         android:padding="@dimen/_10sdp"
+                        android:onClick="loginFacebook"
                         android:src="@drawable/ic_facebook_svg"
                         android:layout_marginEnd="@dimen/_5sdp"
                         android:layout_height="@dimen/_60sdp" />
@@ -280,18 +281,12 @@
                         android:background="@drawable/bg_button_white_shadow_global"
                         android:layout_width="@dimen/_60sdp"
                         android:layout_marginEnd="@dimen/_5sdp"
+                        android:onClick="loginGoogle"
                         android:padding="@dimen/_10sdp"
                         android:src="@drawable/ic_google_sgv"
                         android:layout_height="@dimen/_60sdp" />
 
 
-                    <ImageButton
-                        android:id="@+id/btnTwiteer_register"
-                        android:background="@drawable/bg_button_white_shadow_global"
-                        android:layout_width="@dimen/_60sdp"
-                        android:src="@drawable/ic_twiteer_svg"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:layout_height="@dimen/_60sdp" />
 
 
                 </LinearLayout>

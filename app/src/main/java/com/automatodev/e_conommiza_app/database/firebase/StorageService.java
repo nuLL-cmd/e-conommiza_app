@@ -1,4 +1,4 @@
-package com.automatodev.e_conommiza_app.database.firebase.storage;
+package com.automatodev.e_conommiza_app.database.firebase;
 
 import android.net.Uri;
 

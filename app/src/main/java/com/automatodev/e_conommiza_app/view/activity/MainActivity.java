@@ -16,7 +16,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.automatodev.e_conommiza_app.R;
 import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreGetCallback;
-import com.automatodev.e_conommiza_app.database.firebase.firestore.FirestoreService;
+import com.automatodev.e_conommiza_app.database.firebase.FirestoreService;
 import com.automatodev.e_conommiza_app.database.sqlite.controller.PerspectiveController;
 import com.automatodev.e_conommiza_app.databinding.ActivityMainBinding;
 import com.automatodev.e_conommiza_app.entity.model.PerspectiveEntity;

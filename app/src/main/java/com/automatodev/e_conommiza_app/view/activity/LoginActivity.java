@@ -34,10 +34,10 @@ public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
     private LayoutDialogProgressBinding bindingProgress;
     private AlertDialog dialogProgress;
+    private GoogleAuthentication googleAuthentication;
     private GoogleSignInClient client;
     private ComponentUtils componentUtils;
     private FacebookAuthentication facebookAuthentication;
-    private GoogleAuthentication googleAuthentication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
         View viewLogin = binding.getRoot();
         setContentView(viewLogin);
 
-        googleAuthentication = new GoogleAuthentication(this);
 
         facebookAuthentication = new FacebookAuthentication(this);
 
@@ -58,12 +57,15 @@ public class LoginActivity extends AppCompatActivity {
         dialogProgress.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         dialogProgress.setView(bindingProgress.getRoot());
 
+        googleAuthentication = new GoogleAuthentication(this);
+
         GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
 
         client = GoogleSignIn.getClient(this, options);
+
 
     }
 

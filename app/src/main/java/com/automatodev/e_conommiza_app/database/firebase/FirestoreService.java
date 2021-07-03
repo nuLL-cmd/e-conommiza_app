@@ -1,4 +1,4 @@
-package com.automatodev.e_conommiza_app.database.firebase.firestore;
+package com.automatodev.e_conommiza_app.database.firebase;
 
 import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreGetCallback;
 import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreSaveCallback;

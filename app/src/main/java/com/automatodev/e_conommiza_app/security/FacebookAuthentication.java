@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreSaveCallback;
-import com.automatodev.e_conommiza_app.database.firebase.firestore.FirestoreService;
+import com.automatodev.e_conommiza_app.database.firebase.FirestoreService;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogProgressBinding;
 import com.automatodev.e_conommiza_app.entity.model.UserEntity;
 import com.automatodev.e_conommiza_app.entity.modelBuild.UserEntityBuilder;

@@ -4,23 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
-import com.automatodev.e_conommiza_app.R;
 import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreSaveCallback;
-import com.automatodev.e_conommiza_app.database.firebase.firestore.FirestoreService;
+import com.automatodev.e_conommiza_app.database.firebase.FirestoreService;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogProgressBinding;
 import com.automatodev.e_conommiza_app.entity.model.UserEntity;
 import com.automatodev.e_conommiza_app.entity.modelBuild.UserEntityBuilder;
 import com.automatodev.e_conommiza_app.preferences.UserPreferences;
 import com.automatodev.e_conommiza_app.security.callback.GoogleAuthCallback;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;

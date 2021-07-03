@@ -1,4 +1,4 @@
-package com.automatodev.e_conommiza_app.database.seed;
+package com.automatodev.e_conommiza_app.database.sqlite.seed;
 
 import com.automatodev.e_conommiza_app.entity.model.DataEntryEntity;
 import com.automatodev.e_conommiza_app.entity.model.PerspectiveEntity;
