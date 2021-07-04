@@ -136,7 +136,7 @@ public class FragmentHost extends Fragment implements ItemContract {
     @Override
     public void onResume() {
         super.onResume();
-        //itemsAdapter.notifyDataSetChanged();
+        itemsAdapter.notifyDataSetChanged();
     }
 
     @Override
