@@ -24,33 +24,35 @@
                 android:id="@+id/appbar_item"
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="2.5"
+                android:layout_weight="2.9"
                 android:background="@drawable/bg_relative_toolbar"
-                android:gravity="center"
+                android:gravity="bottom"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:id="@+id/linearTitleWindow_item"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_5sdp"
-                    tools:ignore="UseCompoundDrawables">
+                <ImageButton
+                    android:id="@+id/btnBack_item"
+                    android:layout_width="@dimen/_32sdp"
+                    android:layout_height="@dimen/_32sdp"
+                    android:onClick="actAddItemMain"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:background="@drawable/bg_button_blue_noshadow_global"
+                    android:src="@drawable/ic_arrow_back_white"/>
+
 
 
                     <TextView
                         android:id="@+id/txtWindow_item"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:textAlignment="center"
+                        android:padding="@dimen/_5sdp"
                         android:text="Novo item"
                         android:textColor="#95FFFFFF"
                         android:textSize="@dimen/_20ssp"
                         android:textStyle="bold" />
 
-
-                </LinearLayout>
 
 
                 <TextView
@@ -76,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:paddingStart="@dimen/_20sdp"
@@ -114,23 +116,9 @@
                 android:id="@+id/relativeDaddy_item"
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="1"
+                android:layout_weight="1.5"
                 android:gravity="center"
                 android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/txtTitlePerspective_item"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_35sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_35sdp"
-                    android:textAlignment="center"
-                    android:padding="@dimen/_3sdp"
-                    android:text="Dados do item"
-                    android:textColor="#CDCBCB"
-                    android:textSize="@dimen/_20ssp"
-                    android:textStyle="bold" />
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
@@ -223,18 +211,18 @@
                         android:layout_width="fill_parent"
                         android:layout_height="@dimen/_50sdp"
                         android:layout_weight="1.1"
-                        android:background="@drawable/bg_button_blue_global"
+                        android:background="@drawable/bg_button_white_shadow_global"
                         android:drawableStart="@drawable/ic_calendar_white"
                         android:onClick="showCalendar"
                         android:paddingStart="@dimen/_20sdp"
                         android:paddingEnd="@dimen/_20sdp"
+                        android:textColor="@color/color_gray_5A5A5A"
                         android:shadowColor="#FCD8D8D8"
                         android:shadowDx="3"
                         android:shadowDy="3"
                         android:shadowRadius="20"
                         android:singleLine="true"
                         android:text="Calendário"
-                        android:textColor="#fff"
                         android:textSize="@dimen/_9ssp" />
 
 
@@ -309,7 +297,7 @@
                         android:layout_width="0dp"
                         android:layout_height="@dimen/_50sdp"
                         android:layout_weight="0.3"
-                        android:background="@drawable/bg_button_blue_global"
+                        android:background="@drawable/bg_button_white_shadow_global"
                         android:onClick="actAddItemsCategory"
                         android:src="@drawable/ic_search" />
 
@@ -344,15 +332,15 @@
                         android:paddingStart="@dimen/_100sdp"
                         android:paddingEnd="@dimen/_100sdp"
                         android:onClick="saveData"
-                        android:shadowColor="#FCD8D8D8"
                         android:layout_marginBottom="@dimen/_10sdp"
                         android:layout_marginStart="@dimen/_15sdp"
                         android:layout_marginEnd="@dimen/_15sdp"
+                        android:textColor="@color/color_gray_5A5A5A"
+                        android:shadowColor="#FCD8D8D8"
                         android:shadowDx="3"
                         android:shadowDy="3"
                         android:shadowRadius="20"
                         android:text="Salvar"
-                        android:textColor="@color/color_gray_5A5A5A"
                         android:textSize="@dimen/_9ssp" />
 
 

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
@@ -69,6 +71,8 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
         binding = ActivityAddItemBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
+        binding.btnBackItem.getBackground().setColorFilter(ContextCompat.getColor(this, android.R.color.transparent), PorterDuff.Mode.SRC);
 
         componentUtils = new ComponentUtils(this);
 
@@ -360,9 +364,14 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
     public void actAddItemsCategory(View viw){
         if (!CategoryActivity.status){
             Intent intent = new Intent(this, CategoryActivity.class);
+            binding.edtPriceNew.clearFocus();
             startActivity(intent);
         }
 
+    }
+
+    public void actAddItemMain(View view){
+        NavUtils.navigateUpFromSameTask(AddItemActivity.this);
     }
 
 

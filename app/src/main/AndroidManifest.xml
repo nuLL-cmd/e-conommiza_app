@@ -18,8 +18,8 @@
         tools:ignore="AllowBackup">
         <activity android:name=".view.activity.CategoryActivity"
             android:parentActivityName=".view.activity.CategoryActivity"
+            android:screenOrientation="portrait"
             android:configChanges="orientation|screenSize"
-            android:windowSoftInputMode="stateHidden"
             android:theme="@style/Theme.Econommiza_app_two">
 
 
@@ -27,12 +27,14 @@
         </activity>
         <activity
             android:name=".view.activity.ReportActivity"
+            android:screenOrientation="portrait"
             android:parentActivityName=".view.activity.ReportActivity"
             android:theme="@style/Theme.Econommiza_app_two">
 
         </activity>
         <activity
             android:name=".view.activity.AddItemActivity"
+            android:parentActivityName=".view.activity.AddItemActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Econommiza_app_two">
 

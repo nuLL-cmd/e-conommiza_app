@@ -86,33 +86,172 @@
 
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardPercentInput"
+                    android:id="@+id/cardPercentInput_report"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_200sdp"
                     app:cardCornerRadius="@dimen/_10sdp"
                     app:cardElevation="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_10sdp" >
+                    android:layout_marginBottom="@dimen/_10sdp">
 
-                    <LinearLayout
+
+                    <RelativeLayout
+                        android:id="@+id/relativeCardInput_report"
                         android:layout_width="match_parent"
-                        android:orientation="vertical"
                         android:layout_height="match_parent">
 
                         <TextView
-                            android:id="@+id/lblPercentCardOne_report"
+                            android:id="@+id/lblPercentCarInput_report"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:paddingTop="@dimen/_10sdp"
                             android:paddingBottom="@dimen/_10sdp"
                             android:text="Proventos a mais em relação ao ultimo mês"
-                            android:gravity="center"
+                            android:gravity="center|start"
                             android:fontFamily="@font/cairo_light"
-                            android:textSize="@dimen/_15sdp"
-                            android:layout_marginStart="@dimen/_5sdp"
-                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:textSize="@dimen/_11sdp"
+                            android:layout_above="@id/pieChartInput_report"
+                            android:paddingStart="@dimen/_20sdp"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+
+                            android:shadowColor="#683F3F3F"
+                            android:shadowDx="3"
+                            android:shadowDy="3"
+                            android:shadowRadius="20"/>
+
+                        <com.github.mikephil.charting.charts.PieChart
+                            android:id="@+id/pieChartInput_report"
+                            android:layout_width="@dimen/_150sdp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_height="@dimen/_150sdp" />
+
+                        <LinearLayout
+                            android:id="@+id/linearLegendPieInput_report"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_toEndOf="@id/pieChartInput_report"
+                            android:layout_alignTop="@id/pieChartInput_report"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+
+                            <TextView
+                                android:id="@+id/lblCurrentMontInput_report"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Mês atual"
+                                android:gravity="center"
+                                android:layout_marginBottom="@dimen/_5sdp"
+                                android:fontFamily="@font/cairo_light"
+                                android:textSize="@dimen/_11sdp"
+                                android:layout_above="@id/pieChartOutput_report"
+                                android:padding="@dimen/_5sdp"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:shadowColor="#683F3F3F"
+                                android:shadowDx="3"
+                                android:shadowDy="3"
+                                android:shadowRadius="20"/>
+
+
+
+                            <TextView
+                                android:id="@+id/txtCurrentMonthInput_report"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Junho"
+                                android:paddingTop="@dimen/_5sdp"
+                                android:paddingBottom="@dimen/_5sdp"
+                                android:paddingStart="@dimen/_10sdp"
+                                android:paddingEnd="@dimen/_10sdp"
+                                android:background="@drawable/bg_button_neutral"
+                                android:shadowColor="#FCD8D8D8"
+                                android:shadowDx="3"
+                                android:shadowDy="3"
+                                android:shadowRadius="20"
+                                android:textColor="#fff"
+                                android:layout_marginBottom="@dimen/_5sdp"
+                                android:textSize="@dimen/_13sdp"
+                                />
+
+                            <TextView
+                                android:id="@+id/lblBeforeMontInput_report"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Mês anterior"
+                                android:gravity="center"
+                                android:layout_marginBottom="@dimen/_5sdp"
+                                android:fontFamily="@font/cairo_light"
+                                android:textSize="@dimen/_11sdp"
+                                android:layout_above="@id/pieChartOutput_report"
+                                android:padding="@dimen/_5sdp"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:shadowColor="#683F3F3F"
+                                android:shadowDx="3"
+                                android:shadowDy="3"
+                                android:shadowRadius="20"/>
+
+                            <TextView
+                                android:id="@+id/txtBeforeMonthInput_report"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Agosto"
+                                android:paddingTop="@dimen/_5sdp"
+                                android:paddingBottom="@dimen/_5sdp"
+                                android:paddingStart="@dimen/_10sdp"
+                                android:paddingEnd="@dimen/_10sdp"
+                                android:background="@drawable/bg_button_neutral"
+                                android:shadowColor="#FCD8D8D8"
+                                android:shadowDx="3"
+                                android:shadowDy="3"
+                                android:shadowRadius="20"
+                                android:textColor="#fff"
+                                android:layout_marginBottom="@dimen/_5sdp"
+                                android:textSize="@dimen/_13sdp"
+                                />
+
+                        </LinearLayout>
+
+
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardPercentOutput_report"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_200sdp"
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    app:cardElevation="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp">
+
+
+                    <RelativeLayout
+                        android:id="@+id/relativeCardOutput_report"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/lblPercentCarOutput_report"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingTop="@dimen/_10sdp"
+                            android:paddingBottom="@dimen/_10sdp"
+                            android:text="Gastos a mais em relação ao ultimo mês"
+                            android:gravity="center|start"
+                            android:fontFamily="@font/cairo_light"
+                            android:textSize="@dimen/_11sdp"
+                            android:layout_above="@id/pieChartOutput_report"
+                            android:paddingStart="@dimen/_20sdp"
                             android:ellipsize="end"
                             android:maxLines="2"
                             android:shadowColor="#683F3F3F"
@@ -120,96 +259,103 @@
                             android:shadowDy="3"
                             android:shadowRadius="20"/>
 
-                        <View
-                            android:id="@+id/viewSeparatorCredit_report"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_1sdp"
+                        <com.github.mikephil.charting.charts.PieChart
+                            android:id="@+id/pieChartOutput_report"
+                            android:layout_width="@dimen/_150sdp"
                             android:layout_alignParentBottom="true"
-                            android:layout_marginStart="@dimen/_20sdp"
-                            android:layout_marginEnd="@dimen/_20sdp"
-                            android:background="#CDCDCD" />
+                            android:layout_alignParentEnd="true"
+                            android:layout_height="@dimen/_150sdp" />
 
-                        <TextView
-                            android:id="@+id/txtPercentCardOne_report"
+                        <LinearLayout
+                            android:id="@+id/linearLegendPieOutput_report"
                             android:layout_width="match_parent"
-                            android:layout_height="fill_parent"
-                            android:layout_weight="1"
-                            android:text="12%"
-                            android:textSize="@dimen/_70sdp"
-                            android:padding="@dimen/_3sdp"
-                            android:fontFamily="@font/cairo_light"
-                            android:textColor="@color/button_positive"
-                            android:textAlignment="center"
-                            android:shadowColor="#683F3F3F"
-                            android:shadowDx="3"
-                            android:shadowDy="3"
-                            android:shadowRadius="20"/>
-
-
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardPercentOutput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="@dimen/_10sdp"
-                    app:cardElevation="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_10sdp" >
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:orientation="vertical"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/lblPercentCardTwo_report"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingTop="@dimen/_10sdp"
-                            android:paddingBottom="@dimen/_10sdp"
-                            android:fontFamily="@font/cairo_light"
+                            android:layout_height="match_parent"
+                            android:layout_toStartOf="@id/pieChartOutput_report"
+                            android:layout_alignTop="@id/pieChartOutput_report"
                             android:gravity="center"
-                            android:shadowColor="#683F3F3F"
-                            android:shadowDx="3"
-                            android:shadowDy="3"
-                            android:shadowRadius="20"
-                            android:text="Gastos a mais em relação ao ultimo mês"
-                            android:textSize="@dimen/_15sdp"
-                            android:layout_marginStart="@dimen/_5sdp"
-                            android:layout_marginEnd="@dimen/_5sdp"
-                            android:ellipsize="end"/>
+                            android:orientation="vertical">
 
-                        <View
-                            android:id="@+id/viewSeparatorDebit_report"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_1sdp"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginStart="@dimen/_20sdp"
-                            android:layout_marginEnd="@dimen/_20sdp"
-                            android:background="#CDCDCD" />
-
-                        <TextView
-                            android:id="@+id/txtPercentCardTwo_report"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textAlignment="center"
-                            android:text="8%"
-                            android:padding="@dimen/_3sdp"
-                            android:textSize="@dimen/_70sdp"
-                            android:fontFamily="@font/cairo_light"
-                            android:textColor="@color/red_e65100"
-                            android:shadowColor="#683F3F3F"
-                            android:shadowDx="3"
-                            android:shadowDy="3"
-                            android:shadowRadius="20"/>
+                            <TextView
+                                android:id="@+id/lblCurrentMontOutput_report"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Mês atual"
+                                android:gravity="center"
+                                android:layout_marginBottom="@dimen/_5sdp"
+                                android:fontFamily="@font/cairo_light"
+                                android:textSize="@dimen/_11sdp"
+                                android:layout_above="@id/pieChartOutput_report"
+                                android:padding="@dimen/_5sdp"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:shadowColor="#683F3F3F"
+                                android:shadowDx="3"
+                                android:shadowDy="3"
+                                android:shadowRadius="20"/>
 
 
-                    </LinearLayout>
+                            <TextView
+                                android:id="@+id/txtCurrentMonthOutput_report"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Junho"
+                                android:paddingTop="@dimen/_5sdp"
+                                android:paddingBottom="@dimen/_5sdp"
+                                android:paddingStart="@dimen/_10sdp"
+                                android:paddingEnd="@dimen/_10sdp"
+                                android:background="@drawable/bg_button_neutral"
+                                android:shadowColor="#FCD8D8D8"
+                                android:shadowDx="3"
+                                android:shadowDy="3"
+                                android:shadowRadius="20"
+                                android:textColor="#fff"
+                                android:layout_marginBottom="@dimen/_5sdp"
+                                android:textSize="@dimen/_13sdp"
+                                />
+
+                            <TextView
+                                android:id="@+id/lblBeforeMontOutput_report"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Mês anterior"
+                                android:gravity="center"
+                                android:layout_marginBottom="@dimen/_5sdp"
+                                android:fontFamily="@font/cairo_light"
+                                android:textSize="@dimen/_11sdp"
+                                android:layout_above="@id/pieChartOutput_report"
+                                android:padding="@dimen/_5sdp"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:shadowColor="#683F3F3F"
+                                android:shadowDx="3"
+                                android:shadowDy="3"
+                                android:shadowRadius="20"/>
+
+                            <TextView
+                                android:id="@+id/txtBeforeMonthOutput_report"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Agosto"
+                                android:paddingTop="@dimen/_5sdp"
+                                android:paddingBottom="@dimen/_5sdp"
+                                android:paddingStart="@dimen/_10sdp"
+                                android:paddingEnd="@dimen/_10sdp"
+                                android:background="@drawable/bg_button_neutral"
+                                android:shadowColor="#FCD8D8D8"
+                                android:shadowDx="3"
+                                android:shadowDy="3"
+                                android:shadowRadius="20"
+                                android:textColor="#fff"
+                                android:layout_marginBottom="@dimen/_5sdp"
+                                android:textSize="@dimen/_13sdp"
+                                />
+
+                        </LinearLayout>
+
+
+
+                    </RelativeLayout>
+
                 </androidx.cardview.widget.CardView>
 
 

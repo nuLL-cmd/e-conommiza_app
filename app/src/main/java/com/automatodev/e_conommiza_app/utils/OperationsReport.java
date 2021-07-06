@@ -104,7 +104,7 @@ public class OperationsReport {
             return month;
         } else {
 
-            return "nothing";
+            return "N/A";
         }
 
     }
@@ -118,7 +118,7 @@ public class OperationsReport {
             return month;
         } else {
 
-            return "nothing";
+            return "N/A";
         }
 
     }
