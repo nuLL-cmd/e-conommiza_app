@@ -19,7 +19,18 @@ public class FormatUtils {
         return format.format(value);
     }
 
-    public static String percentFormat(Double value, boolean percent){
+    public static String numberFormat(Float value){
+        NumberFormat format = NumberFormat.getCurrencyInstance();
+        return format.format(value);
+    }
+
+
+    public static String percentFormatDouble(Double value, boolean percent){
+        DecimalFormat format = new DecimalFormat("#.##");
+        return percent ? format.format(value)+"%": format.format(value);
+    }
+
+    public static String percentFormatFloat(Float value, boolean percent){
         DecimalFormat format = new DecimalFormat("#.##");
         return percent ? format.format(value)+"%": format.format(value);
     }

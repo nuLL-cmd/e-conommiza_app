@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/bg_chart_marker">
+
+    <TextView
+        android:id="@+id/txtDataOne_markuer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:ellipsize="end"
+        android:padding="@dimen/_5sdp"
+        android:singleLine="true"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/color_gray_5A5A5A"
+        android:textSize="@dimen/_9sdp" />
+
+    <View
+        android:id="@+id/viewSeparator_marker"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_2sdp"
+        android:layout_below="@id/txtDataOne_markuer"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:background="@color/gray_CDCDCD" />
+
+    <TextView
+        android:id="@+id/txtDataTwo_marker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/viewSeparator_marker"
+        android:layout_centerHorizontal="true"
+        android:ellipsize="end"
+        android:padding="@dimen/_5sdp"
+        android:singleLine="true"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/color_gray_5A5A5A"
+        android:textSize="@dimen/_9sdp" />
+
+</RelativeLayout>

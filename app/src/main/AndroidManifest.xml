@@ -19,6 +19,7 @@
         <activity android:name=".view.activity.CategoryActivity"
             android:parentActivityName=".view.activity.CategoryActivity"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.Econommiza_app_two">
 

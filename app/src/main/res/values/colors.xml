@@ -22,6 +22,7 @@
     <color name="background_form">#f3f6ff</color>E
     <color name = "green_1DC1A0">#1DC1A0</color>
     <color name="color_gray_5A5A5A">#5A5A5A</color>
+    <color name="gray_CDCDCD">#CDCDCD</color>
     <color name="color_gray_CDCBCB">#CDCBCB</color>
 
 </resources>

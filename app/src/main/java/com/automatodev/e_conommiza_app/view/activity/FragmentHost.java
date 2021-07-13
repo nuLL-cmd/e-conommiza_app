@@ -136,7 +136,11 @@ public class FragmentHost extends Fragment implements ItemContract {
     @Override
     public void onResume() {
         super.onResume();
-        itemsAdapter.notifyDataSetChanged();
+        if (itemsAdapter != null)
+            itemsAdapter.notifyDataSetChanged();
+        else{
+            itemsAdapter = new ItemsAdapter(MainActivity.perspectiveEntities.get(0).getItemsPerspective(),this);
+        }
     }
 
     @Override

@@ -165,7 +165,7 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
 
                 componentUtils.stateColorComponent(new View[]{
                         binding.getRoot(), binding.btnUpItem, binding.btnDownItem,
-                        binding.appbarItem
+                        binding.appbarItem,binding.imageItemItem
                 }, new Integer[]{R.color.green_00c853, R.drawable.ic_up_48_fff, R.drawable.ic_down_48_ee0005, R.drawable.bg_edt_green}, false);
 
                 perspectiveEntity.setTotalCredit(perspectiveEntity.getTotalCredit().subtract(valueEntry));
@@ -175,7 +175,7 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
             } else {
                 componentUtils.stateColorComponent(new View[]{
                         binding.getRoot(), binding.btnDownItem, binding.btnUpItem,
-                        binding.appbarItem
+                        binding.appbarItem,binding.imageItemItem
                 }, new Integer[]{R.color.red_e65100, R.drawable.ic_down_48_fff, R.drawable.ic_up_48_8bc34a, R.drawable.bg_edt_orange}, false);
 
                 perspectiveEntity.setTotalDebit(perspectiveEntity.getTotalDebit().subtract(valueEntry));
@@ -221,7 +221,7 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
 
             componentUtils.stateColorComponent(new View[]{
                     binding.getRoot(), binding.btnUpItem, binding.btnDownItem,
-                    binding.appbarItem
+                    binding.appbarItem,binding.imageItemItem
             }, new Integer[]{R.color.green_00c853, R.drawable.ic_up_48_fff, R.drawable.ic_down_48_ee0005, R.drawable.bg_edt_green}, false);
 
             negative = false;
@@ -231,7 +231,7 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
 
         } else {
             componentUtils.stateColorComponent(new View[]{binding.btnUpItem
-                    , binding.appbarItem}, new Integer[]{R.drawable.ic_up_48_8bc34a}, true);
+                    , binding.appbarItem,binding.imageItemItem}, new Integer[]{R.drawable.ic_up_48_8bc34a}, true);
 
             isSelected = false;
             positive = false;
@@ -245,7 +245,7 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
 
             componentUtils.stateColorComponent(new View[]{
                     binding.getRoot(), binding.btnDownItem, binding.btnUpItem,
-                    binding.appbarItem
+                    binding.appbarItem,binding.imageItemItem
             }, new Integer[]{R.color.red_e65100, R.drawable.ic_down_48_fff, R.drawable.ic_up_48_8bc34a, R.drawable.bg_edt_orange}, false);
 
 
@@ -256,7 +256,7 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
 
         } else {
             componentUtils.stateColorComponent(new View[]{binding.btnDownItem
-                    , binding.appbarItem}, new Integer[]{R.drawable.ic_down_48_ee0005}, true);
+                    , binding.appbarItem,binding.imageItemItem}, new Integer[]{R.drawable.ic_down_48_ee0005}, true);
 
             isSelected = false;
             negative = false;

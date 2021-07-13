@@ -130,12 +130,16 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public void loginGoogle(View view) {
+        binding.btnLoginLogin.setEnabled(false);
+        binding.btnFacebookLogin.setEnabled(false);
+        binding.btnGoogleLogin.setEnabled(false);
         Intent intent = client.getSignInIntent();
         startActivityForResult(intent, 100);
     }
 
     private void startGoogleLogin(String token) {
         dialogProgress.show();
+
         googleAuthentication.firebaseAuthWithGoogle(bindingProgress, token, new GoogleAuthCallback() {
             @Override
             public void onSuccess(boolean response) {
@@ -150,6 +154,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void loginFacebook(View view) {
+
+        binding.btnLoginLogin.setEnabled(false);
+        binding.btnFacebookLogin.setEnabled(false);
+        binding.btnGoogleLogin.setEnabled(false);
+
         facebookAuthentication.loginFacebook(bindingProgress, new FacebookAuthCallback() {
             @Override
             public void onSuccess(boolean response) {
@@ -188,6 +197,9 @@ public class LoginActivity extends AppCompatActivity {
     public void returnFailure(String message) {
         bindingProgress.setIsLoading(false);
         bindingProgress.setInformation("Ops! Algo deu errado!");
+        binding.btnLoginLogin.setEnabled(true);
+        binding.btnFacebookLogin.setEnabled(true);
+        binding.btnGoogleLogin.setEnabled(true);
         new Thread() {
             @Override
             public void run() {
