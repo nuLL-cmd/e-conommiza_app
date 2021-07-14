@@ -32,8 +32,6 @@ public class FacebookAuthentication {
     private final Context context;
     private final FirebaseAuth firebaseAuth;
     private final CallbackManager callbackManager;
-    private final FirestoreService firestoreService;
-    private final UserPreferences userPreferences;
 
 
     public FacebookAuthentication(Context context) {
@@ -41,8 +39,6 @@ public class FacebookAuthentication {
 
         FacebookSdk.sdkInitialize(context);
         AppEventsLogger.activateApp(context);
-        userPreferences = new UserPreferences(context, "user");
-        firestoreService = new FirestoreService();
         this.callbackManager = CallbackManager.Factory.create();
         firebaseAuth = FirebaseAuth.getInstance();
 
