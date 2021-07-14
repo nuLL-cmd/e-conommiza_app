@@ -3,6 +3,8 @@ package com.automatodev.e_conommiza_app.security;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreSaveCallback;
 import com.automatodev.e_conommiza_app.database.firebase.FirestoreService;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogProgressBinding;
@@ -19,6 +21,7 @@ import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
@@ -80,28 +83,9 @@ public class FacebookAuthentication {
         AuthCredential credential = FacebookAuthProvider.getCredential(idToken.getToken());
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
+
                 bindingProgress.setInformation("Verificando seu sdados...");
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                String urlPhoto = "https://graph.facebook.com/" + idToken.getUserId() + "/picture?type=large";
-                UserEntity userEntity = new UserEntityBuilder().userName(user.getDisplayName())
-                        .userEmail(user.getEmail())
-                        .urlPhoto(urlPhoto)
-                        .userUid(user.getUid())
-                        .build();
-                firestoreService.saveUser(userEntity, new FirestoreSaveCallback() {
-                    @Override
-                    public void onSuccess() {
-                        userPreferences.setUser(userEntity);
-                        callback.onSuccess(true);
-                    }
-
-                    @Override
-                    public void onFailure(Exception e) {
-                        callback.onFailure("Algo deu errado em seu login, \nDa uma checada na sua conexão :D");
-                        Log.e("logx", "Error firebaseWithFacebook: " + e.getMessage());
-
-                    }
-                });
+                callback.onSuccess(true);
 
             } else {
                 try {
@@ -110,6 +94,12 @@ public class FacebookAuthentication {
                     callback.onFailure("Algo deu errado em seu login, \nDa uma checada na sua conexão :D");
                     Log.e("logx", "Error firebaseWithFacebook: " + e.getMessage());
                 }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                callback.onFailure("Algo deu errado em seu login, \nDa uma checada na sua conexão :D");
+                Log.e("logx", "Error firebaseWithFacebook: " + e.getMessage());
             }
         });
 

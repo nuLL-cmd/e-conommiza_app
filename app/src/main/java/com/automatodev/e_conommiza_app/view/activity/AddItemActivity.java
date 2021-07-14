@@ -1,6 +1,5 @@
 package com.automatodev.e_conommiza_app.view.activity;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -15,7 +14,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 import androidx.core.content.ContextCompat;
-import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.automatodev.e_conommiza_app.R;
@@ -27,11 +25,9 @@ import com.automatodev.e_conommiza_app.entity.model.DataEntryEntity;
 import com.automatodev.e_conommiza_app.entity.model.PerspectiveEntity;
 import com.automatodev.e_conommiza_app.enumarator.TypeEnum;
 import com.automatodev.e_conommiza_app.utils.ComponentUtils;
-import com.automatodev.e_conommiza_app.utils.DrawableHelper;
 import com.automatodev.e_conommiza_app.utils.FormatUtils;
 import com.devs.vectorchildfinder.VectorChildFinder;
 import com.devs.vectorchildfinder.VectorDrawableCompat;
-import com.sdsmdg.harjot.vectormaster.models.PathModel;
 
 import java.math.BigDecimal;
 import java.text.DateFormat;

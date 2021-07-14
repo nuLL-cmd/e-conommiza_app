@@ -130,9 +130,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public void loginGoogle(View view) {
-        binding.btnLoginLogin.setEnabled(false);
-        binding.btnFacebookLogin.setEnabled(false);
-        binding.btnGoogleLogin.setEnabled(false);
+        disableButtons();
         Intent intent = client.getSignInIntent();
         startActivityForResult(intent, 100);
     }
@@ -154,11 +152,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void loginFacebook(View view) {
-
-        binding.btnLoginLogin.setEnabled(false);
-        binding.btnFacebookLogin.setEnabled(false);
-        binding.btnGoogleLogin.setEnabled(false);
-
+        disableButtons();
         facebookAuthentication.loginFacebook(bindingProgress, new FacebookAuthCallback() {
             @Override
             public void onSuccess(boolean response) {
@@ -213,5 +207,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         }.start();
 
+    }
+
+    public void disableButtons(){
+        binding.btnLoginLogin.setEnabled(false);
+        binding.btnFacebookLogin.setEnabled(false);
+        binding.btnGoogleLogin.setEnabled(false);
     }
 }

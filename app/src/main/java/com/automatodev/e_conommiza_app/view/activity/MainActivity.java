@@ -17,11 +17,13 @@ import androidx.viewpager.widget.ViewPager;
 import com.automatodev.e_conommiza_app.R;
 import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreGetCallback;
 import com.automatodev.e_conommiza_app.database.firebase.FirestoreService;
+import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreSaveCallback;
 import com.automatodev.e_conommiza_app.database.sqlite.controller.PerspectiveController;
 import com.automatodev.e_conommiza_app.databinding.ActivityMainBinding;
 import com.automatodev.e_conommiza_app.entity.model.PerspectiveEntity;
 import com.automatodev.e_conommiza_app.entity.model.UserEntity;
 import com.automatodev.e_conommiza_app.entity.modelBuild.PerspectiveEntityBuilder;
+import com.automatodev.e_conommiza_app.entity.modelBuild.UserEntityBuilder;
 import com.automatodev.e_conommiza_app.entity.response.PerspectiveWithData;
 import com.automatodev.e_conommiza_app.preferences.UserPreferences;
 import com.automatodev.e_conommiza_app.security.FirebaseAuthentication;
@@ -29,6 +31,7 @@ import com.automatodev.e_conommiza_app.utils.ComponentUtils;
 import com.automatodev.e_conommiza_app.utils.FormatUtils;
 import com.automatodev.e_conommiza_app.view.adapter.FragmentPageAdapter;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.math.BigDecimal;
@@ -266,6 +269,28 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                                 preferences.setUser(userEntity);
                                 binding.txtUserMain.setText(userEntity.getUserName());
                                 stateRefreshUserName();
+                            }else{
+                                UserEntity userEntity = new UserEntityBuilder()
+                                        .userName(auth.getUser().getDisplayName())
+                                        .userEmail(auth.getUser().getEmail())
+                                        .urlPhoto(auth.getUser().getPhotoUrl().toString())
+                                        .userUid(auth.getUser().getUid())
+                                        .build();
+
+                                firestoreService.saveUser(userEntity, new FirestoreSaveCallback() {
+                                    @Override
+                                    public void onSuccess() {
+                                        preferences.setUser(userEntity);
+                                        binding.txtUserMain.setText(userEntity.getUserName());
+                                        stateRefreshUserName();
+                                    }
+
+                                    @Override
+                                    public void onFailure(Exception e) {
+                                        e.printStackTrace();
+                                        errorLogout();
+                                    }
+                                });
                             }
                         }
                     }
