@@ -49,7 +49,7 @@ public class ComponentUtils {
            //txtAppItem
            //((TextView)views[3]).setTextColor(context.getResources().getColor(R.color.white_fff));
            //imageItemCategory
-           views[2].getBackground().setColorFilter(ContextCompat.getColor(context, R.color.button_positive), PorterDuff.Mode.SRC);
+              views[2].getBackground().setColorFilter(ContextCompat.getColor(context, R.color.button_positive), PorterDuff.Mode.SRC);
            //btnSave
            // views[5].getBackground().setColorFilter(ContextCompat.getColor(context, R.color.button_positive), PorterDuff.Mode.SRC);
            //btnDate
@@ -77,7 +77,7 @@ public class ComponentUtils {
            //txtAppItem
           // ((TextView)views[5]).setTextColor(context.getResources().getColor(R.color.white_fff));
            //imageItemCategory
-           views[4].getBackground().setColorFilter(ContextCompat.getColor(context, resources[0]), PorterDuff.Mode.SRC);
+            views[4].getBackground().setColorFilter(ContextCompat.getColor(context, resources[0]), PorterDuff.Mode.SRC);
 
 
        }

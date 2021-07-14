@@ -27,7 +27,11 @@ import com.automatodev.e_conommiza_app.entity.model.DataEntryEntity;
 import com.automatodev.e_conommiza_app.entity.model.PerspectiveEntity;
 import com.automatodev.e_conommiza_app.enumarator.TypeEnum;
 import com.automatodev.e_conommiza_app.utils.ComponentUtils;
+import com.automatodev.e_conommiza_app.utils.DrawableHelper;
 import com.automatodev.e_conommiza_app.utils.FormatUtils;
+import com.devs.vectorchildfinder.VectorChildFinder;
+import com.devs.vectorchildfinder.VectorDrawableCompat;
+import com.sdsmdg.harjot.vectormaster.models.PathModel;
 
 import java.math.BigDecimal;
 import java.text.DateFormat;
@@ -46,6 +50,7 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
     private ComponentUtils componentUtils;
     private DataEntryEntity data;
     private PerspectiveEntity perspectiveEntity;
+    private CategoryEntity categoryEntity;
 
     private boolean isSelected = false;
     private boolean positive = false;
@@ -76,7 +81,9 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
 
         componentUtils = new ComponentUtils(this);
 
-        getData();;
+        getData();
+        ;
+
 
     }
 
@@ -95,12 +102,18 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
-        if(resourceCategory != 0){
+        if (resourceCategory != 0) {
             binding.txtCategoryItem.setText(nameCategory);
+            categoryEntity = new CategoryEntity(nameCategory,resourceCategory);
             binding.imageItemItem.setImageResource(resourceCategory);
             categoryEntry = nameCategory;
+            if (typeEntry != null && resourceCategory != R.drawable.ic_uber){
+                checkResourceChangeColor(categoryEntity.getImage(),
+                        typeEntry.equals(TypeEnum.INPUT) ? Color.parseColor("#00c853") : Color.parseColor("#e65100"));
+            }
+
 
         }
     }
@@ -137,7 +150,6 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
     }
 
 
-
     private void populeData(DataEntryEntity data) {
         if (data != null) {
             idPerspective = perspectiveEntity.getIdPerspective();
@@ -152,11 +164,11 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
             binding.edtNameItem.setText(nameEntry);
             binding.edtPriceNew.setText(String.valueOf(data.getValueEntry()));
 
-            CategoryEntity categoryEntity = CategoryEntity.getCategories().stream()
+            categoryEntity = CategoryEntity.getCategories().stream()
                     .filter(category -> category.getName().equals(categoryEntry))
                     .findFirst().orElse(null);
 
-            if (categoryEntity != null){
+            if (categoryEntity != null) {
                 binding.txtCategoryItem.setText(categoryEntity.getName());
                 binding.imageItemItem.setImageResource(categoryEntity.getImage());
             }
@@ -165,8 +177,10 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
 
                 componentUtils.stateColorComponent(new View[]{
                         binding.getRoot(), binding.btnUpItem, binding.btnDownItem,
-                        binding.appbarItem,binding.imageItemItem
+                        binding.appbarItem, binding.imageItemItem
                 }, new Integer[]{R.color.green_00c853, R.drawable.ic_up_48_fff, R.drawable.ic_down_48_ee0005, R.drawable.bg_edt_green}, false);
+
+                checkResourceChangeColor(categoryEntity.getImage(), Color.parseColor("#00c853"));
 
                 perspectiveEntity.setTotalCredit(perspectiveEntity.getTotalCredit().subtract(valueEntry));
                 isSelected = true;
@@ -175,9 +189,10 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
             } else {
                 componentUtils.stateColorComponent(new View[]{
                         binding.getRoot(), binding.btnDownItem, binding.btnUpItem,
-                        binding.appbarItem,binding.imageItemItem
+                        binding.appbarItem, binding.imageItemItem
                 }, new Integer[]{R.color.red_e65100, R.drawable.ic_down_48_fff, R.drawable.ic_up_48_8bc34a, R.drawable.bg_edt_orange}, false);
 
+                checkResourceChangeColor(categoryEntity.getImage(), Color.parseColor("#e65100"));
                 perspectiveEntity.setTotalDebit(perspectiveEntity.getTotalDebit().subtract(valueEntry));
                 isSelected = true;
                 negative = true;
@@ -221,8 +236,11 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
 
             componentUtils.stateColorComponent(new View[]{
                     binding.getRoot(), binding.btnUpItem, binding.btnDownItem,
-                    binding.appbarItem,binding.imageItemItem
+                    binding.appbarItem, binding.imageItemItem
             }, new Integer[]{R.color.green_00c853, R.drawable.ic_up_48_fff, R.drawable.ic_down_48_ee0005, R.drawable.bg_edt_green}, false);
+
+            if (categoryEntity != null)
+                checkResourceChangeColor(categoryEntity.getImage(), Color.parseColor("#00c853"));
 
             negative = false;
             positive = true;
@@ -231,12 +249,16 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
 
         } else {
             componentUtils.stateColorComponent(new View[]{binding.btnUpItem
-                    , binding.appbarItem,binding.imageItemItem}, new Integer[]{R.drawable.ic_up_48_8bc34a}, true);
+                    , binding.appbarItem, binding.imageItemItem}, new Integer[]{R.drawable.ic_up_48_8bc34a}, true);
+
+            if (categoryEntity != null)
+                checkResourceChangeColor(categoryEntity.getImage(), Color.parseColor("#256fff"));
 
             isSelected = false;
             positive = false;
             typeEntry = null;
         }
+
 
     }
 
@@ -245,9 +267,11 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
 
             componentUtils.stateColorComponent(new View[]{
                     binding.getRoot(), binding.btnDownItem, binding.btnUpItem,
-                    binding.appbarItem,binding.imageItemItem
+                    binding.appbarItem, binding.imageItemItem
             }, new Integer[]{R.color.red_e65100, R.drawable.ic_down_48_fff, R.drawable.ic_up_48_8bc34a, R.drawable.bg_edt_orange}, false);
 
+            if (categoryEntity != null)
+                checkResourceChangeColor(categoryEntity.getImage(), Color.parseColor("#e65100"));
 
             negative = true;
             positive = false;
@@ -256,7 +280,10 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
 
         } else {
             componentUtils.stateColorComponent(new View[]{binding.btnDownItem
-                    , binding.appbarItem,binding.imageItemItem}, new Integer[]{R.drawable.ic_down_48_ee0005}, true);
+                    , binding.appbarItem, binding.imageItemItem}, new Integer[]{R.drawable.ic_down_48_ee0005}, true);
+
+            if (categoryEntity != null)
+                checkResourceChangeColor(categoryEntity.getImage(), Color.parseColor("#256fff"));
 
             isSelected = false;
             negative = false;
@@ -288,8 +315,8 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
             return;
         }
 
-        if(categoryEntry == null){
-            componentUtils.showSnackbar("O registro precisa de uma categoria",800);
+        if (categoryEntry == null) {
+            componentUtils.showSnackbar("O registro precisa de uma categoria", 800);
             return;
         }
 
@@ -361,19 +388,34 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
         dateEntry = calendar.getTime().getTime();
     }
 
-    public void actAddItemsCategory(View viw){
-        if (!CategoryActivity.status){
+    public void actAddItemsCategory(View viw) {
+        if (!CategoryActivity.status) {
             Intent intent = new Intent(this, CategoryActivity.class);
+            if (typeEntry != null)
+                intent.putExtra("color", typeEntry.equals(TypeEnum.INPUT) ? R.color.green_00c853 : R.color.red_e65100);
             binding.edtPriceNew.clearFocus();
             startActivity(intent);
         }
 
     }
 
-    public void actAddItemMain(View view){
+    public void actAddItemMain(View view) {
         NavUtils.navigateUpFromSameTask(AddItemActivity.this);
     }
 
+
+    public void checkResourceChangeColor(int resource, int newColor) {
+
+        VectorChildFinder vector = new VectorChildFinder(this, resource, binding.imageItemItem);
+
+        VectorDrawableCompat.VFullPath path = vector.findPathByName("modify");
+        if (path != null) {
+            path.setFillColor(newColor);
+            path.setFillAlpha(1f);
+
+        }
+
+    }
 
 
 }

@@ -18,6 +18,7 @@
         tools:context=".view.activity.CategoryActivity">
 
         <RelativeLayout
+            android:id="@+id/relativeHead_category"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_150sdp"
             android:background="@drawable/bg_relative_toolbar">

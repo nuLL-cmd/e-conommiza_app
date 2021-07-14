@@ -586,7 +586,7 @@
                                 android:fontFamily="@font/cairo_light"
                                 android:shadowColor="#683F3F3F"
                                 android:shadowDx="3"
-                                android:text="Saldo de todas as perspectivas cadastradas"
+                                android:text="Saldo das perspectivas cadastradas - não inclui saldos negativos."
                                 android:shadowDy="3"
                                 android:shadowRadius="20"
                                 android:textAlignment="center"

@@ -53,8 +53,8 @@ public class ReportActivity extends AppCompatActivity {
     public static boolean status;
     private int indexMaxValue;
     private ActivityReportBinding binding;
-    private int[] colorsPercentCredit = new int[]{Color.parseColor("#256fff"), Color.parseColor("#00c853")};
-    private int[] colorsPercentDebit = new int[]{Color.parseColor("#FF9800"), Color.parseColor("#e65100")};
+    private final int[] colorsPercentCredit = new int[]{Color.parseColor("#256fff"), Color.parseColor("#00c853")};
+    private final int[] colorsPercentDebit = new int[]{Color.parseColor("#FF9800"), Color.parseColor("#e65100")};
 
     OperationsReport operationsReport;
 

@@ -131,6 +131,9 @@ dependencies {
 
     implementation 'com.github.kishandonga:custom-snackbar:1.1'
 
+    implementation 'com.github.devsideal:VectorChildFinder:1.0.0'
+
+
 
 
 }

@@ -125,6 +125,7 @@
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginStart="@dimen/_15sdp"
                     android:layout_marginTop="@dimen/_15sdp"
+                    app:cardElevation="@dimen/_3sdp"
                     android:layout_marginEnd="@dimen/_15sdp"
                     app:cardCornerRadius="@dimen/_10sdp">
 
@@ -236,7 +237,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_marginStart="@dimen/_15sdp"
                     android:layout_marginEnd="@dimen/_15sdp"
-                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:background="#E1DFDF" />
 
@@ -248,49 +249,59 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                    <RelativeLayout
+                    <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_60sdp"
                         android:layout_marginEnd="@dimen/_5sdp"
                         android:layout_weight="1"
+                        android:layout_margin="@dimen/_7sdp"
+                        app:cardCornerRadius="@dimen/_10sdp"
+                        app:cardElevation="@dimen/_3sdp"
                         android:animateLayoutChanges="true"
                         android:background="@drawable/bg_button_white_shadow_global">
 
-
-                        <ImageView
-                            android:id="@+id/imageItem_item"
-                            android:layout_width="@dimen/_48sdp"
-                            android:layout_height="@dimen/_48sdp"
-                            android:layout_centerVertical="true"
-                            android:layout_marginBottom="@dimen/_5sdp"
-                            android:layout_marginStart="@dimen/_5sdp"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:background="@drawable/bg_button_blue_noshadow_global"
-                            android:padding="@dimen/_10sdp"
-                            android:src="@drawable/ic_nada"
-
-                            />
-
-
-                        <TextView
-                            android:id="@+id/txtCategory_item"
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_alignTop="@id/imageItem_item"
-                            android:layout_alignBottom="@id/imageItem_item"
-                            android:layout_toEndOf="@id/imageItem_item"
-                            android:ellipsize="marquee"
-                            android:gravity="center"
-                            android:padding="@dimen/_5sdp"
-                            android:lineSpacingExtra="@dimen/_6sdp"
-                            android:singleLine="true"
-                            android:text="Escolha uma categoria"
-                            android:textAlignment="center"
-                            android:textColor="@color/color_gray_5A5A5A"
-                            android:textSize="@dimen/_9ssp" />
+                            android:layout_height="match_parent">
 
 
-                    </RelativeLayout>
+                            <ImageView
+                                android:id="@+id/imageItem_item"
+                                android:layout_width="@dimen/_48sdp"
+                                android:layout_height="@dimen/_48sdp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginBottom="@dimen/_5sdp"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:background="@drawable/bg_button_blue_noshadow_global"
+                                android:padding="@dimen/_10sdp"
+                                android:src="@drawable/ic_nada"
+
+                                />
+
+
+                            <TextView
+                                android:id="@+id/txtCategory_item"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignTop="@id/imageItem_item"
+                                android:layout_alignBottom="@id/imageItem_item"
+                                android:layout_toEndOf="@id/imageItem_item"
+                                android:ellipsize="marquee"
+                                android:gravity="center"
+                                android:padding="@dimen/_5sdp"
+                                android:lineSpacingExtra="@dimen/_6sdp"
+                                android:singleLine="true"
+                                android:text="Escolha uma categoria"
+                                android:textAlignment="center"
+                                android:textColor="@color/color_gray_5A5A5A"
+                                android:textSize="@dimen/_9ssp" />
+
+                        </RelativeLayout>
+
+
+
+                    </androidx.cardview.widget.CardView>
 
                     <ImageButton
                         style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
@@ -313,8 +324,8 @@
                     android:layout_alignParentBottom="true"
                     android:layout_marginStart="@dimen/_15sdp"
                     android:layout_marginEnd="@dimen/_15sdp"
-                    android:layout_marginBottom="@dimen/_15sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:background="#E1DFDF" />
 
 
@@ -328,9 +339,6 @@
                         android:background="@drawable/bg_button_white_shadow_global"
                         android:clickable="true"
                         android:focusable="true"
-                        android:drawableStart="@drawable/ic_save_blue"
-                        android:paddingStart="@dimen/_100sdp"
-                        android:paddingEnd="@dimen/_100sdp"
                         android:onClick="saveData"
                         android:layout_marginBottom="@dimen/_10sdp"
                         android:layout_marginStart="@dimen/_15sdp"
