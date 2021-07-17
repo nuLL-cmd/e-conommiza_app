@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_above="@id/imgNoContent_layout_perspective"
                     android:layout_marginBottom="@dimen/_20sdp"
-                    android:text="Clique no menu flutuante \npara adicionar um item a sua perspectiva"
+                    android:text="Use o menu e adicione um item à sua perspectiva"
                     android:lineSpacingExtra="@dimen/_3sdp"
                     android:textAlignment="center"
                     android:textSize="@dimen/_9sdp"

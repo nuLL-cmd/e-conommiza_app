@@ -136,7 +136,7 @@
                     android:shadowDx="3"
                     android:shadowDy="3"
                     android:shadowRadius="20"
-                    android:text="Vamos lá! \nClique no menu e cadastre uma nova pespectiva "
+                    android:text="Comece a usar o app! \nCadastre sua primeira pespectiva"
                     android:textAlignment="center"
                     android:textColor="#939090"
                     android:textSize="@dimen/_9sdp" />
@@ -295,8 +295,6 @@
                             android:id="@+id/txtValueBalance_main"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:layout_toEndOf="@id/lblValueBalance_main"
                             android:alpha="0"
                             android:singleLine="true"
                             android:textAlignment="center"
@@ -315,12 +313,10 @@
                         android:layout_alignEnd="@+id/scrollTxtValueBalance_main"
                         android:layout_alignBottom="@id/scrollTxtValueBalance_main"
                         android:paddingTop="@dimen/_4sdp"
-
                         app:SpinKit_Color="@color/white_fff"
                         app:SpinKit_Style="ThreeBounce" />
 
 
-                    <!---->
 
 
                     <TextView

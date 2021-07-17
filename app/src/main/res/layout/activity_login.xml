@@ -72,9 +72,6 @@
                             android:id="@+id/relativeChar_login"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_toStartOf="@id/lblSlogan_splash"
-                            android:layout_toLeftOf="@id/lblSlogan_splash"
                             android:background="@drawable/bg_resources_logo"
                             android:paddingStart="@dimen/_7sdp"
                             android:paddingTop="@dimen/_5sdp"
@@ -132,9 +129,6 @@
                     android:paddingStart="@dimen/_10sdp"
                     android:drawableStart="@drawable/ic_person"
                     android:layout_marginTop="@dimen/_20sdp"
-
-
-                    android:text="programadormoderador@hotmail.com"
                     android:hint="Email"
                     android:inputType="textEmailAddress"
 
@@ -148,7 +142,6 @@
                     android:id="@+id/edtPassword_login"
                     android:layout_width="match_parent"
                     android:drawableStart="@drawable/ic_lock"
-                    android:text="402866"
                     android:layout_height="@dimen/_50sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:background="@drawable/layout_shadow_white"
@@ -186,7 +179,8 @@
                     android:text="Esqueci minha senha"
                     android:textAlignment="center"
                     android:textColor="@color/button_positive"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:focusable="true" />
 
 
 

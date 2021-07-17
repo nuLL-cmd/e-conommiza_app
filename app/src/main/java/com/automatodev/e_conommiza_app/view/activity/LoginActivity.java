@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             dialogProgress.show();
             bindingProgress.setIsLoading(true);
-            bindingProgress.setInformation("Um momento...");
+            bindingProgress.setInformation("Aguarde...");
             firebaseAuthentication.loginWithEmail(email, password, new FirebaseAuthCallback() {
                 @Override
                 public void onSuccess(boolean result) {

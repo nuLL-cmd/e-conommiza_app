@@ -80,7 +80,6 @@
                 android:id="@+id/relativeDaddy_login"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
                 android:orientation="vertical"
                 tools:context=".view.activity.LoginActivity">
 
@@ -120,7 +119,6 @@
 
                             android:shadowDy="3"
                             android:shadowRadius="20"
-                            android:text="Proventos a mais em relação ao ultimo mês"
                             android:textSize="@dimen/_11sdp" />
 
                         <com.github.mikephil.charting.charts.PieChart
@@ -145,7 +143,6 @@
                                 android:id="@+id/lblCurrentMontInput_report"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_above="@id/pieChartOutput_report"
                                 android:layout_marginBottom="@dimen/_5sdp"
                                 android:ellipsize="end"
                                 android:fontFamily="@font/cairo_light"
@@ -174,7 +171,6 @@
                                 android:shadowDx="3"
                                 android:shadowDy="3"
                                 android:shadowRadius="20"
-                                android:text="Junho"
                                 android:textColor="#fff"
                                 android:textSize="@dimen/_13sdp" />
 
@@ -182,7 +178,6 @@
                                 android:id="@+id/lblBeforeMontInput_report"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_above="@id/pieChartOutput_report"
                                 android:layout_marginBottom="@dimen/_5sdp"
                                 android:ellipsize="end"
                                 android:fontFamily="@font/cairo_light"
@@ -210,7 +205,6 @@
                                 android:shadowDx="3"
                                 android:shadowDy="3"
                                 android:shadowRadius="20"
-                                android:text="Agosto"
                                 android:textColor="#fff"
                                 android:textSize="@dimen/_13sdp" />
 
@@ -256,7 +250,6 @@
                             android:shadowDx="3"
                             android:shadowDy="3"
                             android:shadowRadius="20"
-                            android:text="Gastos a mais em relação ao ultimo mês"
                             android:textSize="@dimen/_11sdp" />
 
                         <com.github.mikephil.charting.charts.PieChart
@@ -310,7 +303,6 @@
                                 android:shadowDx="3"
                                 android:shadowDy="3"
                                 android:shadowRadius="20"
-                                android:text="Junho"
                                 android:textColor="#fff"
                                 android:textSize="@dimen/_13sdp" />
 
@@ -346,7 +338,6 @@
                                 android:shadowDx="3"
                                 android:shadowDy="3"
                                 android:shadowRadius="20"
-                                android:text="Agosto"
                                 android:textColor="#fff"
                                 android:textSize="@dimen/_13sdp" />
 

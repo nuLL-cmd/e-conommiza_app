@@ -231,10 +231,10 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         } catch (Exception e) {
 
             fragmentAdapter.notifyDataSetChanged();
-            binding.txtPerspectiveMain.setText("Pproblema ao \ncarregar as perspectivas");
+            binding.txtPerspectiveMain.setText("Problema ao \ncarregar as perspectivas");
             binding.txtCreditMain.setVisibility(View.GONE);
             binding.txtDebitMain.setVisibility(View.GONE);
-            binding.txtAmountPerspectiveMain.setText("Parece que tivemos um erro ao processar os dados.");
+            binding.txtAmountPerspectiveMain.setText("Tivemos um erro ao processar os dados.");
 
         }
 
@@ -312,7 +312,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
 
     private void errorLogout() {
-        Toast.makeText(this, "Tivemos um problema ao carregar sessão... Saindo...", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Problema ao carregar sua sessão... Saindo...", Toast.LENGTH_LONG).show();
         auth.logout();
         startActivity(new Intent(this, LoginActivity.class));
     }
@@ -366,7 +366,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                             public void run() {
                                 try {
                                     sleep(100);
-                                    componentUtils.showSnackbar("Dado inserido com sucesso", 500);
+                                    componentUtils.showSnackbar("Sucesso!", 500);
 
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
@@ -498,12 +498,9 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
             public void run() {
                 try {
                     sleep(1000);
-                    binding.spinktNameMain.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            binding.spinktNameMain.setVisibility(View.GONE);
-                            binding.txtUserMain.animate().setDuration(500).alpha(1f).start();
-                        }
+                    binding.spinktNameMain.post(() -> {
+                        binding.spinktNameMain.setVisibility(View.GONE);
+                        binding.txtUserMain.animate().setDuration(500).alpha(1f).start();
                     });
 
 

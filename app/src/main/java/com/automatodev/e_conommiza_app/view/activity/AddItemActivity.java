@@ -139,7 +139,7 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
             }
 
         } else {
-            Toast.makeText(this, "Você não tem nenhuma perspectiva cadastrada.\ncadastre uma perspecitve antes para adicionar um novo regisro", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Cadastre uma perspecitve antes de adicionar um novo regisro", Toast.LENGTH_LONG).show();
             finish();
         }
 
@@ -298,7 +298,7 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
         }
 
         if (typeEntry == null) {
-            componentUtils.showSnackbar("Você precisa informar o tipo do registro!", 800);
+            componentUtils.showSnackbar("Informe o tipo do registro!", 800);
             binding.appbarItem.getBackground().setColorFilter(ContextCompat.getColor(this, R.color.orange_f68059), PorterDuff.Mode.SRC);
             getWindow().setStatusBarColor(getResources().getColor(R.color.orange_f68059));
 

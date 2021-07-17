@@ -256,7 +256,7 @@ public class FragmentHost extends Fragment implements ItemContract {
 
                     compositeDisposable.add(perspectiveController.updatePerspective(perspective).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(() -> {
                         compositeDisposable.dispose();
-                        componentUtils.showSnackbar("Item removido com sucesso!", 800);
+                        componentUtils.showSnackbar("Sucesso!", 800);
                     }));
 
                 }));

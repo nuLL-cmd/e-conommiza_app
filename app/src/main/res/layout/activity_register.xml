@@ -8,16 +8,16 @@
     </data>
 
     <ScrollView
+        android:id="@+id/scrollDaddy_register"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/scrollDaddy_register"
         android:fillViewport="true">
 
         <RelativeLayout
 
+            android:id="@+id/relativeDaddy_register"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/relativeDaddy_register"
             android:background="#fff"
             android:orientation="vertical"
             tools:context=".view.activity.RegisterActivity">
@@ -25,28 +25,28 @@
 
             <ImageButton
                 android:id="@+id/btnBack_regoster"
-                android:onClick="actRegisteLogin"
                 android:layout_width="@dimen/_32sdp"
-                android:src="@drawable/ic_arrow_back"
-                android:background="@drawable/bg_button_white_global"
+                android:layout_height="@dimen/_32sdp"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:layout_height="@dimen/_32sdp" />
+                android:background="@drawable/bg_button_white_global"
+                android:onClick="actRegisteLogin"
+                android:src="@drawable/ic_arrow_back" />
 
             <LinearLayout
+                android:id="@+id/linearDataAccount_register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
-                android:id="@+id/linearDataAccount_register"
                 android:orientation="vertical"
                 android:paddingStart="@dimen/_15sdp"
                 android:paddingEnd="@dimen/_15sdp">
 
                 <RelativeLayout
+                    android:id="@+id/relativeLogo_register"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/relativeLogo_register"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_50sdp"
                     android:layout_marginBottom="@dimen/_40sdp">
@@ -69,9 +69,7 @@
                         android:layout_height="@dimen/_2sdp"
                         android:layout_below="@id/linearLogo_register"
                         android:layout_alignStart="@id/linearLogo_register"
-                        android:layout_alignLeft="@id/linearLogo_register"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_marginTop="-2.8dp"
                         android:background="@drawable/bg_resources_logo" />
 
@@ -88,9 +86,6 @@
                             android:id="@+id/relativeChar_register"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_toStartOf="@id/lblSlogan_splash"
-                            android:layout_toLeftOf="@id/lblSlogan_splash"
                             android:background="@drawable/bg_resources_logo"
                             android:paddingStart="@dimen/_7sdp"
                             android:paddingTop="@dimen/_5sdp"
@@ -127,14 +122,14 @@
 
 
                 <TextView
+                    android:id="@+id/lblTitleLogin_register"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
                     android:layout_marginStart="@dimen/_5sdp"
-                    android:id="@+id/lblTitleLogin_register"
-                    android:text="Crie sua conta ja!"
+                    android:layout_marginTop="20dp"
                     android:ellipsize="end"
                     android:singleLine="true"
+                    android:text="Crie sua conta!"
                     android:textSize="@dimen/_15ssp"
                     android:textStyle="bold" />
 
@@ -142,54 +137,51 @@
                 <EditText
                     android:id="@+id/edtUser_register"
                     android:layout_width="match_parent"
-                    android:text="nazomii"
                     android:layout_height="@dimen/_50sdp"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:background="@drawable/layout_shadow_white"
+                    android:drawableStart="@drawable/ic_person"
+                    android:drawablePadding="@dimen/_5sdp"
                     android:hint="Usuário"
                     android:inputType="textEmailAddress"
-                                       android:paddingEnd="@dimen/_10sdp"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_10sdp"
                     android:singleLine="true"
                     android:textColor="#A2A2A2"
-                    android:textSize="@dimen/_10ssp"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:paddingStart="@dimen/_10sdp"
-                    android:drawableStart="@drawable/ic_person"/>
+                    android:textSize="@dimen/_10ssp" />
 
                 <EditText
                     android:id="@+id/edtEmail_register"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_50sdp"
-                    android:text="programadormoderador@hotmail.com"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:background="@drawable/layout_shadow_white"
+                    android:drawableStart="@drawable/ic_email"
+                    android:drawablePadding="@dimen/_5sdp"
                     android:hint="E-mail"
                     android:inputType="textEmailAddress"
+                    android:paddingStart="@dimen/_10sdp"
                     android:paddingEnd="@dimen/_10sdp"
                     android:singleLine="true"
                     android:textColor="#A2A2A2"
-                    android:textSize="@dimen/_10ssp"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:paddingStart="@dimen/_10sdp"
-                    android:drawableStart="@drawable/ic_email"/>
+                    android:textSize="@dimen/_10ssp" />
 
                 <EditText
                     android:id="@+id/edtPassword_register"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_50sdp"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:text="402866"
                     android:background="@drawable/layout_shadow_white"
+                    android:drawableStart="@drawable/ic_lock"
+                    android:drawablePadding="@dimen/_5sdp"
                     android:hint="Senha"
                     android:inputType="numberPassword"
                     android:maxLength="6"
+                    android:paddingStart="@dimen/_10sdp"
                     android:paddingEnd="@dimen/_10sdp"
                     android:singleLine="true"
                     android:textColor="#A2A2A2"
-                    android:textSize="@dimen/_10ssp"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:paddingStart="@dimen/_10sdp"
-                    android:drawableStart="@drawable/ic_lock"/>
+                    android:textSize="@dimen/_10ssp" />
 
 
                 <Button
@@ -197,13 +189,13 @@
                     style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_50sdp"
-                    android:onClick="actRegisterMain"
-                    android:elevation="@dimen/_10sdp"
-                    android:textSize="@dimen/_11ssp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/bg_button_blue_global"
+                    android:elevation="@dimen/_10sdp"
+                    android:onClick="actRegisterMain"
                     android:text="Registrar"
-                    android:textColor="#fff" />
+                    android:textColor="#fff"
+                    android:textSize="@dimen/_11ssp" />
 
 
                 <com.github.ybq.android.spinkit.SpinKitView
@@ -222,16 +214,16 @@
             <LinearLayout
                 android:id="@+id/linearSocial_register"
                 android:layout_width="match_parent"
-                android:layout_below="@+id/linearDataAccount_register"
                 android:layout_height="match_parent"
+                android:layout_below="@+id/linearDataAccount_register"
                 android:gravity="bottom"
                 android:orientation="vertical">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:layout_height="wrap_content">
+                    android:layout_marginBottom="@dimen/_10sdp">
 
 
                     <View
@@ -245,48 +237,46 @@
 
 
                     <TextView
+                        android:id="@+id/lblSocial_register"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Ou faça login com"
-                        android:id="@+id/lblSocial_register"
+                        android:layout_centerInParent="true"
                         android:background="#fff"
                         android:padding="@dimen/_5sdp"
-                        android:textSize="@dimen/_10ssp"
-                        android:layout_centerInParent="true" />
+                        android:text="Ou faça login com"
+                        android:textSize="@dimen/_10ssp" />
 
                 </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:layout_marginBottom="@dimen/_25sdp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/_25sdp"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
 
                     <ImageButton
                         android:id="@+id/btnFacebook_register"
-                        android:background="@drawable/bg_button_white_shadow_global"
                         android:layout_width="@dimen/_60sdp"
-                        android:padding="@dimen/_10sdp"
-                        android:onClick="loginFacebook"
-                        android:src="@drawable/ic_facebook_svg"
+                        android:layout_height="@dimen/_60sdp"
                         android:layout_marginEnd="@dimen/_5sdp"
-                        android:layout_height="@dimen/_60sdp" />
+                        android:background="@drawable/bg_button_white_shadow_global"
+                        android:onClick="loginFacebook"
+                        android:padding="@dimen/_10sdp"
+                        android:src="@drawable/ic_facebook_svg" />
 
 
                     <ImageButton
                         android:id="@+id/btnGoogle_register"
-                        android:background="@drawable/bg_button_white_shadow_global"
                         android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_60sdp"
                         android:layout_marginEnd="@dimen/_5sdp"
+                        android:background="@drawable/bg_button_white_shadow_global"
                         android:onClick="loginGoogle"
                         android:padding="@dimen/_10sdp"
-                        android:src="@drawable/ic_google_sgv"
-                        android:layout_height="@dimen/_60sdp" />
-
-
+                        android:src="@drawable/ic_google_sgv" />
 
 
                 </LinearLayout>

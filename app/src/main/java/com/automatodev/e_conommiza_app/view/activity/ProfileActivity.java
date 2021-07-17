@@ -3,6 +3,7 @@ package com.automatodev.e_conommiza_app.view.activity;
 import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -287,7 +288,7 @@ public class ProfileActivity extends AppCompatActivity implements DatePickerDial
                                     }
                                 }
                             }.start();
-                            componentUtils.showSnackbar("Tivemos um problema ao salvar seus dados\n Tente novamente."
+                            componentUtils.showSnackbar("Tivemos um problema ao salvar seus dados.\nTente novamente."
                                     , 2000);
                             Log.e("logx", "OnFailure updateUser: " + e.getMessage());
                         }
@@ -311,7 +312,7 @@ public class ProfileActivity extends AppCompatActivity implements DatePickerDial
                             }
                         }
                     }.start();
-                    componentUtils.showSnackbar("Tivemos um problema ao salvar seus dados\n Tente novamente."
+                    componentUtils.showSnackbar("Tivemos um problema ao salvar seus dados.\nTente novamente."
                             , 2000);
                     Log.e("logx", "OnFailure uploadPhoto: " + e.getMessage());
 
@@ -334,7 +335,7 @@ public class ProfileActivity extends AppCompatActivity implements DatePickerDial
             showData(userEntity.getUserUid());
 
         } else {
-            componentUtils.showSnackbar("Houve um problema ao carregar suas perspectivas, favor feche a aplicação e tente novamente", 1500);
+            componentUtils.showSnackbar("Houve um problema ao carregar suas perspectivas.\nFeche a aplicação e tente novamente", 1500);
             new Thread() {
                 @Override
                 public void run() {
@@ -378,7 +379,7 @@ public class ProfileActivity extends AppCompatActivity implements DatePickerDial
                     if(perspectivies.size() == 0)
                         binding.relativeNoContentProfile.setVisibility(View.VISIBLE);
                     else{
-                        binding.txtPerspectiveProfile.setText("Perspectivas cadastradas");
+                        binding.txtPerspectiveProfile.setText("Perspectivas");
                         binding.relativeNoContentProfile.setVisibility(View.GONE);
                     }
 
@@ -401,7 +402,7 @@ public class ProfileActivity extends AppCompatActivity implements DatePickerDial
 
 
         } catch (Exception e) {
-            componentUtils.showSnackbar("Houve um problema ao carregar suas perspectivas, favor feche a aplicação e tente novamente", 1500);
+            componentUtils.showSnackbar("Houve um problema ao carregar suas perspectivas.\nFeche a aplicação e tente novamente", 1500);
             new Thread() {
                 @Override
                 public void run() {
@@ -424,6 +425,7 @@ public class ProfileActivity extends AppCompatActivity implements DatePickerDial
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         dialog.setView(layoutBinding.getRoot());
         dialog.show();
+        layoutBinding.txtAboutAbout.setText(showVersion());
         layoutBinding.btnCloseDialogAbout.setOnClickListener(view1 -> dialog.dismiss());
     }
 
@@ -510,7 +512,7 @@ public class ProfileActivity extends AppCompatActivity implements DatePickerDial
             phraseTwo[6] = "seus gastos pelo app";
 
             phraseOne[7] = "Usando as perspectivas";
-            phraseTwo[7] = "voce se controla";
+            phraseTwo[7] = "você se controla";
 
             phraseOne[8] = "Seu bolso";
             phraseTwo[8] = "agradece";
@@ -524,8 +526,8 @@ public class ProfileActivity extends AppCompatActivity implements DatePickerDial
 
 
         } else {
-            String[] phraseOne = {"Você não tem", "Com as perspectivas", "Organiza seus gastos ", "Fazendo isso", "Confia!"};
-            String[] phraseTwo = {"nehuma pespectiva.", "você controla e", "por categoria ", "seu bolso agradece", ":D"};
+            String[] phraseOne = {"Você não tem", "Com as perspectivas", "organiza seus gastos ", "Fazendo isso", "Confia!"};
+            String[] phraseTwo = {"nenhuma pespectiva.", "você se controla e", "por categoria ", "seu bolso agradece", "\uD83D\uDE0E"};
             binding.txtFadeOneProfile.setTexts(phraseOne);
             binding.txtFadeTwoProfile.setTexts(phraseTwo);
         }
@@ -590,7 +592,7 @@ public class ProfileActivity extends AppCompatActivity implements DatePickerDial
                             public void run() {
                                 try {
                                     sleep(100);
-                                    componentUtils.showSnackbar("Dado inserido com sucesso", 500);
+                                    componentUtils.showSnackbar("Sucesso!", 500);
 
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
@@ -609,7 +611,7 @@ public class ProfileActivity extends AppCompatActivity implements DatePickerDial
 
     public void actProfileReport(View view) {
         if (perspectiveList.size() == 0) {
-            componentUtils.showSnackbar("Não há dados para gerar um relatório.", 1700);
+            componentUtils.showSnackbar("Não há dados para gerar um relatório", 1700);
         } else {
             if (!ReportActivity.status) {
                 Intent intent = new Intent(this, ReportActivity.class);
@@ -617,6 +619,21 @@ public class ProfileActivity extends AppCompatActivity implements DatePickerDial
                 startActivity(intent);
             }
         }
+    }
+
+    public String showVersion(){
+        String output=  "Aplicativo de finanças. \nVisite a pagina do projeto na playstore";
+        try{
+            PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
+            if (info != null)
+               output +=  "\n\nVersão: "+ info.versionName;
+
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return output;
+
     }
 
 

@@ -35,7 +35,7 @@ public class SplashActivity extends AppCompatActivity {
         try{
             PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
             if (info != null){
-                binding.txtVersaoSplash.setText("Versão : "+ info.versionName);
+                binding.txtVersaoSplash.setText("Versão: "+ info.versionName);
             }
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();

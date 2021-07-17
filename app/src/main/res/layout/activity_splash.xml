@@ -22,9 +22,7 @@
             android:background="@drawable/bg_resources_logo"
             android:layout_above="@id/linearLogo_splash"
             android:layout_marginBottom="-2.8dp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_alignLeft="@id/linearLogo_splash" />
+            android:layout_marginStart="@dimen/_10sdp" />
 
         <View
             android:id="@+id/viewLogoTwo_splash"
@@ -34,9 +32,7 @@
             android:layout_below="@id/linearLogo_splash"
             android:layout_alignStart="@id/linearLogo_splash"
             android:layout_marginTop="-2.8dp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_alignLeft="@id/linearLogo_splash" />
+            android:layout_marginStart="@dimen/_10sdp" />
 
         <LinearLayout
             android:id="@+id/linearLogo_splash"
@@ -50,15 +46,12 @@
             <RelativeLayout
                 android:id="@+id/relativeChar_splash"
                 android:layout_width="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toStartOf="@id/lblSlogan_splash"
                 android:background="@drawable/bg_resources_logo"
                 android:paddingTop="@dimen/_5sdp"
                 android:paddingBottom="@dimen/_5sdp"
                 android:paddingStart="@dimen/_7sdp"
                 android:paddingEnd="@dimen/_7sdp"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@id/lblSlogan_splash">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/lblChar_logo_splash"
@@ -69,29 +62,7 @@
                     android:textColor="@color/white_fff" />
             </RelativeLayout>
 
-            <!-- <View
-                 android:id="@+id/viewLogoOne_splash"
-                 android:layout_width="@dimen/_110sdp"
-                 android:layout_height="@dimen/_2sdp"
-                 android:background="@drawable/bg_resources_logo"
-                 android:layout_alignBottom="@id/relativeChar_splash"
-                 android:layout_toEndOf="@id/relativeChar_splash"
-                 android:layout_marginStart="-2dp"
 
-                 android:layout_toRightOf="@id/relativeChar_splash"
-                 android:layout_marginLeft="-2dp" />
-
-
-             <View
-                 android:id="@+id/viewLogoTwo_splash"
-                 android:layout_width="@dimen/_110sdp"
-                 android:layout_marginStart="-2dp"
-                 android:layout_height="@dimen/_2sdp"
-                 android:background="@drawable/bg_resources_logo"
-                 android:layout_alignTop="@id/relativeChar_splash"
-                 android:layout_toEndOf="@id/relativeChar_splash"
-                 android:layout_marginLeft="-2dp"
-                 android:layout_toRightOf="@id/relativeChar_splash" />-->
 
             <TextView
                 android:id="@+id/lblSlogan_splash"
@@ -125,7 +96,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Versão 0.0.0"
+
             android:textColor="@color/font_primary"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"

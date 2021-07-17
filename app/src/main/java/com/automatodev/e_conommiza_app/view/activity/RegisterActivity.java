@@ -156,7 +156,7 @@ public class RegisterActivity extends AppCompatActivity {
         String password = binding.edtPasswordRegister.getText().toString().trim();
 
         if (user.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            Snackbar.make(binding.relativeDaddyRegister, "Necessário o preenchimento de todos os campos", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(binding.relativeDaddyRegister, "Todos os campos devem ser preenchidos", Snackbar.LENGTH_LONG).show();
         } else {
 
             dialogProgress.show();
