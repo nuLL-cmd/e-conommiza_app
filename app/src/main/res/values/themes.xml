@@ -35,4 +35,12 @@
     <style name="DatePickerDefaultTheme" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorAccent">@color/button_positive</item>
     </style>
+
+    <style name="DatePickerDefaultThemeInput" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/green_00c853</item>
+    </style>
+
+    <style name="DatePickerDefaultThemeOutput" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/red_e65100</item>
+    </style>
 </resources>

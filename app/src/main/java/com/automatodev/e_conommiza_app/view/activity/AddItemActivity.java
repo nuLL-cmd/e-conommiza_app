@@ -208,8 +208,15 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
         Calendar c = Calendar.getInstance();
         c.setTime(date);
 
-        DatePickerDialog dateDialog = new DatePickerDialog(this, R.style.DatePickerDefaultTheme, this,
-                c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+        DatePickerDialog dateDialog = null;
+
+        if (typeEntry != null)
+             dateDialog = new DatePickerDialog(this, typeEntry.equals(TypeEnum.INPUT) ? R.style.DatePickerDefaultThemeInput : R.style.DatePickerDefaultThemeOutput, this,
+                    c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+        else
+            dateDialog = new DatePickerDialog(this, R.style.DatePickerDefaultTheme, this,
+                    c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+
 
 
         if (dateEntry != null) {
