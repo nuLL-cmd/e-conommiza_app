@@ -1,4 +1,4 @@
-# E-conomiza (App finances mobile)
+# E-conommiza (App finances mobile)
 
 A mobile application project, using Java as the main native technology, focused on the user's personal finances
 
