@@ -5,19 +5,20 @@ import androidx.core.app.NavUtils;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.app.Activity;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 
-import com.automatodev.e_conommiza_app.R;
 import com.automatodev.e_conommiza_app.databinding.ActivityCategoryBinding;
 import com.automatodev.e_conommiza_app.entity.model.CategoryEntity;
 import com.automatodev.e_conommiza_app.entity.model.DataEntryEntity;
+import com.automatodev.e_conommiza_app.enumarator.TypeEnum;
 import com.automatodev.e_conommiza_app.listener.ItemContract;
 import com.automatodev.e_conommiza_app.view.adapter.AdapterCategory;
+
+import java.lang.reflect.Type;
 
 public class CategoryActivity extends AppCompatActivity implements ItemContract {
 
@@ -35,7 +36,9 @@ public class CategoryActivity extends AppCompatActivity implements ItemContract 
 
         binding.txtSearchCategory.requestFocus();
 
-        showData();
+
+        getData();
+
 
         binding.txtSearchCategory.addTextChangedListener(new TextWatcher() {
             @Override
@@ -54,8 +57,7 @@ public class CategoryActivity extends AppCompatActivity implements ItemContract 
             }
         });
 
-
-        getData();
+;
 
 
 
@@ -63,16 +65,23 @@ public class CategoryActivity extends AppCompatActivity implements ItemContract 
 
     public void getData(){
         Bundle bundle = getIntent().getExtras();
+        String type = null;
         if (bundle != null){
             int color = bundle.getInt("color");
             if (color != 0){
                 binding.relativeHeadCategory.getBackground().setColorFilter(ContextCompat.getColor(this, color), PorterDuff.Mode.SRC);
                 binding.btnBackCategory.getBackground().setColorFilter(ContextCompat.getColor(this, color), PorterDuff.Mode.SRC);
                 getWindow().setStatusBarColor(this.getResources().getColor(color));
+                 type = bundle.getString("type");
+
 
             }
 
         }
+        if (type != null)
+            showData(type.equals("ENTRY") ? TypeEnum.INPUT : TypeEnum.OUTPUT);
+        else
+            showData(TypeEnum.DEFAULT);
     }
 
     @Override
@@ -91,13 +100,12 @@ public class CategoryActivity extends AppCompatActivity implements ItemContract 
         NavUtils.navigateUpFromSameTask(CategoryActivity.this);
     }
 
-    private void showData(){
-        adapter = new AdapterCategory(binding,CategoryEntity.getCategories(), this);
+    private void showData(TypeEnum type){
+        adapter = new AdapterCategory(binding.imageNotFoundCategory, CategoryEntity.getCategories(), this,type);
 
         binding.recyclerCategoryCategory.setHasFixedSize(true);
         binding.recyclerCategoryCategory.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerCategoryCategory.setAdapter(adapter);
-        binding.txtAllCategoryCategory.setText("Categorias dispiníveis:  " + CategoryEntity.getCategories().size());
 
     }
 

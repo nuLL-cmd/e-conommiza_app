@@ -347,7 +347,6 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
                                     public void run() {
                                         try {
                                             sleep(500);
-                                            dialog.dismiss();
                                             finish();
                                         } catch (InterruptedException e) {
                                             e.printStackTrace();
@@ -387,8 +386,11 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
     public void actAddItemsCategory(View viw) {
         if (!CategoryActivity.status) {
             Intent intent = new Intent(this, CategoryActivity.class);
-            if (typeEntry != null)
+            if (typeEntry != null){
                 intent.putExtra("color", typeEntry.equals(TypeEnum.INPUT) ? R.color.green_00c853 : R.color.red_e65100);
+                intent.putExtra("type", typeEntry.getDescription());
+            }
+
             binding.edtPriceNew.clearFocus();
             startActivity(intent);
         }
@@ -408,6 +410,13 @@ public class AddItemActivity extends AppCompatActivity implements DatePickerDial
         if (path != null) {
             path.setFillColor(newColor);
             path.setFillAlpha(1f);
+
+        }
+
+        VectorDrawableCompat.VFullPath path2 = vector.findPathByName("modifyTwo");
+        if (path2 != null) {
+            path2.setFillColor(newColor);
+            path2.setFillAlpha(1f);
 
         }
 

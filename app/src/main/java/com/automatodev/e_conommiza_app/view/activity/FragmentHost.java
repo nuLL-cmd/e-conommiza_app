@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,26 +33,21 @@ import com.automatodev.e_conommiza_app.listener.ItemContract;
 import com.automatodev.e_conommiza_app.utils.ComponentUtils;
 import com.automatodev.e_conommiza_app.view.adapter.ItemsAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class FragmentHost extends Fragment implements ItemContract {
 
-    private int position;
-
-    public static ItemsAdapter itemsAdapter;
+    private ItemsAdapter itemsAdapter;
     private RecyclerView recyclerView;
     private RelativeLayout relativeNoContent;
-    private List<DataEntryEntity> dataEntryEntities;
     private PerspectiveEntity perspectiveEntity;
     private ComponentUtils componentUtils;
     private CompositeDisposable compositeDisposable;
     private PerspectiveController perspectiveController;
     private DataEntryController dataEntryController;
+    private PerspectiveEntity perspectiveEntityFragment;
 
 
     private ViewGroup viewGroup;
@@ -68,8 +64,7 @@ public class FragmentHost extends Fragment implements ItemContract {
 
         viewGroup = container;
         View view = inflater.inflate(R.layout.layout_perspectives, container, false);
-        dataEntryEntities = new ArrayList<>();
-        position = getArguments().getInt("position");
+        perspectiveEntityFragment = (PerspectiveEntity) (getArguments().getSerializable("item"));
         recyclerView = view.findViewById(R.id.recyclerItens_layoutPerspective);
         relativeNoContent = view.findViewById(R.id.relativeNoContent_layoutPerspective);
 
@@ -79,7 +74,6 @@ public class FragmentHost extends Fragment implements ItemContract {
         dataEntryController = new ViewModelProvider(this).get(DataEntryController.class);
         perspectiveController = new ViewModelProvider(this).get(PerspectiveController.class);
 
-
         return view;
     }
 
@@ -88,47 +82,49 @@ public class FragmentHost extends Fragment implements ItemContract {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        try{
-            if (MainActivity.perspectiveEntities.get(position).getItemsPerspective().size() == 0)
+        try {
+
+            if (perspectiveEntityFragment.getItemsPerspective().size() == 0)
                 relativeNoContent.setVisibility(View.VISIBLE);
             else
                 relativeNoContent.setVisibility(View.GONE);
 
             perspectiveEntity = new PerspectiveEntityBuilder()
-                    .idPerspective(MainActivity.perspectiveEntities.get(position).getIdPerspective())
-                    .year(MainActivity.perspectiveEntities.get(position).getYear())
-                    .month(MainActivity.perspectiveEntities.get(position).getMonth())
-                    .userUid(MainActivity.perspectiveEntities.get(position).getUserUid())
-                    .totalCredit(MainActivity.perspectiveEntities.get(position).getTotalCredit())
-                    .totalDebit(MainActivity.perspectiveEntities.get(position).getTotalDebit())
+                    .idPerspective(perspectiveEntityFragment.getIdPerspective())
+                    .year(perspectiveEntityFragment.getYear())
+                    .month(perspectiveEntityFragment.getMonth())
+                    .userUid(perspectiveEntityFragment.getUserUid())
+                    .totalCredit(perspectiveEntityFragment.getTotalCredit())
+                    .totalDebit(perspectiveEntityFragment.getTotalDebit())
                     .build();
 
-            dataEntryEntities = MainActivity.perspectiveEntities.get(position).getItemsPerspective();
-            itemsAdapter = new ItemsAdapter(MainActivity.perspectiveEntities.get(position).getItemsPerspective(),this);
+
+            itemsAdapter = new ItemsAdapter(perspectiveEntityFragment.getItemsPerspective(), this);
 
             recyclerView.hasFixedSize();
             recyclerView.setAdapter(itemsAdapter);
             itemsAdapter.notifyDataSetChanged();
             itemsAdapter.setOnItemClickListener(position1 -> {
-                if (dataEntryEntities.get(position1).getPayment().equals(2)){
-                    componentUtils.showSnackbar("Reative o registro antes de edita-lo!",1500);
-                }else{
+                if (perspectiveEntityFragment.getItemsPerspective().get(position1).getPayment().equals(2)) {
+                    componentUtils.showSnackbar("Reative o registro antes de edita-lo!", 1500);
+                } else {
                     Intent intent = new Intent(getActivity(), AddItemActivity.class);
                     intent.putExtra("typeIntent", "edit");
                     intent.putExtra("perspective", perspectiveEntity);
-                    intent.putExtra("data", dataEntryEntities.get(position1));
+                    intent.putExtra("data", perspectiveEntityFragment.getItemsPerspective().get(position1));
                     startActivity(intent);
                 }
             });
-        }catch(Exception e){
+
+        } catch (Exception e) {
             e.printStackTrace();
-            Log.e("logx", "Error FragmentHost: "+e.getMessage());
+            Log.e("logx", "Error size: " + e.getMessage());
         }
 
 
     }
 
-    public ViewGroup getViewGroup(){
+    public ViewGroup getViewGroup() {
         return this.viewGroup;
     }
 
@@ -136,10 +132,17 @@ public class FragmentHost extends Fragment implements ItemContract {
     @Override
     public void onResume() {
         super.onResume();
-        if (itemsAdapter != null)
-            itemsAdapter.notifyDataSetChanged();
-        else{
-            itemsAdapter = new ItemsAdapter(MainActivity.perspectiveEntities.get(0).getItemsPerspective(),this);
+        try {
+            if (itemsAdapter != null)
+                itemsAdapter.notifyDataSetChanged();
+            else {
+                itemsAdapter = new ItemsAdapter(perspectiveEntityFragment.getItemsPerspective(), this);
+                Toast.makeText(getContext(), "OnResume fragmentHost itemAdaptaer  == null", Toast.LENGTH_SHORT).show();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("logx", "Error onResume FragmenetHost: " + e.getMessage());
         }
     }
 
@@ -166,16 +169,16 @@ public class FragmentHost extends Fragment implements ItemContract {
                         .observeOn(AndroidSchedulers.mainThread()).subscribe());
                 break;
             case OPTION_FROZEN:
-                updatePerspective(dataEntryEntity,2, "frozen");
+                updatePerspective(dataEntryEntity, 2, "frozen");
                 break;
             case OPTION_UNFROZEN:
-                updatePerspective(dataEntryEntity,0, "unFrozen");
+                updatePerspective(dataEntryEntity, 0, "unFrozen");
                 break;
             case OPTION_MORE:
                 AlertDialog dialog = new AlertDialog.Builder(getContext()).create();
                 dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-                LayoutDialogStatusBinding binding =  DataBindingUtil.inflate(getLayoutInflater().from(getActivity()), R.layout.layout_dialog_status,getViewGroup(), false);
-                binding.btnBackLayoutStatus.setOnClickListener(view ->{
+                LayoutDialogStatusBinding binding = DataBindingUtil.inflate(getLayoutInflater().from(getActivity()), R.layout.layout_dialog_status, getViewGroup(), false);
+                binding.btnBackLayoutStatus.setOnClickListener(view -> {
                     dialog.dismiss();
                 });
                 dialog.setView(binding.getRoot());
@@ -183,7 +186,7 @@ public class FragmentHost extends Fragment implements ItemContract {
                 break;
             case OPTION_DELETE:
                 AlertDialog dialogConfirm = new AlertDialog.Builder(getContext()).create();
-                LayoutDialogChoiseGlobalBinding dialogBinding = DataBindingUtil.inflate(getLayoutInflater(),R.layout.layout_dialog_choise_global,getViewGroup(),false);
+                LayoutDialogChoiseGlobalBinding dialogBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.layout_dialog_choise_global, getViewGroup(), false);
                 dialogConfirm.setCancelable(false);
                 dialogConfirm.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 dialogConfirm.setView(dialogBinding.getRoot());
@@ -210,13 +213,13 @@ public class FragmentHost extends Fragment implements ItemContract {
 
         compositeDisposable.add(perspectiveController.getPerspectiveById(dataEntryEntity.getIdPersp()).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(perspectiveEntity -> {
-                    if (operation.equals("frozen")){
+                    if (operation.equals("frozen")) {
                         if (dataEntryEntity.getTypeEntry().getCode().equals(TypeEnum.INPUT.getCode()))
                             perspectiveEntity.setTotalCredit(perspectiveEntity.getTotalCredit().subtract(dataEntryEntity.getValueEntry()));
                         else
                             perspectiveEntity.setTotalDebit(perspectiveEntity.getTotalDebit().subtract(dataEntryEntity.getValueEntry()));
 
-                    }else{
+                    } else {
                         if (dataEntryEntity.getTypeEntry().getCode().equals(TypeEnum.INPUT.getCode()))
                             perspectiveEntity.setTotalCredit(perspectiveEntity.getTotalCredit().add(dataEntryEntity.getValueEntry()));
                         else
@@ -226,47 +229,47 @@ public class FragmentHost extends Fragment implements ItemContract {
 
                     dataEntryEntity.setPayment(payment);
                     compositeDisposable.add(dataEntryController.addDataEntry(dataEntryEntity).subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread()).subscribe(() ->{
-                                   compositeDisposable.add(perspectiveController.updatePerspective(perspectiveEntity)
-                                           .subscribeOn(Schedulers.io())
-                                           .observeOn(AndroidSchedulers.mainThread()).subscribe(compositeDisposable::dispose));
+                            .observeOn(AndroidSchedulers.mainThread()).subscribe(() -> {
+                                compositeDisposable.add(perspectiveController.updatePerspective(perspectiveEntity)
+                                        .subscribeOn(Schedulers.io())
+                                        .observeOn(AndroidSchedulers.mainThread()).subscribe(compositeDisposable::dispose));
 
                             }));
 
                 }));
 
 
-
     }
 
-    public void deleteItemDatabase(DataEntryEntity dataEntryEntity){
+    public void deleteItemDatabase(DataEntryEntity dataEntryEntity) {
 
-        try{
-            compositeDisposable.add(perspectiveController.getPerspectiveById(dataEntryEntity.getIdPersp()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(perspective ->{
-                    compositeDisposable.add(dataEntryController.deleteDataEntry(dataEntryEntity).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(()->{
+        try {
+            compositeDisposable.add(perspectiveController.getPerspectiveById(dataEntryEntity.getIdPersp()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(perspective -> {
+                compositeDisposable.add(dataEntryController.deleteDataEntry(dataEntryEntity).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(() -> {
 
-                        boolean typeData = dataEntryEntity.getTypeEntry().equals(TypeEnum.INPUT);
-                        if (typeData)
-                            perspective.setTotalCredit(perspective.getTotalCredit().subtract(dataEntryEntity.getValueEntry()));
-                        else
-                            perspective.setTotalDebit(perspective.getTotalDebit().subtract(dataEntryEntity.getValueEntry()));
+                    boolean typeData = dataEntryEntity.getTypeEntry().equals(TypeEnum.INPUT);
+                    if (typeData)
+                        perspective.setTotalCredit(perspective.getTotalCredit().subtract(dataEntryEntity.getValueEntry()));
+                    else
+                        perspective.setTotalDebit(perspective.getTotalDebit().subtract(dataEntryEntity.getValueEntry()));
 
 
-                        compositeDisposable.add(perspectiveController.updatePerspective(perspective).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(()->{
-                            compositeDisposable.dispose();
-                            componentUtils.showSnackbar("Item removido com sucesso!",800);
-                        }));
-
+                    compositeDisposable.add(perspectiveController.updatePerspective(perspective).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(() -> {
+                        compositeDisposable.dispose();
+                        componentUtils.showSnackbar("Item removido com sucesso!", 800);
                     }));
+
+                }));
             }));
 
 
-
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            Log.e("logx","Error deleteItemDatabase: "+e.getMessage());
+            Log.e("logx", "Error deleteItemDatabase: " + e.getMessage());
 
         }
 
     }
+
+
 }

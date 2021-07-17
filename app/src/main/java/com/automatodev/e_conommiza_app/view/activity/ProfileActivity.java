@@ -609,7 +609,7 @@ public class ProfileActivity extends AppCompatActivity implements DatePickerDial
 
     public void actProfileReport(View view) {
         if (perspectiveList.size() == 0) {
-            componentUtils.showSnackbar("Você não tem dados para gerar um relatório.", 1700);
+            componentUtils.showSnackbar("Não há dados para gerar um relatório.", 1700);
         } else {
             if (!ReportActivity.status) {
                 Intent intent = new Intent(this, ReportActivity.class);

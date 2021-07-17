@@ -67,26 +67,19 @@
                 android:orientation="vertical">
 
 
-                <TextView
-                    android:id="@+id/txtAllCategory_category"
-                    android:layout_width="match_parent"
-                    android:textAlignment="center"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:padding="@dimen/_5sdp"
-                    android:shadowColor="#703F3F3F"
-                    android:shadowDx="3"
-                    android:shadowDy="3"
-                    android:shadowRadius="20"
-                    android:textColor="#939090"
-                    android:textSize="@dimen/_12ssp" />
+                <ImageView
+                    android:id="@+id/imageNotFound_category"
+                    android:layout_width="@dimen/_180sdp"
+                    android:layout_height="@dimen/_180sdp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_not_found"
+                    android:visibility="gone"/>
+
+
+
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerCategory_category"
-                    android:layout_below="@id/txtAllCategory_category"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/_10sdp"

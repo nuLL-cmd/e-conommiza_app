@@ -5,15 +5,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.automatodev.e_conommiza_app.R;
-import com.automatodev.e_conommiza_app.databinding.ActivityCategoryBinding;
 import com.automatodev.e_conommiza_app.databinding.LayoutItemsCategoryBinding;
 import com.automatodev.e_conommiza_app.entity.model.CategoryEntity;
+import com.automatodev.e_conommiza_app.enumarator.TypeEnum;
 import com.automatodev.e_conommiza_app.listener.ItemContract;
 
 import java.util.ArrayList;
@@ -27,13 +28,16 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.DataHa
     private LayoutInflater layoutInflater;
     private ItemContract itemContract;
     private LayoutItemsCategoryBinding binding;
-    private ActivityCategoryBinding bindingCategory;
+    private ImageView imageNotFoundCategory;
 
-    public AdapterCategory(ActivityCategoryBinding bindingCategory,List<CategoryEntity> categories, ItemContract itemContract) {
+    private TypeEnum typeEnum;
+
+    public AdapterCategory(ImageView imageNotFoundCategory, List<CategoryEntity> categories, ItemContract itemContract, TypeEnum typeEnum) {
+        this.imageNotFoundCategory = imageNotFoundCategory;
         this.categories = categories;
         this.categoriesAll = new ArrayList<>(categories);
         this.itemContract = itemContract;
-        this.bindingCategory = bindingCategory;
+        this.typeEnum = typeEnum;
     }
 
 
@@ -44,19 +48,21 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.DataHa
             layoutInflater = LayoutInflater.from(parent.getContext());
         }
 
-        binding = DataBindingUtil.inflate(layoutInflater, R.layout.layout_items_category, parent, false);
+        this.binding = DataBindingUtil.inflate(layoutInflater, R.layout.layout_items_category, parent, false);
 
-        return new DataHandler(binding);
+        return new DataHandler(this.binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull AdapterCategory.DataHandler holder, int position) {
+
         holder.setBinding(categories.get(position));
+
     }
 
     @Override
     public int getItemCount() {
-        if(categories.size() == 0){
+        if (categories.size() == 0) {
 
         }
 
@@ -73,11 +79,11 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.DataHa
         protected FilterResults performFiltering(CharSequence charSequence) {
             List<CategoryEntity> categoriesFilter = new ArrayList<>();
 
-            if(charSequence.toString().isEmpty()){
+            if (charSequence.toString().isEmpty()) {
                 categoriesFilter.addAll(categoriesAll);
-            }else{
-                for (CategoryEntity category: categoriesAll){
-                    if (category.getName().toLowerCase().contains(charSequence.toString().toLowerCase())){
+            } else {
+                for (CategoryEntity category : categoriesAll) {
+                    if (category.getName().toLowerCase().contains(charSequence.toString().toLowerCase())) {
                         categoriesFilter.add(category);
                     }
                 }
@@ -92,6 +98,7 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.DataHa
         protected void publishResults(CharSequence constraint, FilterResults results) {
             categories.clear();
             categories.addAll((Collection<? extends CategoryEntity>) results.values);
+            imageNotFoundCategory.setVisibility(categories.size() == 0 ? View.VISIBLE : View.GONE);
             notifyDataSetChanged();
         }
     };
@@ -104,11 +111,10 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.DataHa
             super(binding.getRoot());
             this.binding = binding;
 
-
         }
 
         public void setBinding(CategoryEntity categoryEntity) {
-
+            binding.setTypeEnum(typeEnum);
             binding.setCategory(categoryEntity);
             binding.executePendingBindings();
             binding.getRoot().setOnClickListener(view -> itemContract.itemCategory(categoryEntity));

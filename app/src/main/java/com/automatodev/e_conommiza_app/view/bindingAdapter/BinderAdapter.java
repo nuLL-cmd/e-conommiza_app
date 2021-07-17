@@ -1,5 +1,7 @@
 package com.automatodev.e_conommiza_app.view.bindingAdapter;
 
+import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.util.Log;
 import android.view.View;
@@ -11,12 +13,16 @@ import androidx.databinding.BindingAdapter;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.automatodev.e_conommiza_app.R;
+import com.automatodev.e_conommiza_app.enumarator.TypeEnum;
+import com.devs.vectorchildfinder.VectorChildFinder;
+import com.devs.vectorchildfinder.VectorDrawableCompat;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+@SuppressLint("ResourceType")
 public class BinderAdapter {
 
 
@@ -85,4 +91,59 @@ public class BinderAdapter {
         }
     }
 
+
+    @BindingAdapter({"android:changeDrawable","android:imageDrawable"})
+    public static void changeDrawable(ImageView imageView, TypeEnum type, int resource){
+        try{
+            switch (type){
+                case INPUT:
+                    imageView.getBackground().setColorFilter(ContextCompat.getColor(imageView.getContext(),R.color.green_00c853), PorterDuff.Mode.SRC);
+                    if (resource != R.drawable.ic_uber){
+                        VectorChildFinder vector = new VectorChildFinder(imageView.getContext(),resource,imageView);
+
+                        VectorDrawableCompat.VFullPath path = vector.findPathByName("modify");
+                        if (path != null) {
+                            path.setFillColor(Color.parseColor("#00c853"));
+                            path.setFillAlpha(1f);
+
+
+                        }
+
+                        VectorDrawableCompat.VFullPath path2 = vector.findPathByName("modifyTwo");
+                        if (path2 != null) {
+                            path2.setFillColor(Color.parseColor("#00c853"));
+                            path2.setFillAlpha(1f);
+
+                        }
+                    }
+                    break;
+                case OUTPUT:
+                    imageView.getBackground().setColorFilter(ContextCompat.getColor(imageView.getContext(),R.color.red_e65100), PorterDuff.Mode.SRC);
+                    if (resource != R.drawable.ic_uber){
+                        VectorChildFinder vector = new VectorChildFinder(imageView.getContext(),resource,imageView);
+
+                        VectorDrawableCompat.VFullPath path = vector.findPathByName("modify");
+                        if (path != null) {
+                            path.setFillColor(Color.parseColor("#e65100"));
+                            path.setFillAlpha(1f);
+
+                        }
+
+                        VectorDrawableCompat.VFullPath path2 = vector.findPathByName("modifyTwo");
+                        if (path2 != null) {
+                            path2.setFillColor(Color.parseColor("#e65100"));
+                            path2.setFillAlpha(1f);
+
+                        }
+                    }
+                    break;
+                case DEFAULT:
+                    break;
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.e("logx","Error binding changeDrawable: "+e.getMessage());
+        }
+    }
 }

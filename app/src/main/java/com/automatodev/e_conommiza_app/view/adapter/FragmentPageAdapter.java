@@ -16,13 +16,14 @@ import java.util.List;
 public class FragmentPageAdapter extends FragmentStatePagerAdapter {
 
     private List<PerspectiveEntity> perspectiveEntities;
-    private int position;
     private FragmentManager fm;
+
 
     public FragmentPageAdapter(@NonNull FragmentManager fm, int b, List<PerspectiveEntity> perspectiveEntities) {
         super(fm, b);
         this.perspectiveEntities = perspectiveEntities;
         this.fm = fm;
+
     }
 
     @NonNull
@@ -44,10 +45,11 @@ public class FragmentPageAdapter extends FragmentStatePagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        this.position = position;
+
         FragmentHost fragmentTest = new FragmentHost();
         Bundle bundle = new Bundle();
         bundle.putInt("position",position);
+        bundle.putSerializable("item",perspectiveEntities.get(position));
         fragmentTest.setArguments(bundle);
         return fragmentTest;
     }
@@ -58,7 +60,4 @@ public class FragmentPageAdapter extends FragmentStatePagerAdapter {
     }
 
 
-    public int getIntemCount(){
-        return this.position;
-    }
 }

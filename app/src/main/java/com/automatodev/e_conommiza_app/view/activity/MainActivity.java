@@ -31,7 +31,6 @@ import com.automatodev.e_conommiza_app.utils.ComponentUtils;
 import com.automatodev.e_conommiza_app.utils.FormatUtils;
 import com.automatodev.e_conommiza_app.view.adapter.FragmentPageAdapter;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.math.BigDecimal;
@@ -58,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     private boolean goToActualPerspective = true;
 
     private CompositeDisposable disposable;
-    public static List<PerspectiveEntity> perspectiveEntities;
+    public  List<PerspectiveEntity> perspectiveEntities;
     private List<PerspectiveEntity> perspectiveList;
     private ActivityMainBinding binding;
     private FirestoreService firestoreService;
@@ -82,13 +81,15 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         perspectiveEntities = new ArrayList<>();
         disposable = new CompositeDisposable();
         controller = new ViewModelProvider(this).get(PerspectiveController.class);
-        fragmentAdapter = new FragmentPageAdapter(getSupportFragmentManager(), 0, perspectiveEntities);
+        fragmentAdapter = new FragmentPageAdapter( getSupportFragmentManager(), 0, perspectiveEntities);
 
 
         binding.viewPagerMain.setAdapter(fragmentAdapter);
 
+        binding.setIsLoading(true);
+
         getUser();
-        showData();
+
     }
 
     @Override
@@ -125,17 +126,12 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        disposable.dispose();
-        fragmentAdapter = null;
-        perspectiveList.clear();
-        perspectiveEntities.clear();
-        userEntity = null;
         finishAffinity();
     }
 
     public void actMainItem(View view) {
         if (perspectiveEntities.size() == 0) {
-            componentUtils.showSnackbar("Você não tem nenhuma perspectiva cadastrada.\ncadastre uma perspecitve antes para adicionar um novo regisro", 2000);
+            componentUtils.showSnackbar("Cadastre uma perspecitve antes de adicionar um novo regisro", 2000);
             return;
         }
 
@@ -163,18 +159,16 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
     }
 
-    public void showData() {
-
+    public void showData(String uid) {
         try {
-            disposable.add(controller.getPerspectiveWithData(auth.getUser()
-                    .getUid())
+            disposable.add(controller.getPerspectiveWithData(uid)
                     .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(dataList -> {
-
 
                         if (!isShow) {
                             binding.txtValueBalanceMain.animate().setDuration(300).alpha(0f).start();
                             binding.spinktBalanceMain.setVisibility(View.VISIBLE);
                         }
+
 
                         perspectiveEntities.clear();
                         perspectiveList.clear();
@@ -186,6 +180,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                             perspectiveList.add(new PerspectiveEntity(perspectiveEntity.getIdPerspective(), perspectiveEntity.getMonth(), perspectiveEntity.getYear()));
 
                         }
+
 
                         fragmentAdapter.notifyDataSetChanged();
                         int positionTest = getPosition(perspectiveEntities);
@@ -229,18 +224,18 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
                             }
                         });
+
+                        binding.setIsLoading(false);
+
                     }));
         } catch (Exception e) {
-            perspectiveList.clear();
-            perspectiveEntities.clear();
+
             fragmentAdapter.notifyDataSetChanged();
             binding.txtPerspectiveMain.setText("Pproblema ao \ncarregar as perspectivas");
             binding.txtCreditMain.setVisibility(View.GONE);
             binding.txtDebitMain.setVisibility(View.GONE);
             binding.txtAmountPerspectiveMain.setText("Parece que tivemos um erro ao processar os dados.");
 
-        } finally {
-            Toast.makeText(this, "teste", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -255,6 +250,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         if (userEntity.getUserUid().equals(uid)) {
             binding.txtUserMain.setText(userEntity.getUserName());
             stateRefreshUserName();
+            showData(userEntity.getUserUid());
 
         } else {
             firestoreService = new FirestoreService();
@@ -268,8 +264,10 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                                 userEntity = snapshot.toObject(UserEntity.class);
                                 preferences.setUser(userEntity);
                                 binding.txtUserMain.setText(userEntity.getUserName());
+                                showData(userEntity.getUserUid());
                                 stateRefreshUserName();
                             }else{
+
                                 UserEntity userEntity = new UserEntityBuilder()
                                         .userName(auth.getUser().getDisplayName())
                                         .userEmail(auth.getUser().getEmail())
@@ -277,6 +275,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                                         .userUid(auth.getUser().getUid())
                                         .build();
 
+                                showData(userEntity.getUserUid());
                                 firestoreService.saveUser(userEntity, new FirestoreSaveCallback() {
                                     @Override
                                     public void onSuccess() {
@@ -325,6 +324,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
             getUser();
             refresh = false;
         }
+
 
     }
 
@@ -430,7 +430,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
     public void setDataViewPager(int position) {
         binding.txtPerspectiveMain.setText(perspectiveEntities.get(position).getMonth() + " / " +
-                perspectiveEntities.get(fragmentAdapter.getIntemCount()).getYear());
+                perspectiveEntities.get(position).getYear());
         binding.txtCreditMain.setText(FormatUtils.numberFormat(perspectiveEntities.get(position).getTotalCredit()));
         binding.txtDebitMain.setText(FormatUtils.numberFormat(perspectiveEntities.get(position).getTotalDebit()));
         binding.txtAmountPerspectiveMain.setText("Saldo por perspectiva " + "\n\n R$ "
@@ -518,4 +518,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         return super.onContextItemSelected(item);
     }
+
+
 }

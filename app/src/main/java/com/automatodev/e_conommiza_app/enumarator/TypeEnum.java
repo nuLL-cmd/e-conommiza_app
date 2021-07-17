@@ -13,7 +13,8 @@ import java.lang.reflect.Field;
 public enum TypeEnum {
 
     INPUT("I","ENTRY"),
-    OUTPUT("O", "OUTPUT");
+    OUTPUT("O", "OUTPUT"),
+    DEFAULT("D","DEFAULT");
 
     private final String code;
     private final String description;

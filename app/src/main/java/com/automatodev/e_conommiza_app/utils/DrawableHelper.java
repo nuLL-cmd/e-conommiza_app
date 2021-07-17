@@ -42,6 +42,7 @@ public class DrawableHelper {
         return this;
     }
 
+    @SuppressLint("ResourceAsColor")
     public DrawableHelper withColor(@ColorRes int colorRes) {
         mColor = ContextCompat.getColor(mContext, colorRes);
         return this;

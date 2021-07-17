@@ -6,6 +6,15 @@
 
     <data>
 
+        <import type="android.view.View"/>
+        <variable
+            name="isLoading"
+            type="Boolean"/>
+
+        <variable
+            name="information"
+            type="String" />
+
     </data>
 
     <RelativeLayout
@@ -144,13 +153,26 @@
 
             </RelativeLayout>
 
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/viewPager_main"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_320sdp"
-                android:layout_below="@id/txtPerspective_main"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:orientation="horizontal" />
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/spinkitProgress_login"
+                style="@style/SpinKitView.Large.ThreeBounce"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_70sdp"
+                android:visibility='@{isLoading ? View.VISIBLE : View.GONE, default = visible}'
+                android:layout_centerInParent="true"
+                app:SpinKit_Color="@color/button_positive" />
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/viewPager_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_320sdp"
+                    android:layout_below="@id/txtPerspective_main"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:orientation="horizontal" />
+
+
+
 
 
         </RelativeLayout>
