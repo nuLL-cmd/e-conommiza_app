@@ -107,16 +107,15 @@
                             android:layout_height="match_parent"
                             android:layout_above="@id/pieChartInput_report"
                             android:ellipsize="end"
-                            android:fontFamily="@font/cairo_light"
                             android:gravity="center"
                             android:maxLines="2"
                             android:paddingStart="@dimen/_5sdp"
                             android:paddingTop="@dimen/_10sdp"
                             android:paddingEnd="@dimen/_5sdp"
                             android:paddingBottom="@dimen/_10sdp"
+                            android:fontFamily="@font/cairo_light"
                             android:shadowColor="#683F3F3F"
                             android:shadowDx="3"
-
                             android:shadowDy="3"
                             android:shadowRadius="20"
                             android:textSize="@dimen/_11sdp" />

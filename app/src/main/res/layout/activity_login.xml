@@ -218,6 +218,11 @@
                         android:background="#fff"
                         android:textSize="@dimen/_10ssp"
                         android:padding="@dimen/_5sdp"
+                        android:shadowColor="#683F3F3F"
+                        android:shadowDx="3"
+                        android:shadowDy="3"
+                        android:shadowRadius="20"
+                        android:textColor="@color/color_gray_5A5A5A"
                         android:layout_centerInParent="true" />
 
                 </RelativeLayout>
@@ -273,6 +278,11 @@
                         android:singleLine="true"
                         android:ellipsize="end"
                         android:text="Não possui uma conta?"
+                        android:shadowColor="#683F3F3F"
+                        android:shadowDx="3"
+                        android:shadowDy="3"
+                        android:shadowRadius="20"
+                        android:textColor="@color/color_gray_5A5A5A"
                         android:textAlignment="center" />
 
                     <TextView

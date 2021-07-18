@@ -74,7 +74,7 @@
             android:ellipsize="marquee"
             android:singleLine="true"
             android:text="@{dataEntry.nameLocal}"
-            android:textColor="@color/font_primary"
+            android:textColor="@color/color_gray_5A5A5A"
             android:textSize="@dimen/_10ssp"
             android:textStyle="bold" />
 
@@ -107,7 +107,7 @@
             android:gravity="center|end"
             android:setRawValue='@{dataEntry.valueEntry}'
             android:singleLine="true"
-            android:textColor="@color/font_primary"
+            android:textColor="@color/color_gray_5A5A5A"
             android:textSize="@dimen/_8ssp"
             android:textStyle="bold" />
 

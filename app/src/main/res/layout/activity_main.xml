@@ -107,11 +107,10 @@
                 android:shadowDx="3"
                 android:shadowDy="3"
                 android:shadowRadius="20"
+                android:textColor="@color/color_gray_5A5A5A"
                 android:singleLine="true"
                 android:textAlignment="center"
-                android:textColor="@color/button_positive"
-                android:textSize="@dimen/_9ssp"
-                android:textStyle="bold" />
+                android:textSize="@dimen/_9ssp" />
 
 
             <RelativeLayout

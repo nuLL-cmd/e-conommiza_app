@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
@@ -74,10 +75,13 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View viewBinding = binding.getRoot();
         setContentView(viewBinding);
+
+        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         componentUtils = new ComponentUtils(this);
         perspectiveList = new ArrayList<>();
@@ -86,7 +90,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         controller = new ViewModelProvider(this).get(PerspectiveController.class);
         fragmentAdapter = new FragmentPageAdapter( getSupportFragmentManager(), 0, perspectiveEntities);
 
-
         binding.viewPagerMain.setAdapter(fragmentAdapter);
 
         binding.setIsLoading(true);
@@ -94,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         getUser();
 
     }
+
 
     @Override
     protected void onPause() {

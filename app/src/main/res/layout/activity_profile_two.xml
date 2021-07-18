@@ -185,12 +185,12 @@
                 android:ellipsize="end"
                 android:gravity="center|start"
                 android:singleLine="true"
-                android:textColor="#939090"
                 android:textSize="@dimen/_10ssp"
-                android:shadowColor="#703F3F3F"
+                android:shadowColor="#683F3F3F"
                 android:shadowDx="3"
                 android:shadowDy="3"
-                android:shadowRadius="20"/>
+                android:shadowRadius="20"
+                android:textColor="@color/color_gray_5A5A5A"/>
 
 
             <ImageButton

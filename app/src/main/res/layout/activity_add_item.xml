@@ -133,6 +133,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
 
+
+
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:orientation="horizontal">
@@ -146,6 +148,10 @@
                             android:id="@+id/txtPerspective_item"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:shadowColor="#683F3F3F"
+                            android:shadowDx="3"
+                            android:shadowDy="3"
+                            android:shadowRadius="20"
                             android:padding="@dimen/_5sdp"
                             android:textColor="@color/color_gray_5A5A5A"
                             android:textSize="@dimen/_9ssp" />
@@ -217,7 +223,7 @@
                         android:paddingStart="@dimen/_20sdp"
                         android:paddingEnd="@dimen/_20sdp"
                         android:textColor="@color/color_gray_5A5A5A"
-                        android:shadowColor="#FCD8D8D8"
+                       android:shadowColor="#683F3F3F"
                         android:shadowDx="3"
                         android:shadowDy="3"
                         android:shadowRadius="20"
@@ -291,6 +297,10 @@
                                 android:lineSpacingExtra="@dimen/_6sdp"
                                 android:singleLine="true"
                                 android:text="Escolha uma categoria"
+                                android:shadowColor="#683F3F3F"
+                                android:shadowDx="3"
+                                android:shadowDy="3"
+                                android:shadowRadius="20"
                                 android:textAlignment="center"
                                 android:textColor="@color/color_gray_5A5A5A"
                                 android:textSize="@dimen/_9ssp" />
@@ -341,7 +351,7 @@
                         android:layout_marginStart="@dimen/_15sdp"
                         android:layout_marginEnd="@dimen/_15sdp"
                         android:textColor="@color/color_gray_5A5A5A"
-                        android:shadowColor="#FCD8D8D8"
+                        android:shadowColor="#683F3F3F"
                         android:shadowDx="3"
                         android:shadowDy="3"
                         android:shadowRadius="20"

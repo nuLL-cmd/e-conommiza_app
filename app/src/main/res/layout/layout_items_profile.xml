@@ -42,7 +42,7 @@
             android:ellipsize="marquee"
             android:layout_toEndOf="@id/imageItem_layoutItem"
             android:text="@{perspective.month}"
-            android:textColor="@color/font_primary"
+            android:textColor="@color/color_gray_5A5A5A"
             android:textSize="@dimen/_10ssp"
             android:textStyle="bold" />
 
@@ -91,7 +91,7 @@
             android:layout_marginEnd="@dimen/_10sdp"
             android:gravity="center|end"
             android:setRawValue='@{perspective.totalCredit.subtract(perspective.totalDebit)}'
-            android:textColor="@color/font_primary"
+            android:textColor="@color/color_gray_5A5A5A"
             android:textSize="@dimen/_8ssp"
             android:textStyle="bold" />
 
