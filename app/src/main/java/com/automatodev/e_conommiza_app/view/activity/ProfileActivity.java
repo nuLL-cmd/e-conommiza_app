@@ -1,7 +1,6 @@
 package com.automatodev.e_conommiza_app.view.activity;
 
 import android.Manifest;
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -50,6 +49,7 @@ import com.bumptech.glide.request.target.Target;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.iceteck.silicompressorr.FileUtils;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.io.File;
 import java.io.IOException;
@@ -535,14 +535,26 @@ public class ProfileActivity extends AppCompatActivity implements DatePickerDial
 
     public void showPicker(View view) throws ParseException {
         c = Calendar.getInstance();
-        DatePickerDialog dialog = new DatePickerDialog(this, R.style.DatePickerDefaultTheme, this, c.get(Calendar.YEAR), c.get(Calendar.MONTH), 1);
+        DatePickerDialog dialog = new DatePickerDialog();
+        dialog.setAccentColor(getResources().getColor(R.color.button_positive));
         Date date1 = getDate();
         c.setTime(date1);
         c.set(Calendar.DAY_OF_MONTH, c.getActualMinimum(Calendar.DAY_OF_MONTH));
-        dialog.getDatePicker().setMinDate(c.getTime().getTime());
+        dialog.setMinDate(c);
         c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
-        dialog.getDatePicker().setMaxDate(c.getTime().getTime());
-        dialog.show();
+        dialog.setMaxDate(c);
+        dialog.setVersion(DatePickerDialog.Version.VERSION_2);
+        List<Calendar> datesDisable = new ArrayList<>();
+        datesDisable.add(c);
+        Calendar[] dates = datesDisable.toArray(new Calendar[datesDisable.size()]);
+        dialog.setDisabledDays(dates);
+        dialog.setSelectableDays(dates);
+        dialog.vibrate(false);
+        dialog.setCancelText("VOLTAR");
+        dialog.setTitle("Nova perspectiva");
+        dialog.setOnDateSetListener(this);
+        dialog.setHighlightedDays(dates);
+        dialog.show(getFragmentManager(),"datePicker");
     }
 
     public Date getDate() throws java.text.ParseException {
@@ -569,7 +581,7 @@ public class ProfileActivity extends AppCompatActivity implements DatePickerDial
     }
 
     @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+    public void onDateSet(DatePickerDialog view, int year, int month, int dayOfMonth) {
 
         try {
             String monthSelected = c.getDisplayName(Calendar.MONTH, Calendar.LONG, new Locale("pt", "br"));

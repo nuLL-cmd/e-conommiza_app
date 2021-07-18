@@ -45,6 +45,10 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+
+    //MaterialDateTimePicker
+    implementation 'com.wdullaer:materialdatetimepicker:3.1.2'
+
     //Chart android
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
@@ -129,8 +133,11 @@ dependencies {
     //EditText mask currency
     implementation 'com.github.BlacKCaT27:CurrencyEditText:2.0.2'
 
+    //Custom snackbar for Android
     implementation 'com.github.kishandonga:custom-snackbar:1.1'
 
+
+    //Vector edit path 
     implementation 'com.github.devsideal:VectorChildFinder:1.0.0'
 
 

@@ -1,9 +1,10 @@
 package com.automatodev.e_conommiza_app.view.activity;
 
 import android.annotation.SuppressLint;
-import android.app.DatePickerDialog;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
@@ -31,7 +32,9 @@ import com.automatodev.e_conommiza_app.utils.ComponentUtils;
 import com.automatodev.e_conommiza_app.utils.FormatUtils;
 import com.automatodev.e_conommiza_app.view.adapter.FragmentPageAdapter;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.math.BigDecimal;
 import java.text.DateFormat;
@@ -331,20 +334,32 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
     public void showPicker(View view) throws ParseException {
         c = Calendar.getInstance();
-
-        DatePickerDialog dialog = new DatePickerDialog(this, R.style.DatePickerDefaultTheme, this, c.get(Calendar.YEAR), c.get(Calendar.MONTH), 1);
+        DatePickerDialog dialog = new DatePickerDialog();
+        dialog.setAccentColor(getResources().getColor(R.color.button_positive));
         Date date1 = getDate();
         c.setTime(date1);
         c.set(Calendar.DAY_OF_MONTH, c.getActualMinimum(Calendar.DAY_OF_MONTH));
-        dialog.getDatePicker().setMinDate(c.getTime().getTime());
+        dialog.setMinDate(c);
         c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
-        dialog.getDatePicker().setMaxDate(c.getTime().getTime());
-        dialog.show();
+        dialog.setMaxDate(c);
+        dialog.setVersion(DatePickerDialog.Version.VERSION_2);
+        List<Calendar> datesDisable = new ArrayList<>();
+        datesDisable.add(c);
+        Calendar[] dates = datesDisable.toArray(new Calendar[datesDisable.size()]);
+        dialog.setDisabledDays(dates);
+        dialog.setSelectableDays(dates);
+        dialog.vibrate(false);
+        dialog.setCancelText("VOLTAR");
+        dialog.setTitle("Nova perspectiva");
+        dialog.setOnDateSetListener(this);
+        dialog.setHighlightedDays(dates);
+        dialog.show(getFragmentManager(),"datePicker");
 
     }
 
+
     @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+    public void onDateSet(DatePickerDialog view, int year, int month, int dayOfMonth) {
 
         try {
             String monthSelected = c.getDisplayName(Calendar.MONTH, Calendar.LONG, new Locale("pt", "br"));
@@ -515,6 +530,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         return super.onContextItemSelected(item);
     }
+
 
 
 }
