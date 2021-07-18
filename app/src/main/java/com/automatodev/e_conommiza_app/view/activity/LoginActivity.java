@@ -1,6 +1,7 @@
 package com.automatodev.e_conommiza_app.view.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -113,17 +114,35 @@ public class LoginActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case 100:
-                Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-                try {
-                    GoogleSignInAccount account = task.getResult(ApiException.class);
-                    startGoogleLogin(account.getIdToken());
-                } catch (ApiException e) {
-                    Log.e("logx", "Error login Google: " + e.getMessage());
+                if (resultCode == Activity.RESULT_OK) {
+                    Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+                    try {
+                        GoogleSignInAccount account = task.getResult(ApiException.class);
+                        startGoogleLogin(account.getIdToken());
+                    } catch (ApiException e) {
+                        Log.e("logx", "Error login Google: " + e.getMessage());
+                    }
+
+                } else {
+                    binding.btnLoginLogin.setEnabled(true);
+                    binding.btnFacebookLogin.setEnabled(true);
+                    binding.btnGoogleLogin.setEnabled(true);
+                    componentUtils.showSnackbar("Operação cancelada", 1500);
                 }
+
                 break;
             case 64206:
-                facebookAuthentication.getCallbackManager().onActivityResult(requestCode, resultCode, data);
-                dialogProgress.show();
+                if (resultCode == Activity.RESULT_OK) {
+                    facebookAuthentication.getCallbackManager().onActivityResult(requestCode, resultCode, data);
+                    dialogProgress.show();
+
+                } else {
+                    binding.btnLoginLogin.setEnabled(true);
+                    binding.btnFacebookLogin.setEnabled(true);
+                    binding.btnGoogleLogin.setEnabled(true);
+                    componentUtils.showSnackbar("Operação cancelada", 1500);
+                }
+
                 break;
         }
     }
@@ -209,7 +228,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void disableButtons(){
+    public void disableButtons() {
         binding.btnLoginLogin.setEnabled(false);
         binding.btnFacebookLogin.setEnabled(false);
         binding.btnGoogleLogin.setEnabled(false);

@@ -62,7 +62,7 @@ public class FacebookAuthentication {
 
             @Override
             public void onCancel() {
-
+                Log.e("logx", "Cancelamento do login: ");
             }
 
             @Override
@@ -91,12 +91,12 @@ public class FacebookAuthentication {
                     Log.e("logx", "Error firebaseWithFacebook: " + e.getMessage());
                 }
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                callback.onFailure("Algo deu errado em seu login, \nDa uma checada na sua conexão :D");
-                Log.e("logx", "Error firebaseWithFacebook: " + e.getMessage());
-            }
+        }).addOnFailureListener(e -> {
+            callback.onFailure("Algo deu errado em seu login, \nDa uma checada na sua conexão :D");
+            Log.e("logx", "Error firebaseWithFacebook: " + e.getMessage());
+        }).addOnCanceledListener(() ->{
+            callback.onFailure("Operação cancelada!");
+            Log.e("logx", "Login cancelado");
         });
 
 

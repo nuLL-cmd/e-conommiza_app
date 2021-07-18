@@ -54,6 +54,9 @@ public class GoogleAuthentication {
         }).addOnFailureListener(e -> {
             callback.onFailure("Algo deu errado em seu login, \nDa uma checada na sua conexão :D");
             Log.e("logx", "Error googleLogin: " + e.getMessage());
+        }).addOnCanceledListener(() ->{
+            callback.onFailure("Operação cancelada!");
+            Log.e("logx", "Login cancelado");
         });
 
     }
