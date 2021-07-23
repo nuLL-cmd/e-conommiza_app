@@ -598,20 +598,7 @@ public class ProfileActivity extends AppCompatActivity implements DatePickerDial
             PerspectiveController pController = new ViewModelProvider(this).get(PerspectiveController.class);
             new CompositeDisposable().add(pController.addPerspective(perspectiveEntity).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread()).subscribe(() -> {
-                        new Thread() {
-                            @Override
-                            public void run() {
-                                try {
-                                    sleep(100);
-                                    componentUtils.showSnackbar("Sucesso!", 500);
-
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }.start();
-
-
+                        componentUtils.showSnackbar("Sucesso!", 500);
                     }));
 
         } catch (Exception e) {

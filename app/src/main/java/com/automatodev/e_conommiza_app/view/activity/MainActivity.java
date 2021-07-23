@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
     public void actMainItem(View view) {
         if (perspectiveEntities.size() == 0) {
-            componentUtils.showSnackbar("Cadastre uma perspecitve antes de adicionar um novo regisro", 2000);
+            componentUtils.showSnackbar("Cadastre uma perspecitva antes de adicionar um novo regisro", 2000);
             return;
         }
 
@@ -282,6 +282,11 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                                         .userUid(auth.getUser().getUid())
                                         .build();
 
+                                MainActivity.this.userEntity.setUserUid(auth.getUser().getUid());
+
+                                if(userEntity.getUrlPhoto().contains("facebook"))
+                                    userEntity.setUrlPhoto(userEntity.getUrlPhoto().concat("?type=large"));
+
                                 showData(userEntity.getUserUid());
                                 firestoreService.saveUser(userEntity, new FirestoreSaveCallback() {
                                     @Override
@@ -380,19 +385,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
             PerspectiveController pController = new ViewModelProvider(this).get(PerspectiveController.class);
             new CompositeDisposable().add(pController.addPerspective(perspectiveEntity).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread()).subscribe(() -> {
-                        new Thread() {
-                            @Override
-                            public void run() {
-                                try {
-                                    sleep(100);
-                                    componentUtils.showSnackbar("Sucesso!", 500);
-
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }.start();
-
+                        componentUtils.showSnackbar("Sucesso!", 500);
 
                     }));
 
