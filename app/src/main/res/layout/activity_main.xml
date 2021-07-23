@@ -135,7 +135,7 @@
                     android:shadowDx="3"
                     android:shadowDy="3"
                     android:shadowRadius="20"
-                    android:text="Comece a usar o app! \nCadastre sua primeira pespectiva"
+                    android:text="Comece a usar o app! \nClique no menu e cadastre sua primeira pespectiva"
                     android:textAlignment="center"
                     android:textColor="#939090"
                     android:textSize="@dimen/_9sdp" />

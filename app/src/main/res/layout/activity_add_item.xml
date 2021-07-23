@@ -148,12 +148,8 @@
                             android:id="@+id/txtPerspective_item"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:shadowColor="#683F3F3F"
-                            android:shadowDx="3"
-                            android:shadowDy="3"
-                            android:shadowRadius="20"
+
                             android:padding="@dimen/_5sdp"
-                            android:textColor="@color/color_gray_5A5A5A"
                             android:textSize="@dimen/_9ssp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -222,11 +218,6 @@
                         android:onClick="showCalendar"
                         android:paddingStart="@dimen/_20sdp"
                         android:paddingEnd="@dimen/_20sdp"
-                        android:textColor="@color/color_gray_5A5A5A"
-                       android:shadowColor="#683F3F3F"
-                        android:shadowDx="3"
-                        android:shadowDy="3"
-                        android:shadowRadius="20"
                         android:singleLine="true"
                         android:text="Calendário"
                         android:textSize="@dimen/_9ssp" />
@@ -297,12 +288,7 @@
                                 android:lineSpacingExtra="@dimen/_6sdp"
                                 android:singleLine="true"
                                 android:text="Escolha uma categoria"
-                                android:shadowColor="#683F3F3F"
-                                android:shadowDx="3"
-                                android:shadowDy="3"
-                                android:shadowRadius="20"
                                 android:textAlignment="center"
-                                android:textColor="@color/color_gray_5A5A5A"
                                 android:textSize="@dimen/_9ssp" />
 
                         </RelativeLayout>
@@ -350,11 +336,6 @@
                         android:layout_marginBottom="@dimen/_10sdp"
                         android:layout_marginStart="@dimen/_15sdp"
                         android:layout_marginEnd="@dimen/_15sdp"
-                        android:textColor="@color/color_gray_5A5A5A"
-                        android:shadowColor="#683F3F3F"
-                        android:shadowDx="3"
-                        android:shadowDy="3"
-                        android:shadowRadius="20"
                         android:text="Salvar"
                         android:textSize="@dimen/_9ssp" />
 

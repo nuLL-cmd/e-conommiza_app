@@ -43,7 +43,7 @@
                 android:hint="Pesquisar categoria"
                 android:paddingStart="@dimen/_20sdp"
                 android:paddingEnd="@dimen/_20sdp"
-                android:maxLines="2"
+                android:singleLine="true"
                 android:textAlignment="center"
                 android:textColor="#95FFFFFF"
                 android:textColorHint="#95FFFFFF"

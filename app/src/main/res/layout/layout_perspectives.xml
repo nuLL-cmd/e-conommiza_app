@@ -52,6 +52,7 @@
                     android:shadowDx="3"
                     android:shadowDy="3"
                     android:shadowRadius="20"
+                    android:padding="@dimen/_5sdp"
                     android:layout_centerHorizontal="true"/>
 
                 <ImageView

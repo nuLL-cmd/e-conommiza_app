@@ -235,21 +235,15 @@
                         android:layout_marginEnd="@dimen/_50sdp"
                         android:background="#E2E0E0" />
 
-
                     <TextView
-                        android:id="@+id/lblSocial_register"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
+                        android:text="Ou faça login com"
+                        android:id="@+id/lblSocial_register"
                         android:background="#fff"
                         android:padding="@dimen/_5sdp"
-                        android:shadowColor="#683F3F3F"
-                        android:shadowDx="3"
-                        android:shadowDy="3"
-                        android:shadowRadius="20"
-                        android:textColor="@color/color_gray_5A5A5A"
-                        android:text="Ou faça login com"
-                        android:textSize="@dimen/_10ssp" />
+                        android:textSize="@dimen/_10ssp"
+                        android:layout_centerInParent="true" />
 
                 </RelativeLayout>
 
