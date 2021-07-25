@@ -11,8 +11,8 @@ android {
         applicationId "com.automatodev.e_conommiza_app"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 3
-        versionName "1.1.7"
+        versionCode 4
+        versionName "1.2.7"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

@@ -3,12 +3,17 @@ package com.automatodev.e_conommiza_app.security;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.automatodev.e_conommiza_app.database.firebase.callback.FirestoreSaveCallback;
 import com.automatodev.e_conommiza_app.database.firebase.FirestoreService;
 import com.automatodev.e_conommiza_app.databinding.LayoutDialogProgressBinding;
 import com.automatodev.e_conommiza_app.entity.model.UserEntity;
 import com.automatodev.e_conommiza_app.preferences.UserPreferences;
 import com.automatodev.e_conommiza_app.security.callback.FirebaseAuthCallback;
+import com.google.android.gms.tasks.OnCanceledListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthEmailException;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -65,7 +70,7 @@ public class FirebaseAuthentication {
         });
     }
 
-    public void registerWithEmail(UserEntity user,LayoutDialogProgressBinding bindingProgress, String email, String password, FirebaseAuthCallback callback) {
+    public void registerWithEmail(UserEntity user, LayoutDialogProgressBinding bindingProgress, String email, String password, FirebaseAuthCallback callback) {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -99,7 +104,7 @@ public class FirebaseAuthentication {
                             callback.onFailure("Email ja cadastrado em outra conta!");
                             Log.e("logx", "Error createUserWithEmailAndPassword: " + e.getMessage());
                         } catch (Exception e) {
-                            callback.onFailure( "Algo deu errado, verifique seu email e/ou senha.\nDa uma olhada na sua conexão :D");
+                            callback.onFailure("Algo deu errado, verifique seu email e/ou senha.\nDa uma olhada na sua conexão :D");
                             Log.e("logx", "Error createUserWithEmailAndPassword: " + e.getMessage());
 
                         }
@@ -111,11 +116,36 @@ public class FirebaseAuthentication {
                 });
     }
 
-    public FirebaseUser getUser(){
+    public FirebaseUser getUser() {
         return firebaseAuth.getCurrentUser();
     }
 
     public void logout() {
         firebaseAuth.signOut();
     }
+
+    public void recoveryPassword(String email, FirebaseAuthCallback callback) {
+
+        firebaseAuth.sendPasswordResetEmail(email)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful())
+                        callback.onSuccess(true);
+                    else{
+                        Log.e("logx","Error recoveryPassword addOnCompleteListener: "+task.getException());
+                        callback.onFailure("taskFailure");
+                    }
+                }).addOnCanceledListener(() -> {
+                        callback.onFailure("cancel");
+        }).addOnFailureListener(e -> {
+                    if (e instanceof FirebaseAuthInvalidCredentialsException)
+                        callback.onFailure("emailException");
+                    else
+                        callback.onFailure("failure");
+
+                    Log.e("logx","Error recoveryPassword: "+e.getMessage());
+
+        });
+
+    }
+
 }

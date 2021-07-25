@@ -64,7 +64,7 @@
                 <com.tomer.fadingtextview.FadingTextView
                     android:id="@+id/txtFadeOne_profile"
                     android:layout_width="wrap_content"
-                    app:timeout="2500"
+                    app:timeout="2000"
                     android:layout_height="wrap_content"
                     android:layout_above="@id/txtFadeTwo_profile"
                     android:layout_centerHorizontal="true"
@@ -79,7 +79,7 @@
                 <com.tomer.fadingtextview.FadingTextView
                     android:id="@+id/txtFadeTwo_profile"
                     android:layout_width="wrap_content"
-                    app:timeout="2500"
+                    app:timeout="2000"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_15sdp"
                     android:layout_marginEnd="@dimen/_15sdp"

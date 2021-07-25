@@ -175,6 +175,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:clickable="true"
+                    android:padding="@dimen/_5sdp"
+                    android:onClick="actLoginRecovery"
                     android:textSize="@dimen/_10ssp"
                     android:text="Esqueci minha senha"
                     android:textAlignment="center"

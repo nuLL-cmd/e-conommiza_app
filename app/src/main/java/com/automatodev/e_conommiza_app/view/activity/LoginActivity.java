@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -51,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         facebookAuthentication = new FacebookAuthentication(this);
 
         componentUtils = new ComponentUtils(this);
+
         bindingProgress = DataBindingUtil.inflate(getLayoutInflater().from(this), R.layout.layout_dialog_progress, binding.relativeDaddyLogin, false);
 
         dialogProgress = new AlertDialog.Builder(this).create();
@@ -82,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
         String email = binding.edtEmailLogin.getText().toString().trim();
         String password = binding.edtPasswordLogin.getText().toString().trim();
 
-        if (email.isEmpty() || password.isEmpty()) {
+        if (validateFields()) {
             componentUtils.showSnackbar("Necessário o preenchimento de todos os campos", 1200);
         } else {
             dialogProgress.show();
@@ -102,6 +104,23 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     }
+
+    public Boolean validateFields() {
+        int count = 0;
+        ComponentUtils componentUtils = new ComponentUtils(this);
+        EditText fields[] = new EditText[2];
+        fields[0] = binding.edtEmailLogin;
+        fields[1] = binding.edtPasswordLogin;
+        for (EditText e : fields) {
+            if (e.getText().toString().trim().isEmpty() || e.getText().toString().equals("R$ 0,00") || e.getText().toString().equals("$0.00")) {
+                e.setBackgroundResource(R.drawable.bg_edt_global_error);
+                componentUtils.onTextListener(e);
+                count++;
+            }
+        }
+        return count != 0;
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -232,5 +251,11 @@ public class LoginActivity extends AppCompatActivity {
         binding.btnLoginLogin.setEnabled(false);
         binding.btnFacebookLogin.setEnabled(false);
         binding.btnGoogleLogin.setEnabled(false);
+    }
+
+    public void actLoginRecovery(View view){
+        if (!RecoveryActivity.status){
+            startActivity(new Intent(this, RecoveryActivity.class));
+        }
     }
 }

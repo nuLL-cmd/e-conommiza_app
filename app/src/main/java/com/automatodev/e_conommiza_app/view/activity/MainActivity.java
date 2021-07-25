@@ -351,7 +351,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         dialog.setMinDate(c);
         c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
         dialog.setMaxDate(c);
-        dialog.setVersion(DatePickerDialog.Version.VERSION_2);
+        dialog.setVersion(DatePickerDialog.Version.VERSION_1);
         List<Calendar> datesDisable = new ArrayList<>();
         datesDisable.add(c);
         Calendar[] dates = datesDisable.toArray(new Calendar[datesDisable.size()]);
@@ -360,6 +360,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         dialog.vibrate(false);
         dialog.setCancelText("VOLTAR");
         dialog.setTitle("Nova perspectiva");
+        dialog.setMenuVisibility(false);
         dialog.setOnDateSetListener(this);
         dialog.setHighlightedDays(dates);
         dialog.show(getFragmentManager(),"datePicker");

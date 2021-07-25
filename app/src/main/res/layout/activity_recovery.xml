@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollDaddy_recovery"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/relativeDaddy_recovery"
+            android:background="#fff"
+            android:orientation="vertical"
+            tools:context=".view.activity.RecoveryActivity">
+
+
+            <LinearLayout
+                android:id="@+id/linearDataAccount_recovery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/btnBack_regoster"
+                    android:layout_width="@dimen/_32sdp"
+                    android:layout_height="@dimen/_32sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/bg_button_white_global"
+                    android:onClick="actRecoveryLogin"
+                    android:src="@drawable/ic_arrow_back" />
+
+                <RelativeLayout
+                    android:id="@+id/relativeLogo_recovery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginBottom="@dimen/_40sdp">
+
+                    <View
+                        android:id="@+id/viewLogoOne_recovery"
+                        android:layout_width="@dimen/_120sdp"
+                        android:layout_height="@dimen/_2sdp"
+                        android:layout_above="@id/linearLogo_recovery"
+                        android:layout_alignStart="@id/linearLogo_recovery"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginBottom="-2.8dp"
+                        android:background="@drawable/bg_resources_logo" />
+
+                    <View
+                        android:id="@+id/viewLogoTwo_recovery"
+                        android:layout_width="@dimen/_120sdp"
+                        android:layout_height="@dimen/_2sdp"
+                        android:layout_below="@id/linearLogo_recovery"
+                        android:layout_alignStart="@id/linearLogo_recovery"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="-2.8dp"
+                        android:background="@drawable/bg_resources_logo" />
+
+                    <LinearLayout
+                        android:id="@+id/linearLogo_recovery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+
+                        <RelativeLayout
+                            android:id="@+id/relativeChar_recovery"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_resources_logo"
+                            android:paddingStart="@dimen/_7sdp"
+                            android:paddingTop="@dimen/_5sdp"
+                            android:paddingEnd="@dimen/_7sdp"
+                            android:paddingBottom="@dimen/_5sdp">
+
+                            <TextView
+                                android:id="@+id/lblCharLogo_recovery"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="E"
+                                android:textColor="@color/white_fff"
+                                android:textSize="@dimen/_20sdp" />
+                        </RelativeLayout>
+
+
+                        <TextView
+                            android:id="@+id/lblSlogan_recovery"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/aldrich"
+                            android:gravity="center"
+                            android:text="conommiza :)"
+                            android:textColor="@color/font_primary"
+                            android:textSize="@dimen/_20sdp"
+
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+
+                <TextView
+                    android:id="@+id/lblTitleLogin_recovery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:ellipsize="end"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:singleLine="true"
+                    android:text="Recuperação de senha"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold" />
+
+
+                <EditText
+                    android:id="@+id/edtEmail_recovery"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:background="@drawable/layout_shadow_white"
+                    android:drawableStart="@drawable/ic_person"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:paddingEnd="@dimen/_15sdp"
+                    android:singleLine="true"
+                    android:textColor="#A2A2A2"
+                    android:textSize="@dimen/_10ssp" />
+
+
+                <Button
+                    android:id="@+id/btnLogin_recovery"
+                    style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:background="@drawable/bg_button_blue_global"
+                    android:elevation="@dimen/_10sdp"
+                    android:onClick="sendEmail"
+                    android:text="Enviar"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:textColor="#fff"
+                    android:textSize="@dimen/_11ssp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearSocial_recovery"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical">
+
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/progress_splash"
+                    android:layout_width="@dimen/_250sdp"
+                    android:layout_height="@dimen/_250sdp"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    android:layout_margin="@dimen/_10sdp"
+                    app:lottie_fileName="email.json" />
+
+       <!--         <com.tomer.fadingtextview.FadingTextView
+                    android:id="@+id/txtFadeOne_recovery"
+                    android:layout_width="wrap_content"
+                    app:timeout="2200"
+                    android:alpha="0.6"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:textAlignment="center"
+
+                    android:textSize="@dimen/_15ssp" />
+
+
+                <com.tomer.fadingtextview.FadingTextView
+                    android:id="@+id/txtFadeTwo_recovery"
+                    android:layout_width="wrap_content"
+                    app:timeout="2200"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:alpha="0.7"
+                    android:gravity="center"
+                    android:textSize="@dimen/_25ssp"
+                    android:layout_marginBottom="@dimen/_15sdp"
+
+                    android:textStyle="bold" />-->
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+    </ScrollView>
+</layout>
