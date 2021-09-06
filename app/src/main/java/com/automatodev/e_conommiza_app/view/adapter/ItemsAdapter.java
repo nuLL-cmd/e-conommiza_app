@@ -1,13 +1,17 @@
 package com.automatodev.e_conommiza_app.view.adapter;
 
 import android.annotation.SuppressLint;
+import android.graphics.PorterDuff;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,16 +22,21 @@ import com.automatodev.e_conommiza_app.entity.model.DataEntryEntity;
 import com.automatodev.e_conommiza_app.enumarator.TypeEnum;
 import com.automatodev.e_conommiza_app.listener.ItemContract;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @SuppressLint("NonConstantResourceId")
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.DataHandler> {
 
     private List<DataEntryEntity> dataEntryEntities;
+    private List<DataEntryEntity> inputList;
+    private List<DataEntryEntity> outputList;
     private LayoutInflater layoutInflater;
     private OnItemClickListener listener;
     private ItemContract itemContract;
     private LayoutItemsMainBinding binding;
+    private  int count = 0;
 
     public interface OnItemClickListener {
         void onIitemClick(int position);
@@ -41,6 +50,18 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.DataHandler>
 
         this.dataEntryEntities = dataEntryEntities;
         this.itemContract = itemContract;
+
+        this.inputList = new ArrayList<>();
+        this.outputList = new ArrayList<>();
+
+        if (dataEntryEntities.size() != 0){
+            this.inputList = dataEntryEntities.stream().filter(entry -> entry.getTypeEntry().equals(TypeEnum.INPUT)).collect(Collectors.toList());
+            this.outputList= dataEntryEntities.stream().filter(entry -> entry.getTypeEntry().equals(TypeEnum.OUTPUT)).collect(Collectors.toList());
+
+            dataEntryEntities.clear();
+            dataEntryEntities.addAll(inputList);
+            dataEntryEntities.addAll(outputList);
+        }
     }
 
     @NonNull
@@ -57,9 +78,15 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.DataHandler>
 
     @Override
     public void onBindViewHolder(@NonNull DataHandler holder, int position) {
-
+        if (position == 0 ){
+            holder.binding.viewSeparatorInputLayoutItem.setVisibility(View.VISIBLE);
+            holder.binding.txtTypeEntryInputLayoutItems.setVisibility(View.VISIBLE);
+        }
+        if(position == inputList.size() -1){
+            holder.binding.viewSeparatorLayoutItem.getBackground().setColorFilter(ContextCompat.getColor(holder.binding.viewSeparatorLayoutItem.getContext(),R.color.red_e65100), PorterDuff.Mode.SRC);
+            holder.binding.txtTypeEntryOutputLayoutItems.setVisibility(View.VISIBLE);
+        }
         holder.setBinding(dataEntryEntities.get(position));
-
 
     }
 
