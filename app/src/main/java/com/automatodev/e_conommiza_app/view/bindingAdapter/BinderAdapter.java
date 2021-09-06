@@ -47,7 +47,7 @@ public class BinderAdapter {
     @BindingAdapter("android:setRawValue")
     public static void setRawValue(TextView textView, BigDecimal value){
         NumberFormat format = NumberFormat.getCurrencyInstance();
-        textView.setText(format.format(value));
+        textView.setText(format.format(value != null ? value : BigDecimal.ZERO));
 
     }
 

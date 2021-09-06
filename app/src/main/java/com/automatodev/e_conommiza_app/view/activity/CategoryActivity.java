@@ -57,10 +57,6 @@ public class CategoryActivity extends AppCompatActivity implements ItemContract 
             }
         });
 
-;
-
-
-
     }
 
     public void getData(){
@@ -73,7 +69,6 @@ public class CategoryActivity extends AppCompatActivity implements ItemContract 
                 binding.btnBackCategory.getBackground().setColorFilter(ContextCompat.getColor(this, color), PorterDuff.Mode.SRC);
                 getWindow().setStatusBarColor(this.getResources().getColor(color));
                  type = bundle.getString("type");
-
 
             }
 
