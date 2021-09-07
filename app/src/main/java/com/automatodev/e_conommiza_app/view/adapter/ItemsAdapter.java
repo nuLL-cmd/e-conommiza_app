@@ -60,9 +60,16 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.DataHandler>
 
             dataEntryEntities.clear();
 
-            inputList.get(0).setFirst(true);
-            outputList.get(0).setLast(true);
-            inputList.get(inputList.size()- 1).setViewColor(true);
+            if (inputList.size() > 0)
+                inputList.get(0).setFirst(true);
+
+
+            if (inputList.size() > 0 && outputList.size() > 0 ){
+                inputList.get(inputList.size() - 1).setViewColor(true);
+                outputList.get(0).setLast(true);
+            }
+
+
 
             dataEntryEntities.addAll(inputList);
             dataEntryEntities.addAll(outputList);
