@@ -22,6 +22,7 @@ import com.automatodev.e_conommiza_app.entity.model.DataEntryEntity;
 import com.automatodev.e_conommiza_app.enumarator.TypeEnum;
 import com.automatodev.e_conommiza_app.listener.ItemContract;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,7 +37,6 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.DataHandler>
     private OnItemClickListener listener;
     private ItemContract itemContract;
     private LayoutItemsMainBinding binding;
-    private  int count = 0;
 
     public interface OnItemClickListener {
         void onIitemClick(int position);
@@ -54,13 +54,20 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.DataHandler>
         this.inputList = new ArrayList<>();
         this.outputList = new ArrayList<>();
 
-        if (dataEntryEntities.size() != 0){
+        if (dataEntryEntities.size() != 0) {
             this.inputList = dataEntryEntities.stream().filter(entry -> entry.getTypeEntry().equals(TypeEnum.INPUT)).collect(Collectors.toList());
-            this.outputList= dataEntryEntities.stream().filter(entry -> entry.getTypeEntry().equals(TypeEnum.OUTPUT)).collect(Collectors.toList());
+            this.outputList = dataEntryEntities.stream().filter(entry -> entry.getTypeEntry().equals(TypeEnum.OUTPUT)).collect(Collectors.toList());
 
             dataEntryEntities.clear();
+
+            inputList.get(0).setFirst(true);
+            outputList.get(0).setLast(true);
+            inputList.get(inputList.size()- 1).setViewColor(true);
+
             dataEntryEntities.addAll(inputList);
             dataEntryEntities.addAll(outputList);
+
+
         }
     }
 
@@ -78,15 +85,9 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.DataHandler>
 
     @Override
     public void onBindViewHolder(@NonNull DataHandler holder, int position) {
-        if (position == 0 ){
-            holder.binding.viewSeparatorInputLayoutItem.setVisibility(View.VISIBLE);
-            holder.binding.txtTypeEntryInputLayoutItems.setVisibility(View.VISIBLE);
-        }
-        if(position == inputList.size() -1){
-            holder.binding.viewSeparatorLayoutItem.getBackground().setColorFilter(ContextCompat.getColor(holder.binding.viewSeparatorLayoutItem.getContext(),R.color.red_e65100), PorterDuff.Mode.SRC);
-            holder.binding.txtTypeEntryOutputLayoutItems.setVisibility(View.VISIBLE);
-        }
+
         holder.setBinding(dataEntryEntities.get(position));
+
 
     }
 
@@ -136,23 +137,23 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.DataHandler>
         @Override
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
             menu.setHeaderTitle("Status");
-            if(dataEntryEntity.getPayment().equals(2)){
+            if (dataEntryEntity.getPayment().equals(2)) {
                 MenuItem unFrozen = menu.add(0, 4, 2, "Descongelar");
                 unFrozen.setOnMenuItemClickListener(itemListener);
-            }else{
+            } else {
                 MenuItem pay = dataEntryEntity.getTypeEntry().getCode().equals(TypeEnum.INPUT.getCode())
                         ? menu.add(0, dataEntryEntity.getPayment().equals(1) ? 2 : 1, 1, dataEntryEntity.getPayment().equals(1) ? "Não recebido" : "Recebido")
                         : menu.add(0, dataEntryEntity.getPayment().equals(1) ? 2 : 1, 1, dataEntryEntity.getPayment().equals(1) ? "Não pago" : "Pago");
-                MenuItem frozen = menu.add(0,3, 2, "Congelar");
-                MenuItem delete = menu.add(0,6,3,"Deletar");
+                MenuItem frozen = menu.add(0, 3, 2, "Congelar");
+                MenuItem delete = menu.add(0, 6, 3, "Deletar");
 
                 pay.setOnMenuItemClickListener(itemListener);
                 frozen.setOnMenuItemClickListener(itemListener);
                 delete.setOnMenuItemClickListener(itemListener);
             }
 
-            MenuItem separator =  menu.add(0,7,4,"");
-            MenuItem subtitle = menu.add(0, 5,5,"Ver todos");
+            MenuItem separator = menu.add(0, 7, 4, "");
+            MenuItem subtitle = menu.add(0, 5, 5, "Ver todos");
             subtitle.setOnMenuItemClickListener(itemListener);
 
 

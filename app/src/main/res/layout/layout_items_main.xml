@@ -23,7 +23,15 @@
 
         <variable
             name="category"
-            type="com.automatodev.e_conommiza_app.entity.model.CategoryEntity"/>
+            type="com.automatodev.e_conommiza_app.entity.model.CategoryEntity" />
+
+        <variable
+            name="visibility"
+            type="Boolean" />
+
+        <variable
+            name="view"
+            type="android.view.View" />
     </data>
 
     <RelativeLayout
@@ -34,142 +42,140 @@
         android:background="?android:attr/selectableItemBackground">
 
 
-
         <View
             android:id="@+id/viewSeparatorInput_layoutItem"
             android:layout_width="match_parent"
-            android:visibility="gone"
             android:layout_height="@dimen/_2sdp"
-            android:layout_marginTop="@dimen/_2sdp"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
-            android:background="@color/green_00c853" />
+            android:background="@color/green_00c853"
+            android:visibility='@{dataEntry.first ? view.VISIBLE : view.GONE, default=gone}'/>
 
 
         <TextView
             android:id="@+id/txtTypeEntryInput_layoutItems"
-            android:visibility="gone"
             android:layout_width="wrap_content"
-            android:layout_marginTop="@dimen/_2sdp"
-            android:background="@drawable/bg_txt_type_entry_input"
-            android:textSize="@dimen/_9ssp"
-            android:layout_alignParentTop="true"
-            android:layout_alignEnd="@id/viewSeparatorInput_layoutItem"
-            android:textColor="@color/white_fff"
-            android:paddingBottom="@dimen/_2sdp"
-            android:paddingTop="@dimen/_2sdp"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:textAlignment="center"
             android:layout_height="wrap_content"
-            android:text="Proventos"/>
-
-
-
-            <View
-                android:id="@+id/imageType"
-                android:layout_width="@dimen/_48sdp"
-                android:layout_height="@dimen/_48sdp"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:background="@drawable/bg_button_white_global"
-                android:setColor='@{dataEntry.typeEntry.code.equals(typeEnum.INPUT.code) ? component.colorEntry() : component.colorExit()}' />
-
-            <View
-                android:id="@+id/imagePayment"
-                android:layout_width="@dimen/_48sdp"
-                android:layout_height="@dimen/_48sdp"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:background="@drawable/bg_button_white_global"
-                android:setStatus='@{dataEntry.payment}' />
-
-            <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/imageItem_layoutItem"
-                android:layout_width="@dimen/_48sdp"
-                android:layout_height="@dimen/_48sdp"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:background="@drawable/bg_button_blue_noshadow_global"
-                android:padding="@dimen/_10sdp"
-                android:setImage='@{category.image}'/>
-
-
-            <TextView
-                android:id="@+id/txtItem_layoutItem"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/imageItem_layoutItem"
-                android:layout_toStartOf="@id/txtValueItem_layout_item"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_toEndOf="@id/imageItem_layoutItem"
-                android:ellipsize="marquee"
-                android:singleLine="true"
-                android:text="@{dataEntry.nameLocal}"
-                android:textColor="@color/color_gray_5A5A5A"
-                android:textSize="@dimen/_10ssp"
-                android:textStyle="bold" />
-
-
-            <TextView
-                android:id="@+id/txtDataItem_layout_item"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txtItem_layoutItem"
-                android:layout_alignStart="@id/txtItem_layoutItem"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:ellipsize="marquee"
-                android:setValue='@{dataEntry.dateEntry}'
-                android:singleLine="true"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="@dimen/_8ssp"
-                android:textStyle="bold" />
-
-
-            <TextView
-                android:id="@+id/txtValueItem_layout_item"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/txtDataItem_layout_item"
-                android:layout_alignBottom="@id/txtDataItem_layout_item"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:ellipsize="marquee"
-                android:gravity="center|end"
-                android:setRawValue='@{dataEntry.valueEntry}'
-                android:singleLine="true"
-                android:textColor="@color/color_gray_5A5A5A"
-                android:textSize="@dimen/_8ssp"
-                android:textStyle="bold" />
-
-            <View
-                android:id="@+id/viewSeparator_layoutItem"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_2sdp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:background="#CDCDCD" />
+            android:layout_alignEnd="@id/viewSeparatorInput_layoutItem"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/bg_txt_type_entry_input"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingTop="@dimen/_4sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_2sdp"
+            android:text="Proventos"
+            android:textAlignment="center"
+            android:textColor="@color/white_fff"
+            android:textSize="@dimen/_9ssp"
+            android:visibility='@{dataEntry.first ? view.VISIBLE : view.GONE, default=gone}'/>
 
 
         <TextView
             android:id="@+id/txtTypeEntryOutput_layoutItems"
-            android:visibility="gone"
             android:layout_width="wrap_content"
-            android:background="@drawable/bg_txt_type_entry_output"
-            android:textSize="@dimen/_9ssp"
-            android:layout_alignEnd="@id/viewSeparator_layoutItem"
-            android:textColor="@color/white_fff"
-            android:layout_alignParentBottom="true"
-            android:paddingBottom="@dimen/_2sdp"
-            android:paddingTop="@dimen/_2sdp"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:textAlignment="center"
             android:layout_height="wrap_content"
-            android:text="Despesas"/>
+            android:layout_alignEnd="@id/viewSeparator_layoutItem"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/bg_txt_type_entry_output"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingTop="@dimen/_2sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_2sdp"
+            android:text="Despesas"
+            android:textAlignment="center"
+            android:textColor="@color/white_fff"
+            android:textSize="@dimen/_9ssp"
+            android:visibility='@{dataEntry.last ? view.VISIBLE : view.GONE, default=gone}'/>
+
+
+        <View
+            android:id="@+id/imageType"
+            android:layout_width="@dimen/_48sdp"
+            android:layout_height="@dimen/_48sdp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:background="@drawable/bg_button_white_global"
+            android:setColor='@{dataEntry.typeEntry.code.equals(typeEnum.INPUT.code) ? component.colorEntry() : component.colorExit()}' />
+
+        <View
+            android:id="@+id/imagePayment"
+            android:layout_width="@dimen/_48sdp"
+            android:layout_height="@dimen/_48sdp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:background="@drawable/bg_button_white_global"
+            android:setStatus='@{dataEntry.payment}' />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/imageItem_layoutItem"
+            android:layout_width="@dimen/_48sdp"
+            android:layout_height="@dimen/_48sdp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:background="@drawable/bg_button_blue_noshadow_global"
+            android:padding="@dimen/_10sdp"
+            android:setImage='@{category.image}' />
+
+
+        <TextView
+            android:id="@+id/txtItem_layoutItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/imageItem_layoutItem"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_toStartOf="@id/txtValueItem_layout_item"
+            android:layout_toEndOf="@id/imageItem_layoutItem"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="@{dataEntry.nameLocal}"
+            android:textColor="@color/color_gray_5A5A5A"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/txtDataItem_layout_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtItem_layoutItem"
+            android:layout_alignStart="@id/txtItem_layoutItem"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:ellipsize="marquee"
+            android:setValue='@{dataEntry.dateEntry}'
+            android:singleLine="true"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="@dimen/_8ssp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/txtValueItem_layout_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/txtDataItem_layout_item"
+            android:layout_alignBottom="@id/txtDataItem_layout_item"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:ellipsize="marquee"
+            android:gravity="center|end"
+            android:setRawValue='@{dataEntry.valueEntry}'
+            android:singleLine="true"
+            android:textColor="@color/color_gray_5A5A5A"
+            android:textSize="@dimen/_8ssp"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/viewSeparator_layoutItem"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_2sdp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@color/gray_CDCDCD"
+            android:setColor='@{dataEntry.viewColor ? component.colorExit() : component.colorGray()}' />
+             />
 
 
     </RelativeLayout>

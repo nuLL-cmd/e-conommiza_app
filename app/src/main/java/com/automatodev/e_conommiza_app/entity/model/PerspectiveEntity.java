@@ -29,6 +29,7 @@ public class PerspectiveEntity implements Serializable {
     @ColumnInfo(name = "total_credit")
     private BigDecimal totalCredit;
 
+
     @Ignore
     private List<DataEntryEntity> itemsPerspective;
 
@@ -36,14 +37,14 @@ public class PerspectiveEntity implements Serializable {
     }
 
     @Ignore
-    public PerspectiveEntity(Long idPerspective,String month,int year){
+    public PerspectiveEntity(Long idPerspective, String month, int year) {
         this.month = month;
         this.year = year;
         this.idPerspective = idPerspective;
     }
 
     @Ignore
-    public PerspectiveEntity( String month, String userUid, int year, BigDecimal totalDebit, BigDecimal totalCredit, List<DataEntryEntity> itemsPerspective) {
+    public PerspectiveEntity(String month, String userUid, int year, BigDecimal totalDebit, BigDecimal totalCredit, List<DataEntryEntity> itemsPerspective) {
         this.month = month;
         this.userUid = userUid;
         this.year = year;

@@ -139,4 +139,8 @@ public class ComponentUtils {
 
     }
 
+    public static int colorGray(){
+        return R.color.gray_CDCDCD;
+    }
+
 }

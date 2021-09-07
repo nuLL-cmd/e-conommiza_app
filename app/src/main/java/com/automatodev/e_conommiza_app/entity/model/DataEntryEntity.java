@@ -2,6 +2,7 @@ package com.automatodev.e_conommiza_app.entity.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.automatodev.e_conommiza_app.enumarator.TypeEnum;
@@ -37,6 +38,15 @@ public class DataEntryEntity implements Serializable {
 
     @ColumnInfo(name = "payment")
     private Integer payment;
+
+    @Ignore
+    private boolean first;
+
+    @Ignore
+    private boolean last;
+
+    @Ignore
+    private boolean viewColor;
 
     public DataEntryEntity(Long idPerspective, String nameLocal, String category, long dateEntry, TypeEnum typeEntry, BigDecimal valueEntry, Integer payment) {
         this.idPersp = idPerspective;
@@ -110,6 +120,30 @@ public class DataEntryEntity implements Serializable {
 
     public Integer getPayment() {
         return payment;
+    }
+
+    public void setFirst(boolean first) {
+        this.first = first;
+    }
+
+    public boolean isFirst() {
+        return this.first;
+    }
+
+    public void setLast(boolean last) {
+        this.last = last;
+    }
+
+    public boolean isLast() {
+        return this.last;
+    }
+
+    public void setViewColor(boolean viewColor) {
+        this.viewColor = viewColor;
+    }
+
+    public boolean getViewColor() {
+        return this.viewColor;
     }
 
     public void setPayment(Integer payment) {

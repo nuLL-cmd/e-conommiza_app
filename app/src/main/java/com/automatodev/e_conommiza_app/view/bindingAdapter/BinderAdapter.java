@@ -91,7 +91,6 @@ public class BinderAdapter {
         }
     }
 
-
     @BindingAdapter({"android:changeDrawable","android:imageDrawable"})
     public static void changeDrawable(ImageView imageView, TypeEnum type, int resource){
         try{
